@@ -1,0 +1,101 @@
+@topbar-height: 35px;
+@main-border-width: 8px;
+
+
+html,body
+{
+    height:95%;
+    width:100%;
+    padding: 0;
+    margin: 0;
+}
+
+
+#topbar {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 0;
+	height: @topbar-height;
+	z-index: 2;
+	background-color:rgba(0,255,255,0.1);
+}
+
+
+
+#main-content {
+	position: absolute;
+	border-style: solid;
+	border-color: rgba(100,100,200,0.5);
+	border-width: @main-border-width;
+	top: @topbar-height;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	margin: 0;
+	z-index: 0;
+	#sidebar {
+		position: absolute;
+		width: 30%;
+		left: 0;
+		height: 100%;
+		z-index: 1;
+		overflow: auto;
+		background-color:rgba(0,0,255,0.1);
+	}
+	
+
+}
+
+.map-container {
+	position: absolute;
+	width: 70%;
+	height: 100%;
+	right: 0;
+	z-index: 0;
+	background-color:rgba(255,0,0,0);
+	float: left;
+	display: none;
+}
+
+
+.text-object {
+	font-family: Arial;
+	margin-left: 10px;
+	.text {
+		font-size: 12px;
+	}
+}
+
+h5 {
+	margin-bottom: 5px;
+}
+
+.map {
+	position: absolute;
+	height: 100%;
+	img {
+		height:100%;
+	}
+}
+
+.level-visible {
+	display: block;
+}
+
+#map-index-level2 {
+	width: 100px;
+	
+}
+
+#map-level2 {
+	left: 100px;
+	right: 0px;
+	top: 0px;
+	
+	
+}
+
+
+
+

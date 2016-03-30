@@ -1,0 +1,14 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+
+# Viewer:
+
+GET		/										controllers.Viewer.layout()
+
+GET		/viewer/:level							controllers.Viewer.nextLevel(level)
+
+GET     /assets/*file               		    controllers.Assets.at(path="/public", file)
+
+GET		/routes.js								controllers.Viewer.jsRoutes()

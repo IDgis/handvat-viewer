@@ -7,7 +7,9 @@
 
 GET		/										controllers.Viewer.layout()
 
-GET		/viewer/:level							controllers.Viewer.nextLevel(level)
+GET		/map/:level								controllers.Viewer.getMapHtml(level)
+
+GET		/text/:level							controllers.Viewer.getTextHtml(level)
 
 GET     /assets/*file               		    controllers.Assets.at(path="/public", file)
 

@@ -1,0 +1,8 @@
+@(textobjects: Array[model.TextObject], maintitle: String,level:String)
+
+<div id="text@level" class="text-container">
+	<div class="main-title">@maintitle</div>
+	@for(to <- textobjects) {
+	 	@textobject(to.getTitle(), to.getText())
+	 }
+</div> 

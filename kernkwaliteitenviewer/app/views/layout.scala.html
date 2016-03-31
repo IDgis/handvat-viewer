@@ -1,28 +1,21 @@
-@(textobjects: Array[model.TextObject])
+@(textobjects: Array[model.TextObject], maintitle: String)
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Kernkwaliteitenviewer</title>
-
+		<link rel="stylesheet" media="screen" href="@routes.Assets.at("lib/bootstrap/css/bootstrap.css")">
 		<link rel="stylesheet" href="@controllers.routes.Assets.at("css/layout.css")">
 	</head>
 	
 	<body>
-	
 		<section id="topbar">
-		<div class="btn-group" data-toggle="buttons">
-			<button><img src="@routes.Assets.at("images/favicon.png")" width="20"/></button>
-			<button><img src="@routes.Assets.at("images/favicon.png")" width="20"/></button>
-		</div>
+	        @buttonbar()
 		</section>
 		<section id="main-content">
-			<section id="sidebar">
-				@for(to <- textobjects) {
-	       			@textobject(to.getTitle(), to.getText())
-	    		}
-			</section>
-			@viewer("1")
+			@sidebar(textobjects,maintitle,"1")
+			
+			@mapviewer("1")
 		</section>
 			
 	</body>

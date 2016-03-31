@@ -1,6 +1,6 @@
-@topbar-height: 35px;
+@topbar-height: 34px;
 @main-border-width: 8px;
-
+@map-index-width: 100px;
 
 html,body
 {
@@ -21,8 +21,6 @@ html,body
 	background-color:rgba(0,255,255,0.1);
 }
 
-
-
 #main-content {
 	position: absolute;
 	border-style: solid;
@@ -34,7 +32,9 @@ html,body
 	left: 0;
 	margin: 0;
 	z-index: 0;
-	#sidebar {
+}
+
+.sidebar {
 		position: absolute;
 		width: 30%;
 		left: 0;
@@ -42,10 +42,11 @@ html,body
 		z-index: 1;
 		overflow: auto;
 		background-color:rgba(0,0,255,0.1);
-	}
-	
+}	
 
-}
+.text-container {
+ 	display: none;
+ }	
 
 .map-container {
 	position: absolute;
@@ -56,6 +57,7 @@ html,body
 	background-color:rgba(255,0,0,0);
 	float: left;
 	display: none;
+	overflow:auto;
 }
 
 
@@ -65,11 +67,22 @@ html,body
 	.text {
 		font-size: 12px;
 	}
+	h5 {
+		margin-bottom: 5px;
+		font-size: 12px;
+		font-weight: bold;
+	}
 }
 
-h5 {
-	margin-bottom: 5px;
-}
+
+
+.main-title {
+	margin-left: 10px;
+	font-family: Arial;
+	font-size: 14px;
+	font-weight: bold;
+	color: gray;
+} 
 
 .map {
 	position: absolute;
@@ -84,18 +97,27 @@ h5 {
 }
 
 #map-index-level2 {
-	width: 100px;
+	width: @map-index-width;
 	
 }
 
 #map-level2 {
-	left: 100px;
+	left: @map-index-width;
 	right: 0px;
 	top: 0px;
 	
 	
 }
 
+#topbar {
+	.btn-group {
+		left:30%;;
+	}
+}	
+
+
+@import "breadcrumbs.less";	
+	
 
 
 

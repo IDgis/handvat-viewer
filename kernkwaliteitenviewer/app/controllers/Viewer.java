@@ -33,12 +33,12 @@ public class Viewer extends Controller {
 	    }
 	
 	 
-	 public Result getMapHtml (String level) {
+	 public Result getMapHtml (String deelgebied, String level) {
 		 //return ok(viewer.render("images/15621_Deelgebied Margraten-230316.jpg"));
-		 return ok(mapviewer.render(level));
+		 return ok(mapviewer.render(deelgebied, level));
 	 }
 	 
-	 public Result getTextHtml (String level) {
+	 public Result getTextHtml (String deelgebied, String level) {
 		 
 		//maak een paar tekstobjecten en stuur die naar de viewer
 		 TextObject test = new TextObject("Gebiedsprofiel" , testText);
@@ -48,10 +48,9 @@ public class Viewer extends Controller {
 		 textObjects[0] = test;
 		 textObjects[1] = test2;
 		 
-		 String mainTitle = "Deelgebied Margraten";
 		 
 		 //return ok(viewer.render("images/15621_Deelgebied Margraten-230316.jpg"));
-		 return ok (textviewer.render  (textObjects,mainTitle, level));
+		 return ok (textviewer.render  (textObjects,deelgebied, level));
 	 }
 	 
 	 

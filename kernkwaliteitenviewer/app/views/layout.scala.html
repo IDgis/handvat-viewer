@@ -1,4 +1,4 @@
-@(textobjects: Array[model.TextObject], maintitle: String)
+@(textobjects: Array[model.TextObject], deelgebied: String)
 <!DOCTYPE html>
 <html>
 	<head>
@@ -13,9 +13,9 @@
 	        @buttonbar()
 		</section>
 		<section id="main-content">
-			@sidebar(textobjects,maintitle,"1")
+			@sidebar(textobjects,deelgebied,"1")
 			
-			@mapviewer("1")
+			@mapviewer("", "1")
 		</section>
 			
 	</body>

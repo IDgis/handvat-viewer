@@ -33,21 +33,21 @@ function(
 		
 		
 		
-		setLevel: function (mapNode, textNode, lev) {
+		setLevel: function (mapNode, textNode, deelgebied, lev, sublev) {
 			var thisObj = this;
-			
-			when (this.setMapLevel (mapNode, lev), function() {
-				when (thisObj.setTextLevel (textNode, lev), function() {
-					var newLevel =  new level (thisObj, lev);	
+			when (this.setMapLevel (mapNode, deelgebied, lev, sublev), function() {
+				when (thisObj.setTextLevel (textNode, deelgebied, lev, sublev), function() {
+					var newLevel =  new level (thisObj, lev, sublev);
+						
 				});
 			});
 		},
 		
-		setMapLevel: function (mapNode, lev) {		
+		setMapLevel: function (mapNode, deelgebied, lev) {		
 			var def = new Deferred ();
 			var thisObj = this;
 			if (dom.byId ("map-container" + lev) === null) {
-				xhr (jsRoutes.controllers.Viewer.getMapHtml (lev).url, {
+				xhr (jsRoutes.controllers.Viewer.getMapHtml (deelgebied, lev).url, {
 					handleAs: "html"
 				}).then (function (html) {
 					thisObj.levelMapNode = domConstruct.toDom (html);
@@ -61,11 +61,11 @@ function(
 			return def;
 		},
 		
-		setTextLevel: function (textNode, lev) {
+		setTextLevel: function (textNode, deelgebied, lev) {
 			var def = new Deferred ();
 			var thisObj = this;
 			if (dom.byId("text" + lev) === null) {
-				xhr (jsRoutes.controllers.Viewer.getTextHtml (lev).url, {
+				xhr (jsRoutes.controllers.Viewer.getTextHtml (deelgebied,lev).url, {
 					handleAs: "html"
 				}).then (function (html) {
 					thisObj.levelTextNode = domConstruct.toDom (html);

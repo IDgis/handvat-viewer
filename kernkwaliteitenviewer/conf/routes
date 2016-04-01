@@ -7,9 +7,9 @@
 
 GET		/										controllers.Viewer.layout()
 
-GET		/map/:level								controllers.Viewer.getMapHtml(level)
+GET		/map/:deelgebied/:level					controllers.Viewer.getMapHtml(deelgebied,level)
 
-GET		/text/:level							controllers.Viewer.getTextHtml(level)
+GET		/text/:deelgebied/:level				controllers.Viewer.getTextHtml(deelgebied,level)
 
 GET     /assets/*file               		    controllers.Assets.at(path="/public", file)
 

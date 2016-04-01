@@ -1,7 +1,9 @@
-@(textobjects: Array[model.TextObject], maintitle: String,level:String)
+@(textobjects: Array[model.TextObject], deelgebied: String,level:String)
 
 <div id="text@level" class="text-container">
-	<div class="main-title">@maintitle</div>
+	@if(deelgebied.length > 0){
+		<div class="main-title">Deelgebied @deelgebied</div>
+	}	
 	@for(to <- textobjects) {
 	 	@textobject(to.getTitle(), to.getText())
 	 }

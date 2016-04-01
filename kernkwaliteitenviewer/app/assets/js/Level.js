@@ -1,33 +1,37 @@
 define([
 	'dojo/_base/declare',
 	'dojo/on',
-	'dojo/dom'
+	'dojo/dom',
+	'dojo/query'
         ], 
 function(
 		declare,
 		on,
-		dom
+		dom,
+		query
 ){
 	return declare ([], {
 		
 		constructor: function (levels, level) {
 
-			var mapNode = dom.byId ("map-container" + level);
+			var mapContainerNode = dom.byId ("map-container" + level);
+			var mapNode = query(".map", mapContainerNode)[0];
 			var textNode = dom.byId ("text" + level);
 			var button = dom.byId ("btn-level" + level);
-			levels.setActiveNodes (mapNode, textNode, button);
+			levels.setActiveNodes (mapContainerNode, textNode, button);
 
 			on (mapNode, 'click', function(e){
 				e.preventDefault();
 				e.stopPropagation();
-				levels.setLevel (mapNode, textNode, level + 1);
+				console.log(mapContainerNode);
+				levels.setLevel (mapContainerNode, textNode, level + 1);
 			});
 			
 			
 			on (button, 'click', function(e){
 				e.preventDefault();
 				e.stopPropagation();
-				levels.setActiveNodes (mapNode, textNode, button);
+				levels.setActiveNodes (mapContainerNode, textNode, button);
 			});
 			
 		}

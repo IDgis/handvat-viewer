@@ -1,6 +1,6 @@
 @topbar-height: 34px;
 @main-border-width: 8px;
-@map-index-width: 100px;
+@map-index-width: 130px;
 
 html,body
 {
@@ -101,12 +101,24 @@ html,body
 	
 }
 
+#map-buttons {
+	width: @map-index-width;	
+	button {
+		background-color: white;
+	}
+}
+
+
 #map-level2 {
 	left: @map-index-width;
 	right: 0px;
 	top: 0px;
-	
-	
+}
+
+div[id^='map-level3']{
+	left: @map-index-width;
+	right: 0px;
+	top: 0px;
 }
 
 #topbar {

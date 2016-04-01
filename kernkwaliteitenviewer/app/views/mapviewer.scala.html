@@ -6,6 +6,11 @@
 			<img src= "@routes.Assets.at("images/map-index-level2.png")">
 		}
 	</div>
+	@if(level=="3") {
+		<div id="map-buttons" class="btn-group-vertical">
+			@mapbuttonbar()
+		</div>
+	}	
 	<div id="map-level@level" class="map">
 		@if(level=="1") {
 			<img src= "@routes.Assets.at("images/map-level1.png")">

@@ -4,10 +4,9 @@ require ([
     'dojo/when',
     'dojo/on',
     'dojo/dom-attr',
+    'js/Levels',
+    'js/Level',
     
-    'js/maplevel1',
-    
-	
 	'openlayers/ol',
 	
 	'dojo/domReady!'
@@ -17,13 +16,16 @@ require ([
 		when,
 		on,
 		domAttr,	
-		
-		mapLevel1,
+		levels,
+		level,
 
 		ol
 ) {
 	
-	var testTool = new mapLevel1 ();
+	var nlevels = new levels ();
+	var level1 = new level (nlevels, 1);
+	
+	
 	
 	
 

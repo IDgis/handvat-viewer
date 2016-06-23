@@ -2,15 +2,6 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+GET		/										controllers.Index.index()
 
-# Viewer:
-
-GET		/										controllers.Viewer.layout()
-
-GET		/map/:deelgebied/:level					controllers.Viewer.getMapHtml(deelgebied,level)
-
-GET		/text/:deelgebied/:level				controllers.Viewer.getTextHtml(deelgebied,level)
-
-GET     /assets/*file               		    controllers.Assets.at(path="/public", file)
-
-GET		/routes.js								controllers.Viewer.jsRoutes()
+GET		/assets/*file							controllers.Assets.versioned(path="/public", file: Asset)

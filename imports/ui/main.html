@@ -1,3 +1,41 @@
 <template name="main">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand">Viewer</a>
+			</div>
+			<div class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="zoek adres of plaats">
+					</div>
+				</form>
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown">Sector 
+							<span class="caret"></span>
+						</a>
+						<ul id="js-sectors" class="dropdown-menu">
+							
+						</ul>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right col-xs-8">
+					<li class="col-xs-3 tab-step">
+						<a>Stap 1</a>
+					</li>
+					<li class="col-xs-3 tab-step">
+						<a>Stap 2</a>
+					</li>
+					<li class="col-xs-3 tab-step">
+						<a>Stap 3</a>
+					</li>
+					<li class="col-xs-3 tab-step">
+						<a>Stap 4</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 	{{> yield}}
 </template>

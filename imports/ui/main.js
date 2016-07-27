@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http';
+import { Router } from 'meteor/iron:router';
 
 import './main.css';
 import './main.html';
@@ -28,4 +29,21 @@ Template.main.onRendered(function() {
 			});
 		});
 	});
+});
+
+Template.main.helpers({
+	activeStep: function(step) {
+		if(Session.equals('stepNumber', step)) {
+			return "active";
+		}
+	}
+});
+
+Template.main.events ({
+	'click #js-step-1': function () {
+		Router.go('step_1');
+	},
+	'click #js-step-2': function () {
+		Router.go('step_2');
+	}
 });

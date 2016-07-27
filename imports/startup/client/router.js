@@ -3,14 +3,14 @@ import { Router } from 'meteor/iron:router';
 
 import '../../ui/main.js';
 
-import '../../ui/intro/intro.js';
+import '../../ui/step_1/step_1.js';
 
 Router.configure({
   layoutTemplate: 'main'
 });
 
 Router.route('/', function () {
-  this.render('intro');
+  this.render('step_1');
 }, {
-  name: 'intro'
+  name: 'step_1'
 });

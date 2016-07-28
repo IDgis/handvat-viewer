@@ -9,7 +9,7 @@ Template.step_1.onRendered(function() {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getLandschapstypen', result.content, function(err, result) {
+		Meteor.call('getLandschapsTypen', result.content, function(err, result) {
 			var select = $('select[id=js-temp-landschapstypen]');
 			$.each(select, function(index, item) {
 				$.each(result, function(idx, el) {

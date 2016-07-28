@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
 Meteor.methods({
-	getLandschapstypen: function(content) {
+	getLandschapsTypen: function(content) {
 		var landschapstypen = [];
 		var json = JSON.parse(content);
 		json.forEach(function(item) {
@@ -24,5 +24,29 @@ Meteor.methods({
 		});
 		
 		return sectors;
+	},
+	getLeidendeBeginselen: function(content) {
+		var lbs = [];
+		var json = JSON.parse(content);
+		json.forEach(function(item) {
+			if(item.texttype === 'leidend_beginsel') {
+				var element = {'id': item.id, 'name' : item.name, 'content' : item.html};
+				lbs.push(element);
+			}
+		});
+		
+		return lbs;
+	},
+	getOntwerpPrincipes: function(content) {
+		var ops = [];
+		var json = JSON.parse(content);
+		json.forEach(function(item) {
+			if(item.texttype === 'ontwerpprincipe') {
+				var element = {'id': item.id, 'name' : item.name, 'content' : item.html, 'images' : item.images};
+				ops.push(element);
+			}
+		});
+		
+		return ops;
 	}
 });

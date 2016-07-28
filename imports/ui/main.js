@@ -18,9 +18,7 @@ Template.main.onRendered(function() {
 					var li = document.createElement('li');
 					li.id = "sector-" + idx;
 					$('#js-sectors').append(li);
-				});
-				
-				$.each(result, function(idx, el) {
+					
 					var a = document.createElement('a');
 					a.id = el.id;
 					a.innerHTML = el.name;
@@ -45,5 +43,11 @@ Template.main.events ({
 	},
 	'click #js-step-2': function () {
 		Router.go('step_2');
+	},
+	'click #js-step-3': function () {
+		Router.go('step_3');
+	},
+	'click #js-step-4': function () {
+		Router.go('step_4');
 	}
 });

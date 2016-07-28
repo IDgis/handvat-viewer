@@ -3,4 +3,4 @@ body, html {width:100%;height:100%;}
 .tab-step.active {font-weight:bold;}
 .tab-step:hover {cursor:pointer;font-weight:bold;}
 #page {width:100%;height:90%;}
-#text-container {height:100%;padding-left:15px;border-right:2px solid grey;}
+#text-container {height:95%;padding-left:15px;border-right:2px solid grey;margin-bottom:15px;overflow-y:auto;}

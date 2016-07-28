@@ -11,7 +11,7 @@ Template.main.onRendered(function() {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getSectors', result.content, function(err, result) {
+		Meteor.call('getTexts', result.content, 'sector', function(err, result) {
 			var ul = $('ul[id=js-sectors]');
 			$.each(ul, function(index, item) {
 				$.each(result, function(idx, el) {

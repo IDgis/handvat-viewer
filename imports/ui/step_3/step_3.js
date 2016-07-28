@@ -12,7 +12,7 @@ Template.step_3.helpers({
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			Meteor.call('getOntwerpPrincipes', result.content, function(err, result) {
+			Meteor.call('getTexts', result.content, 'ontwerpprincipe', function(err, result) {
 				$('#text-container').empty();
 				
 				itemCount = 1;
@@ -51,14 +51,20 @@ Template.step_3.helpers({
 							itemCount++;
 							divCount = 0;
 							
-							return false;
+							//return false;
 						}
 					}
 				});
 				
 				$.each($('#text-container img'), function(index, item) {
-					$(item).removeAttr('style');
-					$(item).attr('class', 'ontwerpprincipe-img');
+					var src = $(item).attr('src');
+					
+					if(typeof src === 'undefined') {
+						$(item).remove();
+					} else {
+						$(item).removeAttr('style');
+						$(item).attr('class', 'ontwerpprincipe-img');
+					}
 				});
 			});
 		});

@@ -5,12 +5,7 @@
 				<a class="navbar-brand">Viewer</a>
 			</div>
 			<div class="collapse navbar-collapse">
-				<form class="navbar-form navbar-left">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="zoek adres of plaats">
-					</div>
-				</form>
-				<ul class="nav navbar-nav">
+				<ul class="nav navbar-nav" id="sector-dropdown">
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown">Sector 
 							<span class="caret"></span>
@@ -20,6 +15,7 @@
 						</ul>
 					</li>
 				</ul>
+				<p class="navbar-text">{{getSectorLabel}}</p>
 				<ul class="nav navbar-nav navbar-right col-xs-8">
 					<li id="js-step-1" class="col-xs-3 tab-step {{activeStep '1'}}">
 						<a>Stap 1</a>

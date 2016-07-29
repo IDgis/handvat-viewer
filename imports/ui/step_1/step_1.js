@@ -12,14 +12,21 @@ Template.step_1.onRendered(function() {
 		Meteor.call('getTexts', result.content, 'landschapstype', function(err, result) {
 			var select = $('select[id=js-temp-landschapstypen]');
 			$.each(select, function(index, item) {
+				item.add(document.createElement('option'));
 				$.each(result, function(idx, el) {
 					var option = document.createElement('option');
-					option.id = el.id;
-					option.value = el.name;
+					option.value = el.id;
 					option.innerHTML = el.name;
 					item.add(option);
 				});
 			});
 		});
 	});
+});
+
+Template.step_1.events ({
+	'change #js-temp-landschapstypen': function(e) {
+		Session.set('landschapstypeId', e.target.value);
+		Router.go('step_3');
+	}
 });

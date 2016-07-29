@@ -34,6 +34,13 @@ Template.main.helpers({
 		if(Session.equals('stepNumber', step)) {
 			return "active";
 		}
+	},
+	getSectorLabel: function() {
+		if(typeof Session.get('sectorLabel') === 'undefined') {
+			return "geen sector geselecteerd";
+		} else {
+			return Session.get('sectorLabel');
+		}
 	}
 });
 
@@ -49,5 +56,9 @@ Template.main.events ({
 	},
 	'click #js-step-4': function () {
 		Router.go('step_4');
+	},
+	'click #js-sectors li a': function (e) {
+		Session.set('sectorLabel', e.target.textContent);
+		Session.set('sectorId', e.target.id);
 	}
 });

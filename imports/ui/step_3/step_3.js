@@ -25,7 +25,45 @@ Template.step_3.onRendered(function() {
 });
 
 Template.step_3.helpers({
+	getLandschapsType: function() {
+		$('#lt-text').empty();
+		
+		if(typeof Session.get('landschapstypeId') !== 'undefined') {
+			HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+				headers: {
+					'Content-Type' : 'application/json; charset=UTF-8'
+				}
+			}, function(err, result) {
+				Meteor.call('getText', result.content, Session.get('landschapstypeId'), function(err, result) {
+					var div = document.createElement('div');
+					$(div).attr('class', 'col-xs-12 text-div');
+					$(div).append(result.content);
+					$('#lt-text').append(div);
+				});
+			});
+		}
+	},
+	getKernKwaliteit: function() {
+		$('#kk-text').empty();
+		
+		if(typeof Session.get('kernkwaliteitId') !== 'undefined') {
+			HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+				headers: {
+					'Content-Type' : 'application/json; charset=UTF-8'
+				}
+			}, function(err, result) {
+				Meteor.call('getText', result.content, Session.get('kernkwaliteitId'), function(err, result) {
+					var div = document.createElement('div');
+					$(div).attr('class', 'col-xs-12 text-div');
+					$(div).append(result.content);
+					$('#kk-text').append(div);
+				});
+			});
+		}
+	},
 	getOntwerpPrincipes: function() {
+		$('#op-text').empty();
+		
 		if(typeof Session.get('landschapstypeId') !== 'undefined' &&
 				typeof Session.get('sectorId') !== 'undefined' &&
 				typeof Session.get('kernkwaliteitId') !== 'undefined') {
@@ -39,21 +77,21 @@ Template.step_3.helpers({
 						Session.get('sectorId'),
 						Session.get('kernkwaliteitId'),
 						function(err, result) {
-					$('#text-container').empty();
 					
 					itemCount = 1;
 					divCount = 0;
 					
 					$.each(result, function(index, item) {
-						if(divCount === 0) {
-							var outerDiv = document.createElement('div');
-							$(outerDiv).attr('id', 'ontwerpprincipe-' + itemCount);
-							
-							var innerDiv = document.createElement('div');
-							$(innerDiv).attr('class', 'col-xs-6');
-							$('#text-container').append(outerDiv);
-							
-							$.each(item.ontwerpprincipes, function(idx, el) {
+						$.each(item.ontwerpprincipes, function(idx, el) {
+							if(divCount === 0) {
+								var outerDiv = document.createElement('div');
+								$(outerDiv).attr('id', 'ontwerpprincipe-' + itemCount);
+								$(outerDiv).attr('class', 'col-xs-12 text-div');
+								
+								var innerDiv = document.createElement('div');
+								$(innerDiv).attr('class', 'col-xs-6 text-div');
+								$('#op-text').append(outerDiv);
+								
 								HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 									headers: {
 										'Content-Type' : 'application/json; charset=UTF-8'
@@ -67,38 +105,41 @@ Template.step_3.helpers({
 										$(innerDiv).append(result.content);
 									});
 								});
-							});
+								
+								$(outerDiv).append(innerDiv);
+								
+								divCount++;
 							
-							$(outerDiv).append(innerDiv);
-							
-							divCount++;
-						} else {
-							var innerDiv = document.createElement('div');
-							$(innerDiv).attr('class', 'col-xs-6');
-							$('#ontwerpprincipe-' + itemCount).append(innerDiv);
-							
-							$.each(item.ontwerpprincipes, function(idx, el) {
-								HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
-									headers: {
-										'Content-Type' : 'application/json; charset=UTF-8'
-									}
-								}, function(err, result) {
-									Meteor.call('getText', result.content, el, function(err, result) {
-										$.each(result.images, function(ix, elt) {
-											$(innerDiv).append(elt);
+							} else {
+								var innerDiv = document.createElement('div');
+								$(innerDiv).attr('class', 'col-xs-6 text-div');
+								$('#ontwerpprincipe-' + itemCount).append(innerDiv);
+								
+								$.each(item.ontwerpprincipes, function(idx, el) {
+									HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+										headers: {
+											'Content-Type' : 'application/json; charset=UTF-8'
+										}
+									}, function(err, result) {
+										Meteor.call('getText', result.content, el, function(err, result) {
+											$.each(result.images, function(ix, elt) {
+												$(innerDiv).append(elt);
+											});
+											
+											$(innerDiv).append(result.content);
 										});
-										
-										$(innerDiv).append(result.content);
 									});
 								});
-							});
-							
-							itemCount++;
-							divCount = 0;
-						}
+								
+								itemCount++;
+								divCount = 0;
+							}
+						});
+						
+						return false;
 					});
 					
-					$.each($('#text-container img'), function(index, item) {
+					$.each($('#op-text img'), function(index, item) {
 						var src = $(item).attr('src');
 						
 						if(typeof src === 'undefined') {

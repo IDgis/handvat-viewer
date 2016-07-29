@@ -4,7 +4,7 @@ import './step_3.css';
 Template.step_3.onRendered(function() {
 	Session.set('stepNumber', '3');
 	
-	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+	HTTP.get("http://localhost:5000/text/json", {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
@@ -29,7 +29,7 @@ Template.step_3.helpers({
 		$('#lt-text').empty();
 		
 		if(typeof Session.get('landschapstypeId') !== 'undefined') {
-			HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+			HTTP.get("http://localhost:5000/text/json", {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
 				}
@@ -47,7 +47,7 @@ Template.step_3.helpers({
 		$('#kk-text').empty();
 		
 		if(typeof Session.get('kernkwaliteitId') !== 'undefined') {
-			HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+			HTTP.get("http://localhost:5000/text/json", {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
 				}
@@ -67,7 +67,7 @@ Template.step_3.helpers({
 		if(typeof Session.get('landschapstypeId') !== 'undefined' &&
 				typeof Session.get('sectorId') !== 'undefined' &&
 				typeof Session.get('kernkwaliteitId') !== 'undefined') {
-			HTTP.get("http://148.251.183.26/handvat-admin/coupling/ontwerp/json", {
+			HTTP.get("http://localhost:5000/coupling/ontwerp/json", {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
 				}
@@ -92,7 +92,7 @@ Template.step_3.helpers({
 								$(innerDiv).attr('class', 'col-xs-6 text-div');
 								$('#op-text').append(outerDiv);
 								
-								HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+								HTTP.get("http://localhost:5000/text/json", {
 									headers: {
 										'Content-Type' : 'application/json; charset=UTF-8'
 									}
@@ -116,7 +116,7 @@ Template.step_3.helpers({
 								$('#ontwerpprincipe-' + itemCount).append(innerDiv);
 								
 								$.each(item.ontwerpprincipes, function(idx, el) {
-									HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+									HTTP.get("http://localhost:5000/text/json", {
 										headers: {
 											'Content-Type' : 'application/json; charset=UTF-8'
 										}

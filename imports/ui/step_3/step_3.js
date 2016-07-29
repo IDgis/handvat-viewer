@@ -102,6 +102,8 @@ Template.step_3.helpers({
 											$(innerDiv).append(elt);
 										});
 										
+										cleanImages();
+										
 										$(innerDiv).append(result.content);
 									});
 								});
@@ -115,19 +117,19 @@ Template.step_3.helpers({
 								$(innerDiv).attr('class', 'col-xs-6 text-div');
 								$('#ontwerpprincipe-' + itemCount).append(innerDiv);
 								
-								$.each(item.ontwerpprincipes, function(idx, el) {
-									HTTP.get("http://localhost:5000/text/json", {
-										headers: {
-											'Content-Type' : 'application/json; charset=UTF-8'
-										}
-									}, function(err, result) {
-										Meteor.call('getText', result.content, el, function(err, result) {
-											$.each(result.images, function(ix, elt) {
-												$(innerDiv).append(elt);
-											});
-											
-											$(innerDiv).append(result.content);
+								HTTP.get("http://localhost:5000/text/json", {
+									headers: {
+										'Content-Type' : 'application/json; charset=UTF-8'
+									}
+								}, function(err, result) {
+									Meteor.call('getText', result.content, el, function(err, result) {
+										$.each(result.images, function(ix, elt) {
+											$(innerDiv).append(elt);
 										});
+										
+										cleanImages();
+										
+										$(innerDiv).append(result.content);
 									});
 								});
 								
@@ -138,22 +140,24 @@ Template.step_3.helpers({
 						
 						return false;
 					});
-					
-					$.each($('#op-text img'), function(index, item) {
-						var src = $(item).attr('src');
-						
-						if(typeof src === 'undefined') {
-							$(item).remove();
-						} else {
-							$(item).removeAttr('style');
-							$(item).attr('class', 'ontwerpprincipe-img');
-						}
-					});
 				});
 			});
 		}
 	}
 });
+
+function cleanImages() {
+	$.each($('#op-text img'), function(index, item) {
+		var src = $(item).attr('src');
+		
+		if(typeof src === 'undefined') {
+			$(item).remove();
+		} else {
+			$(item).removeAttr('style');
+			$(item).attr('class', 'ontwerpprincipe-img');
+		}
+	});
+}
 
 Template.step_3.events ({
 	'change #js-temp-kernkwaliteiten': function(e) {

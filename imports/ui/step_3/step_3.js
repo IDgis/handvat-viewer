@@ -98,13 +98,15 @@ Template.step_3.helpers({
 									}
 								}, function(err, result) {
 									Meteor.call('getText', result.content, el, function(err, result) {
-										$.each(result.images, function(ix, elt) {
-											$(innerDiv).append(elt);
-										});
-										
-										cleanImages();
-										
-										$(innerDiv).append(result.content);
+										if(typeof result !== 'undefined') {
+											$.each(result.images, function(ix, elt) {
+												$(innerDiv).append(elt);
+											});
+											
+											cleanImages();
+											
+											$(innerDiv).append(result.content);
+										}
 									});
 								});
 								
@@ -123,13 +125,15 @@ Template.step_3.helpers({
 									}
 								}, function(err, result) {
 									Meteor.call('getText', result.content, el, function(err, result) {
-										$.each(result.images, function(ix, elt) {
-											$(innerDiv).append(elt);
-										});
-										
-										cleanImages();
-										
-										$(innerDiv).append(result.content);
+										if(typeof result !== 'undefined') {
+											$.each(result.images, function(ix, elt) {
+												$(innerDiv).append(elt);
+											});
+											
+											cleanImages();
+											
+											$(innerDiv).append(result.content);
+										}
 									});
 								});
 								

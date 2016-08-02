@@ -17,9 +17,11 @@ Meteor.methods({
 		var array = [];
 		var json = JSON.parse(content);
 		json.forEach(function(item) {
-			if(item.landschapstype === landschapstype && item.sector === sector && item.kernkwaliteit === kernkwaliteit) {
-				var element = {'id': item._id, 'ontwerpprincipes' : item.ontwerpprincipe};
-				array.push(element);
+			if((item.landschapstype === landschapstype || item.landschapstype === 'P5LXrDeFMZqrfuBti') && 
+					item.sector === sector && item.kernkwaliteit === kernkwaliteit) {
+				item.ontwerpprincipe.forEach(function(item) {
+					array.push(item);
+				});
 			}
 		});
 		
@@ -29,9 +31,10 @@ Meteor.methods({
 		var array = [];
 		var json = JSON.parse(content);
 		json.forEach(function(item) {
-			if(item.landschapstype === landschapstype) {
-				var element = {'id': item._id, 'leidende_beginselen' : item.leidend_beginsel};
-				array.push(element);
+			if(item.landschapstype === landschapstype || item.landschapstype === 'P5LXrDeFMZqrfuBti') {
+				item.leidend_beginsel.forEach(function(item) {
+					array.push(item);
+				});
 			}
 		});
 		

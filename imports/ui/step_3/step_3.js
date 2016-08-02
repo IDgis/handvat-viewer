@@ -89,74 +89,70 @@ Template.step_3.helpers({
 					divCount = 0;
 					
 					$.each(result, function(index, item) {
-						if(typeof item !== 'undefined') {
+						if(index === 0) {
 							var header = document.createElement('p');
 							$(header).attr('class', 'header');
 							header.innerHTML = 'Leidende beginselen';
 							$('#lb-text').append(header);
-							
-							$.each(item.leidende_beginselen, function(index, item) {
-								if(divCount === 0) {
-									var outerDiv = document.createElement('div');
-									$(outerDiv).attr('id', 'leidendbeginsel-' + itemCount);
-									$(outerDiv).attr('class', 'col-xs-12 text-div');
-									
-									var innerDiv = document.createElement('div');
-									$(innerDiv).attr('class', 'col-xs-6 text-div');
-									$('#lb-text').append(outerDiv);
-									
-									HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
-										headers: {
-											'Content-Type' : 'application/json; charset=UTF-8'
-										}
-									}, function(err, result) {
-										Meteor.call('getText', result.content, item, function(err, result) {
-											if(typeof result !== 'undefined') {
-												$.each(result.images, function(ix, elt) {
-													$(innerDiv).append(elt);
-												});
-												
-												cleanImages('lb-text');
-												
-												$(innerDiv).append(result.content);
-											}
-										});
-									});
-									
-									$(outerDiv).append(innerDiv);
-									
-									divCount++;
-								
-								} else {
-									var innerDiv = document.createElement('div');
-									$(innerDiv).attr('class', 'col-xs-6 text-div');
-									$('#leidendbeginsel-' + itemCount).append(innerDiv);
-									
-									HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
-										headers: {
-											'Content-Type' : 'application/json; charset=UTF-8'
-										}
-									}, function(err, result) {
-										Meteor.call('getText', result.content, item, function(err, result) {
-											if(typeof result !== 'undefined') {
-												$.each(result.images, function(ix, elt) {
-													$(innerDiv).append(elt);
-												});
-												
-												cleanImages('lb-text');
-												
-												$(innerDiv).append(result.content);
-											}
-										});
-									});
-									
-									itemCount++;
-									divCount = 0;
-								}
-							});
 						}
 						
-						return false;
+						if(divCount === 0) {
+							var outerDiv = document.createElement('div');
+							$(outerDiv).attr('id', 'leidendbeginsel-' + itemCount);
+							$(outerDiv).attr('class', 'col-xs-12 text-div');
+							
+							var innerDiv = document.createElement('div');
+							$(innerDiv).attr('class', 'col-xs-6 text-div');
+							$('#lb-text').append(outerDiv);
+							
+							HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+								headers: {
+									'Content-Type' : 'application/json; charset=UTF-8'
+								}
+							}, function(err, result) {
+								Meteor.call('getText', result.content, item, function(err, result) {
+									if(typeof result !== 'undefined') {
+										$.each(result.images, function(ix, elt) {
+											$(innerDiv).append(elt);
+										});
+										
+										cleanImages('lb-text');
+										
+										$(innerDiv).append(result.content);
+									}
+								});
+							});
+							
+							$(outerDiv).append(innerDiv);
+							
+							divCount++;
+						
+						} else {
+							var innerDiv = document.createElement('div');
+							$(innerDiv).attr('class', 'col-xs-6 text-div');
+							$('#leidendbeginsel-' + itemCount).append(innerDiv);
+							
+							HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+								headers: {
+									'Content-Type' : 'application/json; charset=UTF-8'
+								}
+							}, function(err, result) {
+								Meteor.call('getText', result.content, item, function(err, result) {
+									if(typeof result !== 'undefined') {
+										$.each(result.images, function(ix, elt) {
+											$(innerDiv).append(elt);
+										});
+										
+										cleanImages('lb-text');
+										
+										$(innerDiv).append(result.content);
+									}
+								});
+							});
+							
+							itemCount++;
+							divCount = 0;
+						}
 					});
 				});
 			});
@@ -183,74 +179,70 @@ Template.step_3.helpers({
 					divCount = 0;
 					
 					$.each(result, function(index, item) {
-						if(typeof item !== 'undefined') {
+						if(index === 0) {
 							var header = document.createElement('p');
 							$(header).attr('class', 'header');
 							header.innerHTML = 'Ontwerpprincipes';
 							$('#op-text').append(header);
-							
-							$.each(item.ontwerpprincipes, function(idx, el) {
-								if(divCount === 0) {
-									var outerDiv = document.createElement('div');
-									$(outerDiv).attr('id', 'ontwerpprincipe-' + itemCount);
-									$(outerDiv).attr('class', 'col-xs-12 text-div');
-									
-									var innerDiv = document.createElement('div');
-									$(innerDiv).attr('class', 'col-xs-6 text-div');
-									$('#op-text').append(outerDiv);
-									
-									HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
-										headers: {
-											'Content-Type' : 'application/json; charset=UTF-8'
-										}
-									}, function(err, result) {
-										Meteor.call('getText', result.content, el, function(err, result) {
-											if(typeof result !== 'undefined') {
-												$.each(result.images, function(ix, elt) {
-													$(innerDiv).append(elt);
-												});
-												
-												cleanImages('op-text');
-												
-												$(innerDiv).append(result.content);
-											}
-										});
-									});
-									
-									$(outerDiv).append(innerDiv);
-									
-									divCount++;
-								
-								} else {
-									var innerDiv = document.createElement('div');
-									$(innerDiv).attr('class', 'col-xs-6 text-div');
-									$('#ontwerpprincipe-' + itemCount).append(innerDiv);
-									
-									HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
-										headers: {
-											'Content-Type' : 'application/json; charset=UTF-8'
-										}
-									}, function(err, result) {
-										Meteor.call('getText', result.content, el, function(err, result) {
-											if(typeof result !== 'undefined') {
-												$.each(result.images, function(ix, elt) {
-													$(innerDiv).append(elt);
-												});
-												
-												cleanImages('op-text');
-												
-												$(innerDiv).append(result.content);
-											}
-										});
-									});
-									
-									itemCount++;
-									divCount = 0;
-								}
-							});
 						}
 						
-						return false;
+						if(divCount === 0) {
+							var outerDiv = document.createElement('div');
+							$(outerDiv).attr('id', 'ontwerpprincipe-' + itemCount);
+							$(outerDiv).attr('class', 'col-xs-12 text-div');
+							
+							var innerDiv = document.createElement('div');
+							$(innerDiv).attr('class', 'col-xs-6 text-div');
+							$('#op-text').append(outerDiv);
+							
+							HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+								headers: {
+									'Content-Type' : 'application/json; charset=UTF-8'
+								}
+							}, function(err, result) {
+								Meteor.call('getText', result.content, item, function(err, result) {
+									if(typeof result !== 'undefined') {
+										$.each(result.images, function(ix, elt) {
+											$(innerDiv).append(elt);
+										});
+										
+										cleanImages('op-text');
+										
+										$(innerDiv).append(result.content);
+									}
+								});
+							});
+							
+							$(outerDiv).append(innerDiv);
+							
+							divCount++;
+						
+						} else {
+							var innerDiv = document.createElement('div');
+							$(innerDiv).attr('class', 'col-xs-6 text-div');
+							$('#ontwerpprincipe-' + itemCount).append(innerDiv);
+							
+							HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+								headers: {
+									'Content-Type' : 'application/json; charset=UTF-8'
+								}
+							}, function(err, result) {
+								Meteor.call('getText', result.content, item, function(err, result) {
+									if(typeof result !== 'undefined') {
+										$.each(result.images, function(ix, elt) {
+											$(innerDiv).append(elt);
+										});
+										
+										cleanImages('op-text');
+										
+										$(innerDiv).append(result.content);
+									}
+								});
+							});
+							
+							itemCount++;
+							divCount = 0;
+						}
 					});
 				});
 			});

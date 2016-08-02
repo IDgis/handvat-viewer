@@ -17,7 +17,7 @@ Meteor.methods({
 		var array = [];
 		var json = JSON.parse(content);
 		json.forEach(function(item) {
-			if((item.landschapstype === landschapstype || item.landschapstype === 'P5LXrDeFMZqrfuBti') && 
+			if((item.landschapstype === landschapstype || item.landschapstype === Meteor.settings.algemeenId) && 
 					item.sector === sector && item.kernkwaliteit === kernkwaliteit) {
 				item.ontwerpprincipe.forEach(function(item) {
 					array.push(item);
@@ -31,7 +31,7 @@ Meteor.methods({
 		var array = [];
 		var json = JSON.parse(content);
 		json.forEach(function(item) {
-			if(item.landschapstype === landschapstype || item.landschapstype === 'P5LXrDeFMZqrfuBti') {
+			if(item.landschapstype === landschapstype || item.landschapstype === Meteor.settings.algemeenId) {
 				item.leidend_beginsel.forEach(function(item) {
 					array.push(item);
 				});

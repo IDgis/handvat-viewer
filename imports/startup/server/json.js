@@ -25,6 +25,18 @@ Meteor.methods({
 		
 		return array;
 	},
+	getBeginselen: function(content, landschapstype) {
+		var array = [];
+		var json = JSON.parse(content);
+		json.forEach(function(item) {
+			if(item.landschapstype === landschapstype) {
+				var element = {'id': item._id, 'leidende_beginselen' : item.leidend_beginsel};
+				array.push(element);
+			}
+		});
+		
+		return array;
+	},
 	getText: function(content, id) {
 		var object;
 		var json = JSON.parse(content);

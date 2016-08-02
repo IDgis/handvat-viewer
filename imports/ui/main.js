@@ -6,7 +6,7 @@ import './main.css';
 import './main.html';
 
 Template.main.onRendered(function() {
-	HTTP.get("http://localhost:5000/text/json", {
+	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}

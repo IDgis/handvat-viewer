@@ -4,7 +4,7 @@ import './step_1.css';
 Template.step_1.onRendered(function() {
 	Session.set('stepNumber', '1');
 	
-	HTTP.get("http://localhost:5000/text/json", {
+	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}

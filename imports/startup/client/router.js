@@ -12,25 +12,25 @@ Router.configure({
   layoutTemplate: 'main'
 });
 
-Router.route('/', function () {
+Router.route('/handvat-viewer', function () {
   this.render('step_1');
 }, {
   name: 'step_1'
 });
 
-Router.route('/2', function () {
+Router.route('/handvat-viewer/2', function () {
   this.render('step_2');
 }, {
   name: 'step_2'
 });
 
-Router.route('/3', function () {
+Router.route('/handvat-viewer/3', function () {
   this.render('step_3');
 }, {
   name: 'step_3'
 });
 
-Router.route('/4', function () {
+Router.route('/handvat-viewer/4', function () {
   this.render('step_4');
 }, {
   name: 'step_4'

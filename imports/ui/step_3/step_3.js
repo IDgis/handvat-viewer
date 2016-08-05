@@ -4,6 +4,66 @@ import './step_3.css';
 Template.step_3.onRendered(function() {
 	Session.set('stepNumber', '3');
 	
+	var projection = new ol.proj.Projection({
+		code: 'EPSG:28992',
+		extent: [167658.241026781, 307862.821900462, 208090.624144334, 339455.907872023]
+	});
+	
+	var view = new ol.View({
+		projection: projection,
+		center: [187000, 323000],
+		zoom: 2
+	});
+	
+	var source = new ol.source.ImageWMS({
+		url: 'http://portal.prvlimburg.nl/geoservices/landschapstypen?', 
+		params: {'LAYERS': 'landschapstypen_v', 'VERSION': '1.1.1'} 
+	})
+	
+	var achtergrond = new ol.layer.Image({
+		source: source
+	});
+	
+	var zoomControl = new ol.control.Zoom();
+	
+	map = new ol.Map({
+		layers: [
+	      achtergrond
+		],
+		control: zoomControl,
+		target: 'map',
+		view: view
+	});
+	
+	if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+		var iconStyle = new ol.style.Style({
+			image: new ol.style.Icon(({
+				anchor: [0.5, 32],
+				anchorXUnits: 'fraction',
+				anchorYUnits: 'pixels',
+				opacity: 0.75,
+				src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+					'/images/location.svg'
+			}))
+		});
+		
+		var iconGeometry = new ol.geom.Point(Session.get('mapCoordinates'));
+		var iconFeature = new ol.Feature({
+			geometry: iconGeometry
+		});
+		
+		var vectorSource = new ol.source.Vector({
+			features: [iconFeature]
+		});
+		
+		var vectorLayer = new ol.layer.Vector({
+			source: vectorSource
+		});
+		
+		iconFeature.setStyle(iconStyle);
+		map.addLayer(vectorLayer);
+	}
+	
 	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
@@ -28,7 +88,7 @@ Template.step_3.helpers({
 	getLandschapsType: function() {
 		$('#lt-text').empty();
 		
-		if(typeof Session.get('landschapstypeId') !== 'undefined') {
+		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null) {
 			HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
@@ -53,7 +113,7 @@ Template.step_3.helpers({
 	getKernKwaliteit: function() {
 		$('#kk-text').empty();
 		
-		if(typeof Session.get('kernkwaliteitId') !== 'undefined') {
+		if(typeof Session.get('kernkwaliteitId') !== 'undefined' && Session.get('kernkwaliteitId') !== null) {
 			HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
@@ -78,7 +138,7 @@ Template.step_3.helpers({
 	getLeidendeBeginselen: function() {
 		$('#lb-text').empty();
 		
-		if(typeof Session.get('landschapstypeId') !== 'undefined') {
+		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null) {
 			HTTP.get("http://148.251.183.26/handvat-admin/coupling/leidend/json", {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
@@ -161,9 +221,9 @@ Template.step_3.helpers({
 	getOntwerpPrincipes: function() {
 		$('#op-text').empty();
 		
-		if(typeof Session.get('landschapstypeId') !== 'undefined' &&
-				typeof Session.get('sectorId') !== 'undefined' &&
-				typeof Session.get('kernkwaliteitId') !== 'undefined') {
+		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null &&
+				typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null &&
+				typeof Session.get('kernkwaliteitId') !== 'undefined' && Session.get('kernkwaliteitId') !== null) {
 			HTTP.get("http://148.251.183.26/handvat-admin/coupling/ontwerp/json", {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'

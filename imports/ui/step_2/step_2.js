@@ -42,14 +42,20 @@ Template.step_2.onRendered(function() {
 		Meteor.call('getLandschapsType', url, function(err, result) {
 			if(result === 'Dalbodem') {
 				Session.set('landschapstypeId', Meteor.settings.public.dalId);
+				Session.set('mapCoordinates', evt.coordinate);
 				Router.go('step_3');
 			} else if(result === 'Helling > 4 graden' || result === 'Helling < 4 graden') {
 				Session.set('landschapstypeId', Meteor.settings.public.hellingId);
+				Session.set('mapCoordinates', evt.coordinate);
 				Router.go('step_3');
 			} else if(result === 'Tussenterras' || result === 'Plateau' || result === 'Groeve' || 
 					result === 'Geisoleerde heuvel') {
 				Session.set('landschapstypeId', Meteor.settings.public.plateauId);
+				Session.set('mapCoordinates', evt.coordinate);
 				Router.go('step_3');
+			} else {
+				Session.set('landschapstypeId', null);
+				Session.set('mapCoordinates', null);
 			}
 		});
 	});

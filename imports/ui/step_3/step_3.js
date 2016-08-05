@@ -35,33 +35,67 @@ Template.step_3.onRendered(function() {
 		view: view
 	});
 	
+	var iconStyle = new ol.style.Style({
+		image: new ol.style.Icon(({
+			anchor: [0.5, 32],
+			anchorXUnits: 'fraction',
+			anchorYUnits: 'pixels',
+			opacity: 0.75,
+			src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+				'/images/location.svg'
+		}))
+	});
+	
+	var iconLayer;
+	
 	if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
-		var iconStyle = new ol.style.Style({
-			image: new ol.style.Icon(({
-				anchor: [0.5, 32],
-				anchorXUnits: 'fraction',
-				anchorYUnits: 'pixels',
-				opacity: 0.75,
-				src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-					'/images/location.svg'
-			}))
-		});
+		iconLayer = getIcon(Session.get('mapCoordinates'));
+		map.addLayer(iconLayer);
+	}
+	
+	map.on('singleclick', function(evt) {
+		if(typeof iconLayer !== 'undefined') {
+			map.removeLayer(iconLayer);
+		}
 		
-		var iconGeometry = new ol.geom.Point(Session.get('mapCoordinates'));
+		iconLayer = getIcon(evt.coordinate);
+		map.addLayer(iconLayer);
+		
+		var url = source.getGetFeatureInfoUrl(evt.coordinate, map.getView().getResolution(), 
+				map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
+		
+		Meteor.call('getLandschapsType', url, function(err, result) {
+			if(result === 'Dalbodem') {
+				Session.set('landschapstypeId', Meteor.settings.public.dalId);
+				Session.set('mapCoordinates', evt.coordinate);
+			} else if(result === 'Helling > 4 graden' || result === 'Helling < 4 graden') {
+				Session.set('landschapstypeId', Meteor.settings.public.hellingId);
+				Session.set('mapCoordinates', evt.coordinate);
+			} else if(result === 'Tussenterras' || result === 'Plateau' || result === 'Groeve' || 
+					result === 'Geisoleerde heuvel') {
+				Session.set('landschapstypeId', Meteor.settings.public.plateauId);
+				Session.set('mapCoordinates', evt.coordinate);
+			} else {
+				Session.set('landschapstypeId', null);
+				Session.set('mapCoordinates', null);
+			}
+		});
+	});
+	
+	function getIcon(coordinates) {
 		var iconFeature = new ol.Feature({
-			geometry: iconGeometry
-		});
-		
-		var vectorSource = new ol.source.Vector({
-			features: [iconFeature]
+			geometry: new ol.geom.Point(coordinates)
 		});
 		
 		var vectorLayer = new ol.layer.Vector({
-			source: vectorSource
+			source: new ol.source.Vector({
+				features: [iconFeature]
+			})
 		});
 		
 		iconFeature.setStyle(iconStyle);
-		map.addLayer(vectorLayer);
+		
+		return vectorLayer;
 	}
 	
 	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {

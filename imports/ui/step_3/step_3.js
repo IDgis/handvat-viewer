@@ -4,6 +4,26 @@ import './step_3.css';
 Template.step_3.onRendered(function() {
 	Session.set('stepNumber', '3');
 	
+	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+		headers: {
+			'Content-Type' : 'application/json; charset=UTF-8'
+		}
+	}, function(err, result) {
+		Meteor.call('getTexts', result.content, 'kernkwaliteit', function(err, result) {
+			$.each(result, function(index, item) {
+				var header = document.createElement('p');
+				$(header).attr('class', 'header');
+				header.innerHTML = item.name;
+				$('#kk-container').append(header);
+				
+				var image = document.createElement('img');
+				$(image).attr('class', 'kernkwaliteit-img');
+				$(image).attr('id', item.id);
+				$('#kk-container').append(image);
+			});
+		});
+	});
+	
 	var projection = new ol.proj.Projection({
 		code: 'EPSG:28992',
 		extent: [167658.241026781, 307862.821900462, 208090.624144334, 339455.907872023]
@@ -97,25 +117,6 @@ Template.step_3.onRendered(function() {
 		
 		return vectorLayer;
 	}
-	
-	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
-		headers: {
-			'Content-Type' : 'application/json; charset=UTF-8'
-		}
-	}, function(err, result) {
-		Meteor.call('getTexts', result.content, 'kernkwaliteit', function(err, result) {
-			var select = $('select[id=js-temp-kernkwaliteiten]');
-			$.each(select, function(index, item) {
-				item.add(document.createElement('option'));
-				$.each(result, function(idx, el) {
-					var option = document.createElement('option');
-					option.value = el.id;
-					option.innerHTML = el.name;
-					item.add(option);
-				});
-			});
-		});
-	});
 });
 
 Template.step_3.helpers({
@@ -358,7 +359,7 @@ function cleanImages(div) {
 }
 
 Template.step_3.events ({
-	'change #js-temp-kernkwaliteiten': function(e) {
-		Session.set('kernkwaliteitId', e.target.value);
+	'click .kernkwaliteit-img': function(e) {
+		Session.set('kernkwaliteitId', e.target.id);
 	}
 });

@@ -1,4 +1,7 @@
-#kk-container {text-align:center;width:200px;margin-left:auto;margin-right:auto;margin-top:420px;}
 .text-div-img {width:100%;}
 .text-div {padding-left:0;padding-right:10px;margin-bottom:10px;}
 p.header {margin-bottom:0;font-weight:bold;}
+#kk-container {height:95%;float:left;position:relative;min-height:1px;padding-right:15px;width:10%;overflow-y:auto;padding-left:15px;}
+.step-3-viewer {float:left;position:relative;min-height:1px;padding-right:15px;width:56.6667%}
+.kernkwaliteit-img {width:100%;height:150px;margin-top:10px;margin-bottom:10px;}
+.kernkwaliteit-img:hover {cursor:pointer;}

@@ -23,3 +23,5 @@ iron:router
 mizzao:bootstrap-3
 http
 session
+alon:ol3
+peerlibrary:xml2js

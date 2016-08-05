@@ -1,4 +1,5 @@
 allow-deny@1.0.5
+alon:ol3@3.11.2
 autopublish@1.0.7
 autoupdate@1.2.11
 babel-compiler@6.8.5
@@ -49,6 +50,7 @@ minifier-css@1.1.13
 minifier-js@1.1.13
 minimongo@1.0.17
 mizzao:bootstrap-3@3.3.1_1
+mizzao:build-fetcher@0.2.0
 mobile-experience@1.0.4
 mobile-status-bar@1.0.12
 modules@0.6.5
@@ -58,6 +60,8 @@ mongo-id@1.0.5
 npm-mongo@1.4.45
 observe-sequence@1.0.12
 ordered-dict@1.0.8
+peerlibrary:blocking@0.5.2
+peerlibrary:xml2js@0.4.8_1
 promise@0.7.3
 random@1.0.10
 reactive-dict@1.1.8

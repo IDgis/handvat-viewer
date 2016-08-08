@@ -19,7 +19,14 @@ Template.step_3.onRendered(function() {
 				var image = document.createElement('img');
 				$(image).attr('class', 'kernkwaliteit-img');
 				$(image).attr('id', item.id);
+				
 				$('#kk-container').append(image);
+			});
+			
+			var imageKernkwaliteiten = $('.kernkwaliteit-img');
+			$.each(imageKernkwaliteiten, function(index, item) {
+				var imageWidth = $(item).width();
+				$(item).css({'height':imageWidth + 'px'});
 			});
 		});
 	});

@@ -4,9 +4,26 @@
 	  "dalId": "T7DsXGLEQg7ABiQun",
 	  "hellingId": "jxhZYdoTod7igeNKi",
 	  "plateauId": "jJPk6LZvcq8ibZ8ar",
+	  
 	  "reliefId": "6qsWQmNP6B6jDxzzd",
 	  "cultuurhistorieId": "XtMceXC8wHg9g2Qpe",
 	  "groenKarakterId": "voWchxfes3t3czyp3",
-	  "openBeslotenId": "AJvMWXHWx3iuz69yR"
+	  "openBeslotenId": "AJvMWXHWx3iuz69yR",
+	  
+	  "cultuurhistorieService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?",
+	    "layers": ["cultuurlandschap_zl_v", "masker_zuid_limburg_v", "masker_beschermingsgebied_v", 
+	    			"rijksmonumenten_p", "geologisch_monument_p", "lvzl_kloosters_p", "lvzl_sympoint_p", 
+	    			"lvzl_kerken_point_p", "cultuurhistorische_elementen_p", "cultuurhistorische_elementen_l", 
+	    			"cultuurhistorische_elementen_v", "Cultuurlandschap_ZL_L", "prov_archeol_aandachtsgeb_v", 
+	    			"historische_buitenplaatsen_v", "archeologische_monumenten_v"]
+	  },
+	  "openBeslotenService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?",
+	    "layers": ["masker_zuid_limburg_v", "masker_beschermingsgebied_v", "boom", "bomenrij", 
+	    			"heg_haag", "landschapstypen_v_plateau", "top10nl_relief_hogezijde_l", 
+	    			"beheertypenkaart_v", "dorpsmantel_v", "bos_boomgaard_kwekerij", 
+	    			"top10nl_spoorbaandeel_l", "landschapstypen_v"]
+	  }
   }
 }

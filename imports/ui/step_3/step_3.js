@@ -361,5 +361,231 @@ function cleanImages(div) {
 Template.step_3.events ({
 	'click .kernkwaliteit-img': function(e) {
 		Session.set('kernkwaliteitId', e.target.id);
+		
+		if(Session.get('kernkwaliteitId') === Meteor.settings.public.openBeslotenId) {
+			map.getLayers().clear();
+			
+			var layer1 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?', 
+					params: {'LAYERS': 'masker_zuid_limburg_v', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer2 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?', 
+					params: {'LAYERS': 'masker_beschermingsgebied_v', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer3 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?', 
+					params: {'LAYERS': 'boom', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer4 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?', 
+					params: {'LAYERS': 'bomenrij', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer5 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?', 
+					params: {'LAYERS': 'heg_haag', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer6 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?', 
+					params: {'LAYERS': 'landschapstypen_v_plateau', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer7 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?', 
+					params: {'LAYERS': 'top10nl_relief_hogezijde_l', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer8 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?', 
+					params: {'LAYERS': 'beheertypenkaart_v', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer9 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?', 
+					params: {'LAYERS': 'dorpsmantel_v', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer10 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?', 
+					params: {'LAYERS': 'bos_boomgaard_kwekerij', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer11 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?', 
+					params: {'LAYERS': 'top10nl_spoorbaandeel_l', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer12 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?', 
+					params: {'LAYERS': 'landschapstypen_v', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			map.addLayer(layer1);
+			map.addLayer(layer2);
+			map.addLayer(layer3);
+			map.addLayer(layer4);
+			map.addLayer(layer5);
+			map.addLayer(layer6);
+			map.addLayer(layer7);
+			map.addLayer(layer8);
+			map.addLayer(layer9);
+			map.addLayer(layer10);
+			map.addLayer(layer11);
+			map.addLayer(layer12);
+		}
+		
+		if(Session.get('kernkwaliteitId') === Meteor.settings.public.cultuurhistorieId) {
+			map.getLayers().clear();
+			
+			var layer1 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?', 
+					params: {'LAYERS': 'cultuurlandschap_zl_v', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer2 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?', 
+					params: {'LAYERS': 'masker_zuid_limburg_v', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer3 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?', 
+					params: {'LAYERS': 'masker_beschermingsgebied_v', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer4 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?', 
+					params: {'LAYERS': 'rijksmonumenten_p', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer5 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?', 
+					params: {'LAYERS': 'geologisch_monument_p', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer6 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?', 
+					params: {'LAYERS': 'lvzl_kloosters_p', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer7 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?', 
+					params: {'LAYERS': 'lvzl_sympoint_p', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer8 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?', 
+					params: {'LAYERS': 'lvzl_kerken_point_p', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer9 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?', 
+					params: {'LAYERS': 'cultuurhistorische_elementen_p', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer10 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?', 
+					params: {'LAYERS': 'cultuurhistorische_elementen_l', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer11 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?', 
+					params: {'LAYERS': 'cultuurhistorische_elementen_v', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer12 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?', 
+					params: {'LAYERS': 'Cultuurlandschap_ZL_L', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer13 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?', 
+					params: {'LAYERS': 'prov_archeol_aandachtsgeb_v', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer14 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?', 
+					params: {'LAYERS': 'historische_buitenplaatsen_v', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			var layer15 = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: 'http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?', 
+					params: {'LAYERS': 'archeologische_monumenten_v', 'VERSION': '1.1.1'} 
+				})
+			});
+			
+			map.addLayer(layer1);
+			map.addLayer(layer2);
+			map.addLayer(layer3);
+			map.addLayer(layer4);
+			map.addLayer(layer5);
+			map.addLayer(layer6);
+			map.addLayer(layer7);
+			map.addLayer(layer8);
+			map.addLayer(layer9);
+			map.addLayer(layer10);
+			map.addLayer(layer11);
+			map.addLayer(layer12);
+			map.addLayer(layer13);
+			map.addLayer(layer14);
+			map.addLayer(layer15);
+		}
 	}
 });

@@ -39,7 +39,8 @@ Template.step_2.onRendered(function() {
 	});
 	
 	map.on('singleclick', function(evt) {
-		var url = source.getGetFeatureInfoUrl(evt.coordinate, map.getView().getResolution(), 
+		var url = map.getLayers().item(Meteor.settings.public.landschapstypenService.indexLT)
+				.getSource().getGetFeatureInfoUrl(evt.coordinate, map.getView().getResolution(), 
 				map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
 		
 		Meteor.call('getLandschapsType', url, function(err, result) {

@@ -3,6 +3,7 @@ import './step_3.css';
 
 Template.step_3.onRendered(function() {
 	Session.set('stepNumber', '3');
+	Session.set('ltActive', true);
 	
 	var ltHeader = document.createElement('p');
 	$(ltHeader).attr('class', 'header');
@@ -104,26 +105,28 @@ Template.step_3.onRendered(function() {
 		iconLayer = getIcon(evt.coordinate);
 		map.addLayer(iconLayer);
 		
-		var url = map.getLayers().item(Meteor.settings.public.landschapstypenService.indexLT)
+		if(Session.get('ltActive') === true) {
+			var url = map.getLayers().item(Meteor.settings.public.landschapstypenService.indexLT)
 				.getSource().getGetFeatureInfoUrl(evt.coordinate, map.getView().getResolution(), 
 				map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
-		
-		Meteor.call('getLandschapsType', url, function(err, result) {
-			if(result === 'Dalbodem') {
-				Session.set('landschapstypeId', Meteor.settings.public.dalId);
-				Session.set('mapCoordinates', evt.coordinate);
-			} else if(result === 'Helling > 4 graden' || result === 'Helling < 4 graden') {
-				Session.set('landschapstypeId', Meteor.settings.public.hellingId);
-				Session.set('mapCoordinates', evt.coordinate);
-			} else if(result === 'Tussenterras' || result === 'Plateau' || result === 'Groeve' || 
-					result === 'Geisoleerde heuvel') {
-				Session.set('landschapstypeId', Meteor.settings.public.plateauId);
-				Session.set('mapCoordinates', evt.coordinate);
-			} else {
-				Session.set('landschapstypeId', null);
-				Session.set('mapCoordinates', null);
-			}
-		});
+			
+			Meteor.call('getLandschapsType', url, function(err, result) {
+				if(result === 'Dalbodem') {
+					Session.set('landschapstypeId', Meteor.settings.public.dalId);
+					Session.set('mapCoordinates', evt.coordinate);
+				} else if(result === 'Helling > 4 graden' || result === 'Helling < 4 graden') {
+					Session.set('landschapstypeId', Meteor.settings.public.hellingId);
+					Session.set('mapCoordinates', evt.coordinate);
+				} else if(result === 'Tussenterras' || result === 'Plateau' || result === 'Groeve' || 
+						result === 'Geisoleerde heuvel') {
+					Session.set('landschapstypeId', Meteor.settings.public.plateauId);
+					Session.set('mapCoordinates', evt.coordinate);
+				} else {
+					Session.set('landschapstypeId', null);
+					Session.set('mapCoordinates', null);
+				}
+			});
+		}
 	});
 	
 	function getIcon(coordinates) {
@@ -385,6 +388,7 @@ function cleanImages(div) {
 Template.step_3.events ({
 	'click .kernkwaliteit-img': function(e) {
 		Session.set('kernkwaliteitId', e.target.id);
+		Session.set('ltActive', false);
 		
 		var url;
 		var layers;
@@ -417,6 +421,7 @@ Template.step_3.events ({
 		});
 	},
 	'click #landschapstype-img': function(e) {
+		Session.set('ltActive', true);
 		map.getLayers().clear();
 		
 		var url = Meteor.settings.public.landschapstypenService.url;

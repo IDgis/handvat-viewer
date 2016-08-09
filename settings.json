@@ -10,6 +10,12 @@
 	  "groenKarakterId": "voWchxfes3t3czyp3",
 	  "openBeslotenId": "AJvMWXHWx3iuz69yR",
 	  
+	  "deelgebiedenService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/deelgebieden?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+	    "version": "1.1.1",
+	    "layers": ["Deelgebieden"],
+	    "indexDG": 0
+	  },
 	  "landschapstypenService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/landschapstypen?",
 	    "version": "1.1.1",

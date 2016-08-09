@@ -30,6 +30,9 @@ Template.main.onRendered(function() {
 });
 
 Template.main.helpers({
+	showSectorChoice: function() {
+		return Session.get('stepNumber') === '1';
+	},
 	activeStep: function(step) {
 		if(Session.equals('stepNumber', step)) {
 			return "active";
@@ -60,5 +63,14 @@ Template.main.events ({
 	'click #js-sectors li a': function (e) {
 		Session.set('sectorLabel', e.target.textContent);
 		Session.set('sectorId', e.target.id);
+		
+		var sectorElement = $('#sector-dropdown-label');
+		$.each(sectorElement, function(index, item) {
+			$(item).removeAttr('style');
+		});
+		
+		if(typeof Session.get('mapExtent') !== 'undefined' && Session.get('mapCenter') !== 'undefined') {
+			Router.go('step_2');
+		}
 	}
 });

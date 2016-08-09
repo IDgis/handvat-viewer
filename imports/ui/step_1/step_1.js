@@ -76,15 +76,17 @@ Template.step_1.onRendered(function() {
 				Session.set('mapExtent', extent);
 				Session.set('mapCenter', center);
 				
-				Router.go('step_2');
+				if(typeof Session.get('sectorId') === 'undefined') {
+					var sectorElement = $('#sector-dropdown-label');
+					$.each(sectorElement, function(index, item) {
+						$(item).css({'color':'#BF3F3F'});
+						$(item).css({'border':'1px solid black'});
+						$(item).css({'font-weight':'bold'});
+					});
+				} else {
+					Router.go('step_2');
+				}
 			}
 		});
 	});
-});
-
-Template.step_1.events ({
-	'change #js-temp-landschapstypen': function(e) {
-		Session.set('landschapstypeId', e.target.value);
-		Router.go('step_3');
-	}
 });

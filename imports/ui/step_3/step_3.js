@@ -12,6 +12,8 @@ Template.step_3.onRendered(function() {
 	
 	var ltImage = document.createElement('img');
 	$(ltImage).attr('id', 'landschapstype-img');
+	$(ltImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+			'/images/lt.png');
 	$('#kk-container').append(ltImage);
 	
 	var ltImageWidth = $(ltImage).width();
@@ -32,6 +34,15 @@ Template.step_3.onRendered(function() {
 				var image = document.createElement('img');
 				$(image).attr('class', 'kernkwaliteit-img');
 				$(image).attr('id', item.id);
+				
+				if(item.id === Meteor.settings.public.cultuurhistorieId) {
+					$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
+							window.location.port + '/images/ch.png');
+				} else if(item.id === Meteor.settings.public.openBeslotenId) {
+					$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
+							window.location.port + '/images/ob.png');
+				}
+				
 				$('#kk-container').append(image);
 				
 				var width = $('#kk-container').width();

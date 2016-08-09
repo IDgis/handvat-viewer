@@ -15,24 +15,27 @@ Template.step_2.onRendered(function() {
 		zoom: 2
 	});
 	
-	var source = new ol.source.ImageWMS({
-		url: 'http://portal.prvlimburg.nl/geoservices/landschapstypen?', 
-		params: {'LAYERS': 'landschapstypen_v', 'VERSION': '1.1.1'} 
-	})
-	
-	var achtergrond = new ol.layer.Image({
-		source: source
-	});
-	
 	var zoomControl = new ol.control.Zoom();
 	
 	map = new ol.Map({
-		layers: [
-	      achtergrond
-		],
 		control: zoomControl,
 		target: 'map',
 		view: view
+	});
+	
+	var url = Meteor.settings.public.landschapstypenService.url;
+	var layers = Meteor.settings.public.landschapstypenService.layers;
+	var version = Meteor.settings.public.landschapstypenService.version;
+	
+	layers.forEach(function(item) {
+		var layer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
+				url: url, 
+				params: {'LAYERS': item, 'VERSION': version} 
+			})
+		});
+		
+		map.addLayer(layer);
 	});
 	
 	map.on('singleclick', function(evt) {

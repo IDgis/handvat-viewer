@@ -4,6 +4,18 @@ import './step_3.css';
 Template.step_3.onRendered(function() {
 	Session.set('stepNumber', '3');
 	
+	var ltHeader = document.createElement('p');
+	$(ltHeader).attr('class', 'header');
+	ltHeader.innerHTML = 'Landschapstype';
+	$('#kk-container').append(ltHeader);
+	
+	var ltImage = document.createElement('img');
+	$(ltImage).attr('id', 'landschapstype-img');
+	$('#kk-container').append(ltImage);
+	
+	var ltImageWidth = $(ltImage).width();
+	$(ltImage).css({'height':ltImageWidth + 'px'});
+	
 	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
@@ -19,14 +31,15 @@ Template.step_3.onRendered(function() {
 				var image = document.createElement('img');
 				$(image).attr('class', 'kernkwaliteit-img');
 				$(image).attr('id', item.id);
-				
 				$('#kk-container').append(image);
+				
+				var width = $('#kk-container').width();
 			});
 			
 			var imageKernkwaliteiten = $('.kernkwaliteit-img');
 			$.each(imageKernkwaliteiten, function(index, item) {
-				var imageWidth = $(item).width();
-				$(item).css({'height':imageWidth + 'px'});
+				var width = $(item).width();
+				$(item).css({'height':width + 'px'});
 			});
 		});
 	});
@@ -42,24 +55,27 @@ Template.step_3.onRendered(function() {
 		zoom: 2
 	});
 	
-	var source = new ol.source.ImageWMS({
-		url: 'http://portal.prvlimburg.nl/geoservices/landschapstypen?', 
-		params: {'LAYERS': 'landschapstypen_v', 'VERSION': '1.1.1'} 
-	})
-	
-	var achtergrond = new ol.layer.Image({
-		source: source
-	});
-	
 	var zoomControl = new ol.control.Zoom();
 	
 	map = new ol.Map({
-		layers: [
-	      achtergrond
-		],
 		control: zoomControl,
 		target: 'map',
 		view: view
+	});
+	
+	var url = Meteor.settings.public.landschapstypenService.url;
+	var layers = Meteor.settings.public.landschapstypenService.layers;
+	var version = Meteor.settings.public.landschapstypenService.version;
+	
+	layers.forEach(function(item) {
+		var layer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
+				url: url, 
+				params: {'LAYERS': item, 'VERSION': version} 
+			})
+		});
+		
+		map.addLayer(layer);
 	});
 	
 	var iconStyle = new ol.style.Style({
@@ -377,6 +393,7 @@ Template.step_3.events ({
 			
 			url = Meteor.settings.public.openBeslotenService.url;
 			layers = Meteor.settings.public.openBeslotenService.layers;
+			version = Meteor.settings.public.openBeslotenService.version;
 		}
 		
 		if(Session.get('kernkwaliteitId') === Meteor.settings.public.cultuurhistorieId) {
@@ -384,13 +401,32 @@ Template.step_3.events ({
 			
 			url = Meteor.settings.public.cultuurhistorieService.url;
 			layers = Meteor.settings.public.cultuurhistorieService.layers;
+			version = Meteor.settings.public.cultuurhistorieService.version;
 		}
 		
 		layers.forEach(function(item) {
 			var layer = new ol.layer.Image({
 				source: new ol.source.ImageWMS({
 					url: url, 
-					params: {'LAYERS': item, 'VERSION': '1.1.1'} 
+					params: {'LAYERS': item, 'VERSION': version} 
+				})
+			});
+			
+			map.addLayer(layer);
+		});
+	},
+	'click #landschapstype-img': function(e) {
+		map.getLayers().clear();
+		
+		var url = Meteor.settings.public.landschapstypenService.url;
+		var layers = Meteor.settings.public.landschapstypenService.layers;
+		var version = Meteor.settings.public.landschapstypenService.version;
+		
+		layers.forEach(function(item) {
+			var layer = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: url, 
+					params: {'LAYERS': item, 'VERSION': version} 
 				})
 			});
 			

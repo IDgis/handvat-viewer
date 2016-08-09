@@ -10,8 +10,14 @@
 	  "groenKarakterId": "voWchxfes3t3czyp3",
 	  "openBeslotenId": "AJvMWXHWx3iuz69yR",
 	  
+	  "landschapstypenService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/landschapstypen?",
+	    "version": "1.1.1",
+	    "layers": ["landschapstypen_v"]
+	  },
 	  "cultuurhistorieService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?",
+	    "version": "1.1.1",
 	    "layers": ["cultuurlandschap_zl_v", "masker_zuid_limburg_v", "masker_beschermingsgebied_v", 
 	    			"rijksmonumenten_p", "geologisch_monument_p", "lvzl_kloosters_p", "lvzl_sympoint_p", 
 	    			"lvzl_kerken_point_p", "cultuurhistorische_elementen_p", "cultuurhistorische_elementen_l", 
@@ -20,6 +26,7 @@
 	  },
 	  "openBeslotenService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?",
+	    "version": "1.1.1",
 	    "layers": ["masker_zuid_limburg_v", "masker_beschermingsgebied_v", "boom", "bomenrij", 
 	    			"heg_haag", "landschapstypen_v_plateau", "top10nl_relief_hogezijde_l", 
 	    			"beheertypenkaart_v", "dorpsmantel_v", "bos_boomgaard_kwekerij", 

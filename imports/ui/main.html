@@ -5,17 +5,19 @@
 				<a class="navbar-brand">Viewer</a>
 			</div>
 			<div class="collapse navbar-collapse">
-				<ul class="nav navbar-nav" id="sector-dropdown">
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown">Sector 
-							<span class="caret"></span>
-						</a>
-						<ul id="js-sectors" class="dropdown-menu">
-							
-						</ul>
-					</li>
-				</ul>
-				<p class="navbar-text">{{getSectorLabel}}</p>
+				{{#if showSectorChoice}}
+					<ul class="nav navbar-nav" id="sector-dropdown">
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" id="sector-dropdown-label">Sector 
+								<span class="caret"></span>
+							</a>
+							<ul id="js-sectors" class="dropdown-menu">
+								
+							</ul>
+						</li>
+					</ul>
+					<p class="navbar-text">{{getSectorLabel}}</p>
+				{{/if}}
 				<ul class="nav navbar-nav navbar-right col-xs-8">
 					<li id="js-step-1" class="col-xs-3 tab-step {{activeStep '1'}}">
 						<a>Stap 1</a>

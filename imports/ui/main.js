@@ -33,6 +33,16 @@ Template.main.helpers({
 	showSectorChoice: function() {
 		return Session.get('stepNumber') === '2';
 	},
+	disablePreviousButton: function() {
+		if(Session.get('stepNumber') === '1') {
+			return "disabled";
+		}
+	},
+	disableNextButton: function() {
+		if(Session.get('stepNumber') === '6') {
+			return "disabled";
+		}
+	},
 	activeStep: function(step) {
 		if(Session.equals('stepNumber', step)) {
 			return "active";
@@ -59,6 +69,32 @@ Template.main.events ({
 		
 		if(typeof Session.get('mapExtent') !== 'undefined' && Session.get('mapCenter') !== 'undefined') {
 			Router.go('step_3');
+		}
+	},
+	'click #js-next-step': function() {
+		if(Session.get('stepNumber') === '1') {
+			Router.go('step_2');
+		} else if(Session.get('stepNumber') === '2') {
+			Router.go('step_3');
+		} else if(Session.get('stepNumber') === '3') {
+			Router.go('step_4');
+		} else if(Session.get('stepNumber') === '4') {
+			Router.go('step_5');
+		} else if(Session.get('stepNumber') === '5') {
+			Router.go('step_6');
+		}
+	},
+	'click #js-previous-step': function() {
+		if(Session.get('stepNumber') === '2') {
+			Router.go('step_1');
+		} else if(Session.get('stepNumber') === '3') {
+			Router.go('step_2');
+		} else if(Session.get('stepNumber') === '4') {
+			Router.go('step_3');
+		} else if(Session.get('stepNumber') === '5') {
+			Router.go('step_4');
+		} else if(Session.get('stepNumber') === '6') {
+			Router.go('step_5');
 		}
 	}
 });

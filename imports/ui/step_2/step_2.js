@@ -38,7 +38,33 @@ Template.step_2.onRendered(function() {
 		map.addLayer(layer);
 	});
 	
+	var iconStyle = new ol.style.Style({
+		image: new ol.style.Icon(({
+			anchor: [0.5, 32],
+			anchorXUnits: 'fraction',
+			anchorYUnits: 'pixels',
+			opacity: 0.75,
+			src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+				'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg'
+		}))
+	});
+	
+	var iconLayer;
+	
+	if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+		iconLayer = getIcon(Session.get('mapCoordinates'));
+		map.addLayer(iconLayer);
+	}
+	
 	map.on('singleclick', function(evt) {
+		if(typeof iconLayer !== 'undefined') {
+			map.removeLayer(iconLayer);
+		}
+		
+		Session.set('mapCoordinates', evt.coordinate);
+		iconLayer = getIcon(evt.coordinate);
+		map.addLayer(iconLayer);
+		
 		var url = map.getLayers().item(Meteor.settings.public.deelgebiedenService.indexDG)
 				.getSource().getGetFeatureInfoUrl(evt.coordinate, map.getView().getResolution(), 
 				map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
@@ -83,10 +109,24 @@ Template.step_2.onRendered(function() {
 						$(item).css({'border':'1px solid black'});
 						$(item).css({'font-weight':'bold'});
 					});
-				} else {
-					Router.go('step_3');
 				}
 			}
 		});
 	});
+	
+	function getIcon(coordinates) {
+		var iconFeature = new ol.Feature({
+			geometry: new ol.geom.Point(coordinates)
+		});
+		
+		var vectorLayer = new ol.layer.Vector({
+			source: new ol.source.Vector({
+				features: [iconFeature]
+			})
+		});
+		
+		iconFeature.setStyle(iconStyle);
+		
+		return vectorLayer;
+	}
 });

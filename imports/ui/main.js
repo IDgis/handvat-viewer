@@ -43,6 +43,12 @@ Template.main.helpers({
 	disableNextButton: function() {
 		if(Session.get('stepNumber') === '6') {
 			return 'disabled';
+		} else if(Session.get('stepNumber') === '2') {
+			if(typeof Session.get('sectorId') === 'undefined' ||
+					typeof Session.get('mapExtent') === 'undefined' ||
+					typeof Session.get('mapCenter') == 'undefined') {
+				return 'disabled';
+			}
 		}
 	},
 	activeStep: function(step) {
@@ -68,10 +74,6 @@ Template.main.events ({
 		$.each(sectorElement, function(index, item) {
 			$(item).removeAttr('style');
 		});
-		
-		if(typeof Session.get('mapExtent') !== 'undefined' && Session.get('mapCenter') !== 'undefined') {
-			Router.go('step_3');
-		}
 	},
 	'click #js-next-step': function() {
 		if(Session.get('stepNumber') === '1') {

@@ -31,16 +31,18 @@ Template.main.onRendered(function() {
 
 Template.main.helpers({
 	showSectorChoice: function() {
-		return Session.get('stepNumber') === '2';
+		if(Session.get('stepNumber') !== '2') {
+			return 'hide-element';
+		}
 	},
 	disablePreviousButton: function() {
 		if(Session.get('stepNumber') === '1') {
-			return "disabled";
+			return 'disabled';
 		}
 	},
 	disableNextButton: function() {
 		if(Session.get('stepNumber') === '6') {
-			return "disabled";
+			return 'disabled';
 		}
 	},
 	activeStep: function(step) {

@@ -116,3 +116,31 @@ Template.step_4.onRendered(function() {
 		return vectorLayer;
 	}
 });
+
+Template.step_4.helpers({
+	getLandschapsType: function() {
+		$('#lt-text-4').empty();
+		
+		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null) {
+			HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+				headers: {
+					'Content-Type' : 'application/json; charset=UTF-8'
+				}
+			}, function(err, result) {
+				Meteor.call('getText', result.content, Session.get('landschapstypeId'), function(err, result) {
+					if(typeof result !== 'undefined') {
+						var header = document.createElement('p');
+						$(header).attr('class', 'header');
+						header.innerHTML = 'Landschapstype';
+						$('#lt-text-4').append(header);
+						
+						var div = document.createElement('div');
+						$(div).attr('class', 'col-xs-12 text-div');
+						$(div).append(result.content);
+						$('#lt-text-4').append(div);
+					}
+				});
+			});
+		}
+	},
+});

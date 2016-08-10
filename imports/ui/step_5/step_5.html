@@ -1,4 +1,12 @@
 <template name="step_5">
-	<div id="text-container" class="col-xs-4"></div>
-	<div id="viewer-container" class="col-xs-8"></div>
+	<div id="text-container" class="col-xs-4">
+		<div id="lt-text">{{getLandschapsType}}</div>
+		<div id="kk-text">{{getKernKwaliteit}}</div>
+		<div id="lb-text">{{getLeidendeBeginselen}}</div>
+		<div id="op-text">{{getOntwerpPrincipes}}</div>
+	</div>
+	<div id="kk-container"></div>
+	<div id="viewer-container" class="step-3-viewer">
+		<div id="map" class="olMap"></div>
+	</div>
 </template>

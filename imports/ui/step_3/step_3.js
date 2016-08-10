@@ -41,6 +41,12 @@ Template.step_3.onRendered(function() {
 				} else if(item.id === Meteor.settings.public.openBeslotenId) {
 					$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
 							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/ob.png');
+				} else if(item.id === Meteor.settings.public.reliefId) {
+					$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
+							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/r.png');
+				} else if(item.id === Meteor.settings.public.groenKarakterId) {
+					$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
+							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/gk.png');
 				}
 				
 				$('#kk-container').append(image);
@@ -426,6 +432,22 @@ Template.step_3.events ({
 			url = Meteor.settings.public.cultuurhistorieService.url;
 			layers = Meteor.settings.public.cultuurhistorieService.layers;
 			version = Meteor.settings.public.cultuurhistorieService.version;
+		}
+		
+		if(Session.get('kernkwaliteitId') === Meteor.settings.public.reliefId) {
+			map.getLayers().clear();
+			
+			url = Meteor.settings.public.reliefService.url;
+			layers = Meteor.settings.public.reliefService.layers;
+			version = Meteor.settings.public.reliefService.version;
+		}
+		
+		if(Session.get('kernkwaliteitId') === Meteor.settings.public.groenKarakterId) {
+			map.getLayers().clear();
+			
+			url = Meteor.settings.public.groenKarakterService.url;
+			layers = Meteor.settings.public.groenKarakterService.layers;
+			version = Meteor.settings.public.groenKarakterService.version;
 		}
 		
 		layers.forEach(function(item) {

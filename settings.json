@@ -40,6 +40,24 @@
 	    			"heg_haag", "landschapstypen_v_plateau", "top10nl_relief_hogezijde_l", 
 	    			"beheertypenkaart_v", "dorpsmantel_v", "bos_boomgaard_kwekerij", 
 	    			"top10nl_spoorbaandeel_l", "landschapstypen_v"]
+	  },
+	  "reliefService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/relief?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+	    "version": "1.1.1",
+	    "layers": ["masker_zuid_limburg_v", "masker_beschermingsgebied_v", "AHN25helling", "top10nl_isohoogtelijn_l", 
+	    			"top10nl_relief_hogezijde_l", "landschapstypen_v", "landschapstypen_v_plateau", 
+	    			"waterstaatswerk_watergang_v", "top10nl_waterdeel_v", "waterstaatswerk_regenwbuf_v", 
+	    			"primaire_bronnen_p"]
+	  },
+	  "groenKarakterService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/groen_karakter?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+	    "version": "1.1.1",
+	    "layers": ["masker_zuid_limburg_v", "masker_beschermingsgebied_v", "grasland_heide_zand", "akkerland", 
+	    			"dorpsmantel_v", "bebouwde_kom", "top10nl_gebouw_v", "cultuurhistorische_elementen_v", "boomgaard", 
+	    			"bos", "beheertypenkaart_v", "landschapstypen_v", "waterstaatswerk_watergang_v", 
+	    			"top10nl_waterdeel_v", "top10nl_wegdeel_hartlijn_l", "top10nl_spoorbaandeel_l", 
+	    			"waterstaatswerk_regenwbuf_v", "primaire_bronnen_p", "heg_haag", "top10nl_relief_hogezijde_l", 
+	    			"bomenrij", "boom"]
 	  }
   }
 }

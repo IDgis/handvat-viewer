@@ -27,7 +27,7 @@ Template.step_3.onRendered(function() {
 	
 	map = new ol.Map({
 		control: zoomControl,
-		target: 'map',
+		target: 'map-3',
 		view: view
 	});
 	
@@ -55,16 +55,16 @@ Template.step_3.onRendered(function() {
 			if(result === 'Dalbodem') {
 				Session.set('landschapstypeId', Meteor.settings.public.dalId);
 				Session.set('mapCoordinates', evt.coordinate);
-				Router.go('step_3');
+				Router.go('step_4');
 			} else if(result === 'Helling > 4 graden' || result === 'Helling < 4 graden') {
 				Session.set('landschapstypeId', Meteor.settings.public.hellingId);
 				Session.set('mapCoordinates', evt.coordinate);
-				Router.go('step_3');
+				Router.go('step_4');
 			} else if(result === 'Tussenterras' || result === 'Plateau' || result === 'Groeve' || 
 					result === 'Geisoleerde heuvel') {
 				Session.set('landschapstypeId', Meteor.settings.public.plateauId);
 				Session.set('mapCoordinates', evt.coordinate);
-				Router.go('step_3');
+				Router.go('step_4');
 			} else {
 				Session.set('landschapstypeId', null);
 				Session.set('mapCoordinates', null);

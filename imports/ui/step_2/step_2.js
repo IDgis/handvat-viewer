@@ -19,7 +19,7 @@ Template.step_2.onRendered(function() {
 	
 	map = new ol.Map({
 		control: zoomControl,
-		target: 'map',
+		target: 'map-2',
 		view: view
 	});
 	
@@ -84,7 +84,7 @@ Template.step_2.onRendered(function() {
 						$(item).css({'font-weight':'bold'});
 					});
 				} else {
-					Router.go('step_2');
+					Router.go('step_3');
 				}
 			}
 		});

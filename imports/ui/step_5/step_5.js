@@ -8,13 +8,13 @@ Template.step_5.onRendered(function() {
 	var ltHeader = document.createElement('p');
 	$(ltHeader).attr('class', 'header');
 	ltHeader.innerHTML = 'Landschapstype';
-	$('#kk-container').append(ltHeader);
+	$('#kk-container-5').append(ltHeader);
 	
 	var ltImage = document.createElement('img');
 	$(ltImage).attr('id', 'landschapstype-img');
 	$(ltImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
 			'/' + Meteor.settings.public.domainSuffix + '/images/lt.png');
-	$('#kk-container').append(ltImage);
+	$('#kk-container-5').append(ltImage);
 	
 	var ltImageWidth = $(ltImage).width();
 	$(ltImage).css({'height':ltImageWidth + 'px'});
@@ -29,7 +29,7 @@ Template.step_5.onRendered(function() {
 				var header = document.createElement('p');
 				$(header).attr('class', 'header');
 				header.innerHTML = item.name;
-				$('#kk-container').append(header);
+				$('#kk-container-5').append(header);
 				
 				var image = document.createElement('img');
 				$(image).attr('class', 'kernkwaliteit-img');
@@ -49,9 +49,7 @@ Template.step_5.onRendered(function() {
 							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/gk.png');
 				}
 				
-				$('#kk-container').append(image);
-				
-				var width = $('#kk-container').width();
+				$('#kk-container-5').append(image);
 			});
 			
 			var imageKernkwaliteiten = $('.kernkwaliteit-img');
@@ -85,7 +83,7 @@ Template.step_5.onRendered(function() {
 	
 	map = new ol.Map({
 		control: zoomControl,
-		target: 'map',
+		target: 'map-5',
 		view: view
 	});
 	
@@ -173,7 +171,7 @@ Template.step_5.onRendered(function() {
 
 Template.step_5.helpers({
 	getLandschapsType: function() {
-		$('#lt-text').empty();
+		$('#lt-text-5').empty();
 		
 		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null) {
 			HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
@@ -186,19 +184,19 @@ Template.step_5.helpers({
 						var header = document.createElement('p');
 						$(header).attr('class', 'header');
 						header.innerHTML = 'Landschapstype';
-						$('#lt-text').append(header);
+						$('#lt-text-5').append(header);
 						
 						var div = document.createElement('div');
 						$(div).attr('class', 'col-xs-12 text-div');
 						$(div).append(result.content);
-						$('#lt-text').append(div);
+						$('#lt-text-5').append(div);
 					}
 				});
 			});
 		}
 	},
 	getKernKwaliteit: function() {
-		$('#kk-text').empty();
+		$('#kk-text-5').empty();
 		
 		if(typeof Session.get('kernkwaliteitId') !== 'undefined' && Session.get('kernkwaliteitId') !== null) {
 			HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
@@ -211,19 +209,19 @@ Template.step_5.helpers({
 						var header = document.createElement('p');
 						$(header).attr('class', 'header');
 						header.innerHTML = 'Kernkwaliteit';
-						$('#kk-text').append(header);
+						$('#kk-text-5').append(header);
 						
 						var div = document.createElement('div');
 						$(div).attr('class', 'col-xs-12 text-div');
 						$(div).append(result.content);
-						$('#kk-text').append(div);
+						$('#kk-text-5').append(div);
 					}
 				});
 			});
 		}
 	},
 	getLeidendeBeginselen: function() {
-		$('#lb-text').empty();
+		$('#lb-text-5').empty();
 		
 		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null) {
 			HTTP.get("http://148.251.183.26/handvat-admin/coupling/leidend/json", {
@@ -240,7 +238,7 @@ Template.step_5.helpers({
 							var header = document.createElement('p');
 							$(header).attr('class', 'header');
 							header.innerHTML = 'Leidende beginselen';
-							$('#lb-text').append(header);
+							$('#lb-text-5').append(header);
 						}
 						
 						if(divCount === 0) {
@@ -250,7 +248,7 @@ Template.step_5.helpers({
 							
 							var innerDiv = document.createElement('div');
 							$(innerDiv).attr('class', 'col-xs-6 text-div');
-							$('#lb-text').append(outerDiv);
+							$('#lb-text-5').append(outerDiv);
 							
 							HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 								headers: {
@@ -263,7 +261,7 @@ Template.step_5.helpers({
 											$(innerDiv).append(elt);
 										});
 										
-										cleanImages('lb-text');
+										cleanImages('lb-text-5');
 										
 										$(innerDiv).append(result.content);
 									}
@@ -290,7 +288,7 @@ Template.step_5.helpers({
 											$(innerDiv).append(elt);
 										});
 										
-										cleanImages('lb-text');
+										cleanImages('lb-text-5');
 										
 										$(innerDiv).append(result.content);
 									}
@@ -306,7 +304,7 @@ Template.step_5.helpers({
 		}
 	},
 	getOntwerpPrincipes: function() {
-		$('#op-text').empty();
+		$('#op-text-5').empty();
 		
 		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null &&
 				typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null &&
@@ -330,7 +328,7 @@ Template.step_5.helpers({
 							var header = document.createElement('p');
 							$(header).attr('class', 'header');
 							header.innerHTML = 'Ontwerpprincipes';
-							$('#op-text').append(header);
+							$('#op-text-5').append(header);
 						}
 						
 						if(divCount === 0) {
@@ -340,7 +338,7 @@ Template.step_5.helpers({
 							
 							var innerDiv = document.createElement('div');
 							$(innerDiv).attr('class', 'col-xs-6 text-div');
-							$('#op-text').append(outerDiv);
+							$('#op-text-5').append(outerDiv);
 							
 							HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 								headers: {
@@ -353,7 +351,7 @@ Template.step_5.helpers({
 											$(innerDiv).append(elt);
 										});
 										
-										cleanImages('op-text');
+										cleanImages('op-text-5');
 										
 										$(innerDiv).append(result.content);
 									}
@@ -380,7 +378,7 @@ Template.step_5.helpers({
 											$(innerDiv).append(elt);
 										});
 										
-										cleanImages('op-text');
+										cleanImages('op-text-5');
 										
 										$(innerDiv).append(result.content);
 									}

@@ -31,7 +31,7 @@ Template.main.onRendered(function() {
 
 Template.main.helpers({
 	showSectorChoice: function() {
-		return Session.get('stepNumber') === '1';
+		return Session.get('stepNumber') === '2';
 	},
 	activeStep: function(step) {
 		if(Session.equals('stepNumber', step)) {
@@ -58,7 +58,7 @@ Template.main.events ({
 		});
 		
 		if(typeof Session.get('mapExtent') !== 'undefined' && Session.get('mapCenter') !== 'undefined') {
-			Router.go('step_2');
+			Router.go('step_3');
 		}
 	}
 });

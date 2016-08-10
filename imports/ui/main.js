@@ -48,18 +48,6 @@ Template.main.helpers({
 });
 
 Template.main.events ({
-	'click #js-step-1': function () {
-		Router.go('step_1');
-	},
-	'click #js-step-2': function () {
-		Router.go('step_2');
-	},
-	'click #js-step-3': function () {
-		Router.go('step_3');
-	},
-	'click #js-step-4': function () {
-		Router.go('step_4');
-	},
 	'click #js-sectors li a': function (e) {
 		Session.set('sectorLabel', e.target.textContent);
 		Session.set('sectorId', e.target.id);

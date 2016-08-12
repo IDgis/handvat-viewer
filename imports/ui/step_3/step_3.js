@@ -27,16 +27,89 @@ Template.step_3.onRendered(function() {
 	var layers = Meteor.settings.public.landschapStructuurService.layers;
 	var version = Meteor.settings.public.landschapStructuurService.version;
 	
-	layers.forEach(function(item) {
-		var layer = new ol.layer.Image({
+	var structuurkaart = new ol.layer.Image({
+		source: new ol.source.ImageWMS({
+			url: url, 
+			params: {'LAYERS': Meteor.settings.public.landschapStructuurService.layers[Meteor.settings.public.landschapStructuurService.indexSK], 
+				'VERSION': version} 
+		})
+	});
+	
+	map.addLayer(structuurkaart);
+	
+	var areaLayer;
+	
+	if(Session.get('area') === 'Doenrade') {
+		areaLayer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
 				url: url, 
-				params: {'LAYERS': item, 'VERSION': version} 
+				params: {'LAYERS': Meteor.settings.public.landschapStructuurService.layers[Meteor.settings.public.landschapStructuurService.indexDR], 
+					'VERSION': version} 
 			})
 		});
 		
-		map.addLayer(layer);
-	});
+		map.addLayer(areaLayer);
+	} else if(Session.get('area') === 'Schimmert') {
+		areaLayer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
+				url: url, 
+				params: {'LAYERS': Meteor.settings.public.landschapStructuurService.layers[Meteor.settings.public.landschapStructuurService.indexS], 
+					'VERSION': version} 
+			})
+		});
+		
+		map.addLayer(areaLayer);
+	} else if(Session.get('area') === 'Margraten') {
+		areaLayer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
+				url: url, 
+				params: {'LAYERS': Meteor.settings.public.landschapStructuurService.layers[Meteor.settings.public.landschapStructuurService.indexM], 
+					'VERSION': version} 
+			})
+		});
+		
+		map.addLayer(areaLayer);
+	} else if(Session.get('area') === 'Ubachsberg') {
+		areaLayer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
+				url: url, 
+				params: {'LAYERS': Meteor.settings.public.landschapStructuurService.layers[Meteor.settings.public.landschapStructuurService.indexUB], 
+					'VERSION': version} 
+			})
+		});
+		
+		map.addLayer(areaLayer);
+	} else if(Session.get('area') === 'Eperheide') {
+		areaLayer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
+				url: url, 
+				params: {'LAYERS': Meteor.settings.public.landschapStructuurService.layers[Meteor.settings.public.landschapStructuurService.indexEH], 
+					'VERSION': version} 
+			})
+		});
+		
+		map.addLayer(areaLayer);
+	} else if(Session.get('area') === 'Vijlenerbos') {
+		areaLayer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
+				url: url, 
+				params: {'LAYERS': Meteor.settings.public.landschapStructuurService.layers[Meteor.settings.public.landschapStructuurService.indexVB], 
+					'VERSION': version} 
+			})
+		});
+		
+		map.addLayer(areaLayer);
+	} else if(Session.get('area') === 'Baneheide') {
+		areaLayer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
+				url: url, 
+				params: {'LAYERS': Meteor.settings.public.landschapStructuurService.layers[Meteor.settings.public.landschapStructuurService.indexBH], 
+					'VERSION': version} 
+			})
+		});
+		
+		map.addLayer(areaLayer);
+	}
 	
 	var iconStyle = new ol.style.Style({
 		image: new ol.style.Icon(({

@@ -101,6 +101,7 @@ Template.step_2.onRendered(function() {
 					result === 'Vijlenerbos' || result === 'Baneheide') {
 				Session.set('mapExtent', extent);
 				Session.set('mapCenter', center);
+				Session.set('area', result);
 				
 				if(typeof Session.get('sectorId') === 'undefined') {
 					var sectorElement = $('#sector-dropdown-label');

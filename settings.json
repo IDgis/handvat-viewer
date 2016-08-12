@@ -74,6 +74,12 @@
 	    "indexDR": 5,
 	    "indexS": 6,
 	    "indexM": 7
+	  },
+	  "polService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/beleidskaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+	    "version": "1.1.1",
+	    "layers": ["masker_zuid_limburg_v", "pol2014_nat_landschap_zl_v", "verord_besch_nat_landsch_v", 
+	    			"pol2014_natuurbeek_l", "pol2014_gzb_v", "pol2014_buitengebied_v"]
 	  }
   }
 }

@@ -23,6 +23,20 @@ Template.step_5.onRendered(function() {
 	var ltImageWidth = $(ltImage).width();
 	$(ltImage).css({'height':ltImageWidth + 'px'});
 	
+	var polHeader = document.createElement('p');
+	$(polHeader).attr('class', 'header');
+	polHeader.innerHTML = 'POL';
+	$('#kk-container-5').append(polHeader);
+	
+	var polImage = document.createElement('img');
+	$(polImage).attr('id', 'pol-img');
+	$(polImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+			'/' + Meteor.settings.public.domainSuffix + '/images/pol.png');
+	$('#kk-container-5').append(polImage);
+	
+	var polImageWidth = $(polImage).width();
+	$(polImage).css({'height':polImageWidth + 'px'});
+	
 	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
@@ -391,6 +405,26 @@ Template.step_5.events ({
 		var url = Meteor.settings.public.landschapstypenService.url;
 		var layers = Meteor.settings.public.landschapstypenService.layers;
 		var version = Meteor.settings.public.landschapstypenService.version;
+		
+		layers.forEach(function(item) {
+			var layer = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: url, 
+					params: {'LAYERS': item, 'VERSION': version} 
+				})
+			});
+			
+			map.addLayer(layer);
+		});
+	},
+	'click #pol-img': function(e) {
+		Session.set('kernkwaliteitId', null);
+		Session.set('ltActive', false);
+		map.getLayers().clear();
+		
+		var url = Meteor.settings.public.polService.url;
+		var layers = Meteor.settings.public.polService.layers;
+		var version = Meteor.settings.public.polService.version;
 		
 		layers.forEach(function(item) {
 			var layer = new ol.layer.Image({

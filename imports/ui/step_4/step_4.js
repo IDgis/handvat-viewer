@@ -143,4 +143,98 @@ Template.step_4.helpers({
 			});
 		}
 	},
+	getLeidendeBeginselen: function() {
+		$('#lb-text-4').empty();
+		
+		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null) {
+			HTTP.get("http://148.251.183.26/handvat-admin/coupling/leidend/json", {
+				headers: {
+					'Content-Type' : 'application/json; charset=UTF-8'
+				}
+			}, function(err, result) {
+				Meteor.call('getBeginselen', result.content, Session.get('landschapstypeId'), function(err, result) {
+					itemCount = 1;
+					divCount = 0;
+					
+					$.each(result, function(index, item) {
+						if(divCount === 0) {
+							var outerDiv = document.createElement('div');
+							$(outerDiv).attr('id', 'leidendbeginsel-' + itemCount);
+							$(outerDiv).attr('class', 'col-xs-12 text-div');
+							
+							var innerDiv = document.createElement('div');
+							$(innerDiv).attr('class', 'col-xs-6 text-div');
+							$('#lb-text-4').append(outerDiv);
+							
+							HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+								headers: {
+									'Content-Type' : 'application/json; charset=UTF-8'
+								}
+							}, function(err, result) {
+								Meteor.call('getText', result.content, item, function(err, result) {
+									if(typeof result !== 'undefined') {
+										$.each(result.images, function(ix, elt) {
+											$(innerDiv).append(elt);
+										});
+										
+										cleanImages('lb-text-4');
+										
+										$(innerDiv).append(result.content);
+									}
+								});
+							});
+							
+							$(outerDiv).append(innerDiv);
+							
+							divCount++;
+						
+						} else {
+							var innerDiv = document.createElement('div');
+							$(innerDiv).attr('class', 'col-xs-6 text-div');
+							$('#leidendbeginsel-' + itemCount).append(innerDiv);
+							
+							HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+								headers: {
+									'Content-Type' : 'application/json; charset=UTF-8'
+								}
+							}, function(err, result) {
+								Meteor.call('getText', result.content, item, function(err, result) {
+									if(typeof result !== 'undefined') {
+										$.each(result.images, function(ix, elt) {
+											$(innerDiv).append(elt);
+										});
+										
+										cleanImages('lb-text-4');
+										
+										$(innerDiv).append(result.content);
+									}
+								});
+							});
+							
+							itemCount++;
+							divCount = 0;
+						}
+					});
+				});
+			});
+		}
+	},
+	disableLbBtn: function() {
+		if(typeof Session.get('landschapstypeId') === 'undefined' || Session.get('landschapstypeId') === null) {
+			return 'disabled';
+		}
+	}
 });
+
+function cleanImages(div) {
+	$.each($('#' + div + ' img'), function(index, item) {
+		var src = $(item).attr('src');
+		
+		if(typeof src === 'undefined') {
+			$(item).remove();
+		} else {
+			$(item).removeAttr('style');
+			$(item).attr('class', 'text-div-img');
+		}
+	});
+}

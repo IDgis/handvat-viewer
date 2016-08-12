@@ -19,6 +19,25 @@
 			interrete. Verum esto: verbum ipsum voluptatis non habet dignitatem, nec nos fortasse intellegimus. 
 			Non prorsus, inquit, omnisque, qui sine dolore sint, in voluptate, et ea quidem summa, esse dico.</p>
 		</div>
+		<button class="btn btn-default {{disableLbBtn}}" data-toggle="modal" data-target="#lb-modal">
+			Toon leidende beginselen
+		</button>
+		<div class="modal fade" tabindex="-1" role="dialog" id="lb-modal">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Leidende beginselen</h4>
+					</div>
+					<div class="modal-body" id="lb-text-4">{{getLeidendeBeginselen}}</div>
+					<div class="modal-footer negate-border">
+						<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div id="viewer-container-4" class="col-xs-8">
 		<div id="map-4" class="olMap"></div>

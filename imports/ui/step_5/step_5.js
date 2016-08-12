@@ -220,89 +220,6 @@ Template.step_5.helpers({
 			});
 		}
 	},
-	getLeidendeBeginselen: function() {
-		$('#lb-text-5').empty();
-		
-		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null) {
-			HTTP.get("http://148.251.183.26/handvat-admin/coupling/leidend/json", {
-				headers: {
-					'Content-Type' : 'application/json; charset=UTF-8'
-				}
-			}, function(err, result) {
-				Meteor.call('getBeginselen', result.content, Session.get('landschapstypeId'), function(err, result) {
-					itemCount = 1;
-					divCount = 0;
-					
-					$.each(result, function(index, item) {
-						if(index === 0) {
-							var header = document.createElement('p');
-							$(header).attr('class', 'header');
-							header.innerHTML = 'Leidende beginselen';
-							$('#lb-text-5').append(header);
-						}
-						
-						if(divCount === 0) {
-							var outerDiv = document.createElement('div');
-							$(outerDiv).attr('id', 'leidendbeginsel-' + itemCount);
-							$(outerDiv).attr('class', 'col-xs-12 text-div');
-							
-							var innerDiv = document.createElement('div');
-							$(innerDiv).attr('class', 'col-xs-6 text-div');
-							$('#lb-text-5').append(outerDiv);
-							
-							HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
-								headers: {
-									'Content-Type' : 'application/json; charset=UTF-8'
-								}
-							}, function(err, result) {
-								Meteor.call('getText', result.content, item, function(err, result) {
-									if(typeof result !== 'undefined') {
-										$.each(result.images, function(ix, elt) {
-											$(innerDiv).append(elt);
-										});
-										
-										cleanImages('lb-text-5');
-										
-										$(innerDiv).append(result.content);
-									}
-								});
-							});
-							
-							$(outerDiv).append(innerDiv);
-							
-							divCount++;
-						
-						} else {
-							var innerDiv = document.createElement('div');
-							$(innerDiv).attr('class', 'col-xs-6 text-div');
-							$('#leidendbeginsel-' + itemCount).append(innerDiv);
-							
-							HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
-								headers: {
-									'Content-Type' : 'application/json; charset=UTF-8'
-								}
-							}, function(err, result) {
-								Meteor.call('getText', result.content, item, function(err, result) {
-									if(typeof result !== 'undefined') {
-										$.each(result.images, function(ix, elt) {
-											$(innerDiv).append(elt);
-										});
-										
-										cleanImages('lb-text-5');
-										
-										$(innerDiv).append(result.content);
-									}
-								});
-							});
-							
-							itemCount++;
-							divCount = 0;
-						}
-					});
-				});
-			});
-		}
-	},
 	getOntwerpPrincipes: function() {
 		$('#op-text-5').empty();
 		
@@ -324,13 +241,6 @@ Template.step_5.helpers({
 					divCount = 0;
 					
 					$.each(result, function(index, item) {
-						if(index === 0) {
-							var header = document.createElement('p');
-							$(header).attr('class', 'header');
-							header.innerHTML = 'Ontwerpprincipes';
-							$('#op-text-5').append(header);
-						}
-						
 						if(divCount === 0) {
 							var outerDiv = document.createElement('div');
 							$(outerDiv).attr('id', 'ontwerpprincipe-' + itemCount);
@@ -391,6 +301,16 @@ Template.step_5.helpers({
 					});
 				});
 			});
+		}
+	},
+	disableOpBtn: function() {
+		if(typeof Session.get('landschapstypeId') === 'undefined' || 
+				Session.get('landschapstypeId') === null ||
+				typeof Session.get('sectorId') === 'undefined' || 
+				Session.get('sectorId') === null ||
+				typeof Session.get('kernkwaliteitId') === 'undefined' || 
+				Session.get('kernkwaliteitId') === null) {
+			return 'disabled';
 		}
 	}
 });
@@ -460,6 +380,7 @@ Template.step_5.events ({
 		});
 	},
 	'click #landschapstype-img': function(e) {
+		Session.set('kernkwaliteitId', null);
 		Session.set('ltActive', true);
 		map.getLayers().clear();
 		

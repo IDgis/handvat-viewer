@@ -1,3 +1,9 @@
 #text-container-4 {height:95%;padding-left:15px;border-right:2px solid grey;margin-bottom:15px;overflow-y:auto;}
 #viewer-container-4 {height:95%;margin-bottom:15px;}
 #map-4 {height:100%;}
+.negate-border {border:none;}
+
+.modal .modal-body {
+	max-height:500px;
+	overflow-y:auto;
+}

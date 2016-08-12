@@ -2,8 +2,25 @@
 	<div id="text-container-5" class="col-xs-4">
 		<div id="lt-text-5">{{getLandschapsType}}</div>
 		<div id="kk-text-5">{{getKernKwaliteit}}</div>
-		<div id="lb-text-5">{{getLeidendeBeginselen}}</div>
-		<div id="op-text-5">{{getOntwerpPrincipes}}</div>
+		<button class="btn btn-default {{disableOpBtn}}" data-toggle="modal" data-target="#op-modal">
+			Toon ontwerpprincipes
+		</button>
+		<div class="modal fade" tabindex="-1" role="dialog" id="op-modal">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Ontwerpprincipes</h4>
+					</div>
+					<div class="modal-body" id="op-text-5">{{getOntwerpPrincipes}}</div>
+					<div class="modal-footer negate-border">
+						<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div id="kk-container-5"></div>
 	<div id="viewer-container-5" class="step-3-viewer">

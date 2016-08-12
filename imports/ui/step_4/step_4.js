@@ -4,6 +4,10 @@ import './step_4.css';
 Template.step_4.onRendered(function() {
 	Session.set('stepNumber', '4');
 	
+	$(function () {
+		$('[data-toggle="popover"]').popover()
+	});
+	
 	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCenter') === 'undefined') {
 		var extent = [167658.241026781, 307862.821900462, 208090.624144334, 339455.907872023];
 		var center = [187000, 323000];

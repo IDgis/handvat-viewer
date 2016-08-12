@@ -5,6 +5,10 @@ Template.step_5.onRendered(function() {
 	Session.set('stepNumber', '5');
 	Session.set('ltActive', true);
 	
+	$(function () {
+		$('[data-toggle="popover"]').popover()
+	});
+	
 	var ltHeader = document.createElement('p');
 	$(ltHeader).attr('class', 'header');
 	ltHeader.innerHTML = 'Landschapstype';

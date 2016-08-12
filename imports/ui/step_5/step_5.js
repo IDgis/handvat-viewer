@@ -120,27 +120,16 @@ Template.step_5.onRendered(function() {
 		map.addLayer(layer);
 	});
 	
-	var iconStyle = new ol.style.Style({
-		image: new ol.style.Icon(({
-			anchor: [0.5, 32],
-			anchorXUnits: 'fraction',
-			anchorYUnits: 'pixels',
-			opacity: 0.75,
-			src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-				'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg'
-		}))
-	});
-	
-	var iconLayer;
-	
 	if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
-		iconLayer = getIcon(Session.get('mapCoordinates'));
+		var iconLayer = getIcon(Session.get('mapCoordinates'));
 		map.addLayer(iconLayer);
 	}
 	
 	map.on('singleclick', function(evt) {
+		Session.set('mapCoordinates', evt.coordinate);
+		
 		if(typeof iconLayer !== 'undefined') {
-			map.removeLayer(iconLayer);
+			map.removeLayer(map.getLayers().item(map.getLayers().getLength() - 1));
 		}
 		
 		iconLayer = getIcon(evt.coordinate);
@@ -169,22 +158,6 @@ Template.step_5.onRendered(function() {
 			});
 		}
 	});
-	
-	function getIcon(coordinates) {
-		var iconFeature = new ol.Feature({
-			geometry: new ol.geom.Point(coordinates)
-		});
-		
-		var vectorLayer = new ol.layer.Vector({
-			source: new ol.source.Vector({
-				features: [iconFeature]
-			})
-		});
-		
-		iconFeature.setStyle(iconStyle);
-		
-		return vectorLayer;
-	}
 });
 
 Template.step_5.helpers({
@@ -396,6 +369,11 @@ Template.step_5.events ({
 			
 			map.addLayer(layer);
 		});
+		
+		if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+			iconLayer = getIcon(Session.get('mapCoordinates'));
+			map.addLayer(iconLayer);
+		}
 	},
 	'click #landschapstype-img': function(e) {
 		Session.set('kernkwaliteitId', null);
@@ -416,6 +394,11 @@ Template.step_5.events ({
 			
 			map.addLayer(layer);
 		});
+		
+		if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+			iconLayer = getIcon(Session.get('mapCoordinates'));
+			map.addLayer(iconLayer);
+		}
 	},
 	'click #pol-img': function(e) {
 		Session.set('kernkwaliteitId', null);
@@ -436,5 +419,37 @@ Template.step_5.events ({
 			
 			map.addLayer(layer);
 		});
+		
+		if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+			iconLayer = getIcon(Session.get('mapCoordinates'));
+			map.addLayer(iconLayer);
+		}
 	}
 });
+
+function getIcon(coordinates) {
+	var iconStyle = new ol.style.Style({
+		image: new ol.style.Icon(({
+			anchor: [0.5, 32],
+			anchorXUnits: 'fraction',
+			anchorYUnits: 'pixels',
+			opacity: 0.75,
+			src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+				'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg'
+		}))
+	});
+	
+	var iconFeature = new ol.Feature({
+		geometry: new ol.geom.Point(coordinates)
+	});
+	
+	var vectorLayer = new ol.layer.Vector({
+		source: new ol.source.Vector({
+			features: [iconFeature]
+		})
+	});
+	
+	iconFeature.setStyle(iconStyle);
+	
+	return vectorLayer;
+}

@@ -31,7 +31,25 @@ Template.main.onRendered(function() {
 
 Template.main.helpers({
 	showSectorChoice: function() {
-		return Session.get('stepNumber') === '1';
+		if(Session.get('stepNumber') !== '2') {
+			return 'hide-element';
+		}
+	},
+	disablePreviousButton: function() {
+		if(Session.get('stepNumber') === '1') {
+			return 'disabled';
+		}
+	},
+	disableNextButton: function() {
+		if(Session.get('stepNumber') === '6') {
+			return 'disabled';
+		} else if(Session.get('stepNumber') === '2') {
+			if(typeof Session.get('sectorId') === 'undefined' ||
+					typeof Session.get('mapExtent') === 'undefined' ||
+					typeof Session.get('mapCenter') == 'undefined') {
+				return 'disabled';
+			}
+		}
 	},
 	activeStep: function(step) {
 		if(Session.equals('stepNumber', step)) {
@@ -48,18 +66,6 @@ Template.main.helpers({
 });
 
 Template.main.events ({
-	'click #js-step-1': function () {
-		Router.go('step_1');
-	},
-	'click #js-step-2': function () {
-		Router.go('step_2');
-	},
-	'click #js-step-3': function () {
-		Router.go('step_3');
-	},
-	'click #js-step-4': function () {
-		Router.go('step_4');
-	},
 	'click #js-sectors li a': function (e) {
 		Session.set('sectorLabel', e.target.textContent);
 		Session.set('sectorId', e.target.id);
@@ -68,9 +74,31 @@ Template.main.events ({
 		$.each(sectorElement, function(index, item) {
 			$(item).removeAttr('style');
 		});
-		
-		if(typeof Session.get('mapExtent') !== 'undefined' && Session.get('mapCenter') !== 'undefined') {
+	},
+	'click #js-next-step': function() {
+		if(Session.get('stepNumber') === '1') {
 			Router.go('step_2');
+		} else if(Session.get('stepNumber') === '2') {
+			Router.go('step_3');
+		} else if(Session.get('stepNumber') === '3') {
+			Router.go('step_4');
+		} else if(Session.get('stepNumber') === '4') {
+			Router.go('step_5');
+		} else if(Session.get('stepNumber') === '5') {
+			Router.go('step_6');
+		}
+	},
+	'click #js-previous-step': function() {
+		if(Session.get('stepNumber') === '2') {
+			Router.go('step_1');
+		} else if(Session.get('stepNumber') === '3') {
+			Router.go('step_2');
+		} else if(Session.get('stepNumber') === '4') {
+			Router.go('step_3');
+		} else if(Session.get('stepNumber') === '5') {
+			Router.go('step_4');
+		} else if(Session.get('stepNumber') === '6') {
+			Router.go('step_5');
 		}
 	}
 });

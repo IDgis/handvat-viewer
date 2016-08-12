@@ -1,35 +1,47 @@
 <template name="main">
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand">Viewer</a>
-			</div>
-			<div class="collapse navbar-collapse">
-				{{#if showSectorChoice}}
-					<ul class="nav navbar-nav" id="sector-dropdown">
-						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" id="sector-dropdown-label">Sector 
-								<span class="caret"></span>
-							</a>
-							<ul id="js-sectors" class="dropdown-menu">
-								
-							</ul>
-						</li>
-					</ul>
-					<p class="navbar-text">{{getSectorLabel}}</p>
-				{{/if}}
-				<ul class="nav navbar-nav navbar-right col-xs-8">
-					<li id="js-step-1" class="col-xs-3 tab-step {{activeStep '1'}}">
+			<div class="collapse navbar-collapse negate-padding-left">
+				<div class="col-lg-5 negate-padding-left">
+					<div class="navbar-header">
+						<a class="navbar-brand">Viewer</a>
+					</div>
+					<div class="{{showSectorChoice}}">
+						<ul class="nav navbar-nav" id="sector-dropdown">
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" id="sector-dropdown-label">Sector 
+									<span class="caret"></span>
+								</a>
+								<ul id="js-sectors" class="dropdown-menu">
+									
+								</ul>
+							</li>
+						</ul>
+						<p class="navbar-text">{{getSectorLabel}}</p>
+					</div>
+					<div class="pull-right" id="nav-buttons">
+						<button class="btn btn-default {{disablePreviousButton}}" id="js-previous-step">Vorige</button>
+						<button class="btn btn-default {{disableNextButton}}" id="js-next-step">Volgende</button>
+					</div>
+				</div>
+				<ul class="nav navbar-nav navbar-right col-xs-7">
+					<li class="col-xs-2 tab-step {{activeStep '1'}}">
 						<a>Stap 1</a>
 					</li>
-					<li id="js-step-2" class="col-xs-3 tab-step {{activeStep '2'}}">
+					<li class="col-xs-2 tab-step {{activeStep '2'}}">
 						<a>Stap 2</a>
 					</li>
-					<li id="js-step-3" class="col-xs-3 tab-step {{activeStep '3'}}">
+					<li class="col-xs-2 tab-step {{activeStep '3'}}">
 						<a>Stap 3</a>
 					</li>
-					<li id="js-step-4" class="col-xs-3 tab-step {{activeStep '4'}}">
+					<li class="col-xs-2 tab-step {{activeStep '4'}}">
 						<a>Stap 4</a>
+					</li>
+					<li class="col-xs-2 tab-step {{activeStep '5'}}">
+						<a>Stap 5</a>
+					</li>
+					<li class="col-xs-2 tab-step {{activeStep '6'}}">
+						<a>Stap 6</a>
 					</li>
 				</ul>
 			</div>

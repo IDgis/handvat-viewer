@@ -1,0 +1,33 @@
+<template name="step_5">
+	<div id="text-container-5" class="col-xs-4">
+		<div id="lt-text-5">{{getLandschapsType}}</div>
+		<div id="kk-text-5">{{getKernKwaliteit}}</div>
+		<button class="btn btn-default {{disableOpBtn}}" data-toggle="modal" data-target="#op-modal">
+			Toon ontwerpprincipes
+		</button>
+		<button class="btn btn-default" data-trigger="focus" data-toggle="popover" data-placement="bottom" 
+			type="button" tabindex="-1" data-content="Om ontwerpprincipes te zien moet u een landschapstype, sector en kernkwaliteit geselecteerd hebben. Een landschapstype kiest u door te klikken in de kaart in stap 4 of stap 5. Een sector kiest u door een optie te selecteren in het keuzemenu in de navigatiebalk in stap 2. Een kernkwaliteit kiest u door op een van de thumbnails in de tweede kolom te klikken in stap 5 (behalve landschapstype, dat is een algemene kaart)">
+			<span class="glyphicon glyphicon-info-sign"></span>
+		</button>
+		<div class="modal fade" tabindex="-1" role="dialog" id="op-modal">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Ontwerpprincipes</h4>
+					</div>
+					<div class="modal-body" id="op-text-5">{{getOntwerpPrincipes}}</div>
+					<div class="modal-footer negate-border">
+						<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="kk-container-5"></div>
+	<div id="viewer-container-5" class="step-3-viewer">
+		<div id="map-5" class="olMap"></div>
+	</div>
+</template>

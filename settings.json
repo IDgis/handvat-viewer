@@ -58,6 +58,28 @@
 	    			"top10nl_waterdeel_v", "top10nl_wegdeel_hartlijn_l", "top10nl_spoorbaandeel_l", 
 	    			"waterstaatswerk_regenwbuf_v", "primaire_bronnen_p", "heg_haag", "top10nl_relief_hogezijde_l", 
 	    			"bomenrij", "boom"]
+	  },
+	  "landschapStructuurService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+	    "version": "1.1.1",
+	    "layers": ["Landschapsstructuurkaart", "Landschapskaart_deelgebied_Baneheide", 
+	    			"Landschapskaart_deelgebied_Vijlenerbos", "Landschapskaart_deelgebied_Eperheide", 
+	    			"Landschapskaart_deelgebied_Ubachsberg", "Landschapskaart_deelgebied_Doenrade", 
+	    			"Landschapskaart_deelgebied_Schimmert", "Landschapskaart_deelgebied_Margraten"],
+	    "indexSK": 0,
+	    "indexBH": 1,
+	    "indexVB": 2,
+	    "indexEH": 3,
+	    "indexUB": 4,
+	    "indexDR": 5,
+	    "indexS": 6,
+	    "indexM": 7
+	  },
+	  "polService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/beleidskaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+	    "version": "1.1.1",
+	    "layers": ["masker_zuid_limburg_v", "pol2014_nat_landschap_zl_v", "verord_besch_nat_landsch_v", 
+	    			"pol2014_natuurbeek_l", "pol2014_gzb_v", "pol2014_buitengebied_v"]
 	  }
   }
 }

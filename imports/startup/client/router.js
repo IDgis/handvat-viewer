@@ -7,6 +7,8 @@ import '../../ui/step_1/step_1.js';
 import '../../ui/step_2/step_2.js';
 import '../../ui/step_3/step_3.js';
 import '../../ui/step_4/step_4.js';
+import '../../ui/step_5/step_5.js';
+import '../../ui/step_6/step_6.js';
 
 Router.configure({
   layoutTemplate: 'main'
@@ -34,4 +36,16 @@ Router.route('/handvat-viewer/4', function () {
   this.render('step_4');
 }, {
   name: 'step_4'
+});
+
+Router.route('/handvat-viewer/5', function () {
+	  this.render('step_5');
+	}, {
+	  name: 'step_5'
+});
+
+Router.route('/handvat-viewer/6', function () {
+	  this.render('step_6');
+	}, {
+	  name: 'step_6'
 });

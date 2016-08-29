@@ -4,14 +4,22 @@ import './step_3.css';
 Template.step_3.onRendered(function() {
 	Session.set('stepNumber', '3');
 	
+	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCenter') === 'undefined') {
+		var extent = [167658.241026781, 307862.821900462, 208090.624144334, 339455.907872023];
+		var center = [187000, 323000];
+	} else {
+		var extent = Session.get('mapExtent');
+		var center = Session.get('mapCenter');
+	}
+	
 	var projection = new ol.proj.Projection({
 		code: 'EPSG:28992',
-		extent: [167658.241026781, 307862.821900462, 208090.624144334, 339455.907872023]
+		extent: extent
 	});
 	
 	var view = new ol.View({
 		projection: projection,
-		center: [187000, 323000],
+		center: center,
 		zoom: 2
 	});
 	
@@ -26,16 +34,6 @@ Template.step_3.onRendered(function() {
 	var url = Meteor.settings.public.landschapStructuurService.url;
 	var layers = Meteor.settings.public.landschapStructuurService.layers;
 	var version = Meteor.settings.public.landschapStructuurService.version;
-	
-	var structuurkaart = new ol.layer.Image({
-		source: new ol.source.ImageWMS({
-			url: url, 
-			params: {'LAYERS': Meteor.settings.public.landschapStructuurService.layers[Meteor.settings.public.landschapStructuurService.indexSK], 
-				'VERSION': version} 
-		})
-	});
-	
-	map.addLayer(structuurkaart);
 	
 	var areaLayer;
 	

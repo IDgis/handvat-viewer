@@ -23,14 +23,29 @@ Template.step_2.onRendered(function() {
 		view: view
 	});
 	
-	var url = Meteor.settings.public.deelgebiedenService.url;
-	var layers = Meteor.settings.public.deelgebiedenService.layers;
+	var urlDG = Meteor.settings.public.deelgebiedenService.urlDG;
+	var layersDG = Meteor.settings.public.deelgebiedenService.layersDG;
 	var version = Meteor.settings.public.deelgebiedenService.version;
 	
-	layers.forEach(function(item) {
+	layersDG.forEach(function(item) {
 		var layer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
-				url: url, 
+				url: urlDG, 
+				params: {'LAYERS': item, 'VERSION': version} 
+			})
+		});
+		
+		map.addLayer(layer);
+	});
+	
+	var urlSK = Meteor.settings.public.deelgebiedenService.urlSK;
+	var layersSK = Meteor.settings.public.deelgebiedenService.layersSK;
+	var version = Meteor.settings.public.deelgebiedenService.version;
+	
+	layersSK.forEach(function(item) {
+		var layer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
+				url: urlSK, 
 				params: {'LAYERS': item, 'VERSION': version} 
 			})
 		});

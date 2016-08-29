@@ -13,9 +13,11 @@
 	  "openBeslotenId": "AJvMWXHWx3iuz69yR",
 	  
 	  "deelgebiedenService": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/deelgebieden?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+	    "urlDG": "http://portal.prvlimburg.nl/geoservices/deelgebieden?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+	    "urlSK": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
 	    "version": "1.1.1",
-	    "layers": ["Deelgebieden"],
+	    "layersDG": ["Deelgebieden"],
+	    "layersSK": ["Landschapskaart_Zuid-Limburg_totaal", "top50namen_grotere_steden", "top50namen_overig"],
 	    "indexDG": 0
 	  },
 	  "landschapstypenService": {

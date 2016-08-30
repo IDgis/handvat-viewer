@@ -78,6 +78,8 @@ Template.step_4.onRendered(function() {
 		});
 	});
 	
+	setBorderThumbnail($('#landschapstype-img'));
+	
 	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCenter') === 'undefined') {
 		var extent = [167658.241026781, 307862.821900462, 208090.624144334, 339455.907872023];
 		var center = [187000, 323000];
@@ -349,6 +351,8 @@ Template.step_4.events ({
 		Session.set('kernkwaliteitId', e.target.id);
 		Session.set('ltActive', false);
 		
+		setBorderThumbnail(e.target);
+		
 		var url;
 		var layers;
 		
@@ -409,6 +413,8 @@ Template.step_4.events ({
 		Session.set('ltActive', true);
 		map.getLayers().clear();
 		
+		setBorderThumbnail(e.target);
+		
 		var url = Meteor.settings.public.landschapstypenService.url;
 		var layers = Meteor.settings.public.landschapstypenService.layers;
 		var version = Meteor.settings.public.landschapstypenService.version;
@@ -435,6 +441,8 @@ Template.step_4.events ({
 		Session.set('kernkwaliteitId', null);
 		Session.set('ltActive', false);
 		map.getLayers().clear();
+		
+		setBorderThumbnail(e.target);
 		
 		var url = Meteor.settings.public.polService.url;
 		var layers = Meteor.settings.public.polService.layers;
@@ -485,6 +493,16 @@ function getIcon(coordinates) {
 	iconFeature.setStyle(iconStyle);
 	
 	return vectorLayer;
+}
+
+function setBorderThumbnail(target) {
+	var context = $('#kk-container-5')[0];
+	var images = $('img', context);
+	$.each(images, function(index, item) {
+		$(item).removeAttr('style');
+	});
+	
+	$(target).attr('style', 'border:1px solid black;');
 }
 
 function setOpacity() {

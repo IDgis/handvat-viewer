@@ -69,6 +69,23 @@ Template.step_3.onRendered(function() {
 		setLandschapstypeId(Session.get('mapCoordinates'));
 	}
 	
+	$("#slider-id").slider({
+		value: 100,
+		slide: function(e, ui) {
+			$.each(map.getLayers().getArray(), function(index, item) {
+				if(index !== 0) {
+					if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+						if(index !== map.getLayers().getLength() - 1) {
+							map.getLayers().item(index).setOpacity(ui.value / 100);
+						}
+					} else {
+						map.getLayers().item(index).setOpacity(ui.value / 100);
+					}
+				}
+			});
+		}
+	});
+	
 	map.on('singleclick', function(evt) {
 		if(typeof iconLayer !== 'undefined') {
 			map.removeLayer(iconLayer);

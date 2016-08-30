@@ -125,6 +125,23 @@ Template.step_4.onRendered(function() {
 		map.addLayer(iconLayer);
 	}
 	
+	$("#slider-id").slider({
+		value: 100,
+		slide: function(e, ui) {
+			$.each(map.getLayers().getArray(), function(index, item) {
+				if(index !== 0) {
+					if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+						if(index !== map.getLayers().getLength() - 1) {
+							map.getLayers().item(index).setOpacity(ui.value / 100);
+						}
+					} else {
+						map.getLayers().item(index).setOpacity(ui.value / 100);
+					}
+				}
+			});
+		}
+	});
+	
 	map.on('singleclick', function(evt) {
 		Session.set('mapCoordinates', evt.coordinate);
 		
@@ -302,6 +319,11 @@ Template.step_4.helpers({
 				typeof Session.get('kernkwaliteitId') === 'undefined' || 
 				Session.get('kernkwaliteitId') === null) {
 			return 'disabled';
+		}
+	},
+	hideSlider: function() {
+		if(Session.get('kernkwaliteitId') === Meteor.settings.public.reliefId) {
+			return 'hide-element';
 		}
 	}
 });

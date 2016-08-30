@@ -31,19 +31,19 @@ Template.main.onRendered(function() {
 
 Template.main.helpers({
 	showSectorChoice: function() {
-		if(Session.get('stepNumber') !== '2') {
+		if(Session.get('stepNumber') !== '1') {
 			return 'hide-element';
 		}
 	},
 	disablePreviousButton: function() {
-		if(Session.get('stepNumber') === '1') {
+		if(Session.get('stepNumber') === 'start') {
 			return 'disabled';
 		}
 	},
 	disableNextButton: function() {
-		if(Session.get('stepNumber') === '6') {
+		if(Session.get('stepNumber') === '5') {
 			return 'disabled';
-		} else if(Session.get('stepNumber') === '2') {
+		} else if(Session.get('stepNumber') === '1') {
 			if(typeof Session.get('sectorId') === 'undefined' ||
 					typeof Session.get('mapExtent') === 'undefined' ||
 					typeof Session.get('mapCenter') == 'undefined') {
@@ -76,7 +76,9 @@ Template.main.events ({
 		});
 	},
 	'click #js-next-step': function() {
-		if(Session.get('stepNumber') === '1') {
+		if(Session.get('stepNumber') === 'start') {
+			Router.go('step_1');
+		} else if(Session.get('stepNumber') === '1') {
 			Router.go('step_2');
 		} else if(Session.get('stepNumber') === '2') {
 			Router.go('step_3');
@@ -84,12 +86,12 @@ Template.main.events ({
 			Router.go('step_4');
 		} else if(Session.get('stepNumber') === '4') {
 			Router.go('step_5');
-		} else if(Session.get('stepNumber') === '5') {
-			Router.go('step_6');
 		}
 	},
 	'click #js-previous-step': function() {
-		if(Session.get('stepNumber') === '2') {
+		if(Session.get('stepNumber') === '1') {
+			Router.go('start');
+		} else if(Session.get('stepNumber') === '2') {
 			Router.go('step_1');
 		} else if(Session.get('stepNumber') === '3') {
 			Router.go('step_2');
@@ -97,8 +99,6 @@ Template.main.events ({
 			Router.go('step_3');
 		} else if(Session.get('stepNumber') === '5') {
 			Router.go('step_4');
-		} else if(Session.get('stepNumber') === '6') {
-			Router.go('step_5');
 		}
 	}
 });

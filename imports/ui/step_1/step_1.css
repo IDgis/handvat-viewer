@@ -1,6 +1,5 @@
-#text-container-1 {height:95%;padding-left:15px;border-right:2px solid grey;margin-bottom:15px;overflow-y:auto;}
-#viewer-container-1 {height:95%;margin-bottom:15px;}
-#map-1 {height:100%;}
+#text-container-2 {height:95%;padding-left:15px;border-right:2px solid grey;margin-bottom:15px;overflow-y:auto;}
+#viewer-container-2 {height:95%;margin-bottom:15px;}
+#map-2 {height:100%;}
 
-#viewer-start {text-align:center;margin-top:200px;}
-#steps-information {font-weight:bold;font-size:20px;}
+.tmp-info {font-weight:bold;}

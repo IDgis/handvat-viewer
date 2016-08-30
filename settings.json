@@ -25,7 +25,7 @@
 	    "version": "1.1.1",
 	    "layers": ["Luchtfoto hoge resolutie", "masker_zuid_limburg_v", "masker_beschermingsgebied_v", 
 	    			"landschapstypen_v", "beschermingsgeb_nat_landsc_v"],
-	    "indexLT": 0
+	    "indexLT": 3
 	  },
 	  "cultuurhistorieService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?",

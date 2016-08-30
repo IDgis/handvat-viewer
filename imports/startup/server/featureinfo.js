@@ -40,5 +40,19 @@ Meteor.methods({
 		});
 		
 		return future.wait();
+	},
+	getBoundingBox(url) {
+		var future = new Future();
+		
+		HTTP.get(url, {
+		}, function(err, result) {
+			xml2js.parseString(result.content, function (err, result) {
+				var array = result.WMT_MS_Capabilities.Capability[0].Layer[0].Layer
+				
+				future.return(array);
+			});
+		});
+		
+		return future.wait();
 	}
 });

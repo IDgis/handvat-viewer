@@ -85,37 +85,9 @@ Template.step_1.onRendered(function() {
 				map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
 		
 		Meteor.call('getDeelgebied', url, function(err, result) {
-			if(result === 'Doenrade') {
-				var extent = [186871, 325595, 195806, 334149];
-				var center = [191338, 329872];
-			} else if(result === 'Schimmert') {
-				var extent = [179746, 319052, 190223,328561];
-				var center = [184984, 323806];
-			} else if(result === 'Margraten') {
-				var extent = [179143, 307181, 190422, 321341];
-				var center = [184782, 314261];
-			} else if(result === 'Maasterras Gronsveld') {
-				var extent = [178000, 312344, 182095, 321937];
-				var center = [180227, 317040];
-			} else if(result === 'Ubachsberg') {
-				var extent = [189833, 314940, 198236, 321304];
-				var center = [194034, 318122];
-			} else if(result === 'Eperheide') {
-				var extent = [188254, 306598, 193192, 316372];
-				var center = [191119, 310435];
-			} else if(result === 'Vijlenerbos') {
-				var extent = [192945, 306833, 200189, 313472];
-				var center = [196567, 310152];
-			} else if(result === 'Baneheide') {
-				var extent = [192636, 312343, 198545, 316508];
-				var center = [195590, 314425];
-			}
-			
-			if(result === 'Doenrade' || result === 'Schimmert' || result === 'Margraten' || 
-					result === 'Maasterras Gronsveld' || result === 'Ubachsberg' || result === 'Eperheide' ||
-					result === 'Vijlenerbos' || result === 'Baneheide') {
-				Session.set('mapExtent', extent);
-				Session.set('mapCenter', center);
+			if(result === 'Baneheide' || result === 'Doenrade' || result === 'Eperheide' || 
+					result === 'Maasterras Gronsveld' || result === 'Margraten' || 
+					result === 'Schimmert' || result === 'Ubachsberg' || result === 'Vijlenerbos') {
 				Session.set('area', result);
 				
 				if(typeof Session.get('sectorId') === 'undefined') {
@@ -127,6 +99,23 @@ Template.step_1.onRendered(function() {
 					});
 				}
 			}
+			
+			Meteor.call('getBoundingBox', urlSK, function(err, result) {
+				$.each(result, function(index, item) {
+					if(Session.get('area') !== 'undefined') {
+						var area = Session.get('area');
+						
+						setExtentCenter(area, 'Baneheide', item.Name[0], 'Landschapskaart_deelgebied_Baneheide', item);
+						setExtentCenter(area, 'Doenrade', item.Name[0], 'Landschapskaart_deelgebied_Doenrade', item);
+						setExtentCenter(area, 'Eperheide', item.Name[0], 'Landschapskaart_deelgebied_Eperheide', item);
+						setExtentCenter(area, 'Maasterras Gronsveld', item.Name[0], 'Landschapskaart_deelgebied_Gronsveld', item);
+						setExtentCenter(area, 'Margraten', item.Name[0], 'Landschapskaart_deelgebied_Margraten', item);
+						setExtentCenter(area, 'Schimmert', item.Name[0], 'Landschapskaart_deelgebied_Schimmert', item);
+						setExtentCenter(area, 'Ubachsberg', item.Name[0], 'Landschapskaart_deelgebied_Ubachsberg', item);
+						setExtentCenter(area, 'Vijlenerbos', item.Name[0], 'Landschapskaart_deelgebied_Vijlenerbos', item);
+					}
+				});
+			});
 		});
 	});
 	
@@ -144,5 +133,25 @@ Template.step_1.onRendered(function() {
 		iconFeature.setStyle(iconStyle);
 		
 		return vectorLayer;
+	}
+	
+	function setExtentCenter(areaSession, area, nameLayer, name, layerItem) {
+		if(areaSession === area) {
+			if(nameLayer === name) {
+				var minx = layerItem.BoundingBox[0].$.minx;
+				var maxx = layerItem.BoundingBox[0].$.maxx;
+				var miny = layerItem.BoundingBox[0].$.miny;
+				var maxy = layerItem.BoundingBox[0].$.maxy;
+				
+				var center1 = ((+maxx - +minx) / 2) + +minx;
+				var center2 = ((+maxy - +miny) / 2) + +miny;
+				
+				var extent = [minx, miny, maxx, maxy];
+				var center = [center1, center2];
+				
+				Session.set('mapExtent', extent);
+				Session.set('mapCenter', center);
+			}
+		}
 	}
 });

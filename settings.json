@@ -68,17 +68,18 @@
 	  "landschapStructuurService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
 	    "version": "1.1.1",
-	    "layers": ["Landschapskaart_deelgebied_Baneheide", 
-	    			"Landschapskaart_deelgebied_Vijlenerbos", "Landschapskaart_deelgebied_Eperheide", 
-	    			"Landschapskaart_deelgebied_Ubachsberg", "Landschapskaart_deelgebied_Doenrade", 
-	    			"Landschapskaart_deelgebied_Schimmert", "Landschapskaart_deelgebied_Margraten"],
+	    "layers": ["Landschapskaart_deelgebied_Baneheide", "Landschapskaart_deelgebied_Doenrade", 
+	    			"Landschapskaart_deelgebied_Eperheide", "Landschapskaart_deelgebied_Gronsveld", 
+	    			"Landschapskaart_deelgebied_Margraten", "Landschapskaart_deelgebied_Schimmert", 
+	    			"Landschapskaart_deelgebied_Vijlenerbos", "Landschapskaart_deelgebied_Ubachsberg"],
 	    "indexBH": 0,
-	    "indexVB": 1,
+	    "indexDR": 1,
 	    "indexEH": 2,
-	    "indexUB": 3,
-	    "indexDR": 4,
+	    "indexMG": 3,
+	    "indexM": 4,
 	    "indexS": 5,
-	    "indexM": 6
+	    "indexVB": 6,
+	    "indexUB": 7
 	  },
 	  "polService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/beleidskaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",

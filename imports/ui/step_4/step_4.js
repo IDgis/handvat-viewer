@@ -125,8 +125,9 @@ Template.step_4.onRendered(function() {
 		map.addLayer(iconLayer);
 	}
 	
+	Session.set('sliderValue', 100);
 	$("#slider-id").slider({
-		value: 100,
+		value: Session.get('sliderValue'),
 		slide: function(e, ui) {
 			$.each(map.getLayers().getArray(), function(index, item) {
 				if(index !== 0) {
@@ -139,6 +140,8 @@ Template.step_4.onRendered(function() {
 					}
 				}
 			});
+			
+			Session.set('sliderValue', ui.value);
 		}
 	});
 	
@@ -396,6 +399,10 @@ Template.step_4.events ({
 			iconLayer = getIcon(Session.get('mapCoordinates'));
 			map.addLayer(iconLayer);
 		}
+		
+		if(Session.get('kernkwaliteitId') !== Meteor.settings.public.reliefId) {
+			setOpacity();
+		}
 	},
 	'click #landschapstype-img': function(e) {
 		Session.set('kernkwaliteitId', null);
@@ -421,6 +428,8 @@ Template.step_4.events ({
 			iconLayer = getIcon(Session.get('mapCoordinates'));
 			map.addLayer(iconLayer);
 		}
+		
+		setOpacity();
 	},
 	'click #pol-img': function(e) {
 		Session.set('kernkwaliteitId', null);
@@ -446,6 +455,8 @@ Template.step_4.events ({
 			iconLayer = getIcon(Session.get('mapCoordinates'));
 			map.addLayer(iconLayer);
 		}
+		
+		setOpacity();
 	}
 });
 
@@ -474,4 +485,18 @@ function getIcon(coordinates) {
 	iconFeature.setStyle(iconStyle);
 	
 	return vectorLayer;
+}
+
+function setOpacity() {
+	$.each(map.getLayers().getArray(), function(index, item) {
+		if(index !== 0) {
+			if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+				if(index !== map.getLayers().getLength() - 1) {
+					map.getLayers().item(index).setOpacity(Session.get('sliderValue') / 100);
+				}
+			} else {
+				map.getLayers().item(index).setOpacity(Session.get('sliderValue') / 100);
+			}
+		}
+	});
 }

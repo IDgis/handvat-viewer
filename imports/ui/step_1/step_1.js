@@ -155,3 +155,56 @@ Template.step_1.onRendered(function() {
 		}
 	}
 });
+
+Template.step_1.events ({
+	'keyup #js-input-search': function(e) {
+		if(e.target.value !== '') {
+			$('#address-suggestions').attr('style', 'display:block;');
+		} else {
+			$('#address-suggestions').attr('style', 'display:none;');
+		}
+		
+		var url = 'http://bag.idgis.nl/geoide-search-service/bag/suggest?q=' + e.target.value;
+		
+		Meteor.call('getSuggestions', url, function(err, result) {
+			$('#address-suggestions').empty();
+			var count = 0;
+			
+			result.forEach(function(item) {
+				var begin = item.indexOf('{');
+				var end = item.indexOf('}');
+				var suggestion = item.substring(begin + 1, end);
+				
+				if(count < 5 && suggestion !== '') {
+					var li = document.createElement('li');
+					$(li).attr('class', 'list-group-item');
+					
+					var a = document.createElement('a');
+					$(a).attr('class', 'address-suggestion')
+					var spanInput = document.createElement('span');
+					$(spanInput).attr('class', 'address-input');
+					$(spanInput).append(e.target.value);
+					$(a).append(spanInput);
+					
+					var spanSuggestion = document.createElement('span');
+					$(spanSuggestion).attr('class', 'address-suggestion-append');
+					$(spanSuggestion).append(suggestion);
+					$(a).append(spanSuggestion);
+					
+					$(li).append(a);
+					$('#address-suggestions').append(li);
+					
+					count++;
+				}
+			});
+		});
+	},
+	'click .address-suggestion': function(e) {
+		var element = $(e.target).parent()[0];
+		var input = $('.address-input', element)[0];
+		var suggestion = $('.address-suggestion-append', element)[0];
+		
+		$('#js-input-search').val(input.innerHTML + suggestion.innerHTML);
+		$('#address-suggestions').attr('style', 'display:none;');
+	}
+});

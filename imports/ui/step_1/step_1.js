@@ -4,6 +4,16 @@ import './step_1.css';
 Template.step_1.onRendered(function() {
 	Session.set('stepNumber', '1');
 	
+	String.prototype.replaceAll = function(s1, s2) {  
+		var str = this;  
+		var pos = str.indexOf(s1);  
+		while (pos > -1) {  
+			str = str.replace(s1, s2);
+			pos = str.indexOf(s1);
+		}
+		return (str);
+	}
+	
 	var projection = new ol.proj.Projection({
 		code: 'EPSG:28992',
 		extent: [167658.241026781, 307862.821900462, 208090.624144334, 339455.907872023]
@@ -87,7 +97,7 @@ Template.step_1.onRendered(function() {
 });
 
 Template.step_1.events ({
-	'keyup #js-input-search': function(e) {
+	'keyup #js-input-address-search': function(e) {
 		if(e.target.value !== '') {
 			$('#address-suggestions').attr('style', 'display:block;');
 		} else {
@@ -96,7 +106,7 @@ Template.step_1.events ({
 		
 		var url = 'http://bag.idgis.nl/geoide-search-service/bag/suggest?q=' + e.target.value;
 		
-		Meteor.call('getSuggestions', url, function(err, result) {
+		Meteor.call('getAddressSuggestions', url, function(err, result) {
 			$('#address-suggestions').empty();
 			var count = 0;
 			
@@ -129,24 +139,74 @@ Template.step_1.events ({
 			});
 		});
 	},
+	'keyup #js-input-cadastre-search': function(e) {
+		if(e.target.value !== '') {
+			$('#cadastre-suggestions').attr('style', 'display:block;');
+		} else {
+			$('#cadastre-suggestions').attr('style', 'display:none;');
+		}
+		
+		var url = 'http://portal.prvlimburg.nl/geoservices/kad_perceel?&TYPENAME=kad_perceel_v&' +
+			'VERSION=1.1.0&SERVICE=WFS&REQUEST=GetFeature&FILTER=%3CFilter%20xmlns=%27' +
+			'http://www.opengis.net/ogc%27%20xmlns:app=%27http://www.deegree.org/app%27%3E%3CPropertyIsLike' +
+			'%20wildCard%3D%22*%22%20singleChar%3D%22%23%22%20escape%3D%22!%22%3E%0A%3CPropertyName' +
+			'%3EKADSLEUTEL%3C%2FPropertyName%3E%0A%3CLiteral%3E' + e.target.value.toUpperCase() + 
+			'*%3C%2FLiteral%3E%0A%3C%2FPropertyIsLike%3E%3C/Filter%3E&maxFeatures=5';
+		
+		Meteor.call('getCadastreSuggestions', url, function(err, result) {
+			$('#cadastre-suggestions').empty();
+			var searchValue = e.target.value;
+			
+			result.forEach(function(item) {
+				var appendValue = item.substring(searchValue.length).replace(/ /g, '&nbsp;');
+				
+				if(appendValue !== '') {
+					var li = document.createElement('li');
+					$(li).attr('class', 'list-group-item');
+					
+					var a = document.createElement('a');
+					$(a).attr('class', 'cadastre-suggestion')
+					var spanInput = document.createElement('span');
+					$(spanInput).attr('class', 'cadastre-input');
+					$(spanInput).append(searchValue.toUpperCase());
+					$(a).append(spanInput);
+					
+					var spanSuggestion = document.createElement('span');
+					$(spanSuggestion).attr('class', 'cadastre-suggestion-append');
+					$(spanSuggestion).append(appendValue);
+					$(a).append(spanSuggestion);
+					
+					$(li).append(a);
+					$('#cadastre-suggestions').append(li);
+				}
+			});
+		});
+	},	
 	'click .address-suggestion': function(e) {
 		var element = $(e.target).parent()[0];
 		var input = $('.address-input', element)[0];
 		var suggestion = $('.address-suggestion-append', element)[0];
 		
-		$('#js-input-search').val(input.innerHTML + suggestion.innerHTML);
+		$('#js-input-address-search').val(input.innerHTML + suggestion.innerHTML);
 		$('#address-suggestions').attr('style', 'display:none;');
-	}
-	,
+	},	
+	'click .cadastre-suggestion': function(e) {
+		var element = $(e.target).parent()[0];
+		var input = $('.cadastre-input', element)[0];
+		var suggestion = $('.cadastre-suggestion-append', element)[0];
+		
+		$('#js-input-cadastre-search').val(input.innerHTML + suggestion.innerHTML.replaceAll('&nbsp;', ' '));
+		$('#cadastre-suggestions').attr('style', 'display:none;');
+	},
 	'click #js-execute-address-search': function(e) {
 		$('#address-suggestions').attr('style', 'display:none;');
 		$('#address-search-results').empty();
 		
-		var searchValue = $('#js-input-search').val();
+		var searchValue = $('#js-input-address-search').val();
 		
 		var url = 'http://bag.idgis.nl/geoide-search-service/bag/search?q=' + searchValue + '&srs=28992';
 		
-		Meteor.call('getSearchResults', url, function(err, result) {
+		Meteor.call('getAddressSearchResults', url, function(err, result) {
 			result.forEach(function(item) {
 				var minX = item.envelope.minX;
 				var maxX = item.envelope.maxX;
@@ -171,7 +231,75 @@ Template.step_1.events ({
 			});
 		});
 	},
+	'click #js-execute-cadastre-search': function(e) {
+		$('#cadastre-suggestions').attr('style', 'display:none;');
+		$('#cadastre-search-results').empty();
+		
+		var searchValue = $('#js-input-cadastre-search').val().toUpperCase().replace(/ /g, '%20');
+		
+		var url = 'http://portal.prvlimburg.nl/geoservices/kad_perceel?&TYPENAME=kad_perceel_v&' +
+		'VERSION=1.1.0&SERVICE=WFS&REQUEST=GetFeature&FILTER=%3CFilter%20xmlns=%27' +
+		'http://www.opengis.net/ogc%27%20xmlns:app=%27http://www.deegree.org/app%27%3E%3CPropertyIsLike' +
+		'%20wildCard%3D%22*%22%20singleChar%3D%22%23%22%20escape%3D%22!%22%3E%0A%3CPropertyName' +
+		'%3EKADSLEUTEL%3C%2FPropertyName%3E%0A%3CLiteral%3E' + searchValue + 
+		'*%3C%2FLiteral%3E%0A%3C%2FPropertyIsLike%3E%3C/Filter%3E&maxFeatures=5';
+		
+		Meteor.call('getCadastreSearchResults', url, function(err, result) {
+			result.forEach(function(item) {
+				var lowerCorner = item.lowerCorner.split(' ');
+				var upperCorner = item.upperCorner.split(' ');
+				
+				var minX = parseFloat(lowerCorner[0]);
+				var maxX = parseFloat(upperCorner[0]);
+				var minY = parseFloat(lowerCorner[1]);
+				var maxY = parseFloat(upperCorner[1]);
+				
+				var center1 = ((maxX - minX) / 2) + minX;
+				var center2 = ((maxY - minY) / 2) + minY;
+				
+				var li = document.createElement('li');
+				$(li).attr('class', 'list-group-item');
+				
+				var a = document.createElement('a');
+				$(a).attr('class', 'cadastre-search-result')
+				$(a).attr('data-center-1', center1)
+				$(a).attr('data-center-2', center2)
+				$(a).attr('data-dismiss', 'modal')
+				$(a).append(item.name.replace(/ /g, '&nbsp;'));
+				
+				$(li).append(a);
+				$('#cadastre-search-results').append(li);
+			});
+		});
+	},
 	'click .address-search-result': function(e) {
+		if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+			map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
+		}
+		
+		var iconStyle = new ol.style.Style({
+			image: new ol.style.Icon(({
+				anchor: [0.5, 32],
+				anchorXUnits: 'fraction',
+				anchorYUnits: 'pixels',
+				opacity: 0.75,
+				src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+					'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg'
+			}))
+		});
+		
+		var center1 = parseFloat($(e.target).attr('data-center-1'));
+		var center2 = parseFloat($(e.target).attr('data-center-2'));
+		
+		var center = [center1, center2];
+		Session.set('mapCoordinates', center);
+		var iconLayer = getIcon(center, iconStyle);
+		
+		map.addLayer(iconLayer);
+		Session.set('iconLayerSet', true);
+		getDeelgebied(Session.get('mapCoordinates'));
+	},
+	'click .cadastre-search-result': function(e) {
 		if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
 			map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
 		}

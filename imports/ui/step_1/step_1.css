@@ -3,3 +3,8 @@
 #map-2 {height:100%;}
 
 .tmp-info {font-weight:bold;}
+
+.address-input {font-weight:bold;}
+.address-suggestion, .address-search-result {color:#000000;}
+.address-suggestion:hover, .address-search-result:hover {color:#000000;cursor:pointer;}
+#address-suggestions {display:none;}

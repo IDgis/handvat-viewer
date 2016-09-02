@@ -242,9 +242,11 @@ function getDeelgebied(coordinates) {
 				map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
 	
 	Meteor.call('getDeelgebied', url, function(err, result) {
-		if(result === 'Baneheide' || result === 'Doenrade' || result === 'Eperheide' || 
-				result === 'Maasterras Gronsveld' || result === 'Margraten' || 
-				result === 'Schimmert' || result === 'Ubachsberg' || result === 'Vijlenerbos') {
+		if(result === 'Baneheide' || result === 'Bekken van Heerlen' || result === 'Doenrade' || 
+				result === 'Eperheide' || result === 'Geleenbeek' || result === 'Geuldal' || 
+				result === 'Maasdal' || result === 'Maasterras Gronsveld' || result === 'Margraten' || 
+				result === 'Roode Beek' || result === 'Schimmert' || result === 'Ubachsberg' || 
+				result === 'Vijlenerbos') {
 			Session.set('area', result);
 			
 			if(typeof Session.get('sectorId') === 'undefined') {
@@ -263,10 +265,15 @@ function getDeelgebied(coordinates) {
 					var area = Session.get('area');
 					
 					setExtentCenter(area, 'Baneheide', item.Name[0], 'Landschapskaart_deelgebied_Baneheide', item);
+					setExtentCenter(area, 'Bekken van Heerlen', item.Name[0], 'Landschapskaart_deelgebied_Heerlen', item);
 					setExtentCenter(area, 'Doenrade', item.Name[0], 'Landschapskaart_deelgebied_Doenrade', item);
 					setExtentCenter(area, 'Eperheide', item.Name[0], 'Landschapskaart_deelgebied_Eperheide', item);
+					setExtentCenter(area, 'Geleenbeek', item.Name[0], 'Landschapskaart_deelgebied_Geleenbeek', item);
+					setExtentCenter(area, 'Geuldal', item.Name[0], 'Landschapskaart_deelgebied_Geuldal', item);
+					setExtentCenter(area, 'Maasdal', item.Name[0], 'Landschapskaart_deelgebied_Maasdal', item);
 					setExtentCenter(area, 'Maasterras Gronsveld', item.Name[0], 'Landschapskaart_deelgebied_Gronsveld', item);
 					setExtentCenter(area, 'Margraten', item.Name[0], 'Landschapskaart_deelgebied_Margraten', item);
+					setExtentCenter(area, 'Roode Beek', item.Name[0], 'Landschapskaart_deelgebied_Roode_beek', item);
 					setExtentCenter(area, 'Schimmert', item.Name[0], 'Landschapskaart_deelgebied_Schimmert', item);
 					setExtentCenter(area, 'Ubachsberg', item.Name[0], 'Landschapskaart_deelgebied_Ubachsberg', item);
 					setExtentCenter(area, 'Vijlenerbos', item.Name[0], 'Landschapskaart_deelgebied_Vijlenerbos', item);

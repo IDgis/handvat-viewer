@@ -6,10 +6,29 @@
 		<div id="search-location" class="input-group">
 			<input type="text" class="form-control" id="js-input-search">
 			<span class="input-group-btn">
-				<button type="button" class="btn btn-default">
+				<button type="button" class="btn btn-default" id="js-execute-address-search"
+					 data-toggle="modal" data-target="#address-modal">
 					<span class="glyphicon glyphicon-search"></span>
 				</button>
 			</span>
+			<div class="modal fade" tabindex="-1" role="dialog" id="address-modal">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Adres: resultaten</h4>
+						</div>
+						<div class="modal-body" id="address-text-1">
+							<ul class="list-group" id="address-search-results"></ul>
+						</div>
+						<div class="modal-footer negate-border">
+							<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<ul class="list-group" id="address-suggestions">
 			<!-- <li class="list-group-item"><a>Cras justo odio</a></li> -->

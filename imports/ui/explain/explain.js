@@ -1,17 +1,17 @@
-import './start.html';
-import './start.css';
+import './explain.html';
+import './explain.css';
 
-Template.start.onRendered(function() {
-	Session.set('stepNumber', 'start');
+Template.explain.onRendered(function() {
+	Session.set('stepNumber', 'explain');
 	
 	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getText', result.content, Meteor.settings.public.startText, function(err, result) {
+		Meteor.call('getText', result.content, Meteor.settings.public.explainText, function(err, result) {
 			if(typeof result !== 'undefined') {
-				$('#text-container-start').append(result.content);
+				$('#text-container-explain').append(result.content);
 			}
 		});
 	});
@@ -21,20 +21,20 @@ Template.start.onRendered(function() {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getText', result.content, Meteor.settings.public.startImage, function(err, result) {
+		Meteor.call('getText', result.content, Meteor.settings.public.explainImage, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$.each(result.images, function(index, item) {
-					$('#viewer-container-start').append(item);
+					$('#viewer-container-explain').append(item);
 				});
 				
-				$.each($('#viewer-container-start img'), function(index, item) {
+				$.each($('#viewer-container-explain img'), function(index, item) {
 					var src = $(item).attr('src');
 					
 					if(typeof src === 'undefined') {
 						$(item).remove();
 					} else {
 						$(item).removeAttr('style');
-						$(item).attr('class', 'text-start-img');
+						$(item).attr('class', 'text-explain-img');
 					}
 				});
 			}
@@ -42,8 +42,8 @@ Template.start.onRendered(function() {
 	});
 });
 
-Template.start.events ({
-	'click #js-next-start': function() {
-		Router.go('explain');
+Template.explain.events ({
+	'click #js-next-explain': function() {
+		Router.go('step_1');
 	}
 });

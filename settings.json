@@ -15,6 +15,12 @@
 	  "startText": "4BmBJ3XLgtgtPejEz",
 	  "startImage": "fwTWHzwSszTQ83eex",
 	  
+	  "explainText": "7wSQJ6E93nQNr5uGq",
+	  "explainImage": "L45SETkt3JSgftEDm",
+	  
+	  "step1Text": "vWKZte4Ku9gSK3Pyp",
+	  "step2Text": "rLWcpgMtLnbygLnr2",
+	  
 	  "deelgebiedenService": {
 	    "urlDG": "http://portal.prvlimburg.nl/geoservices/deelgebieden?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
 	    "urlSK": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",

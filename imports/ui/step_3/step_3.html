@@ -1,55 +1,8 @@
 <template name="step_3">
-	<div id="text-container-4" class="col-xs-4">
-		<div class="text-paragraph">
-			<p class="paragraph-header"><b>Gebiedsprofiel</b></p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maximas vero virtutes iacere omnis necesse 
-			est voluptate dominante. Nam aliquando posse recte fieri dicunt nulla expectata nec quaesita voluptate. 
-			An ea, quae per vinitorem antea consequebatur, per se ipsa curabit? Ut optime, secundum naturam affectum 
-			esse possit. Rhetorice igitur, inquam, nos mavis quam dialectice disputare? Duo Reges: constructio 
-			interrete. Verum esto: verbum ipsum voluptatis non habet dignitatem, nec nos fortasse intellegimus. 
-			Non prorsus, inquit, omnisque, qui sine dolore sint, in voluptate, et ea quidem summa, esse dico.</p>
-		</div>
-		<div id="lt-text-4">{{getLandschapsType}}</div>
-		<div class="text-paragraph">
-			<p class="paragraph-header"><b>Leidende beginselen</b></p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maximas vero virtutes iacere omnis necesse 
-			est voluptate dominante. Nam aliquando posse recte fieri dicunt nulla expectata nec quaesita voluptate. 
-			An ea, quae per vinitorem antea consequebatur, per se ipsa curabit? Ut optime, secundum naturam affectum 
-			esse possit. Rhetorice igitur, inquam, nos mavis quam dialectice disputare? Duo Reges: constructio 
-			interrete. Verum esto: verbum ipsum voluptatis non habet dignitatem, nec nos fortasse intellegimus. 
-			Non prorsus, inquit, omnisque, qui sine dolore sint, in voluptate, et ea quidem summa, esse dico.</p>
-		</div>
-		<button class="btn btn-default {{disableLbBtn}}" data-toggle="modal" data-target="#lb-modal">
-			Toon leidende beginselen
-		</button>
-		<button class="btn btn-default" data-trigger="focus" data-toggle="popover" data-placement="right" 
-			type="button" tabindex="-1" data-content="U moet een landschapstype kiezen om leidende beginselen te zien. Dit kunt u doen door in de kaart in een van de geaccepteerde deelgebieden te klikken.">
-			<span class="glyphicon glyphicon-info-sign"></span>
-		</button>
-		<div id="transparency-slider">
-			<p id="transparency-header"><b>Transparantie</b></p>
-			<div id="slider-id">
-				<div class="ui-slider-handle"></div>
-			</div>
-		</div>
-		<div class="modal fade" tabindex="-1" role="dialog" id="lb-modal">
-			<div class="modal-dialog modal-lg" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title">Leidende beginselen</h4>
-					</div>
-					<div class="modal-body" id="lb-text-4">{{getLeidendeBeginselen}}</div>
-					<div class="modal-footer negate-border">
-						<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-					</div>
-				</div>
-			</div>
-		</div>
+	<div id="text-container-3" class="col-xs-4">
+		<p class="tmp-info">Hier komt informatie over de landschapsstructuurkaart (met onder meer de legenda).</p>
 	</div>
-	<div id="viewer-container-4" class="col-xs-8">
-		<div id="map-4" class="olMap"></div>
+	<div id="viewer-container-3" class="col-xs-8">
+		<div id="map-3" class="olMap"></div>
 	</div>
 </template>

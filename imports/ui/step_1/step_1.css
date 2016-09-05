@@ -1,4 +1,5 @@
-#text-container-2 {height:95%;padding-left:15px;border-right:2px solid grey;margin-bottom:15px;overflow-y:auto;}
+#text-container-2 {height:95%;padding-left:40px;padding-right:30px;border-right:2px solid grey;
+	margin-bottom:15px;overflow-y:auto;}
 #viewer-container-2 {height:95%;margin-bottom:15px;}
 #map-2 {height:100%;}
 

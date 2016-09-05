@@ -12,6 +12,9 @@
 	  "groenKarakterId": "voWchxfes3t3czyp3",
 	  "openBeslotenId": "AJvMWXHWx3iuz69yR",
 	  
+	  "startText": "4BmBJ3XLgtgtPejEz",
+	  "startImage": "fwTWHzwSszTQ83eex",
+	  
 	  "deelgebiedenService": {
 	    "urlDG": "http://portal.prvlimburg.nl/geoservices/deelgebieden?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
 	    "urlSK": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",

@@ -4,6 +4,18 @@ import './step_2.css';
 Template.step_2.onRendered(function() {
 	Session.set('stepNumber', '2');
 	
+	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+		headers: {
+			'Content-Type' : 'application/json; charset=UTF-8'
+		}
+	}, function(err, result) {
+		Meteor.call('getText', result.content, Meteor.settings.public.step2Text, function(err, result) {
+			if(typeof result !== 'undefined') {
+				$('#text-2').append(result.content);
+			}
+		});
+	});
+	
 	String.prototype.replaceAll = function(s1, s2) {  
 		var str = this;  
 		var pos = str.indexOf(s1);  
@@ -401,3 +413,9 @@ function getDeelgebied(coordinates) {
 		});
 	});
 }
+
+Template.step_2.events ({
+	'click #js-next-2': function() {
+		Router.go('step_3');
+	}
+});

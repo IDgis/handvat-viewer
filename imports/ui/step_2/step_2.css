@@ -1,10 +1,3 @@
-#text-container-2 {height:95%;padding-left:40px;padding-right:30px;border-right:2px solid grey;
-	margin-bottom:15px;overflow-y:auto;}
-#viewer-container-2 {height:95%;margin-bottom:15px;}
-#map-2 {height:100%;}
-
-.tmp-info {font-weight:bold;}
-
 .address-input {font-weight:bold;}
 .cadastre-input {font-weight:bold;}
 .address-suggestion, .address-search-result, 
@@ -12,5 +5,7 @@
 .address-suggestion:hover, .address-search-result:hover, 
 	.cadastre-suggestion:hover, .cadastre-search-result:hover {color:#000000;cursor:pointer;}
 #address-suggestions {display:none;}
-
 #address-search, #cadastre-search {margin-top:20px;margin-bottom:20px;}
+
+.btn-add-on-2 {border-radius:0 4px 4px 0;}
+.label-search-2 {font-weight:bold;}

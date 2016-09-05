@@ -1,8 +1,25 @@
 <template name="step_3">
-	<div id="text-container-3" class="col-xs-4">
-		<p class="tmp-info">Hier komt informatie over de landschapsstructuurkaart (met onder meer de legenda).</p>
-	</div>
+	<div id="text-container-3" class="col-xs-4"></div>
 	<div id="viewer-container-3" class="col-xs-8">
 		<div id="map-3" class="olMap"></div>
+	</div>
+	<div id="navigation-container-3" class="col-xs-4">
+			<a id="js-next-3" class="pull-right">Klik om verder te gaan</a>
+	</div>
+	<div class="modal fade" tabindex="-1" role="dialog" id="lb-modal">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Leidende beginselen</h4>
+				</div>
+				<div class="modal-body" id="lb-text-3">{{getLeidendeBeginselen}}</div>
+				<div class="modal-footer negate-border">
+					<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>

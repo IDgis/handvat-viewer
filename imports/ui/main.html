@@ -1,49 +1,20 @@
 <template name="main">
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="collapse navbar-collapse negate-padding-left">
-				<div class="col-lg-5 negate-padding-left">
-					<div class="navbar-header">
-						<a class="navbar-brand">Viewer</a>
-					</div>
-					<div class="{{showSectorChoice}}">
-						<ul class="nav navbar-nav" id="sector-dropdown">
-							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" id="sector-dropdown-label">Sector 
-									<span class="caret"></span>
-								</a>
-								<ul id="js-sectors" class="dropdown-menu">
-									
-								</ul>
-							</li>
-						</ul>
-						<p class="navbar-text">{{getSectorLabel}}</p>
-					</div>
-					<div class="pull-right" id="nav-buttons">
-						<button class="btn btn-default {{disablePreviousButton}}" id="js-previous-step">Vorige</button>
-						<button class="btn btn-default {{disableNextButton}}" id="js-next-step">Volgende</button>
-					</div>
-				</div>
-				<ul class="nav navbar-nav navbar-right col-xs-7">
-					<li class="tab-step {{activeStep '1'}}">
-						<a>Stap 1</a>
-					</li>
-					<li class="tab-step {{activeStep '2'}}">
-						<a>Stap 2</a>
-					</li>
-					<li class="tab-step {{activeStep '3'}}">
-						<a>Stap 3</a>
-					</li>
-					<li class="tab-step {{activeStep '4'}}">
-						<a>Stap 4</a>
-					</li>
-					<li class="tab-step {{activeStep '5'}}">
-						<a>Stap 5</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	<div id="banner">
+		<img id="banner-img" src="../images/banner.jpg">
+	</div>
+	<p id="banner-title">
+		Handvat Kernkwaliteiten Nationaal Landschap Zuid-Limburg
+	</p>
+	<div id="banner-links">
+		<a>handleiding</a>
+		<a>help</a>
+		<a>contact</a>
+		<a>links</a>
+		<a>disclaimer</a>
+	</div>
+	<div id="tabs-main">
+		<img id="tabs-main-img">
+	</div>
 	<div id="page">
 		{{> yield}}
 	</div>

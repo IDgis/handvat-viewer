@@ -6,99 +6,12 @@ import './main.css';
 import './main.html';
 
 Template.main.onRendered(function() {
-	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
-		headers: {
-			'Content-Type' : 'application/json; charset=UTF-8'
-		}
-	}, function(err, result) {
-		Meteor.call('getTexts', result.content, 'sector', function(err, result) {
-			var ul = $('ul[id=js-sectors]');
-			$.each(ul, function(index, item) {
-				$.each(result, function(idx, el) {
-					var li = document.createElement('li');
-					li.id = "sector-" + idx;
-					$('#js-sectors').append(li);
-					
-					var a = document.createElement('a');
-					a.id = el.id;
-					a.innerHTML = el.name;
-					$('#sector-' + idx).append(a);
-				});
-			});
-		});
-	});
-});
-
-Template.main.helpers({
-	showSectorChoice: function() {
-		if(Session.get('stepNumber') !== '1') {
-			return 'hide-element';
-		}
-	},
-	disablePreviousButton: function() {
-		if(Session.get('stepNumber') === 'start') {
-			return 'disabled';
-		}
-	},
-	disableNextButton: function() {
-		if(Session.get('stepNumber') === '5') {
-			return 'disabled';
-		} else if(Session.get('stepNumber') === '1') {
-			if(typeof Session.get('sectorId') === 'undefined' ||
-					typeof Session.get('mapExtent') === 'undefined' ||
-					typeof Session.get('mapCenter') == 'undefined') {
-				return 'disabled';
-			}
-		}
-	},
-	activeStep: function(step) {
-		if(Session.equals('stepNumber', step)) {
-			return "active";
-		}
-	},
-	getSectorLabel: function() {
-		if(typeof Session.get('sectorLabel') === 'undefined') {
-			return "geen sector geselecteerd";
-		} else {
-			return Session.get('sectorLabel');
-		}
-	}
-});
-
-Template.main.events ({
-	'click #js-sectors li a': function (e) {
-		Session.set('sectorLabel', e.target.textContent);
-		Session.set('sectorId', e.target.id);
-		
-		var sectorElement = $('#sector-dropdown-label');
-		$.each(sectorElement, function(index, item) {
-			$(item).removeAttr('style');
-		});
-	},
-	'click #js-next-step': function() {
-		if(Session.get('stepNumber') === 'start') {
-			Router.go('step_1');
-		} else if(Session.get('stepNumber') === '1') {
-			Router.go('step_2');
-		} else if(Session.get('stepNumber') === '2') {
-			Router.go('step_3');
-		} else if(Session.get('stepNumber') === '3') {
-			Router.go('step_4');
-		} else if(Session.get('stepNumber') === '4') {
-			Router.go('step_5');
-		}
-	},
-	'click #js-previous-step': function() {
-		if(Session.get('stepNumber') === '1') {
-			Router.go('start');
-		} else if(Session.get('stepNumber') === '2') {
-			Router.go('step_1');
-		} else if(Session.get('stepNumber') === '3') {
-			Router.go('step_2');
-		} else if(Session.get('stepNumber') === '4') {
-			Router.go('step_3');
-		} else if(Session.get('stepNumber') === '5') {
-			Router.go('step_4');
-		}
-	}
+	var bannerWidth = $('#banner').width();
+	var bannerHeight = bannerWidth / 13.09375;
+	
+	var titleOffset = (bannerHeight / 2) - 22;
+	$('#banner-title').attr('style', 'top:' + titleOffset + 'px');
+	
+	var linksOffset = bannerHeight - 22 - 15;
+	$('#banner-links').attr('style', 'top:' + linksOffset + 'px');
 });

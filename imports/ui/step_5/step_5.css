@@ -1,5 +1,15 @@
-#text-container-6 {height:95%;padding-left:15px;border-right:2px solid grey;margin-bottom:15px;overflow-y:auto;}
-#viewer-container-6 {height:95%;margin-bottom:15px;}
-#map-6 {height:100%;}
+#intro-text-5 {margin-bottom:20px;}
+.text-div-img {width:100%;}
+.text-div {padding-left:0;padding-right:10px;margin-bottom:10px;}
+#kk-container-5 {height:95%;float:left;position:relative;min-height:1px;padding-right:15px;width:12%;overflow-y:scroll;padding-left:15px;}
+.step-3-viewer {float:left;position:relative;min-height:1px;padding-right:15px;width:54.6667%}
 
-.tmp-info {font-weight:bold;}
+.kernkwaliteit-img {width:100%;margin-top:10px;margin-bottom:10px;}
+.kernkwaliteit-img:hover {cursor:pointer;}
+#landschapstype-img {width:100%;margin-top:10px;margin-bottom:10px;}
+#landschapstype-img {cursor:pointer;}
+#pol-img {width:100%;margin-top:10px;margin-bottom:10px;}
+#pol-img {cursor:pointer;}
+
+#transparency-slider {margin-top:20px;margin-bottom:20px;}
+#transparency-header {margin-bottom:5px;}

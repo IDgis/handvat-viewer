@@ -4,11 +4,13 @@ import { Router } from 'meteor/iron:router';
 import '../../ui/main.js';
 
 import '../../ui/start/start.js';
+import '../../ui/explain/explain.js';
 import '../../ui/step_1/step_1.js';
 import '../../ui/step_2/step_2.js';
 import '../../ui/step_3/step_3.js';
 import '../../ui/step_4/step_4.js';
 import '../../ui/step_5/step_5.js';
+import '../../ui/step_6/step_6.js';
 
 Router.configure({
   layoutTemplate: 'main'
@@ -18,6 +20,12 @@ Router.route('/handvat-viewer', function () {
 	  this.render('start');
 	}, {
 	  name: 'start'
+});
+
+Router.route('/handvat-viewer/uitleg', function () {
+  this.render('explain');
+}, {
+  name: 'explain'
 });
 
 Router.route('/handvat-viewer/1', function () {
@@ -48,4 +56,10 @@ Router.route('/handvat-viewer/5', function () {
 	  this.render('step_5');
 	}, {
 	  name: 'step_5'
+});
+
+Router.route('/handvat-viewer/6', function () {
+	  this.render('step_6');
+	}, {
+	  name: 'step_6'
 });

@@ -12,6 +12,33 @@
 	  "groenKarakterId": "voWchxfes3t3czyp3",
 	  "openBeslotenId": "AJvMWXHWx3iuz69yR",
 	  
+	  "startText": "4BmBJ3XLgtgtPejEz",
+	  "startImage": "fwTWHzwSszTQ83eex",
+	  
+	  "explainText": "7wSQJ6E93nQNr5uGq",
+	  "explainImage": "L45SETkt3JSgftEDm",
+	  
+	  "step1Text": "vWKZte4Ku9gSK3Pyp",
+	  "step2Text": "rLWcpgMtLnbygLnr2",
+	  
+	  "step3TextBH": "mAno2ChbJqkCJeyau",
+	  "step3TextH": "kmKwhjeKzEsMdZmXX",
+	  "step3TextDR": "9jMP8u9YemxcNhuXz",
+	  "step3TextEH": "zGvNWDz7AFdKfEJju",
+	  "step3TextGB": "Y2u8ow3RY3bXsye7h",
+	  "step3TextGD": "un2J2kPRxuKPkRdix",
+	  "step3TextMD": "DYtcqjfTPmxrnxkz2",
+	  "step3TextMG": "ZsmDfbtXcnoSdR9LJ",
+	  "step3TextM": "dJ7DwaYAcoY3Hi4ft",
+	  "step3TextRB": "7ujFX7wtRj24qJhhK",
+	  "step3TextS": "o84RoEXWLhe4X98De",
+	  "step3TextUB": "f9Dy2gvtyrEfy2WBS",
+	  "step3TextVB": "xJeLo73GCjTCmuG24",
+	  
+	  "step4Text": "sqBrMYet4mMfywiQW",
+	  "step5Text": "wZv6A45RBq2QLLbda",
+	  "step6Text": "h3TprkfhARcPJctWd",
+	  
 	  "deelgebiedenService": {
 	    "urlDG": "http://portal.prvlimburg.nl/geoservices/deelgebieden?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
 	    "urlSK": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",

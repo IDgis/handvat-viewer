@@ -3,14 +3,13 @@ import './step_3.css';
 
 Template.step_3.onRendered(function() {
 	Session.set('stepNumber', '3');
-	
-	$(function () {
-		$('[data-toggle="popover"]').popover()
-	});
+	$('#tabs-main-img').attr('src', '../images/step_3.jpg');
+	$('#tabs-main').attr('style', 'margin-top:3px;position:relative;top:0;');
+	$('#page').attr('style', 'height:75%;');
 	
 	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCenter') === 'undefined') {
-		var extent = [167658.241026781, 307862.821900462, 208090.624144334, 339455.907872023];
-		var center = [187000, 323000];
+		var extent: [165027, 306558, 212686, 338329]
+		var center = [188856, 322443];
 	} else {
 		var extent = Session.get('mapExtent');
 		var center = Session.get('mapCenter');
@@ -31,23 +30,104 @@ Template.step_3.onRendered(function() {
 	
 	map = new ol.Map({
 		control: zoomControl,
-		target: 'map-4',
+		target: 'map-3',
 		view: view
 	});
 	
-	var url = Meteor.settings.public.landschapstypenService.url;
-	var layers = Meteor.settings.public.landschapstypenService.layers;
-	var version = Meteor.settings.public.landschapstypenService.version;
+	var skUrl = Meteor.settings.public.landschapStructuurService.url;
+	var ltUrl = Meteor.settings.public.landschapstypenService.url;
 	
-	layers.forEach(function(item) {
-		var layer = new ol.layer.Image({
+	var ltLayerId = Meteor.settings.public.landschapstypenService.indexLT;
+	
+	var version = Meteor.settings.public.landschapStructuurService.version;
+	
+	var ltLayer = new ol.layer.Image({
+		source: new ol.source.ImageWMS({
+			url: ltUrl,
+			opacity: 0,
+			params: {'LAYERS': Meteor.settings.public.landschapstypenService.layers[ltLayerId], 
+				'VERSION': version} 
+		})
+	});
+	
+	map.addLayer(ltLayer);
+	
+	map.getLayers().item(0).setOpacity(0);
+	
+	var areaLayer;
+	var layerId;
+	var textAreaId;
+	
+	if(Session.get('area') === 'Baneheide' || Session.get('area') === 'Bekken van Heerlen' || 
+			Session.get('area') === 'Doenrade' || Session.get('area') === 'Eperheide' || 
+			Session.get('area') === 'Geleenbeek' || Session.get('area') === 'Geuldal' || 
+			Session.get('area') === 'Maasdal' || Session.get('area') === 'Maasterras Gronsveld' || 
+			Session.get('area') === 'Margraten' || Session.get('area') === 'Roode Beek' || 
+			Session.get('area') === 'Schimmert' || Session.get('area') === 'Ubachsberg' || 
+			Session.get('area') === 'Vijlenerbos') {
+		
+		if(Session.get('area') === 'Baneheide') {
+			layerId = Meteor.settings.public.landschapStructuurService.indexBH;
+			textAreaId = Meteor.settings.public.step3TextBH;
+		} else if(Session.get('area') === 'Bekken van Heerlen') {
+			layerId = Meteor.settings.public.landschapStructuurService.indexH;
+			textAreaId = Meteor.settings.public.step3TextH;
+		} else if(Session.get('area') === 'Doenrade') {
+			layerId = Meteor.settings.public.landschapStructuurService.indexDR;
+			textAreaId = Meteor.settings.public.step3TextDR;
+		} else if(Session.get('area') === 'Eperheide') {
+			layerId = Meteor.settings.public.landschapStructuurService.indexEH;
+			textAreaId = Meteor.settings.public.step3TextEH;
+		} else if(Session.get('area') === 'Geleenbeek') {
+			layerId = Meteor.settings.public.landschapStructuurService.indexGB;
+			textAreaId = Meteor.settings.public.step3TextGB;
+		} else if(Session.get('area') === 'Geuldal') {
+			layerId = Meteor.settings.public.landschapStructuurService.indexGD;
+			textAreaId = Meteor.settings.public.step3TextGD;
+		} else if(Session.get('area') === 'Maasdal') {
+			layerId = Meteor.settings.public.landschapStructuurService.indexMD;
+			textAreaId = Meteor.settings.public.step3TextMD;
+		} else if(Session.get('area') === 'Maasterras Gronsveld') {
+			layerId = Meteor.settings.public.landschapStructuurService.indexMG;
+			textAreaId = Meteor.settings.public.step3TextMG;
+		} else if(Session.get('area') === 'Margraten') {
+			layerId = Meteor.settings.public.landschapStructuurService.indexM;
+			textAreaId = Meteor.settings.public.step3TextM;
+		} else if(Session.get('area') === 'Roode Beek') {
+			layerId = Meteor.settings.public.landschapStructuurService.indexRB;
+			textAreaId = Meteor.settings.public.step3TextRB;
+		} else if(Session.get('area') === 'Schimmert') {
+			layerId = Meteor.settings.public.landschapStructuurService.indexS;
+			textAreaId = Meteor.settings.public.step3TextS;
+		} else if(Session.get('area') === 'Ubachsberg') {
+			layerId = Meteor.settings.public.landschapStructuurService.indexUB;
+			textAreaId = Meteor.settings.public.step3TextUB;
+		} else if(Session.get('area') === 'Vijlenerbos') {
+			layerId = Meteor.settings.public.landschapStructuurService.indexVB;
+			textAreaId = Meteor.settings.public.step3TextVB;
+		}
+		
+		areaLayer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
-				url: url, 
-				params: {'LAYERS': item, 'VERSION': version} 
+				url: skUrl, 
+				params: {'LAYERS': Meteor.settings.public.landschapStructuurService.layers[layerId], 
+					'VERSION': version} 
 			})
 		});
 		
-		map.addLayer(layer);
+		map.addLayer(areaLayer);
+	}
+	
+	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+		headers: {
+			'Content-Type' : 'application/json; charset=UTF-8'
+		}
+	}, function(err, result) {
+		Meteor.call('getText', result.content, textAreaId, function(err, result) {
+			if(typeof result !== 'undefined') {
+				$('#text-container-3').append(result.content);
+			}
+		});
 	});
 	
 	var iconStyle = new ol.style.Style({
@@ -69,23 +149,6 @@ Template.step_3.onRendered(function() {
 		setLandschapstypeId(Session.get('mapCoordinates'));
 	}
 	
-	$("#slider-id").slider({
-		value: 100,
-		slide: function(e, ui) {
-			$.each(map.getLayers().getArray(), function(index, item) {
-				if(index !== 0) {
-					if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
-						if(index !== map.getLayers().getLength() - 1) {
-							map.getLayers().item(index).setOpacity(ui.value / 100);
-						}
-					} else {
-						map.getLayers().item(index).setOpacity(ui.value / 100);
-					}
-				}
-			});
-		}
-	});
-	
 	map.on('singleclick', function(evt) {
 		if(typeof iconLayer !== 'undefined') {
 			map.removeLayer(iconLayer);
@@ -96,27 +159,32 @@ Template.step_3.onRendered(function() {
 		map.addLayer(iconLayer);
 		
 		setLandschapstypeId(evt.coordinate);
+		
+		$('#lb-modal').modal();
 	});
 	
 	function setLandschapstypeId(coordinates) {
-		var url = map.getLayers().item(Meteor.settings.public.landschapstypenService.indexLT)
-					.getSource().getGetFeatureInfoUrl(coordinates, map.getView().getResolution(), 
-					map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
+		var url = map.getLayers().item(0).getSource().getGetFeatureInfoUrl(coordinates, map.getView().
+				getResolution(), map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
 		
 		Meteor.call('getLandschapsType', url, function(err, result) {
 			if(result === 'Dalbodem') {
 				Session.set('landschapstypeId', Meteor.settings.public.dalId);
 				Session.set('mapCoordinates', coordinates);
+				Session.set('landschapstypeName', 'Dal');
 			} else if(result === 'Helling > 4 graden' || result === 'Helling < 4 graden') {
 				Session.set('landschapstypeId', Meteor.settings.public.hellingId);
 				Session.set('mapCoordinates', coordinates);
+				Session.set('landschapstypeName', 'Helling');
 			} else if(result === 'Tussenterras' || result === 'Plateau' || result === 'Groeve' || 
 					result === 'Geisoleerde heuvel') {
 				Session.set('landschapstypeId', Meteor.settings.public.plateauId);
 				Session.set('mapCoordinates', coordinates);
+				Session.set('landschapstypeName', 'Plateau');
 			} else {
 				Session.set('landschapstypeId', null);
 				Session.set('mapCoordinates', null);
+				Session.set('landschapstypeName', null);
 			}
 		});
 	}
@@ -139,33 +207,8 @@ Template.step_3.onRendered(function() {
 });
 
 Template.step_3.helpers({
-	getLandschapsType: function() {
-		$('#lt-text-4').empty();
-		
-		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null) {
-			HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
-				headers: {
-					'Content-Type' : 'application/json; charset=UTF-8'
-				}
-			}, function(err, result) {
-				Meteor.call('getText', result.content, Session.get('landschapstypeId'), function(err, result) {
-					if(typeof result !== 'undefined') {
-						var header = document.createElement('p');
-						$(header).attr('class', 'header');
-						header.innerHTML = 'Landschapstype';
-						$('#lt-text-4').append(header);
-						
-						var div = document.createElement('div');
-						$(div).attr('class', 'col-xs-12 text-div');
-						$(div).append(result.content);
-						$('#lt-text-4').append(div);
-					}
-				});
-			});
-		}
-	},
 	getLeidendeBeginselen: function() {
-		$('#lb-text-4').empty();
+		$('#lb-text-3').empty();
 		
 		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null) {
 			HTTP.get("http://148.251.183.26/handvat-admin/coupling/leidend/json", {
@@ -185,7 +228,7 @@ Template.step_3.helpers({
 							
 							var innerDiv = document.createElement('div');
 							$(innerDiv).attr('class', 'col-xs-6 text-div');
-							$('#lb-text-4').append(outerDiv);
+							$('#lb-text-3').append(outerDiv);
 							
 							HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 								headers: {
@@ -198,7 +241,7 @@ Template.step_3.helpers({
 											$(innerDiv).append(elt);
 										});
 										
-										cleanImages('lb-text-4');
+										cleanImages('lb-text-3');
 										
 										$(innerDiv).append(result.content);
 									}
@@ -225,7 +268,7 @@ Template.step_3.helpers({
 											$(innerDiv).append(elt);
 										});
 										
-										cleanImages('lb-text-4');
+										cleanImages('lb-text-3');
 										
 										$(innerDiv).append(result.content);
 									}
@@ -238,11 +281,6 @@ Template.step_3.helpers({
 					});
 				});
 			});
-		}
-	},
-	disableLbBtn: function() {
-		if(typeof Session.get('landschapstypeId') === 'undefined' || Session.get('landschapstypeId') === null) {
-			return 'disabled';
 		}
 	}
 });
@@ -259,3 +297,9 @@ function cleanImages(div) {
 		}
 	});
 }
+
+Template.step_3.events ({
+	'click #js-next-3': function() {
+		Router.go('step_4');
+	}
+});

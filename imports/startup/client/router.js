@@ -10,6 +10,7 @@ import '../../ui/step_2/step_2.js';
 import '../../ui/step_3/step_3.js';
 import '../../ui/step_4/step_4.js';
 import '../../ui/step_5/step_5.js';
+import '../../ui/step_6/step_6.js';
 
 Router.configure({
   layoutTemplate: 'main'

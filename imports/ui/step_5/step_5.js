@@ -9,6 +9,18 @@ Template.step_5.onRendered(function() {
 		$('[data-toggle="popover"]').popover()
 	});
 	
+	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+		headers: {
+			'Content-Type' : 'application/json; charset=UTF-8'
+		}
+	}, function(err, result) {
+		Meteor.call('getText', result.content, Meteor.settings.public.step5Text, function(err, result) {
+			if(typeof result !== 'undefined') {
+				$('#intro-text-5').append(result.content);
+			}
+		});
+	});
+	
 	var ltHeader = document.createElement('p');
 	$(ltHeader).attr('class', 'header');
 	ltHeader.innerHTML = 'Landschapstype';
@@ -183,31 +195,6 @@ Template.step_5.onRendered(function() {
 });
 
 Template.step_5.helpers({
-	getLandschapsType: function() {
-		$('#lt-text-5').empty();
-		
-		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null) {
-			HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
-				headers: {
-					'Content-Type' : 'application/json; charset=UTF-8'
-				}
-			}, function(err, result) {
-				Meteor.call('getText', result.content, Session.get('landschapstypeId'), function(err, result) {
-					if(typeof result !== 'undefined') {
-						var header = document.createElement('p');
-						$(header).attr('class', 'header');
-						header.innerHTML = 'Landschapstype';
-						$('#lt-text-5').append(header);
-						
-						var div = document.createElement('div');
-						$(div).attr('class', 'col-xs-12 text-div');
-						$(div).append(result.content);
-						$('#lt-text-5').append(div);
-					}
-				});
-			});
-		}
-	},
 	getKernKwaliteit: function() {
 		$('#kk-text-5').empty();
 		
@@ -219,11 +206,6 @@ Template.step_5.helpers({
 			}, function(err, result) {
 				Meteor.call('getText', result.content, Session.get('kernkwaliteitId'), function(err, result) {
 					if(typeof result !== 'undefined') {
-						var header = document.createElement('p');
-						$(header).attr('class', 'header');
-						header.innerHTML = 'Kernkwaliteit';
-						$('#kk-text-5').append(header);
-						
 						var div = document.createElement('div');
 						$(div).attr('class', 'col-xs-12 text-div');
 						$(div).append(result.content);
@@ -465,6 +447,9 @@ Template.step_5.events ({
 		}
 		
 		setOpacity();
+	},
+	'click #js-next-5': function() {
+		Router.go('step_6');
 	}
 });
 

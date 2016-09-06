@@ -28,12 +28,12 @@ Template.step_2.onRendered(function() {
 	
 	var projection = new ol.proj.Projection({
 		code: 'EPSG:28992',
-		extent: [167658.241026781, 307862.821900462, 208090.624144334, 339455.907872023]
+		extent: [165027, 306558, 212686, 338329]
 	});
 	
 	var view = new ol.View({
 		projection: projection,
-		center: [187000, 323000],
+		center: [188856, 322443],
 		zoom: 2
 	});
 	

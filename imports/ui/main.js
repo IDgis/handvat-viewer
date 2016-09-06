@@ -6,27 +6,14 @@ import './main.css';
 import './main.html';
 
 Template.main.onRendered(function() {
-	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
-		headers: {
-			'Content-Type' : 'application/json; charset=UTF-8'
-		}
-	}, function(err, result) {
-		Meteor.call('getTexts', result.content, 'sector', function(err, result) {
-			var ul = $('ul[id=js-sectors]');
-			$.each(ul, function(index, item) {
-				$.each(result, function(idx, el) {
-					var li = document.createElement('li');
-					li.id = "sector-" + idx;
-					$('#js-sectors').append(li);
-					
-					var a = document.createElement('a');
-					a.id = el.id;
-					a.innerHTML = el.name;
-					$('#sector-' + idx).append(a);
-				});
-			});
-		});
-	});
+	var bannerWidth = $('#banner').width();
+	var bannerHeight = bannerWidth / 13.09375;
+	
+	var titleOffset = (bannerHeight / 2) - 22;
+	$('#banner-title').attr('style', 'top:' + titleOffset + 'px');
+	
+	var linksOffset = bannerHeight - 22 - 15;
+	$('#banner-links').attr('style', 'top:' + linksOffset + 'px');
 });
 
 Template.main.helpers({

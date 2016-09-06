@@ -5,8 +5,8 @@ Template.step_3.onRendered(function() {
 	Session.set('stepNumber', '3');
 	
 	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCenter') === 'undefined') {
-		var extent = [167658.241026781, 307862.821900462, 208090.624144334, 339455.907872023];
-		var center = [187000, 323000];
+		var extent: [165027, 306558, 212686, 338329]
+		var center = [188856, 322443];
 	} else {
 		var extent = Session.get('mapExtent');
 		var center = Session.get('mapCenter');

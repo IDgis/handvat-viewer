@@ -4,6 +4,9 @@ import './step_5.css';
 Template.step_5.onRendered(function() {
 	Session.set('stepNumber', '5');
 	Session.set('ltActive', true);
+	$('#tabs-main-img').attr('src', '../images/step_5.jpg');
+	$('#tabs-main').attr('style', 'margin-top:3px;position:relative;top:0;');
+	$('#page').attr('style', 'height:75%;');
 	
 	$(function () {
 		$('[data-toggle="popover"]').popover()

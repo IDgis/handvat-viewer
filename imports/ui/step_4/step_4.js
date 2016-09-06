@@ -3,6 +3,9 @@ import './step_4.css';
 
 Template.step_4.onRendered(function() {
 	Session.set('stepNumber', '4');
+	$('#tabs-main-img').attr('src', '../images/step_4.jpg');
+	$('#tabs-main').attr('style', 'margin-top:3px;position:relative;top:0;');
+	$('#page').attr('style', 'height:75%;');
 	
 	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 		headers: {

@@ -12,34 +12,9 @@
 		<a>links</a>
 		<a>disclaimer</a>
 	</div>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="collapse navbar-collapse negate-padding-left">
-				<div class="col-lg-5 negate-padding-left">
-					<div class="navbar-header">
-						<a class="navbar-brand">Viewer</a>
-					</div>
-				</div>
-				<ul class="nav navbar-nav navbar-right col-xs-7">
-					<li class="tab-step {{activeStep '1'}}">
-						<a>Stap 1</a>
-					</li>
-					<li class="tab-step {{activeStep '2'}}">
-						<a>Stap 2</a>
-					</li>
-					<li class="tab-step {{activeStep '3'}}">
-						<a>Stap 3</a>
-					</li>
-					<li class="tab-step {{activeStep '4'}}">
-						<a>Stap 4</a>
-					</li>
-					<li class="tab-step {{activeStep '5'}}">
-						<a>Stap 5</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	<div id="tabs-main">
+		<img id="tabs-main-img">
+	</div>
 	<div id="page">
 		{{> yield}}
 	</div>

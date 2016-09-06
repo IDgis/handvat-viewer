@@ -3,6 +3,9 @@ import './step_3.css';
 
 Template.step_3.onRendered(function() {
 	Session.set('stepNumber', '3');
+	$('#tabs-main-img').attr('src', '../images/step_3.jpg');
+	$('#tabs-main').attr('style', 'margin-top:3px;position:relative;top:0;');
+	$('#page').attr('style', 'height:75%;');
 	
 	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCenter') === 'undefined') {
 		var extent: [165027, 306558, 212686, 338329]

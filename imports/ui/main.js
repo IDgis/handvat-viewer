@@ -15,11 +15,3 @@ Template.main.onRendered(function() {
 	var linksOffset = bannerHeight - 22 - 15;
 	$('#banner-links').attr('style', 'top:' + linksOffset + 'px');
 });
-
-Template.main.helpers({
-	activeStep: function(step) {
-		if(Session.equals('stepNumber', step)) {
-			return "active";
-		}
-	}
-});

@@ -168,16 +168,20 @@ Template.step_3.onRendered(function() {
 			if(result === 'Dalbodem') {
 				Session.set('landschapstypeId', Meteor.settings.public.dalId);
 				Session.set('mapCoordinates', coordinates);
+				Session.set('landschapstypeName', 'Dal');
 			} else if(result === 'Helling > 4 graden' || result === 'Helling < 4 graden') {
 				Session.set('landschapstypeId', Meteor.settings.public.hellingId);
 				Session.set('mapCoordinates', coordinates);
+				Session.set('landschapstypeName', 'Helling');
 			} else if(result === 'Tussenterras' || result === 'Plateau' || result === 'Groeve' || 
 					result === 'Geisoleerde heuvel') {
 				Session.set('landschapstypeId', Meteor.settings.public.plateauId);
 				Session.set('mapCoordinates', coordinates);
+				Session.set('landschapstypeName', 'Plateau');
 			} else {
 				Session.set('landschapstypeId', null);
 				Session.set('mapCoordinates', null);
+				Session.set('landschapstypeName', null);
 			}
 		});
 	}

@@ -28,6 +28,7 @@ Template.step_4.onRendered(function() {
 				$(button).append(item.name);
 				$(button).attr('class', 'btn btn-default btn-lg col-xs-12 sector-btn-4');
 				$(button).attr('data-id', item.id);
+				$(button).attr('data-name', item.name);
 				
 				$(sectors).append(button);
 			});
@@ -38,6 +39,7 @@ Template.step_4.onRendered(function() {
 Template.step_4.events ({
 	'click .sector-btn-4': function(e) {
 		var id = $(e.target).attr('data-id');
+		Session.set('sectorName', $(e.target).attr('data-name'));
 		
 		HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 			headers: {

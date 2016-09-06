@@ -37,6 +37,7 @@
 	  
 	  "step4Text": "sqBrMYet4mMfywiQW",
 	  "step5Text": "wZv6A45RBq2QLLbda",
+	  "step6Text": "h3TprkfhARcPJctWd",
 	  
 	  "deelgebiedenService": {
 	    "urlDG": "http://portal.prvlimburg.nl/geoservices/deelgebieden?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",

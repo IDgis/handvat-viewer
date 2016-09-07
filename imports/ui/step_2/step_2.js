@@ -418,6 +418,9 @@ function getDeelgebied(coordinates) {
 }
 
 Template.step_2.events ({
+	'click #js-previous-2': function() {
+		Router.go('step_1');
+	},
 	'click #js-next-2': function() {
 		Router.go('step_3');
 	}

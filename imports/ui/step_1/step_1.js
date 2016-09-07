@@ -21,6 +21,9 @@ Template.step_1.onRendered(function() {
 });
 
 Template.step_1.events ({
+	'click #js-previous-1': function() {
+		Router.go('explain');
+	},
 	'click #js-next-1': function() {
 		Router.go('step_2');
 	}

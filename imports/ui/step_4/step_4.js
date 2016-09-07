@@ -65,6 +65,9 @@ Template.step_4.events ({
 			});
 		});
 	},
+	'click #js-previous-4': function() {
+		Router.go('step_3');
+	},
 	'click #js-next-4': function() {
 		Router.go('step_5');
 	}

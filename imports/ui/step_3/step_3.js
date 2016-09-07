@@ -299,6 +299,9 @@ function cleanImages(div) {
 }
 
 Template.step_3.events ({
+	'click #js-previous-3': function() {
+		Router.go('step_2');
+	},
 	'click #js-next-3': function() {
 		Router.go('step_4');
 	}

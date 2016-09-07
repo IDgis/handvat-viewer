@@ -40,3 +40,9 @@ Template.step_6.helpers({
 		}
 	}
 });
+
+Template.step_6.events ({
+	'click #js-previous-6': function() {
+		Router.go('step_5');
+	}
+});

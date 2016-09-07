@@ -455,6 +455,9 @@ Template.step_5.events ({
 		
 		setOpacity();
 	},
+	'click #js-previous-5': function() {
+		Router.go('step_4');
+	},
 	'click #js-next-5': function() {
 		Router.go('step_6');
 	}

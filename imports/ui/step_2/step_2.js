@@ -391,6 +391,10 @@ function getDeelgebied(coordinates) {
 				result === 'Roode Beek' || result === 'Schimmert' || result === 'Ubachsberg' || 
 				result === 'Vijlenerbos') {
 			Session.set('area', result);
+		} else {
+			Session.set('area', null);
+			Session.set('mapExtent', null);
+			Session.set('mapCenter', null);
 		}
 		
 		Meteor.call('getBoundingBox', Meteor.settings.public.deelgebiedenService.urlSK, function(err, result) {

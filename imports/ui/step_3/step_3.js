@@ -126,6 +126,8 @@ Template.step_3.onRendered(function() {
 		Meteor.call('getText', result.content, textAreaId, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$('#text-container-3').append(result.content);
+			} else {
+				$('#text-container-3').append('U heeft geen valide deelgebied geselecteerd.');
 			}
 		});
 	});

@@ -12,17 +12,29 @@ Template.step_5.onRendered(function() {
 		$('[data-toggle="popover"]').popover()
 	});
 	
-	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
-		headers: {
-			'Content-Type' : 'application/json; charset=UTF-8'
-		}
-	}, function(err, result) {
-		Meteor.call('getText', result.content, Meteor.settings.public.step5Text, function(err, result) {
-			if(typeof result !== 'undefined') {
-				$('#intro-text-5').append(result.content);
+	if(typeof Session.get('area') !== 'undefined' && Session.get('area') !== null &&
+			typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
+		HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+			headers: {
+				'Content-Type' : 'application/json; charset=UTF-8'
 			}
+		}, function(err, result) {
+			Meteor.call('getText', result.content, Meteor.settings.public.step5Text, function(err, result) {
+				if(typeof result !== 'undefined') {
+					$('#intro-text-5').append(result.content);
+				}
+			});
 		});
-	});
+	} else {
+		if((typeof Session.get('area') === 'undefined' || Session.get('area') === null) &&
+				(typeof Session.get('sectorId') === 'undefined' || Session.get('sectorId') === null)) {
+			$('#intro-text-5').append('U heeft geen valide deelgebied en geen sector geselecteerd.');
+		} else if(typeof Session.get('area') === 'undefined' || Session.get('area') === null) {
+			$('#intro-text-5').append('U heeft geen valide deelgebied geselecteerd.');
+		} else if(typeof Session.get('sectorId') === 'undefined' || Session.get('sectorId') === null) {
+			$('#intro-text-5').append('U heeft geen sector geselecteerd.');
+		}
+	}
 	
 	var ltHeader = document.createElement('p');
 	$(ltHeader).attr('class', 'header');

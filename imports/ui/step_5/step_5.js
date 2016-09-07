@@ -162,6 +162,15 @@ Template.step_5.onRendered(function() {
 		}
 	});
 	
+
+	$("#op-modal").draggable({
+		handle: ".modal-header"
+	});
+	
+	$('.modal-content').resizable({
+		alsoResize: ".modal-body"
+	});
+	
 	map.on('singleclick', function(evt) {
 		Session.set('mapCoordinates', evt.coordinate);
 		

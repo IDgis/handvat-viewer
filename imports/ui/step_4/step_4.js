@@ -38,8 +38,11 @@ Template.step_4.onRendered(function() {
 				});
 			});
 		});
+		
+		$('#js-next-4').attr('style', 'pointer-events:auto;color:#000000 !important;');
 	} else {
 		$('#text-4').append('U heeft geen valide deelgebied geselecteerd.');
+		$('#js-next-4').attr('style', 'pointer-events:none;color:grey !important;');
 	}
 });
 

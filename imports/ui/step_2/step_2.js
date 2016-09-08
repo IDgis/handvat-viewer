@@ -7,6 +7,12 @@ Template.step_2.onRendered(function() {
 	$('#tabs-main').attr('style', 'margin-top:3px;position:relative;top:0;');
 	$('#page').attr('style', 'height:75%;');
 	
+	if(typeof Session.get('area') === 'undefined' || Session.get('area') === null) {
+		$('#js-next-2').attr('style', 'pointer-events:none;color:grey !important;');
+	} else {
+		$('#js-next-2').attr('style', 'pointer-events:auto;color:#000000 !important;');
+	}
+	
 	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
@@ -391,10 +397,14 @@ function getDeelgebied(coordinates) {
 				result === 'Roode Beek' || result === 'Schimmert' || result === 'Ubachsberg' || 
 				result === 'Vijlenerbos') {
 			Session.set('area', result);
+			
+			$('#js-next-2').attr('style', 'pointer-events:auto;color:#000000 !important;');
 		} else {
 			Session.set('area', null);
 			Session.set('mapExtent', null);
 			Session.set('mapCenter', null);
+			
+			$('#js-next-2').attr('style', 'pointer-events:none;color:grey !important;');
 		}
 		
 		Meteor.call('getBoundingBox', Meteor.settings.public.deelgebiedenService.urlSK, function(err, result) {

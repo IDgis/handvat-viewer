@@ -38,10 +38,13 @@ Template.step_4.onRendered(function() {
 				});
 			});
 		});
-		
-		$('#js-next-4').attr('style', 'pointer-events:auto;color:#000000 !important;');
 	} else {
 		$('#text-4').append('U heeft geen valide deelgebied geselecteerd.');
+	}
+	
+	if(typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
+		$('#js-next-4').attr('style', 'pointer-events:auto;color:#000000 !important;');
+	} else {
 		$('#js-next-4').attr('style', 'pointer-events:none;color:grey !important;');
 	}
 });
@@ -68,6 +71,12 @@ Template.step_4.events ({
 					Session.set('sectorId', id);
 					$('#viewer-4').empty();
 					$('#viewer-4').append(result.content);
+				}
+				
+				if(typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
+					$('#js-next-4').attr('style', 'pointer-events:auto;color:#000000 !important;');
+				} else {
+					$('#js-next-4').attr('style', 'pointer-events:none;color:grey !important;');
 				}
 			});
 		});

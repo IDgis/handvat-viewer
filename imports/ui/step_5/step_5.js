@@ -8,10 +8,6 @@ Template.step_5.onRendered(function() {
 	$('#tabs-main').attr('style', 'margin-top:3px;position:relative;top:0;');
 	$('#page').attr('style', 'height:75%;');
 	
-	$(function () {
-		$('[data-toggle="popover"]').popover()
-	});
-	
 	if(typeof Session.get('area') !== 'undefined' && Session.get('area') !== null &&
 			typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
 		HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
@@ -326,14 +322,14 @@ Template.step_5.helpers({
 			});
 		}
 	},
-	disableOpBtn: function() {
+	hideOpsButton: function() {
 		if(typeof Session.get('landschapstypeId') === 'undefined' || 
 				Session.get('landschapstypeId') === null ||
 				typeof Session.get('sectorId') === 'undefined' || 
 				Session.get('sectorId') === null ||
 				typeof Session.get('kernkwaliteitId') === 'undefined' || 
 				Session.get('kernkwaliteitId') === null) {
-			return 'disabled';
+			return 'hide-element';
 		}
 	},
 	hideSlider: function() {

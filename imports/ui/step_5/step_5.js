@@ -36,34 +36,6 @@ Template.step_5.onRendered(function() {
 		}
 	}
 	
-	var ltHeader = document.createElement('p');
-	$(ltHeader).attr('class', 'header');
-	ltHeader.innerHTML = 'Landschapstype';
-	$('#kk-container-5').append(ltHeader);
-	
-	var ltImage = document.createElement('img');
-	$(ltImage).attr('id', 'landschapstype-img');
-	$(ltImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-			'/' + Meteor.settings.public.domainSuffix + '/images/lt.png');
-	$('#kk-container-5').append(ltImage);
-	
-	var ltImageWidth = $(ltImage).width();
-	$(ltImage).css({'height':ltImageWidth + 'px'});
-	
-	var polHeader = document.createElement('p');
-	$(polHeader).attr('class', 'header');
-	polHeader.innerHTML = 'POL';
-	$('#kk-container-5').append(polHeader);
-	
-	var polImage = document.createElement('img');
-	$(polImage).attr('id', 'pol-img');
-	$(polImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-			'/' + Meteor.settings.public.domainSuffix + '/images/pol.png');
-	$('#kk-container-5').append(polImage);
-	
-	var polImageWidth = $(polImage).width();
-	$(polImage).css({'height':polImageWidth + 'px'});
-	
 	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
@@ -74,7 +46,7 @@ Template.step_5.onRendered(function() {
 				var header = document.createElement('p');
 				$(header).attr('class', 'header');
 				header.innerHTML = item.name;
-				$('#kk-container-5').append(header);
+				$('#js-kk-thumbnails-5').append(header);
 				
 				var image = document.createElement('img');
 				$(image).attr('class', 'kernkwaliteit-img');
@@ -94,7 +66,7 @@ Template.step_5.onRendered(function() {
 							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/gk.png');
 				}
 				
-				$('#kk-container-5').append(image);
+				$('#js-kk-thumbnails-5').append(image);
 			});
 			
 			var imageKernkwaliteiten = $('.kernkwaliteit-img');
@@ -104,6 +76,34 @@ Template.step_5.onRendered(function() {
 			});
 		});
 	});
+	
+	var ltHeader = document.createElement('p');
+	$(ltHeader).attr('class', 'header');
+	ltHeader.innerHTML = 'Landschapstype';
+	$('#js-overig-thumbnails-5').append(ltHeader);
+	
+	var ltImage = document.createElement('img');
+	$(ltImage).attr('id', 'landschapstype-img');
+	$(ltImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+			'/' + Meteor.settings.public.domainSuffix + '/images/lt.png');
+	$('#js-overig-thumbnails-5').append(ltImage);
+	
+	var ltImageWidth = $(ltImage).width();
+	$(ltImage).css({'height':ltImageWidth + 'px'});
+	
+	var polHeader = document.createElement('p');
+	$(polHeader).attr('class', 'header');
+	polHeader.innerHTML = 'POL';
+	$('#js-overig-thumbnails-5').append(polHeader);
+	
+	var polImage = document.createElement('img');
+	$(polImage).attr('id', 'pol-img');
+	$(polImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+			'/' + Meteor.settings.public.domainSuffix + '/images/pol.png');
+	$('#js-overig-thumbnails-5').append(polImage);
+	
+	var polImageWidth = $(polImage).width();
+	$(polImage).css({'height':polImageWidth + 'px'});
 	
 	setBorderThumbnail($('#landschapstype-img'));
 	

@@ -130,15 +130,30 @@ Template.step_5.onRendered(function() {
 		view: view
 	});
 	
-	var url = Meteor.settings.public.landschapstypenService.url;
-	var layers = Meteor.settings.public.landschapstypenService.layers;
-	var version = Meteor.settings.public.landschapstypenService.version;
+	var urlLufo = Meteor.settings.public.luchtfotoService.url;
+	var layersLufo = Meteor.settings.public.luchtfotoService.layers;
+	var versionLufo = Meteor.settings.public.luchtfotoService.version;
 	
-	layers.forEach(function(item) {
+	layersLufo.forEach(function(item) {
 		var layer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
-				url: url, 
-				params: {'LAYERS': item, 'VERSION': version} 
+				url: urlLufo, 
+				params: {'LAYERS': item, 'VERSION': versionLufo} 
+			})
+		});
+		
+		map.addLayer(layer);
+	});
+	
+	var urlLt = Meteor.settings.public.landschapstypenService.url;
+	var layersLt = Meteor.settings.public.landschapstypenService.layers;
+	var versionLt = Meteor.settings.public.landschapstypenService.version;
+	
+	layersLt.forEach(function(item) {
+		var layer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
+				url: urlLt, 
+				params: {'LAYERS': item, 'VERSION': versionLt} 
 			})
 		});
 		
@@ -331,11 +346,6 @@ Template.step_5.helpers({
 				Session.get('kernkwaliteitId') === null) {
 			return 'hide-element';
 		}
-	},
-	hideSlider: function() {
-		if(Session.get('kernkwaliteitId') === Meteor.settings.public.reliefId) {
-			return 'hide-element';
-		}
 	}
 });
 
@@ -359,60 +369,79 @@ Template.step_5.events ({
 		
 		setBorderThumbnail(e.target);
 		
-		var url;
-		var layers;
+		var urlKk;
+		var layersKk;
+		var versionKk;
 		
 		if(Session.get('kernkwaliteitId') === Meteor.settings.public.openBeslotenId) {
 			map.getLayers().clear();
 			
-			url = Meteor.settings.public.openBeslotenService.url;
-			layers = Meteor.settings.public.openBeslotenService.layers;
-			version = Meteor.settings.public.openBeslotenService.version;
+			urlKk = Meteor.settings.public.openBeslotenService.url;
+			layersKk = Meteor.settings.public.openBeslotenService.layers;
+			versionKk = Meteor.settings.public.openBeslotenService.version;
 		}
 		
 		if(Session.get('kernkwaliteitId') === Meteor.settings.public.cultuurhistorieId) {
 			map.getLayers().clear();
 			
-			url = Meteor.settings.public.cultuurhistorieService.url;
-			layers = Meteor.settings.public.cultuurhistorieService.layers;
-			version = Meteor.settings.public.cultuurhistorieService.version;
+			urlKk = Meteor.settings.public.cultuurhistorieService.url;
+			layersKk = Meteor.settings.public.cultuurhistorieService.layers;
+			versionKk = Meteor.settings.public.cultuurhistorieService.version;
 		}
 		
 		if(Session.get('kernkwaliteitId') === Meteor.settings.public.reliefId) {
 			map.getLayers().clear();
 			
-			url = Meteor.settings.public.reliefService.url;
-			layers = Meteor.settings.public.reliefService.layers;
-			version = Meteor.settings.public.reliefService.version;
+			urlKk = Meteor.settings.public.reliefService.url;
+			layersKk = Meteor.settings.public.reliefService.layers;
+			versionKk = Meteor.settings.public.reliefService.version;
 		}
 		
 		if(Session.get('kernkwaliteitId') === Meteor.settings.public.groenKarakterId) {
 			map.getLayers().clear();
 			
-			url = Meteor.settings.public.groenKarakterService.url;
-			layers = Meteor.settings.public.groenKarakterService.layers;
-			version = Meteor.settings.public.groenKarakterService.version;
+			urlKk = Meteor.settings.public.groenKarakterService.url;
+			layersKk = Meteor.settings.public.groenKarakterService.layers;
+			versionKk = Meteor.settings.public.groenKarakterService.version;
 		}
 		
-		layers.forEach(function(item) {
-			var layer = new ol.layer.Image({
-				source: new ol.source.ImageWMS({
-					url: url, 
-					params: {'LAYERS': item, 'VERSION': version} 
-				})
+		if(Session.get('kernkwaliteitId') === Meteor.settings.public.openBeslotenId ||
+				Session.get('kernkwaliteitId') === Meteor.settings.public.cultuurhistorieId ||
+				Session.get('kernkwaliteitId') === Meteor.settings.public.reliefId ||
+				Session.get('kernkwaliteitId') === Meteor.settings.public.groenKarakterId) {
+			var urlLufo = Meteor.settings.public.luchtfotoService.url;
+			var layersLufo = Meteor.settings.public.luchtfotoService.layers;
+			var versionLufo = Meteor.settings.public.luchtfotoService.version;
+			
+			layersLufo.forEach(function(item) {
+				var layer = new ol.layer.Image({
+					source: new ol.source.ImageWMS({
+						url: urlLufo, 
+						params: {'LAYERS': item, 'VERSION': versionLufo} 
+					})
+				});
+				
+				map.addLayer(layer);
 			});
 			
-			map.addLayer(layer);
-		});
+			layersKk.forEach(function(item) {
+				var layer = new ol.layer.Image({
+					source: new ol.source.ImageWMS({
+						url: urlKk, 
+						params: {'LAYERS': item, 'VERSION': versionKk} 
+					})
+				});
+				
+				map.addLayer(layer);
+			});
+		}
 		
 		if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
 			iconLayer = getIcon(Session.get('mapCoordinates'));
 			map.addLayer(iconLayer);
 		}
 		
-		if(Session.get('kernkwaliteitId') !== Meteor.settings.public.reliefId) {
-			setOpacity();
-		}
+		setOpacity();
 	},
 	'click #landschapstype-img': function(e) {
 		Session.set('kernkwaliteitId', null);
@@ -421,15 +450,30 @@ Template.step_5.events ({
 		
 		setBorderThumbnail(e.target);
 		
-		var url = Meteor.settings.public.landschapstypenService.url;
-		var layers = Meteor.settings.public.landschapstypenService.layers;
-		var version = Meteor.settings.public.landschapstypenService.version;
+		var urlLufo = Meteor.settings.public.luchtfotoService.url;
+		var layersLufo = Meteor.settings.public.luchtfotoService.layers;
+		var versionLufo = Meteor.settings.public.luchtfotoService.version;
 		
-		layers.forEach(function(item) {
+		layersLufo.forEach(function(item) {
 			var layer = new ol.layer.Image({
 				source: new ol.source.ImageWMS({
-					url: url, 
-					params: {'LAYERS': item, 'VERSION': version} 
+					url: urlLufo, 
+					params: {'LAYERS': item, 'VERSION': versionLufo} 
+				})
+			});
+			
+			map.addLayer(layer);
+		});
+		
+		var urlLt = Meteor.settings.public.landschapstypenService.url;
+		var layersLt = Meteor.settings.public.landschapstypenService.layers;
+		var versionLt = Meteor.settings.public.landschapstypenService.version;
+		
+		layersLt.forEach(function(item) {
+			var layer = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: urlLt, 
+					params: {'LAYERS': item, 'VERSION': versionLt} 
 				})
 			});
 			
@@ -450,15 +494,30 @@ Template.step_5.events ({
 		
 		setBorderThumbnail(e.target);
 		
-		var url = Meteor.settings.public.polService.url;
-		var layers = Meteor.settings.public.polService.layers;
-		var version = Meteor.settings.public.polService.version;
+		var urlLufo = Meteor.settings.public.luchtfotoService.url;
+		var layersLufo = Meteor.settings.public.luchtfotoService.layers;
+		var versionLufo = Meteor.settings.public.luchtfotoService.version;
 		
-		layers.forEach(function(item) {
+		layersLufo.forEach(function(item) {
 			var layer = new ol.layer.Image({
 				source: new ol.source.ImageWMS({
-					url: url, 
-					params: {'LAYERS': item, 'VERSION': version} 
+					url: urlLufo, 
+					params: {'LAYERS': item, 'VERSION': versionLufo} 
+				})
+			});
+			
+			map.addLayer(layer);
+		});
+		
+		var urlPol = Meteor.settings.public.polService.url;
+		var layersPol = Meteor.settings.public.polService.layers;
+		var versionPol = Meteor.settings.public.polService.version;
+		
+		layersPol.forEach(function(item) {
+			var layer = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: urlPol, 
+					params: {'LAYERS': item, 'VERSION': versionPol} 
 				})
 			});
 			

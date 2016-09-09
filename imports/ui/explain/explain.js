@@ -3,7 +3,11 @@ import './explain.css';
 
 Template.explain.onRendered(function() {
 	Session.set('stepNumber', 'explain');
-	$('#tabs-main-img').attr('src', '../images/no_step.jpg');
+	
+	var stepBarUrl = window.location.protocol + '//' + window.location.hostname + ':' + 
+					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/no_step.jpg';
+	
+	$('#tabs-main-img').attr('src', stepBarUrl);
 	$('#tabs-main').attr('style', 'margin-top:0;position:relative;top:-4px;');
 	$('#page').attr('style', 'height:78%;');
 	

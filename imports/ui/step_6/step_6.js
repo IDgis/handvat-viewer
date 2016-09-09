@@ -3,7 +3,11 @@ import './step_6.css';
 
 Template.step_6.onRendered(function() {
 	Session.set('stepNumber', '6');
-	$('#tabs-main-img').attr('src', '../images/step_6.jpg');
+	
+	var stepBarUrl = window.location.protocol + '//' + window.location.hostname + ':' + 
+					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/step_6.jpg';
+	
+	$('#tabs-main-img').attr('src', stepBarUrl);
 	$('#tabs-main').attr('style', 'margin-top:3px;position:relative;top:0;');
 	$('#page').attr('style', 'height:75%;');
 	

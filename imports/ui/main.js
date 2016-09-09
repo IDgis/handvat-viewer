@@ -6,6 +6,11 @@ import './main.css';
 import './main.html';
 
 Template.main.onRendered(function() {
+	var bannerUrl = window.location.protocol + '//' + window.location.hostname + ':' + 
+					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/banner.jpg';
+	
+	$('#banner-img').attr('src', bannerUrl);
+	
 	var bannerWidth = $('#banner').width();
 	var bannerHeight = bannerWidth / 13.09375;
 	

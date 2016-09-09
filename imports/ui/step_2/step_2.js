@@ -7,6 +7,14 @@ Template.step_2.onRendered(function() {
 	$('#tabs-main').attr('style', 'margin-top:3px;position:relative;top:0;');
 	$('#page').attr('style', 'height:75%;');
 	
+	$(".modal").draggable({
+		handle: ".modal-header"
+	});
+	
+	$('.modal-content').resizable({
+		alsoResize: ".modal-body"
+	});
+	
 	if(typeof Session.get('area') === 'undefined' || Session.get('area') === null) {
 		$('#js-next-2').attr('style', 'pointer-events:none;color:grey !important;');
 	} else {

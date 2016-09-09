@@ -8,6 +8,14 @@ Template.step_5.onRendered(function() {
 	$('#tabs-main').attr('style', 'margin-top:3px;position:relative;top:0;');
 	$('#page').attr('style', 'height:75%;');
 	
+	$(".modal").draggable({
+		handle: ".modal-header"
+	});
+	
+	$('.modal-content').resizable({
+		alsoResize: ".modal-body"
+	});
+	
 	if(typeof Session.get('area') !== 'undefined' && Session.get('area') !== null &&
 			typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
 		HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
@@ -172,15 +180,6 @@ Template.step_5.onRendered(function() {
 		}
 	});
 	
-
-	$("#op-modal").draggable({
-		handle: ".modal-header"
-	});
-	
-	$('.modal-content').resizable({
-		alsoResize: ".modal-body"
-	});
-	
 	map.on('singleclick', function(evt) {
 		Session.set('mapCoordinates', evt.coordinate);
 		
@@ -192,7 +191,7 @@ Template.step_5.onRendered(function() {
 		map.addLayer(iconLayer);
 		
 		if(Session.get('ltActive') === true) {
-			var url = map.getLayers().item(Meteor.settings.public.landschapstypenService.indexLT)
+			var url = map.getLayers().item(1)
 				.getSource().getGetFeatureInfoUrl(evt.coordinate, map.getView().getResolution(), 
 				map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
 			

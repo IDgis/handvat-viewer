@@ -3,7 +3,11 @@ import './step_3.css';
 
 Template.step_3.onRendered(function() {
 	Session.set('stepNumber', '3');
-	$('#tabs-main-img').attr('src', '../images/step_3.jpg');
+	
+	var stepBarUrl = window.location.protocol + '//' + window.location.hostname + ':' + 
+					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/step_3.jpg';
+	
+	$('#tabs-main-img').attr('src', stepBarUrl);
 	$('#tabs-main').attr('style', 'margin-top:3px;position:relative;top:0;');
 	$('#page').attr('style', 'height:75%;');
 	
@@ -126,6 +130,8 @@ Template.step_3.onRendered(function() {
 		Meteor.call('getText', result.content, textAreaId, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$('#text-container-3').append(result.content);
+			} else {
+				$('#text-container-3').append('U heeft geen valide deelgebied geselecteerd.');
 			}
 		});
 	});
@@ -299,6 +305,9 @@ function cleanImages(div) {
 }
 
 Template.step_3.events ({
+	'click #js-previous-3': function() {
+		Router.go('step_2');
+	},
 	'click #js-next-3': function() {
 		Router.go('step_4');
 	}

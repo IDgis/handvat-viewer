@@ -1,17 +1,99 @@
 <template name="main">
 	<div id="banner">
-		<img id="banner-img" src="../images/banner.jpg">
+		<img id="banner-img">
 	</div>
 	<p id="banner-title">
 		Handvat Kernkwaliteiten Nationaal Landschap Zuid-Limburg
 	</p>
 	<div id="banner-links">
-		<a>handleiding</a>
-		<a>help</a>
-		<a>contact</a>
-		<a>links</a>
-		<a>disclaimer</a>
+		<a data-toggle="modal" data-target="#manual-modal">handleiding</a>
+		<a data-toggle="modal" data-target="#help-modal">help</a>
+		<a data-toggle="modal" data-target="#contact-modal">contact</a>
+		<a data-toggle="modal" data-target="#links-modal">links</a>
+		<a data-toggle="modal" data-target="#disclaimer-modal">disclaimer</a>
 	</div>
+	
+	<div class="modal fade" tabindex="-1" role="dialog" id="manual-modal">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Handleiding</h4>
+				</div>
+				<div class="modal-body" id="handleiding-main"></div>
+				<div class="modal-footer negate-border">
+					<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" tabindex="-1" role="dialog" id="help-modal">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Help</h4>
+				</div>
+				<div class="modal-body" id="help-main"></div>
+				<div class="modal-footer negate-border">
+					<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" tabindex="-1" role="dialog" id="contact-modal">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Contact</h4>
+				</div>
+				<div class="modal-body" id="contact-main"></div>
+				<div class="modal-footer negate-border">
+					<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" tabindex="-1" role="dialog" id="links-modal">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Links</h4>
+				</div>
+				<div class="modal-body" id="links-main"></div>
+				<div class="modal-footer negate-border">
+					<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" tabindex="-1" role="dialog" id="disclaimer-modal">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Disclaimer</h4>
+				</div>
+				<div class="modal-body" id="disclaimer-main"></div>
+				<div class="modal-footer negate-border">
+					<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<div id="tabs-main">
 		<img id="tabs-main-img">
 	</div>

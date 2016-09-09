@@ -4,53 +4,45 @@ import './step_5.css';
 Template.step_5.onRendered(function() {
 	Session.set('stepNumber', '5');
 	Session.set('ltActive', true);
-	$('#tabs-main-img').attr('src', '../images/step_5.jpg');
+	
+	var stepBarUrl = window.location.protocol + '//' + window.location.hostname + ':' + 
+					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/step_5.jpg';
+	
+	$('#tabs-main-img').attr('src', stepBarUrl);
 	$('#tabs-main').attr('style', 'margin-top:3px;position:relative;top:0;');
 	$('#page').attr('style', 'height:75%;');
 	
-	$(function () {
-		$('[data-toggle="popover"]').popover()
+	$(".modal").draggable({
+		handle: ".modal-header"
 	});
 	
-	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
-		headers: {
-			'Content-Type' : 'application/json; charset=UTF-8'
-		}
-	}, function(err, result) {
-		Meteor.call('getText', result.content, Meteor.settings.public.step5Text, function(err, result) {
-			if(typeof result !== 'undefined') {
-				$('#intro-text-5').append(result.content);
+	$('.modal-content').resizable({
+		alsoResize: ".modal-body"
+	});
+	
+	if(typeof Session.get('area') !== 'undefined' && Session.get('area') !== null &&
+			typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
+		HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+			headers: {
+				'Content-Type' : 'application/json; charset=UTF-8'
 			}
+		}, function(err, result) {
+			Meteor.call('getText', result.content, Meteor.settings.public.step5Text, function(err, result) {
+				if(typeof result !== 'undefined') {
+					$('#intro-text-5').append(result.content);
+				}
+			});
 		});
-	});
-	
-	var ltHeader = document.createElement('p');
-	$(ltHeader).attr('class', 'header');
-	ltHeader.innerHTML = 'Landschapstype';
-	$('#kk-container-5').append(ltHeader);
-	
-	var ltImage = document.createElement('img');
-	$(ltImage).attr('id', 'landschapstype-img');
-	$(ltImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-			'/' + Meteor.settings.public.domainSuffix + '/images/lt.png');
-	$('#kk-container-5').append(ltImage);
-	
-	var ltImageWidth = $(ltImage).width();
-	$(ltImage).css({'height':ltImageWidth + 'px'});
-	
-	var polHeader = document.createElement('p');
-	$(polHeader).attr('class', 'header');
-	polHeader.innerHTML = 'POL';
-	$('#kk-container-5').append(polHeader);
-	
-	var polImage = document.createElement('img');
-	$(polImage).attr('id', 'pol-img');
-	$(polImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-			'/' + Meteor.settings.public.domainSuffix + '/images/pol.png');
-	$('#kk-container-5').append(polImage);
-	
-	var polImageWidth = $(polImage).width();
-	$(polImage).css({'height':polImageWidth + 'px'});
+	} else {
+		if((typeof Session.get('area') === 'undefined' || Session.get('area') === null) &&
+				(typeof Session.get('sectorId') === 'undefined' || Session.get('sectorId') === null)) {
+			$('#intro-text-5').append('U heeft geen valide deelgebied en geen sector geselecteerd.');
+		} else if(typeof Session.get('area') === 'undefined' || Session.get('area') === null) {
+			$('#intro-text-5').append('U heeft geen valide deelgebied geselecteerd.');
+		} else if(typeof Session.get('sectorId') === 'undefined' || Session.get('sectorId') === null) {
+			$('#intro-text-5').append('U heeft geen sector geselecteerd.');
+		}
+	}
 	
 	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 		headers: {
@@ -62,7 +54,7 @@ Template.step_5.onRendered(function() {
 				var header = document.createElement('p');
 				$(header).attr('class', 'header');
 				header.innerHTML = item.name;
-				$('#kk-container-5').append(header);
+				$('#js-kk-thumbnails-5').append(header);
 				
 				var image = document.createElement('img');
 				$(image).attr('class', 'kernkwaliteit-img');
@@ -82,7 +74,7 @@ Template.step_5.onRendered(function() {
 							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/gk.png');
 				}
 				
-				$('#kk-container-5').append(image);
+				$('#js-kk-thumbnails-5').append(image);
 			});
 			
 			var imageKernkwaliteiten = $('.kernkwaliteit-img');
@@ -92,6 +84,34 @@ Template.step_5.onRendered(function() {
 			});
 		});
 	});
+	
+	var ltHeader = document.createElement('p');
+	$(ltHeader).attr('class', 'header');
+	ltHeader.innerHTML = 'Landschapstype';
+	$('#js-overig-thumbnails-5').append(ltHeader);
+	
+	var ltImage = document.createElement('img');
+	$(ltImage).attr('id', 'landschapstype-img');
+	$(ltImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+			'/' + Meteor.settings.public.domainSuffix + '/images/lt.png');
+	$('#js-overig-thumbnails-5').append(ltImage);
+	
+	var ltImageWidth = $(ltImage).width();
+	$(ltImage).css({'height':ltImageWidth + 'px'});
+	
+	var polHeader = document.createElement('p');
+	$(polHeader).attr('class', 'header');
+	polHeader.innerHTML = 'POL';
+	$('#js-overig-thumbnails-5').append(polHeader);
+	
+	var polImage = document.createElement('img');
+	$(polImage).attr('id', 'pol-img');
+	$(polImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+			'/' + Meteor.settings.public.domainSuffix + '/images/pol.png');
+	$('#js-overig-thumbnails-5').append(polImage);
+	
+	var polImageWidth = $(polImage).width();
+	$(polImage).css({'height':polImageWidth + 'px'});
 	
 	setBorderThumbnail($('#landschapstype-img'));
 	
@@ -122,15 +142,17 @@ Template.step_5.onRendered(function() {
 		view: view
 	});
 	
-	var url = Meteor.settings.public.landschapstypenService.url;
-	var layers = Meteor.settings.public.landschapstypenService.layers;
-	var version = Meteor.settings.public.landschapstypenService.version;
+	setLufoLayers();
 	
-	layers.forEach(function(item) {
+	var urlLt = Meteor.settings.public.landschapstypenService.url;
+	var layersLt = Meteor.settings.public.landschapstypenService.layers;
+	var versionLt = Meteor.settings.public.landschapstypenService.version;
+	
+	layersLt.forEach(function(item) {
 		var layer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
-				url: url, 
-				params: {'LAYERS': item, 'VERSION': version} 
+				url: urlLt, 
+				params: {'LAYERS': item, 'VERSION': versionLt} 
 			})
 		});
 		
@@ -173,7 +195,7 @@ Template.step_5.onRendered(function() {
 		map.addLayer(iconLayer);
 		
 		if(Session.get('ltActive') === true) {
-			var url = map.getLayers().item(Meteor.settings.public.landschapstypenService.indexLT)
+			var url = map.getLayers().item(1)
 				.getSource().getGetFeatureInfoUrl(evt.coordinate, map.getView().getResolution(), 
 				map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
 			
@@ -305,18 +327,13 @@ Template.step_5.helpers({
 			});
 		}
 	},
-	disableOpBtn: function() {
+	hideOpsButton: function() {
 		if(typeof Session.get('landschapstypeId') === 'undefined' || 
 				Session.get('landschapstypeId') === null ||
 				typeof Session.get('sectorId') === 'undefined' || 
 				Session.get('sectorId') === null ||
 				typeof Session.get('kernkwaliteitId') === 'undefined' || 
 				Session.get('kernkwaliteitId') === null) {
-			return 'disabled';
-		}
-	},
-	hideSlider: function() {
-		if(Session.get('kernkwaliteitId') === Meteor.settings.public.reliefId) {
 			return 'hide-element';
 		}
 	}
@@ -342,60 +359,67 @@ Template.step_5.events ({
 		
 		setBorderThumbnail(e.target);
 		
-		var url;
-		var layers;
+		var urlKk;
+		var layersKk;
+		var versionKk;
 		
 		if(Session.get('kernkwaliteitId') === Meteor.settings.public.openBeslotenId) {
 			map.getLayers().clear();
 			
-			url = Meteor.settings.public.openBeslotenService.url;
-			layers = Meteor.settings.public.openBeslotenService.layers;
-			version = Meteor.settings.public.openBeslotenService.version;
+			urlKk = Meteor.settings.public.openBeslotenService.url;
+			layersKk = Meteor.settings.public.openBeslotenService.layers;
+			versionKk = Meteor.settings.public.openBeslotenService.version;
 		}
 		
 		if(Session.get('kernkwaliteitId') === Meteor.settings.public.cultuurhistorieId) {
 			map.getLayers().clear();
 			
-			url = Meteor.settings.public.cultuurhistorieService.url;
-			layers = Meteor.settings.public.cultuurhistorieService.layers;
-			version = Meteor.settings.public.cultuurhistorieService.version;
+			urlKk = Meteor.settings.public.cultuurhistorieService.url;
+			layersKk = Meteor.settings.public.cultuurhistorieService.layers;
+			versionKk = Meteor.settings.public.cultuurhistorieService.version;
 		}
 		
 		if(Session.get('kernkwaliteitId') === Meteor.settings.public.reliefId) {
 			map.getLayers().clear();
 			
-			url = Meteor.settings.public.reliefService.url;
-			layers = Meteor.settings.public.reliefService.layers;
-			version = Meteor.settings.public.reliefService.version;
+			urlKk = Meteor.settings.public.reliefService.url;
+			layersKk = Meteor.settings.public.reliefService.layers;
+			versionKk = Meteor.settings.public.reliefService.version;
 		}
 		
 		if(Session.get('kernkwaliteitId') === Meteor.settings.public.groenKarakterId) {
 			map.getLayers().clear();
 			
-			url = Meteor.settings.public.groenKarakterService.url;
-			layers = Meteor.settings.public.groenKarakterService.layers;
-			version = Meteor.settings.public.groenKarakterService.version;
+			urlKk = Meteor.settings.public.groenKarakterService.url;
+			layersKk = Meteor.settings.public.groenKarakterService.layers;
+			versionKk = Meteor.settings.public.groenKarakterService.version;
 		}
 		
-		layers.forEach(function(item) {
-			var layer = new ol.layer.Image({
-				source: new ol.source.ImageWMS({
-					url: url, 
-					params: {'LAYERS': item, 'VERSION': version} 
-				})
-			});
+		if(Session.get('kernkwaliteitId') === Meteor.settings.public.openBeslotenId ||
+				Session.get('kernkwaliteitId') === Meteor.settings.public.cultuurhistorieId ||
+				Session.get('kernkwaliteitId') === Meteor.settings.public.reliefId ||
+				Session.get('kernkwaliteitId') === Meteor.settings.public.groenKarakterId) {
 			
-			map.addLayer(layer);
-		});
+			setLufoLayers();
+			
+			layersKk.forEach(function(item) {
+				var layer = new ol.layer.Image({
+					source: new ol.source.ImageWMS({
+						url: urlKk, 
+						params: {'LAYERS': item, 'VERSION': versionKk} 
+					})
+				});
+				
+				map.addLayer(layer);
+			});
+		}
 		
 		if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
 			iconLayer = getIcon(Session.get('mapCoordinates'));
 			map.addLayer(iconLayer);
 		}
 		
-		if(Session.get('kernkwaliteitId') !== Meteor.settings.public.reliefId) {
-			setOpacity();
-		}
+		setOpacity();
 	},
 	'click #landschapstype-img': function(e) {
 		Session.set('kernkwaliteitId', null);
@@ -403,16 +427,17 @@ Template.step_5.events ({
 		map.getLayers().clear();
 		
 		setBorderThumbnail(e.target);
+		setLufoLayers();
 		
-		var url = Meteor.settings.public.landschapstypenService.url;
-		var layers = Meteor.settings.public.landschapstypenService.layers;
-		var version = Meteor.settings.public.landschapstypenService.version;
+		var urlLt = Meteor.settings.public.landschapstypenService.url;
+		var layersLt = Meteor.settings.public.landschapstypenService.layers;
+		var versionLt = Meteor.settings.public.landschapstypenService.version;
 		
-		layers.forEach(function(item) {
+		layersLt.forEach(function(item) {
 			var layer = new ol.layer.Image({
 				source: new ol.source.ImageWMS({
-					url: url, 
-					params: {'LAYERS': item, 'VERSION': version} 
+					url: urlLt, 
+					params: {'LAYERS': item, 'VERSION': versionLt} 
 				})
 			});
 			
@@ -432,16 +457,17 @@ Template.step_5.events ({
 		map.getLayers().clear();
 		
 		setBorderThumbnail(e.target);
+		setLufoLayers();
 		
-		var url = Meteor.settings.public.polService.url;
-		var layers = Meteor.settings.public.polService.layers;
-		var version = Meteor.settings.public.polService.version;
+		var urlPol = Meteor.settings.public.polService.url;
+		var layersPol = Meteor.settings.public.polService.layers;
+		var versionPol = Meteor.settings.public.polService.version;
 		
-		layers.forEach(function(item) {
+		layersPol.forEach(function(item) {
 			var layer = new ol.layer.Image({
 				source: new ol.source.ImageWMS({
-					url: url, 
-					params: {'LAYERS': item, 'VERSION': version} 
+					url: urlPol, 
+					params: {'LAYERS': item, 'VERSION': versionPol} 
 				})
 			});
 			
@@ -454,6 +480,9 @@ Template.step_5.events ({
 		}
 		
 		setOpacity();
+	},
+	'click #js-previous-5': function() {
+		Router.go('step_4');
 	},
 	'click #js-next-5': function() {
 		Router.go('step_6');
@@ -508,5 +537,22 @@ function setOpacity() {
 				map.getLayers().item(index).setOpacity(Session.get('sliderValue') / 100);
 			}
 		}
+	});
+}
+
+function setLufoLayers() {
+	var urlLufo = Meteor.settings.public.luchtfotoService.url;
+	var layersLufo = Meteor.settings.public.luchtfotoService.layers;
+	var versionLufo = Meteor.settings.public.luchtfotoService.version;
+	
+	layersLufo.forEach(function(item) {
+		var layer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
+				url: urlLufo, 
+				params: {'LAYERS': item, 'VERSION': versionLufo} 
+			})
+		});
+		
+		map.addLayer(layer);
 	});
 }

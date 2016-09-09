@@ -1,11 +1,14 @@
 <template name="step_2">
 	<div id="text-container-2" class="col-xs-4">
-		<div id="text-2">
-			
-		</div>
+		<div id="text-2"></div>
+		<p class="label-2">Zoekmethode</p>
+		<select id="search-method-select" class="form-control">
+			<option value="address">Adres en woonplaats</option>
+			<option value="cadastre">Kadastrale percelen</option>
+		</select>
 		<div id="search-2">
 			<div id="address-search">
-				<p class="label-search-2">Adres en woonplaats</p>
+				<p class="label-2">Adres en woonplaats</p>
 				<div class="input-group">
 					<input type="text" class="form-control" id="js-input-address-search">
 					<span class="input-group-btn">
@@ -36,7 +39,7 @@
 				<ul class="list-group" id="address-suggestions"></ul>
 			</div>
 			<div id="cadastre-search">
-				<p class="label-search-2">Kadastrale percelen</p>
+				<p class="label-2">Kadastrale percelen</p>
 				<div class="input-group">
 					<input type="text" class="form-control" id="js-input-cadastre-search">
 					<span class="input-group-btn">
@@ -72,6 +75,9 @@
 		<div id="map-2" class="olMap"></div>
 	</div>
 	<div id="navigation-container-2" class="col-xs-4">
-			<a id="js-next-2" class="pull-right">Klik om verder te gaan</a>
+			<span class="pull-right">
+				<a id="js-previous-2" class="previous-btn">Klik om terug te gaan</a>
+				<a id="js-next-2">Klik om verder te gaan</a>
+			</span>
 	</div>
 </template>

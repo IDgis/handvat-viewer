@@ -47,3 +47,7 @@ p.header {margin-bottom:0;font-weight:bold;}
 
 #tabs-main {margin-top:3px;margin-bottom:20px;}
 #tabs-main-img {width:100%;}
+
+.previous-btn {margin-right:10px;}
+
+.modal-backdrop.in {opacity:0;}

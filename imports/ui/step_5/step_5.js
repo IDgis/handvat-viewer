@@ -130,20 +130,7 @@ Template.step_5.onRendered(function() {
 		view: view
 	});
 	
-	var urlLufo = Meteor.settings.public.luchtfotoService.url;
-	var layersLufo = Meteor.settings.public.luchtfotoService.layers;
-	var versionLufo = Meteor.settings.public.luchtfotoService.version;
-	
-	layersLufo.forEach(function(item) {
-		var layer = new ol.layer.Image({
-			source: new ol.source.ImageWMS({
-				url: urlLufo, 
-				params: {'LAYERS': item, 'VERSION': versionLufo} 
-			})
-		});
-		
-		map.addLayer(layer);
-	});
+	setLufoLayers();
 	
 	var urlLt = Meteor.settings.public.landschapstypenService.url;
 	var layersLt = Meteor.settings.public.landschapstypenService.layers;
@@ -409,20 +396,8 @@ Template.step_5.events ({
 				Session.get('kernkwaliteitId') === Meteor.settings.public.cultuurhistorieId ||
 				Session.get('kernkwaliteitId') === Meteor.settings.public.reliefId ||
 				Session.get('kernkwaliteitId') === Meteor.settings.public.groenKarakterId) {
-			var urlLufo = Meteor.settings.public.luchtfotoService.url;
-			var layersLufo = Meteor.settings.public.luchtfotoService.layers;
-			var versionLufo = Meteor.settings.public.luchtfotoService.version;
 			
-			layersLufo.forEach(function(item) {
-				var layer = new ol.layer.Image({
-					source: new ol.source.ImageWMS({
-						url: urlLufo, 
-						params: {'LAYERS': item, 'VERSION': versionLufo} 
-					})
-				});
-				
-				map.addLayer(layer);
-			});
+			setLufoLayers();
 			
 			layersKk.forEach(function(item) {
 				var layer = new ol.layer.Image({
@@ -449,21 +424,7 @@ Template.step_5.events ({
 		map.getLayers().clear();
 		
 		setBorderThumbnail(e.target);
-		
-		var urlLufo = Meteor.settings.public.luchtfotoService.url;
-		var layersLufo = Meteor.settings.public.luchtfotoService.layers;
-		var versionLufo = Meteor.settings.public.luchtfotoService.version;
-		
-		layersLufo.forEach(function(item) {
-			var layer = new ol.layer.Image({
-				source: new ol.source.ImageWMS({
-					url: urlLufo, 
-					params: {'LAYERS': item, 'VERSION': versionLufo} 
-				})
-			});
-			
-			map.addLayer(layer);
-		});
+		setLufoLayers();
 		
 		var urlLt = Meteor.settings.public.landschapstypenService.url;
 		var layersLt = Meteor.settings.public.landschapstypenService.layers;
@@ -493,21 +454,7 @@ Template.step_5.events ({
 		map.getLayers().clear();
 		
 		setBorderThumbnail(e.target);
-		
-		var urlLufo = Meteor.settings.public.luchtfotoService.url;
-		var layersLufo = Meteor.settings.public.luchtfotoService.layers;
-		var versionLufo = Meteor.settings.public.luchtfotoService.version;
-		
-		layersLufo.forEach(function(item) {
-			var layer = new ol.layer.Image({
-				source: new ol.source.ImageWMS({
-					url: urlLufo, 
-					params: {'LAYERS': item, 'VERSION': versionLufo} 
-				})
-			});
-			
-			map.addLayer(layer);
-		});
+		setLufoLayers();
 		
 		var urlPol = Meteor.settings.public.polService.url;
 		var layersPol = Meteor.settings.public.polService.layers;
@@ -587,5 +534,22 @@ function setOpacity() {
 				map.getLayers().item(index).setOpacity(Session.get('sliderValue') / 100);
 			}
 		}
+	});
+}
+
+function setLufoLayers() {
+	var urlLufo = Meteor.settings.public.luchtfotoService.url;
+	var layersLufo = Meteor.settings.public.luchtfotoService.layers;
+	var versionLufo = Meteor.settings.public.luchtfotoService.version;
+	
+	layersLufo.forEach(function(item) {
+		var layer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
+				url: urlLufo, 
+				params: {'LAYERS': item, 'VERSION': versionLufo} 
+			})
+		});
+		
+		map.addLayer(layer);
 	});
 }

@@ -1,8 +1,8 @@
-import './explain.html';
-import './explain.css';
+import './info.html';
+import './info.css';
 
-Template.explain.onRendered(function() {
-	Session.set('stepNumber', 'explain');
+Template.info.onRendered(function() {
+	Session.set('stepNumber', 'info');
 	
 	var stepBarUrl = window.location.protocol + '//' + window.location.hostname + ':' + 
 					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/no_step.jpg';
@@ -16,26 +16,26 @@ Template.explain.onRendered(function() {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getText', result.content, Meteor.settings.public.explainText, function(err, result) {
+		Meteor.call('getText', result.content, Meteor.settings.public.infoText, function(err, result) {
 			if(typeof result !== 'undefined') {
-				$('#text-container-explain').append(result.content);
+				$('#text-container-info').append(result.content);
 			}
 		});
 		
-		Meteor.call('getText', result.content, Meteor.settings.public.explainImage, function(err, result) {
+		Meteor.call('getText', result.content, Meteor.settings.public.infoImage, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$.each(result.images, function(index, item) {
-					$('#viewer-container-explain').append(item);
+					$('#viewer-container-info').append(item);
 				});
 				
-				$.each($('#viewer-container-explain img'), function(index, item) {
+				$.each($('#viewer-container-info img'), function(index, item) {
 					var src = $(item).attr('src');
 					
 					if(typeof src === 'undefined') {
 						$(item).remove();
 					} else {
 						$(item).removeAttr('style');
-						$(item).attr('class', 'text-explain-img');
+						$(item).attr('class', 'text-info-img');
 					}
 				});
 			}
@@ -43,11 +43,11 @@ Template.explain.onRendered(function() {
 	});
 });
 
-Template.explain.events ({
-	'click #js-previous-explain': function() {
-		Router.go('info');
+Template.info.events ({
+	'click #js-previous-info': function() {
+		Router.go('start');
 	},
-	'click #js-next-explain': function() {
-		Router.go('step_1');
+	'click #js-next-info': function() {
+		Router.go('explain');
 	}
 });

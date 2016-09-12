@@ -45,6 +45,6 @@ Template.start.onRendered(function() {
 
 Template.start.events ({
 	'click #js-next-start': function() {
-		Router.go('explain');
+		Router.go('info');
 	}
 });

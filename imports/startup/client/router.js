@@ -4,6 +4,7 @@ import { Router } from 'meteor/iron:router';
 import '../../ui/main.js';
 
 import '../../ui/start/start.js';
+import '../../ui/info/info.js';
 import '../../ui/explain/explain.js';
 import '../../ui/step_1/step_1.js';
 import '../../ui/step_2/step_2.js';
@@ -20,6 +21,12 @@ Router.route('/handvat-viewer', function () {
 	  this.render('start');
 	}, {
 	  name: 'start'
+});
+
+Router.route('/handvat-viewer/info', function () {
+	  this.render('info');
+	}, {
+	  name: 'info'
 });
 
 Router.route('/handvat-viewer/uitleg', function () {

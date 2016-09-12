@@ -55,6 +55,10 @@ Template.main.onRendered(function() {
 		});
 	});
 	
+	$('#banner').resize(setBannerSize);
+});
+
+function setBannerSize() {
 	var bannerWidth = $('#banner').width();
 	var bannerHeight = bannerWidth / 13.09375;
 	
@@ -63,4 +67,4 @@ Template.main.onRendered(function() {
 	
 	var linksOffset = bannerHeight - 22 - 15;
 	$('#banner-links').attr('style', 'top:' + linksOffset + 'px');
-});
+}

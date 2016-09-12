@@ -56,7 +56,7 @@
 	    "version": "1.1.1",
 	    "layersDG": ["Deelgebieden"],
 	    "layersSK": ["Landschapskaart_Zuid-Limburg_totaal", "top50namen_grotere_steden", "top50namen_overig"],
-	    "indexDG": 0
+	    "indexDG": 1
 	  },
 	  "landschapstypenService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/landschapstypen?",

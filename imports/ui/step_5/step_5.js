@@ -172,44 +172,6 @@ Template.step_5.onRendered(function() {
 		}
 	});
 	
-	map.on('singleclick', function(evt) {
-		Session.set('mapCoordinates', evt.coordinate);
-		
-		if(typeof iconLayer !== 'undefined') {
-			map.removeLayer(map.getLayers().item(map.getLayers().getLength() - 1));
-		}
-		
-		iconLayer = getIcon(evt.coordinate);
-		map.addLayer(iconLayer);
-		
-		if(Session.get('ltActive') === true) {
-			var url = map.getLayers().item(1)
-				.getSource().getGetFeatureInfoUrl(evt.coordinate, map.getView().getResolution(), 
-				map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
-			
-			Meteor.call('getLandschapsType', url, function(err, result) {
-				if(result === 'Dalbodem') {
-					Session.set('landschapstypeId', Meteor.settings.public.dalId);
-					Session.set('mapCoordinates', evt.coordinate);
-					Session.set('landschapstypeName', 'Dal');
-				} else if(result === 'Helling > 4 graden' || result === 'Helling < 4 graden') {
-					Session.set('landschapstypeId', Meteor.settings.public.hellingId);
-					Session.set('mapCoordinates', evt.coordinate);
-					Session.set('landschapstypeName', 'Helling');
-				} else if(result === 'Tussenterras' || result === 'Plateau' || result === 'Groeve' || 
-						result === 'Geisoleerde heuvel') {
-					Session.set('landschapstypeId', Meteor.settings.public.plateauId);
-					Session.set('mapCoordinates', evt.coordinate);
-					Session.set('landschapstypeName', 'Plateau');
-				} else {
-					Session.set('landschapstypeId', null);
-					Session.set('mapCoordinates', null);
-					Session.set('landschapstypeName', null);
-				}
-			});
-		}
-	});
-	
 	$('#kk-container-5').resize(setThumbnailSize);
 });
 

@@ -156,16 +156,6 @@ Template.step_3.onRendered(function() {
 	}
 	
 	map.on('singleclick', function(evt) {
-		if(typeof iconLayer !== 'undefined') {
-			map.removeLayer(iconLayer);
-		}
-		
-		Session.set('mapCoordinates', evt.coordinate);
-		iconLayer = getIcon(evt.coordinate);
-		map.addLayer(iconLayer);
-		
-		setLandschapstypeId(evt.coordinate);
-		
 		$('#lb-modal').modal();
 	});
 	

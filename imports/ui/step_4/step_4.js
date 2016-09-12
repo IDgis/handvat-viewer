@@ -22,13 +22,7 @@ Template.step_4.onRendered(function() {
 					$('#text-4').append(result.content);
 				}
 			});
-		});
-		
-		HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
-			headers: {
-				'Content-Type' : 'application/json; charset=UTF-8'
-			}
-		}, function(err, result) {
+			
 			Meteor.call('getTexts', result.content, 'sector', function(err, result) {
 				var sectors = $('#js-sectors');
 				$.each(result, function(index, item) {

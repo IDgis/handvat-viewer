@@ -21,6 +21,25 @@ Template.step_1.onRendered(function() {
 				$('#text-container-1').append(result.content);
 			}
 		});
+		
+		Meteor.call('getText', result.content, Meteor.settings.public.step1Image, function(err, result) {
+			if(typeof result !== 'undefined') {
+				$.each(result.images, function(index, item) {
+					$('#viewer-container-1').append(item);
+				});
+				
+				$.each($('#viewer-container-1 img'), function(index, item) {
+					var src = $(item).attr('src');
+					
+					if(typeof src === 'undefined') {
+						$(item).remove();
+					} else {
+						$(item).removeAttr('style');
+						$(item).attr('class', 'text-1-img');
+					}
+				});
+			}
+		});
 	});
 });
 

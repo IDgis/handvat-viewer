@@ -11,28 +11,28 @@ p.header {margin-bottom:0;font-weight:bold;}
 .text-paragraph {margin-bottom:20px;}
 .negate-border {border:none;}
 
-#text-container-start, #text-container-explain, #text-container-1, #text-container-2, 
+#text-container-start, #text-container-info, #text-container-explain, #text-container-1, #text-container-2, 
 #text-container-3, #text-container-4, #text-container-5, #text-container-6 {
 	height:95%;margin-bottom:15px;overflow-y:auto;padding-left:40px;
 	padding-right:30px;border-right:2px solid grey;}
-#navigation-container-start, #navigation-container-explain, #navigation-container-1, 
-#navigation-container-2, #navigation-container-3, #navigation-container-4, 
-#navigation-container-5, #navigation-container-6 {
+#navigation-container-start, #navigation-container-info, #navigation-container-explain, #navigation-container-1, 
+#navigation-container-2, #navigation-container-3, #navigation-container-4, #navigation-container-5, 
+#navigation-container-6 {
 	height:20px;padding-left:40px;padding-right:30px;}
-#navigation-container-start a, #navigation-container-explain a, #navigation-container-1 a, 
-#navigation-container-2 a, #navigation-container-3 a, #navigation-container-4 a, 
+#navigation-container-start a, #navigation-container-info a, #navigation-container-explain a, 
+#navigation-container-1 a, #navigation-container-2 a, #navigation-container-3 a, #navigation-container-4 a, 
 #navigation-container-5 a, #navigation-container-6 a {
 	font-size:16px;font-weight:bold;color:#000000;}
-#navigation-container-start a:hover, #navigation-container-explain a:hover,
-#navigation-container-1 a:hover, #navigation-container-2 a:hover,
-#navigation-container-3 a:hover, #navigation-container-4 a:hover,
-#navigation-container-5 a:hover, #navigation-container-6 a:hover {
+#navigation-container-start a:hover, #navigation-container-info a:hover, 
+#navigation-container-explain a:hover, #navigation-container-1 a:hover, 
+#navigation-container-2 a:hover, #navigation-container-3 a:hover, 
+#navigation-container-4 a:hover, #navigation-container-5 a:hover, 
+#navigation-container-6 a:hover {
 	cursor:pointer;}
-#viewer-container-start, #viewer-container-explain, #viewer-container-1, 
-#viewer-container-2, #viewer-container-3, #viewer-container-4, 
-#viewer-container-5, #viewer-container-6 {
+#viewer-container-start, #viewer-container-info, #viewer-container-explain, #viewer-container-1, 
+#viewer-container-2, #viewer-container-3, #viewer-container-4, #viewer-container-5, #viewer-container-6 {
 	height:95%;margin-bottom:15px;overflow-y:auto;}
-#map-start, #map-explain, #map-1, #map-2, #map-3, #map-4, #map-5, #map-6 {height:100%;}
+#map-start, #map-info, #map-explain, #map-1, #map-2, #map-3, #map-4, #map-5, #map-6 {height:100%;}
 
 .modal .modal-body {
 	max-height:500px;

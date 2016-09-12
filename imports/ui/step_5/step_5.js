@@ -76,12 +76,6 @@ Template.step_5.onRendered(function() {
 				
 				$('#js-kk-thumbnails-5').append(image);
 			});
-			
-			var imageKernkwaliteiten = $('.kernkwaliteit-img');
-			$.each(imageKernkwaliteiten, function(index, item) {
-				var width = $(item).width();
-				$(item).css({'height':width + 'px'});
-			});
 		});
 	});
 	
@@ -96,9 +90,6 @@ Template.step_5.onRendered(function() {
 			'/' + Meteor.settings.public.domainSuffix + '/images/lt.png');
 	$('#js-overig-thumbnails-5').append(ltImage);
 	
-	var ltImageWidth = $(ltImage).width();
-	$(ltImage).css({'height':ltImageWidth + 'px'});
-	
 	var polHeader = document.createElement('p');
 	$(polHeader).attr('class', 'header');
 	polHeader.innerHTML = 'POL';
@@ -109,9 +100,6 @@ Template.step_5.onRendered(function() {
 	$(polImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
 			'/' + Meteor.settings.public.domainSuffix + '/images/pol.png');
 	$('#js-overig-thumbnails-5').append(polImage);
-	
-	var polImageWidth = $(polImage).width();
-	$(polImage).css({'height':polImageWidth + 'px'});
 	
 	setBorderThumbnail($('#landschapstype-img'));
 	
@@ -221,6 +209,8 @@ Template.step_5.onRendered(function() {
 			});
 		}
 	});
+	
+	$('#kk-container-5').resize(setThumbnailSize);
 });
 
 Template.step_5.helpers({
@@ -554,5 +544,13 @@ function setLufoLayers() {
 		});
 		
 		map.addLayer(layer);
+	});
+}
+
+function setThumbnailSize() {
+	var thumbnails = $('#kk-container-5 img');
+	$.each(thumbnails, function(index, item) {
+		var width = $(item).width();
+		$(item).css({'height':width + 'px'});
 	});
 }

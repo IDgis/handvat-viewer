@@ -21,13 +21,7 @@ Template.start.onRendered(function() {
 				$('#text-container-start').append(result.content);
 			}
 		});
-	});
-	
-	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
-		headers: {
-			'Content-Type' : 'application/json; charset=UTF-8'
-		}
-	}, function(err, result) {
+		
 		Meteor.call('getText', result.content, Meteor.settings.public.startImage, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$.each(result.images, function(index, item) {

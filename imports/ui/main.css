@@ -31,7 +31,7 @@ p.header {margin-bottom:0;font-weight:bold;}
 #viewer-container-start, #viewer-container-explain, #viewer-container-1, 
 #viewer-container-2, #viewer-container-3, #viewer-container-4, 
 #viewer-container-5, #viewer-container-6 {
-	height:95%;margin-bottom:15px;}
+	height:95%;margin-bottom:15px;overflow-y:auto;}
 #map-start, #map-explain, #map-1, #map-2, #map-3, #map-4, #map-5, #map-6 {height:100%;}
 
 .modal .modal-body {

@@ -1,58 +1,25 @@
-var Future = Npm.require('fibers/future'); 
-
 import { Meteor } from 'meteor/meteor';
 
 Meteor.methods({
 	getDeelgebied: function(url) {
-		var future = new Future();
-		var dg;
+		var res = HTTP.get(url);
+		var xml = xml2js.parseStringSync(res.content);
 		
-		HTTP.get(url, {
-		}, function(err, result) {
-			xml2js.parseString(result.content, function (err, result) {
-				if(typeof result.msGMLOutput.Deelgebieden_layer !== 'undefined') {
-					dg = result.msGMLOutput.Deelgebieden_layer[0].Deelgebieden_feature[0].OMSCHRIJVI[0];
-				} else {
-					dg = 'undefined';
-				}
-				
-				future.return(dg);
-			});
-		});
-		
-		return future.wait();
+		if(typeof xml.msGMLOutput.Deelgebieden_layer !== 'undefined') {
+			return xml.msGMLOutput.Deelgebieden_layer[0].Deelgebieden_feature[0].OMSCHRIJVI[0];
+		}
 	},
 	getLandschapsType: function(url) {
-		var future = new Future();
-		var lt;
+		var res = HTTP.get(url);
+		var xml = xml2js.parseStringSync(res.content);
 		
-		HTTP.get(url, {
-		}, function(err, result) {
-			xml2js.parseString(result.content, function (err, result) {
-				if(typeof result.msGMLOutput.landschapstypen_v_layer !== 'undefined') {
-					lt = result.msGMLOutput.landschapstypen_v_layer[0].landschapstypen_v_feature[0].LANDSCHAPSTYPE[0];
-				} else {
-					lt = "undefined";
-				}
-				
-				future.return(lt);
-			});
-		});
-		
-		return future.wait();
+		if(typeof xml.msGMLOutput.landschapstypen_v_layer !== 'undefined') {
+			return xml.msGMLOutput.landschapstypen_v_layer[0].landschapstypen_v_feature[0].LANDSCHAPSTYPE[0];
+		}
 	},
-	getBoundingBox(url) {
-		var future = new Future();
-		
-		HTTP.get(url, {
-		}, function(err, result) {
-			xml2js.parseString(result.content, function (err, result) {
-				var array = result.WMT_MS_Capabilities.Capability[0].Layer[0].Layer
-				
-				future.return(array);
-			});
-		});
-		
-		return future.wait();
+	getBoundingBox: function(url) {
+		var res = HTTP.get(url);
+		var xml = xml2js.parseStringSync(res.content);
+		return xml.WMT_MS_Capabilities.Capability[0].Layer[0].Layer;
 	}
 });

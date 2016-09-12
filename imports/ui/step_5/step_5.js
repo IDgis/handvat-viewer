@@ -152,9 +152,9 @@ Template.step_5.onRendered(function() {
 		map.addLayer(iconLayer);
 	}
 	
-	Session.set('sliderValue', 100);
-	$("#slider-id").slider({
-		value: Session.get('sliderValue'),
+	Session.set('sliderValue-2', 100);
+	$("#slider-id-5").slider({
+		value: Session.get('sliderValue-2'),
 		slide: function(e, ui) {
 			$.each(map.getLayers().getArray(), function(index, item) {
 				if(index !== 0) {
@@ -168,7 +168,7 @@ Template.step_5.onRendered(function() {
 				}
 			});
 			
-			Session.set('sliderValue', ui.value);
+			Session.set('sliderValue-2', ui.value);
 		}
 	});
 	
@@ -521,10 +521,10 @@ function setOpacity() {
 		if(index !== 0) {
 			if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
 				if(index !== map.getLayers().getLength() - 1) {
-					map.getLayers().item(index).setOpacity(Session.get('sliderValue') / 100);
+					map.getLayers().item(index).setOpacity(Session.get('sliderValue-2') / 100);
 				}
 			} else {
-				map.getLayers().item(index).setOpacity(Session.get('sliderValue') / 100);
+				map.getLayers().item(index).setOpacity(Session.get('sliderValue-2') / 100);
 			}
 		}
 	});

@@ -11,6 +11,14 @@ Template.step_3.onRendered(function() {
 	$('#tabs-main').attr('style', 'margin-top:3px;position:relative;top:0;');
 	$('#page').attr('style', 'height:75%;');
 	
+	$(".modal").draggable({
+		handle: ".modal-header"
+	});
+	
+	$('.modal-content').resizable({
+		alsoResize: ".modal-body"
+	});
+	
 	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCenter') === 'undefined') {
 		var extent: [165027, 306558, 212686, 338329]
 		var center = [188856, 322443];
@@ -141,6 +149,13 @@ Template.step_3.onRendered(function() {
 		
 		Meteor.call('getText', result.content, textAreaId, function(err, result) {
 			if(typeof result !== 'undefined') {
+				$.each(result.images, function(index, item) {
+					if(index === 0) {
+						$('#dg-text-3').append(item);
+					}
+				});
+				
+				cleanImages('dg-text-3', 'area-img-3');
 				$('#dg-text-3').append(result.content);
 			} else {
 				$('#dg-text-3').append('U heeft geen valide deelgebied geselecteerd.');
@@ -248,7 +263,7 @@ Template.step_3.helpers({
 											$(innerDiv).append(elt);
 										});
 										
-										cleanImages('lb-text-3');
+										cleanImages('lb-text-3', 'text-div-img');
 										
 										$(innerDiv).append(result.content);
 									}
@@ -275,7 +290,7 @@ Template.step_3.helpers({
 											$(innerDiv).append(elt);
 										});
 										
-										cleanImages('lb-text-3');
+										cleanImages('lb-text-3', 'text-div-img');
 										
 										$(innerDiv).append(result.content);
 									}
@@ -292,7 +307,7 @@ Template.step_3.helpers({
 	}
 });
 
-function cleanImages(div) {
+function cleanImages(div, className) {
 	$.each($('#' + div + ' img'), function(index, item) {
 		var src = $(item).attr('src');
 		
@@ -300,7 +315,7 @@ function cleanImages(div) {
 			$(item).remove();
 		} else {
 			$(item).removeAttr('style');
-			$(item).attr('class', 'text-div-img');
+			$(item).attr('class', className);
 		}
 	});
 }

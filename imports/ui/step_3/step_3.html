@@ -1,5 +1,15 @@
 <template name="step_3">
-	<div id="text-container-3" class="col-xs-4"></div>
+	<div id="text-container-3" class="col-xs-4">
+		<div id="error-3"></div>
+		<div id="intro-dg-3"></div>
+		<button class="btn btn-default button-3" data-toggle="modal" data-target="#dg-modal">
+			Toon informatie deelgebied
+		</button>
+		<div id="intro-lb-3"></div>
+		<button class="btn btn-default button-3" data-toggle="modal" data-target="#lb-modal">
+			Toon leidende beginselen
+		</button>
+	</div>
 	<div id="viewer-container-3" class="col-xs-8">
 		<div id="map-3" class="olMap"></div>
 	</div>
@@ -8,6 +18,22 @@
 				<a id="js-previous-3" class="previous-btn">Klik om terug te gaan</a>
 				<a id="js-next-3">Klik om verder te gaan</a>
 			</span>
+	</div>
+	<div class="modal fade" tabindex="-1" role="dialog" id="dg-modal">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Deelgebied</h4>
+				</div>
+				<div class="modal-body" id="dg-text-3"></div>
+				<div class="modal-footer negate-border">
+					<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="modal fade" tabindex="-1" role="dialog" id="lb-modal">
 		<div class="modal-dialog modal-lg" role="document">

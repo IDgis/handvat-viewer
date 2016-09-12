@@ -127,11 +127,23 @@ Template.step_3.onRendered(function() {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
+		Meteor.call('getText', result.content, Meteor.settings.public.step3Dg, function(err, result) {
+			if(typeof result !== 'undefined') {
+				$('#intro-dg-3').append(result.content);
+			}
+		});
+		
+		Meteor.call('getText', result.content, Meteor.settings.public.step3Lb, function(err, result) {
+			if(typeof result !== 'undefined') {
+				$('#intro-lb-3').append(result.content);
+			}
+		});
+		
 		Meteor.call('getText', result.content, textAreaId, function(err, result) {
 			if(typeof result !== 'undefined') {
-				$('#text-container-3').append(result.content);
+				$('#dg-text-3').append(result.content);
 			} else {
-				$('#text-container-3').append('U heeft geen valide deelgebied geselecteerd.');
+				$('#dg-text-3').append('U heeft geen valide deelgebied geselecteerd.');
 			}
 		});
 	});
@@ -153,11 +165,10 @@ Template.step_3.onRendered(function() {
 		iconLayer = getIcon(Session.get('mapCoordinates'));
 		map.addLayer(iconLayer);
 		setLandschapstypeId(Session.get('mapCoordinates'));
+	} else {
+		$('#error-3').append('U heeft geen valide deelgebied geselecteerd.');
+		$('#lb-text-3').append('U heeft geen valide deelgebied geselecteerd.');
 	}
-	
-	map.on('singleclick', function(evt) {
-		$('#lb-modal').modal();
-	});
 	
 	function setLandschapstypeId(coordinates) {
 		var url = map.getLayers().item(0).getSource().getGetFeatureInfoUrl(coordinates, map.getView().

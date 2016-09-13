@@ -280,35 +280,45 @@ Template.step_2.events ({
 	},
 	'click #js-execute-address-search': function(e) {
 		$('#address-suggestions').attr('style', 'display:none;');
-		$('#address-search-results').empty();
-		
 		var searchValue = $('#js-input-address-search').val();
-		
 		var url = 'http://bag.idgis.nl/geoide-search-service/bag/search?q=' + searchValue + '&srs=28992';
 		
-		Meteor.call('getAddressSearchResults', url, function(err, result) {
-			result.forEach(function(item) {
-				var minX = item.envelope.minX;
-				var maxX = item.envelope.maxX;
-				var minY = item.envelope.minY;
-				var maxY = item.envelope.maxY;
+		Meteor.call('getAddressSearchResult', url, function(err, result) {
+			if(result) {
+				$('#no-results-found-search').attr('style', 'display:none;');
+				
+				var minX = result.envelope.minX;
+				var maxX = result.envelope.maxX;
+				var minY = result.envelope.minY;
+				var maxY = result.envelope.maxY;
 				
 				var center1 = ((maxX - minX) / 2) + minX;
 				var center2 = ((maxY - minY) / 2) + minY;
 				
-				var li = document.createElement('li');
-				$(li).attr('class', 'list-group-item');
+				if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+					map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
+				}
 				
-				var a = document.createElement('a');
-				$(a).attr('class', 'address-search-result')
-				$(a).attr('data-center-1', center1)
-				$(a).attr('data-center-2', center2)
-				$(a).attr('data-dismiss', 'modal')
-				$(a).append(item.name);
+				var iconStyle = new ol.style.Style({
+					image: new ol.style.Icon(({
+						anchor: [0.5, 32],
+						anchorXUnits: 'fraction',
+						anchorYUnits: 'pixels',
+						opacity: 0.75,
+						src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+							'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg'
+					}))
+				});
 				
-				$(li).append(a);
-				$('#address-search-results').append(li);
-			});
+				var center = [center1, center2];
+				Session.set('mapCoordinates', center);
+				var iconLayer = getIcon(center, iconStyle);
+				map.addLayer(iconLayer);
+				Session.set('iconLayerSet', true);
+				getDeelgebied(Session.get('mapCoordinates'));
+			} else {
+				$('#no-results-found-search').attr('style', 'display:block;');
+			}
 		});
 	},
 	'click #js-execute-cadastre-search': function(e) {
@@ -324,10 +334,12 @@ Template.step_2.events ({
 		'%3EKADSLEUTEL%3C%2FPropertyName%3E%0A%3CLiteral%3E' + searchValue + 
 		'*%3C%2FLiteral%3E%0A%3C%2FPropertyIsLike%3E%3C/Filter%3E&maxFeatures=5';
 		
-		Meteor.call('getCadastreSearchResults', url, function(err, result) {
-			result.forEach(function(item) {
-				var lowerCorner = item.lowerCorner.split(' ');
-				var upperCorner = item.upperCorner.split(' ');
+		Meteor.call('getCadastreSearchResult', url, function(err, result) {
+			if(result) {
+				$('#no-results-found-search').attr('style', 'display:none;');
+				
+				var lowerCorner = result.lowerCorner.split(' ');
+				var upperCorner = result.upperCorner.split(' ');
 				
 				var minX = parseFloat(lowerCorner[0]);
 				var maxX = parseFloat(upperCorner[0]);
@@ -337,74 +349,31 @@ Template.step_2.events ({
 				var center1 = ((maxX - minX) / 2) + minX;
 				var center2 = ((maxY - minY) / 2) + minY;
 				
-				var li = document.createElement('li');
-				$(li).attr('class', 'list-group-item');
+				if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+					map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
+				}
 				
-				var a = document.createElement('a');
-				$(a).attr('class', 'cadastre-search-result')
-				$(a).attr('data-center-1', center1)
-				$(a).attr('data-center-2', center2)
-				$(a).attr('data-dismiss', 'modal')
-				$(a).append(item.name.replace(/ /g, '&nbsp;'));
+				var iconStyle = new ol.style.Style({
+					image: new ol.style.Icon(({
+						anchor: [0.5, 32],
+						anchorXUnits: 'fraction',
+						anchorYUnits: 'pixels',
+						opacity: 0.75,
+						src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+							'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg'
+					}))
+				});
 				
-				$(li).append(a);
-				$('#cadastre-search-results').append(li);
-			});
+				var center = [center1, center2];
+				Session.set('mapCoordinates', center);
+				var iconLayer = getIcon(center, iconStyle);
+				map.addLayer(iconLayer);
+				Session.set('iconLayerSet', true);
+				getDeelgebied(Session.get('mapCoordinates'));
+			} else {
+				$('#no-results-found-search').attr('style', 'display:block;');
+			}
 		});
-	},
-	'click .address-search-result': function(e) {
-		if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
-			map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
-		}
-		
-		var iconStyle = new ol.style.Style({
-			image: new ol.style.Icon(({
-				anchor: [0.5, 32],
-				anchorXUnits: 'fraction',
-				anchorYUnits: 'pixels',
-				opacity: 0.75,
-				src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-					'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg'
-			}))
-		});
-		
-		var center1 = parseFloat($(e.target).attr('data-center-1'));
-		var center2 = parseFloat($(e.target).attr('data-center-2'));
-		
-		var center = [center1, center2];
-		Session.set('mapCoordinates', center);
-		var iconLayer = getIcon(center, iconStyle);
-		
-		map.addLayer(iconLayer);
-		Session.set('iconLayerSet', true);
-		getDeelgebied(Session.get('mapCoordinates'));
-	},
-	'click .cadastre-search-result': function(e) {
-		if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
-			map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
-		}
-		
-		var iconStyle = new ol.style.Style({
-			image: new ol.style.Icon(({
-				anchor: [0.5, 32],
-				anchorXUnits: 'fraction',
-				anchorYUnits: 'pixels',
-				opacity: 0.75,
-				src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-					'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg'
-			}))
-		});
-		
-		var center1 = parseFloat($(e.target).attr('data-center-1'));
-		var center2 = parseFloat($(e.target).attr('data-center-2'));
-		
-		var center = [center1, center2];
-		Session.set('mapCoordinates', center);
-		var iconLayer = getIcon(center, iconStyle);
-		
-		map.addLayer(iconLayer);
-		Session.set('iconLayerSet', true);
-		getDeelgebied(Session.get('mapCoordinates'));
 	}
 });
 

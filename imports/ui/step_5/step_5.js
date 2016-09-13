@@ -302,19 +302,6 @@ Template.step_5.helpers({
 	}
 });
 
-function cleanImages(div) {
-	$.each($('#' + div + ' img'), function(index, item) {
-		var src = $(item).attr('src');
-		
-		if(typeof src === 'undefined') {
-			$(item).remove();
-		} else {
-			$(item).removeAttr('style');
-			$(item).attr('class', 'text-div-img');
-		}
-	});
-}
-
 Template.step_5.events ({
 	'click .kernkwaliteit-img': function(e) {
 		if(e.target.id === Meteor.settings.public.openBeslotenId) {
@@ -361,6 +348,19 @@ Template.step_5.events ({
 		Router.go('step_6');
 	}
 });
+
+function cleanImages(div) {
+	$.each($('#' + div + ' img'), function(index, item) {
+		var src = $(item).attr('src');
+		
+		if(typeof src === 'undefined') {
+			$(item).remove();
+		} else {
+			$(item).removeAttr('style');
+			$(item).attr('class', 'text-div-img');
+		}
+	});
+}
 
 function getIcon(coordinates) {
 	var iconStyle = new ol.style.Style({

@@ -25,14 +25,41 @@ Template.step_4.onRendered(function() {
 			
 			Meteor.call('getTexts', result.content, 'sector', function(err, result) {
 				var sectors = $('#js-sectors');
+				
+				var itemCount = 0;
+				var count = 0;
 				$.each(result, function(index, item) {
-					var button = document.createElement('button');
-					$(button).append(item.name);
-					$(button).attr('class', 'btn btn-default btn-lg col-xs-12 sector-btn-4');
-					$(button).attr('data-id', item.id);
-					$(button).attr('data-name', item.name);
+					var innerDiv = document.createElement('div');
+					$(innerDiv).attr('class', 'col-xs-6');
 					
-					$(sectors).append(button);
+					var image = $(item.images[0])[0];
+					
+					$(image).removeAttr('style');
+					$(image).attr('class', 'sector-btn-4');
+					$(image).attr('data-id', item.id);
+					$(image).attr('data-name', item.name);
+					
+					$(innerDiv).append(image);
+					
+					var span = document.createElement('span');
+					$(span).append(item.name);
+					
+					$(innerDiv).append(span);
+					
+					if(count === 0) {
+						var outerDiv = document.createElement('div');
+						$(outerDiv).attr('class', 'col-xs-12 text-div');
+						$(outerDiv).attr('id', 'sector-' + itemCount);
+						$(outerDiv).append(innerDiv);
+						$(sectors).append(outerDiv);
+						
+						count++;
+					} else {
+						$('#sector-' + itemCount).append(innerDiv);
+						
+						itemCount++;
+						count = 0;
+					}
 				});
 			});
 		});
@@ -61,10 +88,10 @@ Template.step_4.events ({
 				if(typeof result !== 'undefined') {
 					var buttons = $('.sector-btn-4');
 					$.each(buttons, function(index, item) {
-						$(item).attr('class', 'btn btn-default btn-lg col-xs-12 sector-btn-4');
+						$(item).attr('class', 'sector-btn-4');
 					});
 					
-					$(e.target).attr('class', 'btn btn-default btn-lg col-xs-12 sector-btn-4 sector-btn-4-active');
+					$(e.target).attr('class', 'sector-btn-4 sector-btn-4-active');
 					
 					Session.set('sectorId', id);
 					$('#viewer-4').empty();

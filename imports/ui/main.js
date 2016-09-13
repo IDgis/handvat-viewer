@@ -58,6 +58,13 @@ Template.main.onRendered(function() {
 	$('#banner').resize(setBannerSize);
 });
 
+Template.main.events({
+	'click #banner-title': function() {
+		Router.go('start');
+		Session.clear();
+	}
+});
+
 function setBannerSize() {
 	var bannerWidth = $('#banner').width();
 	var bannerHeight = bannerWidth / 13.09375;

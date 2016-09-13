@@ -6,3 +6,5 @@
 .kernkwaliteit-img:hover, #landschapstype-img:hover, #pol-img:hover, #nb-img:hover {cursor:pointer;}
 
 #slider-id-5 {position:relative;top:4px;}
+
+#banner-title:hover {cursor:pointer;}

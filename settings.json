@@ -53,6 +53,42 @@
 	  "step5Text": "wZv6A45RBq2QLLbda",
 	  "step6Text": "h3TprkfhARcPJctWd",
 	  
+	  "cultuurhistorieService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?",
+	    "version": "1.1.1",
+	    "layers": ["cultuurlandschap_zl_v", "archeologische_monumenten_v", "historische_buitenplaatsen_v", 
+	    			"prov_archeol_aandachtsgeb_v", "panden", "Cultuurlandschap_ZL_L", 
+	    			"cultuurhistorische_elementen_v", "cultuurhistorische_elementen_l", 
+	    			"cultuurhistorische_elementen_p", "lvzl_kerken_point_p", "lvzl_sympoint_p", 
+	    			"lvzl_kloosters_p", "geologisch_monument_p", "rijksmonumenten_p", "masker_beschermingsgebied_v", 
+	    			"masker_zuid_limburg_v", "beschermingsgeb_nat_landsc_v"]
+	  },
+	  "openBeslotenService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?",
+	    "version": "1.1.1",
+	    "layers": ["hillshade", "landschapstypen_v", "top10nl_spoorbaandeel_l", "bos_boomgaard_kwekerij", 
+	    			"dorpsmantel_v", "panden", "top10nl_relief_hogezijde_l", "landschapstypen_v_plateau", 
+	    			"heg_haag", "bomenrij", "boom", "masker_beschermingsgebied_v", "masker_zuid_limburg_v", 
+	    			"beschermingsgeb_nat_landsc_v"]
+	  },
+	  "reliefService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/relief?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+	    "version": "1.1.1",
+	    "layers": ["AHN25helling", "top10nl_isohoogtelijn_l", "top10nl_relief_hogezijde_l", "landschapstypen_v", 
+	    			"landschapstypen_v_plateau", "panden", "waterstaatswerk_watergang_v", "top10nl_waterdeel_v", 
+	    			"waterstaatswerk_regenwbuf_v", "primaire_bronnen_p", "masker_beschermingsgebied_v", 
+	    			"masker_zuid_limburg_v", "beschermingsgeb_nat_landsc_v"]
+	  },
+	  "groenKarakterService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/groen_karakter?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+	    "version": "1.1.1",
+	    "layers": ["grasland_heide_zand", "akkerland", "dorpsmantel_v", "bebouwde_kom", "top10nl_gebouw_v", 
+	    			"cultuurhistorische_elementen_v", "boomgaard", "bos", "landschapstypen_v", 
+	    			"waterstaatswerk_watergang_v", "top10nl_waterdeel_v", "top10nl_wegdeel_hartlijn_l", 
+	    			"top10nl_spoorbaandeel_l", "waterstaatswerk_regenwbuf_v", "primaire_bronnen_p", "heg_haag", 
+	    			"top10nl_relief_hogezijde_l", "bomenrij", "boom", "masker_beschermingsgebied_v", 
+	    			"masker_zuid_limburg_v", "beschermingsgeb_nat_landsc_v"]
+	  },
 	  "luchtfotoService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/luchtfoto?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
 	    "version": "1.1.1",
@@ -73,41 +109,16 @@
 	    			"beschermingsgeb_nat_landsc_v"],
 	    "indexLT": 0
 	  },
-	  "cultuurhistorieService": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?",
+	  "polService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/beleidskaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
 	    "version": "1.1.1",
-	    "layers": ["cultuurlandschap_zl_v", "archeologische_monumenten_v", "historische_buitenplaatsen_v", 
-	    			"prov_archeol_aandachtsgeb_v", "panden", "Cultuurlandschap_ZL_L", 
-	    			"cultuurhistorische_elementen_v", "cultuurhistorische_elementen_l", 
-	    			"cultuurhistorische_elementen_p", "lvzl_kerken_point_p", "lvzl_sympoint_p", 
-	    			"lvzl_kloosters_p", "geologisch_monument_p", "rijksmonumenten_p", "masker_beschermingsgebied_v", 
-	    			"masker_zuid_limburg_v", "beschermingsgeb_nat_landsc_v"]
+	    "layers": ["pol2014_gzb_v", "pol2014_buitengebied_v", "pol2014_natuurbeek_l", "masker_zuid_limburg_v", 
+	    			"verord_besch_nat_landsch_v", "pol2014_nat_landschap_zl_v"]
 	  },
-	  "openBeslotenService": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?",
-	    "version": "1.1.1",
-	    "layers": ["hillshade", "landschapstypen_v", "top10nl_spoorbaandeel_l", "bos_boomgaard_kwekerij", 
-	    			"dorpsmantel_v", "beheertypenkaart_v", "panden", "top10nl_relief_hogezijde_l", 
-	    			"landschapstypen_v_plateau", "heg_haag", "bomenrij", "boom", "masker_beschermingsgebied_v", 
-	    			"masker_zuid_limburg_v", "beschermingsgeb_nat_landsc_v"]
-	  },
-	  "reliefService": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/relief?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-	    "version": "1.1.1",
-	    "layers": ["AHN25helling", "top10nl_isohoogtelijn_l", "top10nl_relief_hogezijde_l", "landschapstypen_v", 
-	    			"landschapstypen_v_plateau", "panden", "waterstaatswerk_watergang_v", "top10nl_waterdeel_v", 
-	    			"waterstaatswerk_regenwbuf_v", "primaire_bronnen_p", "masker_beschermingsgebied_v", 
-	    			"masker_zuid_limburg_v", "beschermingsgeb_nat_landsc_v"]
-	  },
-	  "groenKarakterService": {
+	  "natuurbeheerService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/groen_karakter?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
 	    "version": "1.1.1",
-	    "layers": ["grasland_heide_zand", "akkerland", "dorpsmantel_v", "bebouwde_kom", "top10nl_gebouw_v", 
-	    			"cultuurhistorische_elementen_v", "boomgaard", "bos", "beheertypenkaart_v", 
-	    			"landschapstypen_v", "waterstaatswerk_watergang_v", "top10nl_waterdeel_v", 
-	    			"top10nl_wegdeel_hartlijn_l", "top10nl_spoorbaandeel_l", "waterstaatswerk_regenwbuf_v", 
-	    			"primaire_bronnen_p", "heg_haag", "top10nl_relief_hogezijde_l", "bomenrij", "boom",
-	    			"masker_beschermingsgebied_v", "masker_zuid_limburg_v", "beschermingsgeb_nat_landsc_v"]
+	    "layers": ["beheertypenkaart_v"]
 	  },
 	  "landschapStructuurService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
@@ -132,12 +143,6 @@
 	    "indexS": 10,
 	    "indexUB": 11,
 	    "indexVB": 12
-	  },
-	  "polService": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/beleidskaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-	    "version": "1.1.1",
-	    "layers": ["pol2014_gzb_v", "pol2014_buitengebied_v", "pol2014_natuurbeek_l", "masker_zuid_limburg_v", 
-	    			"verord_besch_nat_landsch_v", "pol2014_nat_landschap_zl_v"]
 	  }
   }
 }

@@ -9,8 +9,12 @@ Template.step_5.onRendered(function() {
 					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/step_5.jpg';
 	
 	$('#tabs-main-img').attr('src', stepBarUrl);
-	$('#tabs-main').attr('style', 'margin-top:3px;position:relative;top:0;');
-	$('#page').attr('style', 'height:75%;');
+	
+	$('#js-previous').attr('style', 'pointer-events:auto;color:#ffffff !important;');
+	$('#js-previous-icon').attr('style', 'color:#ffffff !important;');
+	
+	$('#js-next').attr('style', 'pointer-events:auto;color:#ffffff !important;');
+	$('#js-next-icon').attr('style', 'color:#ffffff !important;');
 	
 	$(".modal").draggable({
 		handle: ".modal-header"
@@ -62,16 +66,16 @@ Template.step_5.onRendered(function() {
 				
 				if(item.id === Meteor.settings.public.cultuurhistorieId) {
 					$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
-							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/ch.png');
+							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/ch.jpg');
 				} else if(item.id === Meteor.settings.public.openBeslotenId) {
 					$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
-							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/ob.png');
+							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/ob.jpg');
 				} else if(item.id === Meteor.settings.public.reliefId) {
 					$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
-							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/r.png');
+							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/r.jpg');
 				} else if(item.id === Meteor.settings.public.groenKarakterId) {
 					$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
-							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/gk.png');
+							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/gk.jpg');
 				}
 				
 				$('#js-kk-thumbnails-5').append(image);
@@ -109,7 +113,7 @@ Template.step_5.onRendered(function() {
 	var nbImage = document.createElement('img');
 	$(nbImage).attr('id', 'nb-img');
 	$(nbImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-			'/' + Meteor.settings.public.domainSuffix + '/images/pol.png');
+			'/' + Meteor.settings.public.domainSuffix + '/images/nb.png');
 	$('#js-overig-thumbnails-5').append(nbImage);
 	
 	setBorderThumbnail($('#landschapstype-img'));
@@ -302,19 +306,6 @@ Template.step_5.helpers({
 	}
 });
 
-function cleanImages(div) {
-	$.each($('#' + div + ' img'), function(index, item) {
-		var src = $(item).attr('src');
-		
-		if(typeof src === 'undefined') {
-			$(item).remove();
-		} else {
-			$(item).removeAttr('style');
-			$(item).attr('class', 'text-div-img');
-		}
-	});
-}
-
 Template.step_5.events ({
 	'click .kernkwaliteit-img': function(e) {
 		if(e.target.id === Meteor.settings.public.openBeslotenId) {
@@ -353,14 +344,21 @@ Template.step_5.events ({
 	'click #nb-img': function(e) {
 		addServiceLayers(null, false, e.target, Meteor.settings.public.natuurbeheerService.url, 
 				Meteor.settings.public.natuurbeheerService.layers, Meteor.settings.public.natuurbeheerService.version);
-	},
-	'click #js-previous-5': function() {
-		Router.go('step_4');
-	},
-	'click #js-next-5': function() {
-		Router.go('step_6');
 	}
 });
+
+function cleanImages(div) {
+	$.each($('#' + div + ' img'), function(index, item) {
+		var src = $(item).attr('src');
+		
+		if(typeof src === 'undefined') {
+			$(item).remove();
+		} else {
+			$(item).removeAttr('style');
+			$(item).attr('class', 'text-div-img');
+		}
+	});
+}
 
 function getIcon(coordinates) {
 	var iconStyle = new ol.style.Style({

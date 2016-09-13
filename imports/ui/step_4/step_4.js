@@ -8,8 +8,9 @@ Template.step_4.onRendered(function() {
 					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/step_4.jpg';
 	
 	$('#tabs-main-img').attr('src', stepBarUrl);
-	$('#tabs-main').attr('style', 'margin-top:3px;position:relative;top:0;');
-	$('#page').attr('style', 'height:75%;');
+	
+	$('#js-previous').attr('style', 'pointer-events:auto;color:#ffffff !important;');
+	$('#js-previous-icon').attr('style', 'color:#ffffff !important;');
 	
 	if(typeof Session.get('area') !== 'undefined' && Session.get('area') !== null) {
 		HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
@@ -25,14 +26,41 @@ Template.step_4.onRendered(function() {
 			
 			Meteor.call('getTexts', result.content, 'sector', function(err, result) {
 				var sectors = $('#js-sectors');
+				
+				var itemCount = 0;
+				var count = 0;
 				$.each(result, function(index, item) {
-					var button = document.createElement('button');
-					$(button).append(item.name);
-					$(button).attr('class', 'btn btn-default btn-lg col-xs-12 sector-btn-4');
-					$(button).attr('data-id', item.id);
-					$(button).attr('data-name', item.name);
+					var innerDiv = document.createElement('div');
+					$(innerDiv).attr('class', 'col-xs-6');
 					
-					$(sectors).append(button);
+					var image = $(item.images[0])[0];
+					
+					$(image).removeAttr('style');
+					$(image).attr('class', 'sector-btn-4');
+					$(image).attr('data-id', item.id);
+					$(image).attr('data-name', item.name);
+					
+					$(innerDiv).append(image);
+					
+					var span = document.createElement('span');
+					$(span).append(item.name);
+					
+					$(innerDiv).append(span);
+					
+					if(count === 0) {
+						var outerDiv = document.createElement('div');
+						$(outerDiv).attr('class', 'col-xs-12 text-div');
+						$(outerDiv).attr('id', 'sector-' + itemCount);
+						$(outerDiv).append(innerDiv);
+						$(sectors).append(outerDiv);
+						
+						count++;
+					} else {
+						$('#sector-' + itemCount).append(innerDiv);
+						
+						itemCount++;
+						count = 0;
+					}
 				});
 			});
 		});
@@ -41,9 +69,11 @@ Template.step_4.onRendered(function() {
 	}
 	
 	if(typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
-		$('#js-next-4').attr('style', 'pointer-events:auto;color:#000000 !important;');
+		$('#js-next').attr('style', 'pointer-events:auto;color:#ffffff !important;');
+		$('#js-next-icon').attr('style', 'color:#ffffff !important;');
 	} else {
-		$('#js-next-4').attr('style', 'pointer-events:none;color:grey !important;');
+		$('#js-next').attr('style', 'pointer-events:none;color:grey !important;');
+		$('#js-next-icon').attr('style', 'color:grey !important;');
 	}
 });
 
@@ -61,10 +91,10 @@ Template.step_4.events ({
 				if(typeof result !== 'undefined') {
 					var buttons = $('.sector-btn-4');
 					$.each(buttons, function(index, item) {
-						$(item).attr('class', 'btn btn-default btn-lg col-xs-12 sector-btn-4');
+						$(item).attr('class', 'sector-btn-4');
 					});
 					
-					$(e.target).attr('class', 'btn btn-default btn-lg col-xs-12 sector-btn-4 sector-btn-4-active');
+					$(e.target).attr('class', 'sector-btn-4 sector-btn-4-active');
 					
 					Session.set('sectorId', id);
 					$('#viewer-4').empty();
@@ -72,17 +102,13 @@ Template.step_4.events ({
 				}
 				
 				if(typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
-					$('#js-next-4').attr('style', 'pointer-events:auto;color:#000000 !important;');
+					$('#js-next').attr('style', 'pointer-events:auto;color:#ffffff !important;');
+					$('#js-next-icon').attr('style', 'color:#ffffff !important;');
 				} else {
-					$('#js-next-4').attr('style', 'pointer-events:none;color:grey !important;');
+					$('#js-next').attr('style', 'pointer-events:none;color:grey !important;');
+					$('#js-next-icon').attr('style', 'color:grey !important;');
 				}
 			});
 		});
-	},
-	'click #js-previous-4': function() {
-		Router.go('step_3');
-	},
-	'click #js-next-4': function() {
-		Router.go('step_5');
 	}
 });

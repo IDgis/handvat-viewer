@@ -8,8 +8,9 @@ Template.step_2.onRendered(function() {
 					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/step_2.jpg';
 	
 	$('#tabs-main-img').attr('src', stepBarUrl);
-	$('#tabs-main').attr('style', 'margin-top:3px;position:relative;top:0;');
-	$('#page').attr('style', 'height:75%;');
+	
+	$('#js-previous').attr('style', 'pointer-events:auto;color:#ffffff !important;');
+	$('#js-previous-icon').attr('style', 'color:#ffffff !important;');
 	
 	$(".modal").draggable({
 		handle: ".modal-header"
@@ -20,9 +21,11 @@ Template.step_2.onRendered(function() {
 	});
 	
 	if(typeof Session.get('area') === 'undefined' || Session.get('area') === null) {
-		$('#js-next-2').attr('style', 'pointer-events:none;color:grey !important;');
+		$('#js-next').attr('style', 'pointer-events:none;color:grey !important;');
+		$('#js-next-icon').attr('style', 'color:grey !important;');
 	} else {
-		$('#js-next-2').attr('style', 'pointer-events:auto;color:#000000 !important;');
+		$('#js-next').attr('style', 'pointer-events:auto;color:#ffffff !important;');
+		$('#js-next-icon').attr('style', 'color:#ffffff !important;');
 	}
 	
 	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
@@ -426,13 +429,15 @@ function getDeelgebied(coordinates) {
 				result === 'Vijlenerbos') {
 			Session.set('area', result);
 			
-			$('#js-next-2').attr('style', 'pointer-events:auto;color:#000000 !important;');
+			$('#js-next').attr('style', 'pointer-events:auto;color:#ffffff !important;');
+			$('#js-next-icon').attr('style', 'color:#ffffff !important;');
 		} else {
 			Session.set('area', null);
 			Session.set('mapExtent', null);
 			Session.set('mapCenter', null);
 			
-			$('#js-next-2').attr('style', 'pointer-events:none;color:grey !important;');
+			$('#js-next').attr('style', 'pointer-events:none;color:grey !important;');
+			$('#js-next-icon').attr('style', 'color:grey !important;');
 		}
 		
 		Meteor.call('getBoundingBox', Meteor.settings.public.deelgebiedenService.urlSK, function(err, result) {
@@ -469,11 +474,5 @@ Template.step_2.events ({
 			$('#address-search').attr('style', 'display:none;');
 			$('#cadastre-search').attr('style', 'display:block;');
 		}
-	},
-	'click #js-previous-2': function() {
-		Router.go('step_1');
-	},
-	'click #js-next-2': function() {
-		Router.go('step_3');
 	}
 });

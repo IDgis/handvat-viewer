@@ -5,11 +5,15 @@ Template.explain.onRendered(function() {
 	Session.set('stepNumber', 'explain');
 	
 	var stepBarUrl = window.location.protocol + '//' + window.location.hostname + ':' + 
-					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/no_step.jpg';
+					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/step_1.jpg';
 	
 	$('#tabs-main-img').attr('src', stepBarUrl);
-	$('#tabs-main').attr('style', 'margin-top:0;position:relative;top:-4px;');
-	$('#page').attr('style', 'height:78%;');
+	
+	$('#js-previous').attr('style', 'pointer-events:auto;color:#ffffff !important;');
+	$('#js-previous-icon').attr('style', 'color:#ffffff !important;');
+	
+	$('#js-next').attr('style', 'pointer-events:auto;color:#ffffff !important;');
+	$('#js-next-icon').attr('style', 'color:#ffffff !important;');
 	
 	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 		headers: {
@@ -41,13 +45,4 @@ Template.explain.onRendered(function() {
 			}
 		});
 	});
-});
-
-Template.explain.events ({
-	'click #js-previous-explain': function() {
-		Router.go('info');
-	},
-	'click #js-next-explain': function() {
-		Router.go('step_1');
-	}
 });

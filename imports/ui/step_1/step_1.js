@@ -8,8 +8,12 @@ Template.step_1.onRendered(function() {
 					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/step_1.jpg';
 	
 	$('#tabs-main-img').attr('src', stepBarUrl);
-	$('#tabs-main').attr('style', 'margin-top:3px;position:relative;top:0;');
-	$('#page').attr('style', 'height:75%;');
+	
+	$('#js-previous').attr('style', 'pointer-events:auto;color:#ffffff !important;');
+	$('#js-previous-icon').attr('style', 'color:#ffffff !important;');
+	
+	$('#js-next').attr('style', 'pointer-events:auto;color:#ffffff !important;');
+	$('#js-next-icon').attr('style', 'color:#ffffff !important;');
 	
 	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 		headers: {
@@ -41,13 +45,4 @@ Template.step_1.onRendered(function() {
 			}
 		});
 	});
-});
-
-Template.step_1.events ({
-	'click #js-previous-1': function() {
-		Router.go('explain');
-	},
-	'click #js-next-1': function() {
-		Router.go('step_2');
-	}
 });

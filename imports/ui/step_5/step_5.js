@@ -9,8 +9,12 @@ Template.step_5.onRendered(function() {
 					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/step_5.jpg';
 	
 	$('#tabs-main-img').attr('src', stepBarUrl);
-	$('#tabs-main').attr('style', 'margin-top:3px;position:relative;top:0;');
-	$('#page').attr('style', 'height:75%;');
+	
+	$('#js-previous').attr('style', 'pointer-events:auto;color:#ffffff !important;');
+	$('#js-previous-icon').attr('style', 'color:#ffffff !important;');
+	
+	$('#js-next').attr('style', 'pointer-events:auto;color:#ffffff !important;');
+	$('#js-next-icon').attr('style', 'color:#ffffff !important;');
 	
 	$(".modal").draggable({
 		handle: ".modal-header"
@@ -340,12 +344,6 @@ Template.step_5.events ({
 	'click #nb-img': function(e) {
 		addServiceLayers(null, false, e.target, Meteor.settings.public.natuurbeheerService.url, 
 				Meteor.settings.public.natuurbeheerService.layers, Meteor.settings.public.natuurbeheerService.version);
-	},
-	'click #js-previous-5': function() {
-		Router.go('step_4');
-	},
-	'click #js-next-5': function() {
-		Router.go('step_6');
 	}
 });
 

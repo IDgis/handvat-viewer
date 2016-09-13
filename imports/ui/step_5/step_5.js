@@ -101,6 +101,17 @@ Template.step_5.onRendered(function() {
 			'/' + Meteor.settings.public.domainSuffix + '/images/pol.png');
 	$('#js-overig-thumbnails-5').append(polImage);
 	
+	var nbHeader = document.createElement('p');
+	$(nbHeader).attr('class', 'header');
+	nbHeader.innerHTML = 'Natuurbeheer';
+	$('#js-overig-thumbnails-5').append(nbHeader);
+	
+	var nbImage = document.createElement('img');
+	$(nbImage).attr('id', 'nb-img');
+	$(nbImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+			'/' + Meteor.settings.public.domainSuffix + '/images/pol.png');
+	$('#js-overig-thumbnails-5').append(nbImage);
+	
 	setBorderThumbnail($('#landschapstype-img'));
 	
 	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCenter') === 'undefined') {
@@ -306,132 +317,42 @@ function cleanImages(div) {
 
 Template.step_5.events ({
 	'click .kernkwaliteit-img': function(e) {
-		Session.set('kernkwaliteitId', e.target.id);
-		Session.set('ltActive', false);
-		
-		setBorderThumbnail(e.target);
-		
-		var urlKk;
-		var layersKk;
-		var versionKk;
-		
-		if(Session.get('kernkwaliteitId') === Meteor.settings.public.openBeslotenId) {
-			map.getLayers().clear();
-			
-			urlKk = Meteor.settings.public.openBeslotenService.url;
-			layersKk = Meteor.settings.public.openBeslotenService.layers;
-			versionKk = Meteor.settings.public.openBeslotenService.version;
+		if(e.target.id === Meteor.settings.public.openBeslotenId) {
+			addServiceLayers(e.target.id, false, e.target, Meteor.settings.public.openBeslotenService.url, 
+					Meteor.settings.public.openBeslotenService.layers, 
+					Meteor.settings.public.openBeslotenService.version);
 		}
 		
-		if(Session.get('kernkwaliteitId') === Meteor.settings.public.cultuurhistorieId) {
-			map.getLayers().clear();
-			
-			urlKk = Meteor.settings.public.cultuurhistorieService.url;
-			layersKk = Meteor.settings.public.cultuurhistorieService.layers;
-			versionKk = Meteor.settings.public.cultuurhistorieService.version;
+		if(e.target.id === Meteor.settings.public.cultuurhistorieId) {
+			addServiceLayers(e.target.id, false, e.target, Meteor.settings.public.cultuurhistorieService.url, 
+					Meteor.settings.public.cultuurhistorieService.layers, 
+					Meteor.settings.public.cultuurhistorieService.version);
 		}
 		
-		if(Session.get('kernkwaliteitId') === Meteor.settings.public.reliefId) {
-			map.getLayers().clear();
-			
-			urlKk = Meteor.settings.public.reliefService.url;
-			layersKk = Meteor.settings.public.reliefService.layers;
-			versionKk = Meteor.settings.public.reliefService.version;
+		if(e.target.id === Meteor.settings.public.reliefId) {
+			addServiceLayers(e.target.id, false, e.target, Meteor.settings.public.reliefService.url, 
+					Meteor.settings.public.reliefService.layers, 
+					Meteor.settings.public.reliefService.version);
 		}
 		
-		if(Session.get('kernkwaliteitId') === Meteor.settings.public.groenKarakterId) {
-			map.getLayers().clear();
-			
-			urlKk = Meteor.settings.public.groenKarakterService.url;
-			layersKk = Meteor.settings.public.groenKarakterService.layers;
-			versionKk = Meteor.settings.public.groenKarakterService.version;
+		if(e.target.id === Meteor.settings.public.groenKarakterId) {
+			addServiceLayers(e.target.id, false, e.target, Meteor.settings.public.groenKarakterService.url, 
+					Meteor.settings.public.groenKarakterService.layers, 
+					Meteor.settings.public.groenKarakterService.version);
 		}
-		
-		if(Session.get('kernkwaliteitId') === Meteor.settings.public.openBeslotenId ||
-				Session.get('kernkwaliteitId') === Meteor.settings.public.cultuurhistorieId ||
-				Session.get('kernkwaliteitId') === Meteor.settings.public.reliefId ||
-				Session.get('kernkwaliteitId') === Meteor.settings.public.groenKarakterId) {
-			
-			setLufoLayers();
-			
-			layersKk.forEach(function(item) {
-				var layer = new ol.layer.Image({
-					source: new ol.source.ImageWMS({
-						url: urlKk, 
-						params: {'LAYERS': item, 'VERSION': versionKk} 
-					})
-				});
-				
-				map.addLayer(layer);
-			});
-		}
-		
-		if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
-			iconLayer = getIcon(Session.get('mapCoordinates'));
-			map.addLayer(iconLayer);
-		}
-		
-		setOpacity();
 	},
 	'click #landschapstype-img': function(e) {
-		Session.set('kernkwaliteitId', null);
-		Session.set('ltActive', true);
-		map.getLayers().clear();
-		
-		setBorderThumbnail(e.target);
-		setLufoLayers();
-		
-		var urlLt = Meteor.settings.public.landschapstypenService.url;
-		var layersLt = Meteor.settings.public.landschapstypenService.layers;
-		var versionLt = Meteor.settings.public.landschapstypenService.version;
-		
-		layersLt.forEach(function(item) {
-			var layer = new ol.layer.Image({
-				source: new ol.source.ImageWMS({
-					url: urlLt, 
-					params: {'LAYERS': item, 'VERSION': versionLt} 
-				})
-			});
-			
-			map.addLayer(layer);
-		});
-		
-		if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
-			iconLayer = getIcon(Session.get('mapCoordinates'));
-			map.addLayer(iconLayer);
-		}
-		
-		setOpacity();
+		addServiceLayers(null, true, e.target, Meteor.settings.public.landschapstypenService.url, 
+				Meteor.settings.public.landschapstypenService.layers, 
+				Meteor.settings.public.landschapstypenService.version);
 	},
 	'click #pol-img': function(e) {
-		Session.set('kernkwaliteitId', null);
-		Session.set('ltActive', false);
-		map.getLayers().clear();
-		
-		setBorderThumbnail(e.target);
-		setLufoLayers();
-		
-		var urlPol = Meteor.settings.public.polService.url;
-		var layersPol = Meteor.settings.public.polService.layers;
-		var versionPol = Meteor.settings.public.polService.version;
-		
-		layersPol.forEach(function(item) {
-			var layer = new ol.layer.Image({
-				source: new ol.source.ImageWMS({
-					url: urlPol, 
-					params: {'LAYERS': item, 'VERSION': versionPol} 
-				})
-			});
-			
-			map.addLayer(layer);
-		});
-		
-		if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
-			iconLayer = getIcon(Session.get('mapCoordinates'));
-			map.addLayer(iconLayer);
-		}
-		
-		setOpacity();
+		addServiceLayers(null, false, e.target, Meteor.settings.public.polService.url, 
+				Meteor.settings.public.polService.layers, Meteor.settings.public.polService.version);
+	},
+	'click #nb-img': function(e) {
+		addServiceLayers(null, false, e.target, Meteor.settings.public.natuurbeheerService.url, 
+				Meteor.settings.public.natuurbeheerService.layers, Meteor.settings.public.natuurbeheerService.version);
 	},
 	'click #js-previous-5': function() {
 		Router.go('step_4');
@@ -515,4 +436,31 @@ function setThumbnailSize() {
 		var width = $(item).width();
 		$(item).css({'height':width + 'px'});
 	});
+}
+
+function addServiceLayers(kkId, ltActive, element, url, layers, version) {
+	Session.set('kernkwaliteitId', kkId);
+	Session.set('ltActive', ltActive);
+	map.getLayers().clear();
+	
+	setBorderThumbnail(element);
+	setLufoLayers();
+	
+	layers.forEach(function(item) {
+		var layer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
+				url: url, 
+				params: {'LAYERS': item, 'VERSION': version} 
+			})
+		});
+		
+		map.addLayer(layer);
+	});
+	
+	if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+		iconLayer = getIcon(Session.get('mapCoordinates'));
+		map.addLayer(iconLayer);
+	}
+	
+	setOpacity();
 }

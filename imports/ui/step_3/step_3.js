@@ -153,13 +153,6 @@ Template.step_3.onRendered(function() {
 		
 		Meteor.call('getText', result.content, textAreaId, function(err, result) {
 			if(typeof result !== 'undefined') {
-				$.each(result.images, function(index, item) {
-					if(index === 0) {
-						$('#dg-text-3').append(item);
-					}
-				});
-				
-				cleanImages('dg-text-3', 'area-img-3');
 				$('#dg-text-3').append(result.content);
 			} else {
 				$('#dg-text-3').append('U heeft geen valide deelgebied geselecteerd.');

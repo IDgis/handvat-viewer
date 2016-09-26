@@ -24,7 +24,7 @@ Template.step_4.onRendered(function() {
 				}
 			});
 			
-			Meteor.call('getTexts', result.content, 'sector', function(err, result) {
+			Meteor.call('getTexts', result.content, 'sector_icoon', function(err, result) {
 				var sectors = $('#js-sectors');
 				
 				var itemCount = 0;
@@ -33,17 +33,12 @@ Template.step_4.onRendered(function() {
 					var innerDiv = document.createElement('div');
 					$(innerDiv).attr('class', 'col-xs-6');
 					
-					var image = $(item.images[0])[0];
-					
-					$(image).removeAttr('style');
-					$(image).attr('class', 'sector-btn-4');
-					$(image).attr('data-id', item.id);
-					$(image).attr('data-name', item.name);
-					
-					$(innerDiv).append(image);
+					$(innerDiv).append(item.content);
 					
 					var span = document.createElement('span');
 					$(span).append(item.name);
+					$(span).attr('class', 'sector-btn-4');
+					$(span).attr('data-name', item.name);
 					
 					$(innerDiv).append(span);
 					
@@ -79,26 +74,23 @@ Template.step_4.onRendered(function() {
 
 Template.step_4.events ({
 	'click .sector-btn-4': function(e) {
-		var id = $(e.target).attr('data-id');
-		Session.set('sectorName', $(e.target).attr('data-name'));
+		var sectorName = $(e.target).attr('data-name');
+		Session.set('sectorName', sectorName);
 		
 		HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			Meteor.call('getText', result.content, id, function(err, result) {
+			Meteor.call('getTexts', result.content, 'sector', function(err, result) {
 				if(typeof result !== 'undefined') {
-					var buttons = $('.sector-btn-4');
-					$.each(buttons, function(index, item) {
-						$(item).attr('class', 'sector-btn-4');
+					$.each(result, function(index, item) {
+						if(item.name === sectorName) {
+							Session.set('sectorId', item.id);
+							$('#viewer-4').empty();
+							$('#viewer-4').append(item.content);
+						}
 					});
-					
-					$(e.target).attr('class', 'sector-btn-4 sector-btn-4-active');
-					
-					Session.set('sectorId', id);
-					$('#viewer-4').empty();
-					$('#viewer-4').append(result.content);
 				}
 				
 				if(typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {

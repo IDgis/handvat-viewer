@@ -102,6 +102,11 @@
 	    "layersSK": ["Landschapskaart_Zuid-Limburg_totaal", "top50namen_grotere_steden", "top50namen_overig"],
 	    "indexDG": 1
 	  },
+	  "toponiemenService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+	    "version": "1.1.1",
+	    "layers": ["top50namen_grotere_steden", "top50namen_overig"]
+	  },
 	  "landschapstypenService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/landschapstypen?",
 	    "version": "1.1.1",

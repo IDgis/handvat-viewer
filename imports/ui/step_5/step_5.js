@@ -331,6 +331,21 @@ Template.step_5.events ({
 					Meteor.settings.public.groenKarakterService.layers, 
 					Meteor.settings.public.groenKarakterService.version);
 		}
+		
+		var toponiemenUrl = Meteor.settings.public.toponiemenService.url;
+		var toponiemenLayers = Meteor.settings.public.toponiemenService.layers;
+		var toponiemenVersion = Meteor.settings.public.toponiemenService.version;
+		
+		toponiemenLayers.forEach(function(item) {
+			var layer = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: toponiemenUrl, 
+					params: {'LAYERS': item, 'VERSION': toponiemenVersion} 
+				})
+			});
+			
+			map.addLayer(layer);
+		});
 	},
 	'click #landschapstype-img': function(e) {
 		addServiceLayers(null, true, e.target, Meteor.settings.public.landschapstypenService.url, 

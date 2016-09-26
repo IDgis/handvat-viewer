@@ -28,20 +28,7 @@ Template.start.onRendered(function() {
 		
 		Meteor.call('getText', result.content, Meteor.settings.public.startImage, function(err, result) {
 			if(typeof result !== 'undefined') {
-				$.each(result.images, function(index, item) {
-					$('#viewer-container-start').append(item);
-				});
-				
-				$.each($('#viewer-container-start img'), function(index, item) {
-					var src = $(item).attr('src');
-					
-					if(typeof src === 'undefined') {
-						$(item).remove();
-					} else {
-						$(item).removeAttr('style');
-						$(item).attr('class', 'text-start-img');
-					}
-				});
+				$('#viewer-container-start').append(result.content);
 			}
 		});
 	});

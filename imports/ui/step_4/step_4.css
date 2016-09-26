@@ -1,7 +1,5 @@
 #text-4 {margin-bottom:20px;}
-.sector-btn-4 {margin-bottom:10px;width:100%;}
 .sector-btn-4:hover {cursor:pointer;}
-.sector-btn-4-active {border:1px solid black;}
 #viewer-4 {padding-left:40px;padding-right:30px;padding-top:40px;}
 
 #js-next-4 {pointer-events:none;color:#939393 !important;}

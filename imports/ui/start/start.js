@@ -5,7 +5,7 @@ Template.start.onRendered(function() {
 	Session.set('stepNumber', 'start');
 	
 	var stepBarUrl = window.location.protocol + '//' + window.location.hostname + ':' + 
-					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/step_1.jpg';
+					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/no_step.jpg';
 	
 	$('#tabs-main-img').attr('src', stepBarUrl);
 	

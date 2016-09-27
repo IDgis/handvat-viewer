@@ -3,6 +3,7 @@ import { Router } from 'meteor/iron:router';
 
 import '../../ui/main.js';
 
+import '../../ui/entry/entry.js';
 import '../../ui/start/start.js';
 import '../../ui/info/info.js';
 import '../../ui/explain/explain.js';
@@ -14,10 +15,17 @@ import '../../ui/step_5/step_5.js';
 import '../../ui/step_6/step_6.js';
 
 Router.configure({
-  layoutTemplate: 'main'
+	layoutTemplate: 'main'
 });
 
 Router.route('/handvat-viewer', function () {
+	this.layout('entry');
+	this.render('entry');
+	}, {
+	  name: 'entry'
+});
+
+Router.route('/handvat-viewer/start', function () {
 	  this.render('start');
 	}, {
 	  name: 'start'

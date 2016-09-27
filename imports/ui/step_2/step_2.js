@@ -377,6 +377,16 @@ Template.step_2.events ({
 				$('#no-results-found-search').attr('style', 'display:block;');
 			}
 		});
+	},
+	'change #search-method-select': function(e) {
+		var searchValue = e.target.value;
+		if(searchValue === 'address') {
+			$('#address-search').attr('style', 'display:block;');
+			$('#cadastre-search').attr('style', 'display:none;');
+		} else if(searchValue === 'cadastre') {
+			$('#address-search').attr('style', 'display:none;');
+			$('#cadastre-search').attr('style', 'display:block;');
+		}
 	}
 });
 
@@ -463,16 +473,3 @@ function getDeelgebied(coordinates) {
 		});
 	});
 }
-
-Template.step_2.events ({
-	'change #search-method-select': function(e) {
-		var searchValue = e.target.value;
-		if(searchValue === 'address') {
-			$('#address-search').attr('style', 'display:block;');
-			$('#cadastre-search').attr('style', 'display:none;');
-		} else if(searchValue === 'cadastre') {
-			$('#address-search').attr('style', 'display:none;');
-			$('#cadastre-search').attr('style', 'display:block;');
-		}
-	}
-});

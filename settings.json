@@ -96,13 +96,20 @@
 	    "version": "1.1.1",
 	    "layers": ["Luchtfoto hoge resolutie"]
 	  },
+	  "top10Service": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/topoNLZL?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+	    "version": "1.1.1",
+	    "layers": ["top10nl_wegdeel_v", "top10nl_gebouw_v", "top10nl_terrein_v", "top10nl_waterdeel_v", 
+	    			"top10nl_relief_hogezijde_l", "top10nl_relief_lagezijde_l", "top10nl_spoorbaandeel_l", 
+	    			"top10nl_waterdeel_l", "nwb_wegvakken_limb_l_straatnamen", "masker_zuid_limburg_v"]
+	  },
 	  "deelgebiedenService": {
 	    "urlDG": "http://portal.prvlimburg.nl/geoservices/deelgebieden?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
 	    "urlSK": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
 	    "version": "1.1.1",
 	    "layersDG": ["Deelgebieden"],
 	    "layersSK": ["Landschapskaart_Zuid-Limburg_totaal", "top50namen_grotere_steden", "top50namen_overig"],
-	    "indexDG": 1
+	    "indexDG": 10
 	  },
 	  "toponiemenService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",

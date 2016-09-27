@@ -63,40 +63,25 @@ Template.step_2.onRendered(function() {
 	
 	var zoomControl = new ol.control.Zoom();
 	
-	var resolutions = 
-		[3440.64, 1720.32, 860.16, 430.08, 215.04, 107.52, 53.76, 26.88, 13.44, 6.72, 3.36, 1.68, 0.84, 0.42, 0.21];
-	var matrixIds0 = [];
-	matrixIds0 = $.map(resolutions, function(resolution) {
-		var indexResolution = resolutions.indexOf(resolution);
-		return 'EPSG:28992' + ':' + indexResolution;
-	});
-	
-	var tileGrid0 = new ol.tilegrid.WMTS({
-		origin: [-285401.920, 903401.920],
-		resolutions: resolutions,
-		matrixIds: matrixIds0
-	});
-	
-	var achtergrond = new ol.layer.Tile({
-		opacity: 0.8,
-		extent: [-285401.92, 22598.08, 595401.9199999999, 903401.9199999999],
-		source : new ol.source.WMTS({
-			attributions: [],
-			url: '//geodata.nationaalgeoregister.nl/wmts',
-			layer: 'brtachtergrondkaartpastel',
-			matrixSet: 'EPSG:28992',
-			format: 'image/png',
-			tileGrid: tileGrid0,
-			style: 'default'
-		}),
-		visible: true
-	});
-	
 	map = new ol.Map({
-		layers: [achtergrond],
 		control: zoomControl,
 		target: 'map-2',
 		view: view
+	});
+	
+	var urlTop10 = Meteor.settings.public.top10Service.url;
+	var layersTop10 = Meteor.settings.public.top10Service.layers;
+	var versionTop10 = Meteor.settings.public.top10Service.version;
+	
+	layersTop10.forEach(function(item) {
+		var layer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
+				url: urlTop10, 
+				params: {'LAYERS': item, 'VERSION': versionTop10} 
+			})
+		});
+		
+		map.addLayer(layer);
 	});
 	
 	var urlDG = Meteor.settings.public.deelgebiedenService.urlDG;
@@ -152,7 +137,7 @@ Template.step_2.onRendered(function() {
 		value: 100,
 		slide: function(e, ui) {
 			$.each(map.getLayers().getArray(), function(index, item) {
-				if(index !== 0) {
+				if(index > 9) {
 					if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
 						if(index !== map.getLayers().getLength() - 1) {
 							map.getLayers().item(index).setOpacity(ui.value / 100);

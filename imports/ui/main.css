@@ -2,7 +2,7 @@ body, html {width:100%;height:100%;}
 p.header {margin-bottom:0;font-weight:bold;}
 .tab-step {text-align:center;border-left:1px solid #e7e7e7;padding:0;width:20%;}
 .tab-step.active {font-weight:bold;}
-#page {width:100%;height:78%;}
+#page {width:100%;}
 #sector-dropdown:hover {cursor:pointer;}
 .negate-padding-left {padding-left:0;}
 #nav-buttons {margin-top:8px;margin-bottom:8px;}
@@ -16,11 +16,11 @@ p.header {margin-bottom:0;font-weight:bold;}
 
 #text-container-start, #text-container-info, #text-container-explain, #text-container-1, #text-container-2, 
 #text-container-3, #text-container-4, #text-container-5, #text-container-6 {
-	height:95%;margin-bottom:15px;overflow-y:auto;padding-left:40px;
+	height:100%;margin-bottom:15px;overflow-y:auto;padding-left:40px;
 	padding-right:30px;border-right:2px solid grey;}
 #viewer-container-start, #viewer-container-info, #viewer-container-explain, #viewer-container-1, 
 #viewer-container-2, #viewer-container-3, #viewer-container-4, #viewer-container-5, #viewer-container-6 {
-	height:95%;margin-bottom:15px;overflow-y:auto;}
+	height:100%;margin-bottom:15px;overflow-y:auto;}
 #map-start, #map-info, #map-explain, #map-1, #map-2, #map-3, #map-4, #map-5, #map-6 {height:100%;}
 
 .modal .modal-body {
@@ -44,3 +44,5 @@ p.header {margin-bottom:0;font-weight:bold;}
 .modal-backdrop.in {opacity:0;}
 
 #js-home:hover, #js-previous:hover, #js-next:hover {cursor:pointer;}
+
+#footer {height:30px;width:66%;margin-right:30px;}

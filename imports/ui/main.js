@@ -57,6 +57,7 @@ Template.main.onRendered(function() {
 	
 	$('#banner').resize(setBannerSize);
 	$('#tabs-main').resize(setNavigationSize);
+	$('html').resize(setPageHeight);
 });
 
 Template.main.events({
@@ -132,4 +133,18 @@ function setNavigationSize() {
 	
 	var navigationOffset = (bannerHeight + (((tabsHeight * 0.6744) / 2)) - 8);
 	$('#navigation-buttons').attr('style', 'top:' + navigationOffset + 'px');
+}
+
+function setPageHeight() {
+	var documentHeight = $(window).height();
+	
+	var bannerWidth = $('#banner').width();
+	var bannerHeight = bannerWidth / 13.09375;
+	
+	var tabsWidth = $('#tabs-main').width();
+	var tabsHeight = tabsWidth / 33.031008;
+	
+	var pageHeight = documentHeight - bannerHeight - tabsHeight - 20 - 45;
+	
+	$('#page').attr('style', 'height:' + pageHeight + 'px');
 }

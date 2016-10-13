@@ -147,4 +147,6 @@ function setPageHeight() {
 	var pageHeight = documentHeight - bannerHeight - tabsHeight - 20 - 45;
 	
 	$('#page').attr('style', 'height:' + pageHeight + 'px');
+	
+	map.updateSize();
 }

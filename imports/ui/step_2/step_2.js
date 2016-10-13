@@ -121,7 +121,8 @@ Template.step_2.onRendered(function() {
 			anchorYUnits: 'pixels',
 			opacity: 0.75,
 			src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-				'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg'
+				'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg',
+			size: [32, 32]
 		}))
 	});
 	
@@ -294,7 +295,8 @@ Template.step_2.events ({
 						anchorYUnits: 'pixels',
 						opacity: 0.75,
 						src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-							'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg'
+							'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg',
+						size: [32, 32]
 					}))
 				});
 				
@@ -348,7 +350,8 @@ Template.step_2.events ({
 						anchorYUnits: 'pixels',
 						opacity: 0.75,
 						src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-							'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg'
+							'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg',
+						size: [32, 32]
 					}))
 				});
 				

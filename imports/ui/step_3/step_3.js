@@ -70,60 +70,14 @@ Template.step_3.onRendered(function() {
 	
 	map.getLayers().item(0).setOpacity(0);
 	
-	var areaLayer;
-	var layerId;
-	var textAreaId;
+	var deelgebiedCoupling;
 	
-	if(Session.get('area') === 'Baneheide' || Session.get('area') === 'Bekken van Heerlen' || 
-			Session.get('area') === 'Doenrade' || Session.get('area') === 'Eperheide' || 
-			Session.get('area') === 'Geleenbeek' || Session.get('area') === 'Geuldal' || 
-			Session.get('area') === 'Maasdal' || Session.get('area') === 'Maasterras Gronsveld' || 
-			Session.get('area') === 'Margraten' || Session.get('area') === 'Roode Beek' || 
-			Session.get('area') === 'Schimmert' || Session.get('area') === 'Ubachsberg' || 
-			Session.get('area') === 'Vijlenerbos') {
+	if(typeof Session.get('area') !== 'undefined') {
+		var area = Session.get('area');
+		var layerId = Meteor.settings.public.landschapStructuurService[area];
+		deelgebiedCoupling = Meteor.settings.public[area];
 		
-		if(Session.get('area') === 'Baneheide') {
-			layerId = Meteor.settings.public.landschapStructuurService.indexBH;
-			textAreaId = Meteor.settings.public.step3TextBH;
-		} else if(Session.get('area') === 'Bekken van Heerlen') {
-			layerId = Meteor.settings.public.landschapStructuurService.indexH;
-			textAreaId = Meteor.settings.public.step3TextH;
-		} else if(Session.get('area') === 'Doenrade') {
-			layerId = Meteor.settings.public.landschapStructuurService.indexDR;
-			textAreaId = Meteor.settings.public.step3TextDR;
-		} else if(Session.get('area') === 'Eperheide') {
-			layerId = Meteor.settings.public.landschapStructuurService.indexEH;
-			textAreaId = Meteor.settings.public.step3TextEH;
-		} else if(Session.get('area') === 'Geleenbeek') {
-			layerId = Meteor.settings.public.landschapStructuurService.indexGB;
-			textAreaId = Meteor.settings.public.step3TextGB;
-		} else if(Session.get('area') === 'Geuldal') {
-			layerId = Meteor.settings.public.landschapStructuurService.indexGD;
-			textAreaId = Meteor.settings.public.step3TextGD;
-		} else if(Session.get('area') === 'Maasdal') {
-			layerId = Meteor.settings.public.landschapStructuurService.indexMD;
-			textAreaId = Meteor.settings.public.step3TextMD;
-		} else if(Session.get('area') === 'Maasterras Gronsveld') {
-			layerId = Meteor.settings.public.landschapStructuurService.indexMG;
-			textAreaId = Meteor.settings.public.step3TextMG;
-		} else if(Session.get('area') === 'Margraten') {
-			layerId = Meteor.settings.public.landschapStructuurService.indexM;
-			textAreaId = Meteor.settings.public.step3TextM;
-		} else if(Session.get('area') === 'Roode Beek') {
-			layerId = Meteor.settings.public.landschapStructuurService.indexRB;
-			textAreaId = Meteor.settings.public.step3TextRB;
-		} else if(Session.get('area') === 'Schimmert') {
-			layerId = Meteor.settings.public.landschapStructuurService.indexS;
-			textAreaId = Meteor.settings.public.step3TextS;
-		} else if(Session.get('area') === 'Ubachsberg') {
-			layerId = Meteor.settings.public.landschapStructuurService.indexUB;
-			textAreaId = Meteor.settings.public.step3TextUB;
-		} else if(Session.get('area') === 'Vijlenerbos') {
-			layerId = Meteor.settings.public.landschapStructuurService.indexVB;
-			textAreaId = Meteor.settings.public.step3TextVB;
-		}
-		
-		areaLayer = new ol.layer.Image({
+		var areaLayer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
 				url: skUrl, 
 				params: {'LAYERS': Meteor.settings.public.landschapStructuurService.layers[layerId], 
@@ -139,25 +93,27 @@ Template.step_3.onRendered(function() {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getText', result.content, Meteor.settings.public.step3Dg, function(err, result) {
+		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap3Deelgebied, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$('#intro-dg-3').append(result.content);
 			}
 		});
 		
-		Meteor.call('getText', result.content, Meteor.settings.public.step3Lb, function(err, result) {
+		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap3Beginselen, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$('#intro-lb-3').append(result.content);
 			}
 		});
 		
-		Meteor.call('getText', result.content, textAreaId, function(err, result) {
-			if(typeof result !== 'undefined') {
-				$('#dg-text-3').append(result.content);
-			} else {
-				$('#dg-text-3').append('U heeft geen valide deelgebied geselecteerd.');
-			}
-		});
+		if(typeof deelgebiedCoupling !== 'undefined') {
+			Meteor.call('getTextFromCoupling', result.content, deelgebiedCoupling, function(err, result) {
+				if(typeof result !== 'undefined') {
+					$('#dg-text-3').append(result.content);
+				} else {
+					$('#dg-text-3').append('U heeft geen valide deelgebied geselecteerd.');
+				}
+			});
+		}
 	});
 	
 	var iconStyle = new ol.style.Style({
@@ -188,23 +144,12 @@ Template.step_3.onRendered(function() {
 				getResolution(), map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
 		
 		Meteor.call('getLandschapsType', url, function(err, result) {
-			if(result === 'Dalbodem') {
-				Session.set('landschapstypeId', Meteor.settings.public.dalId);
+			if(typeof result !== 'undefined') {
+				Session.set('landschapstypeId', result);
 				Session.set('mapCoordinates', coordinates);
-				Session.set('landschapstypeName', 'Dal');
-			} else if(result === 'Helling > 4 graden' || result === 'Helling < 4 graden') {
-				Session.set('landschapstypeId', Meteor.settings.public.hellingId);
-				Session.set('mapCoordinates', coordinates);
-				Session.set('landschapstypeName', 'Helling');
-			} else if(result === 'Tussenterras' || result === 'Plateau' || result === 'Groeve' || 
-					result === 'Geisoleerde heuvel') {
-				Session.set('landschapstypeId', Meteor.settings.public.plateauId);
-				Session.set('mapCoordinates', coordinates);
-				Session.set('landschapstypeName', 'Plateau');
 			} else {
 				Session.set('landschapstypeId', null);
 				Session.set('mapCoordinates', null);
-				Session.set('landschapstypeName', null);
 			}
 		});
 	}
@@ -255,7 +200,7 @@ Template.step_3.helpers({
 									'Content-Type' : 'application/json; charset=UTF-8'
 								}
 							}, function(err, result) {
-								Meteor.call('getText', result.content, item, function(err, result) {
+								Meteor.call('getTextFromId', result.content, item, function(err, result) {
 									if(typeof result !== 'undefined') {
 										$.each(result.images, function(ix, elt) {
 											$(innerDiv).append(elt);
@@ -282,7 +227,7 @@ Template.step_3.helpers({
 									'Content-Type' : 'application/json; charset=UTF-8'
 								}
 							}, function(err, result) {
-								Meteor.call('getText', result.content, item, function(err, result) {
+								Meteor.call('getTextFromId', result.content, item, function(err, result) {
 									if(typeof result !== 'undefined') {
 										$.each(result.images, function(ix, elt) {
 											$(innerDiv).append(elt);

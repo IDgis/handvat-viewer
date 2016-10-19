@@ -22,7 +22,7 @@ Template.step_6.onRendered(function() {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			Meteor.call('getText', result.content, Meteor.settings.public.step6Text, function(err, result) {
+			Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap6Links, function(err, result) {
 				if(typeof result !== 'undefined') {
 					$('#intro-text-6').append(result.content);
 				}

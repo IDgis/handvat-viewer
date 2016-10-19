@@ -20,13 +20,13 @@ Template.start.onRendered(function() {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getText', result.content, Meteor.settings.public.startText, function(err, result) {
+		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.startLinks, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$('#text-container-start').append(result.content);
 			}
 		});
 		
-		Meteor.call('getText', result.content, Meteor.settings.public.startImage, function(err, result) {
+		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.startRechts, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$('#viewer-container-start').append(result.content);
 			}

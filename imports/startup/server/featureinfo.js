@@ -6,7 +6,7 @@ Meteor.methods({
 		var xml = xml2js.parseStringSync(res.content);
 		
 		if(typeof xml.msGMLOutput.Deelgebieden_layer !== 'undefined') {
-			return xml.msGMLOutput.Deelgebieden_layer[0].Deelgebieden_feature[0].OMSCHRIJVI[0];
+			return xml.msGMLOutput.Deelgebieden_layer[0].Deelgebieden_feature[0].OMSCHRIJVI[0].trim();
 		}
 	},
 	getLandschapsType: function(url) {
@@ -27,7 +27,7 @@ Meteor.methods({
 			return id;
 		}
 	},
-	getBoundingBox: function(url) {
+	getLayer: function(url) {
 		var res = HTTP.get(url);
 		var xml = xml2js.parseStringSync(res.content);
 		return xml.WMT_MS_Capabilities.Capability[0].Layer[0].Layer;

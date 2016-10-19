@@ -384,23 +384,21 @@ function getIcon(coordinates, iconStyle) {
 	return vectorLayer;
 }
 
-function setExtentCenter(areaSession, area, nameLayer, name, layerItem) {
-	if(areaSession === area) {
-		if(nameLayer === name) {
-			var minx = layerItem.BoundingBox[0].$.minx;
-			var maxx = layerItem.BoundingBox[0].$.maxx;
-			var miny = layerItem.BoundingBox[0].$.miny;
-			var maxy = layerItem.BoundingBox[0].$.maxy;
-			
-			var center1 = ((+maxx - +minx) / 2) + +minx;
-			var center2 = ((+maxy - +miny) / 2) + +miny;
-			
-			var extent = [minx, miny, maxx, maxy];
-			var center = [center1, center2];
-			
-			Session.set('mapExtent', extent);
-			Session.set('mapCenter', center);
-		}
+function setExtentCenter(item) {
+	if(item.Name[0] === 'Landschapskaart_deelgebied_' + Session.get('area')) {
+		var minx = item.BoundingBox[0].$.minx;
+		var maxx = item.BoundingBox[0].$.maxx;
+		var miny = item.BoundingBox[0].$.miny;
+		var maxy = item.BoundingBox[0].$.maxy;
+		
+		var center1 = ((+maxx - +minx) / 2) + +minx;
+		var center2 = ((+maxy - +miny) / 2) + +miny;
+		
+		var extent = [minx, miny, maxx, maxy];
+		var center = [center1, center2];
+		
+		Session.set('mapExtent', extent);
+		Session.set('mapCenter', center);
 	}
 }
 
@@ -410,11 +408,7 @@ function getDeelgebied(coordinates) {
 				map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
 	
 	Meteor.call('getDeelgebied', url, function(err, result) {
-		if(result === 'Baneheide' || result === 'Bekken van Heerlen' || result === 'Doenrade' || 
-				result === 'Eperheide' || result === 'Geleenbeek' || result === 'Geuldal' || 
-				result === 'Maasdal' || result === 'Maasterras Gronsveld' || result === 'Margraten' || 
-				result === 'Roode Beek' || result === 'Schimmert' || result === 'Ubachsberg' || 
-				result === 'Vijlenerbos') {
+		if(typeof result !== 'undefined' && result !== '') {
 			Session.set('area', result);
 			
 			$('#js-next').attr('style', 'pointer-events:auto;color:#ffffff !important;');
@@ -428,24 +422,10 @@ function getDeelgebied(coordinates) {
 			$('#js-next-icon').attr('style', 'color:grey !important;');
 		}
 		
-		Meteor.call('getBoundingBox', Meteor.settings.public.deelgebiedenService.urlSK, function(err, result) {
+		Meteor.call('getLayer', Meteor.settings.public.deelgebiedenService.urlSK, function(err, result) {
 			$.each(result, function(index, item) {
-				if(Session.get('area') !== 'undefined') {
-					var area = Session.get('area');
-					
-					setExtentCenter(area, 'Baneheide', item.Name[0], 'Landschapskaart_deelgebied_Baneheide', item);
-					setExtentCenter(area, 'Bekken van Heerlen', item.Name[0], 'Landschapskaart_deelgebied_Heerlen', item);
-					setExtentCenter(area, 'Doenrade', item.Name[0], 'Landschapskaart_deelgebied_Doenrade', item);
-					setExtentCenter(area, 'Eperheide', item.Name[0], 'Landschapskaart_deelgebied_Eperheide', item);
-					setExtentCenter(area, 'Geleenbeek', item.Name[0], 'Landschapskaart_deelgebied_Geleenbeek', item);
-					setExtentCenter(area, 'Geuldal', item.Name[0], 'Landschapskaart_deelgebied_Geuldal', item);
-					setExtentCenter(area, 'Maasdal', item.Name[0], 'Landschapskaart_deelgebied_Maasdal', item);
-					setExtentCenter(area, 'Maasterras Gronsveld', item.Name[0], 'Landschapskaart_deelgebied_Gronsveld', item);
-					setExtentCenter(area, 'Margraten', item.Name[0], 'Landschapskaart_deelgebied_Margraten', item);
-					setExtentCenter(area, 'Roode Beek', item.Name[0], 'Landschapskaart_deelgebied_Roode_beek', item);
-					setExtentCenter(area, 'Schimmert', item.Name[0], 'Landschapskaart_deelgebied_Schimmert', item);
-					setExtentCenter(area, 'Ubachsberg', item.Name[0], 'Landschapskaart_deelgebied_Ubachsberg', item);
-					setExtentCenter(area, 'Vijlenerbos', item.Name[0], 'Landschapskaart_deelgebied_Vijlenerbos', item);
+				if(typeof Session.get('area') !== 'undefined' && Session.get('area') !== null) {
+					setExtentCenter(item);
 				}
 			});
 		});

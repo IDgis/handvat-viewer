@@ -31,7 +31,7 @@ Template.step_5.onRendered(function() {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			Meteor.call('getText', result.content, Meteor.settings.public.step5Text, function(err, result) {
+			Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap4Links, function(err, result) {
 				if(typeof result !== 'undefined') {
 					$('#intro-text-5').append(result.content);
 				}
@@ -63,17 +63,18 @@ Template.step_5.onRendered(function() {
 				var image = document.createElement('img');
 				$(image).attr('class', 'kernkwaliteit-img');
 				$(image).attr('id', item.id);
+				$(image).attr('data-coupling', item.appCoupling);
 				
-				if(item.id === Meteor.settings.public.cultuurhistorieId) {
+				if(item.appCoupling === Meteor.settings.public.cultuurhistorie) {
 					$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
 							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/ch.jpg');
-				} else if(item.id === Meteor.settings.public.openBeslotenId) {
+				} else if(item.appCoupling === Meteor.settings.public.openbesloten) {
 					$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
 							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/ob.jpg');
-				} else if(item.id === Meteor.settings.public.reliefId) {
+				} else if(item.appCoupling === Meteor.settings.public.relief) {
 					$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
 							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/r.jpg');
-				} else if(item.id === Meteor.settings.public.groenKarakterId) {
+				} else if(item.appCoupling === Meteor.settings.public.groenkarakter) {
 					$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
 							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/gk.jpg');
 				}
@@ -200,7 +201,7 @@ Template.step_5.helpers({
 					'Content-Type' : 'application/json; charset=UTF-8'
 				}
 			}, function(err, result) {
-				Meteor.call('getText', result.content, Session.get('kernkwaliteitId'), function(err, result) {
+				Meteor.call('getTextFromId', result.content, Session.get('kernkwaliteitId'), function(err, result) {
 					if(typeof result !== 'undefined') {
 						var div = document.createElement('div');
 						$(div).attr('class', 'col-xs-12 text-div');
@@ -246,7 +247,7 @@ Template.step_5.helpers({
 									'Content-Type' : 'application/json; charset=UTF-8'
 								}
 							}, function(err, result) {
-								Meteor.call('getText', result.content, item, function(err, result) {
+								Meteor.call('getTextFromId', result.content, item, function(err, result) {
 									if(typeof result !== 'undefined') {
 										$.each(result.images, function(ix, elt) {
 											$(innerDiv).append(elt);
@@ -273,7 +274,7 @@ Template.step_5.helpers({
 									'Content-Type' : 'application/json; charset=UTF-8'
 								}
 							}, function(err, result) {
-								Meteor.call('getText', result.content, item, function(err, result) {
+								Meteor.call('getTextFromId', result.content, item, function(err, result) {
 									if(typeof result !== 'undefined') {
 										$.each(result.images, function(ix, elt) {
 											$(innerDiv).append(elt);
@@ -308,25 +309,21 @@ Template.step_5.helpers({
 
 Template.step_5.events ({
 	'click .kernkwaliteit-img': function(e) {
-		if(e.target.id === Meteor.settings.public.openBeslotenId) {
+		var coupling = $(e.target).attr('data-coupling');
+		
+		if(coupling === Meteor.settings.public.openbesloten) {
 			addServiceLayers(e.target.id, false, e.target, Meteor.settings.public.openBeslotenService.url, 
 					Meteor.settings.public.openBeslotenService.layers, 
 					Meteor.settings.public.openBeslotenService.version);
-		}
-		
-		if(e.target.id === Meteor.settings.public.cultuurhistorieId) {
+		} else if(coupling === Meteor.settings.public.cultuurhistorie) {
 			addServiceLayers(e.target.id, false, e.target, Meteor.settings.public.cultuurhistorieService.url, 
 					Meteor.settings.public.cultuurhistorieService.layers, 
 					Meteor.settings.public.cultuurhistorieService.version);
-		}
-		
-		if(e.target.id === Meteor.settings.public.reliefId) {
+		} else if(coupling === Meteor.settings.public.relief) {
 			addServiceLayers(e.target.id, false, e.target, Meteor.settings.public.reliefService.url, 
 					Meteor.settings.public.reliefService.layers, 
 					Meteor.settings.public.reliefService.version);
-		}
-		
-		if(e.target.id === Meteor.settings.public.groenKarakterId) {
+		} else if(coupling === Meteor.settings.public.groenkarakter) {
 			addServiceLayers(e.target.id, false, e.target, Meteor.settings.public.groenKarakterService.url, 
 					Meteor.settings.public.groenKarakterService.layers, 
 					Meteor.settings.public.groenKarakterService.version);

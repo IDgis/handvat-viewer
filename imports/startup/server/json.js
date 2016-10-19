@@ -6,7 +6,8 @@ Meteor.methods({
 		var json = JSON.parse(content);
 		json.forEach(function(item) {
 			if(item.texttype === texttype) {
-				var element = {'id': item.id, 'name' : item.name, 'content' : item.html, 'images' : item.images};
+				var element = {'id': item.id, 'name' : item.name, 'appCoupling' : item.appCoupling,
+						'content' : item.html, 'images' : item.images};
 				array.push(element);
 			}
 		});
@@ -16,8 +17,10 @@ Meteor.methods({
 	getOntwerpen: function(content, landschapstype, sector, kernkwaliteit) {
 		var array = [];
 		var json = JSON.parse(content);
+		var algemeen = Meteor.call('getIdFromCoupling', Meteor.settings.public.Algemeen);
+		
 		json.forEach(function(item) {
-			if((item.landschapstype === landschapstype || item.landschapstype === Meteor.settings.algemeenId) && 
+			if((item.landschapstype === landschapstype || item.landschapstype === algemeen) && 
 					item.sector === sector && item.kernkwaliteit === kernkwaliteit) {
 				item.ontwerpprincipe.forEach(function(item) {
 					array.push(item);

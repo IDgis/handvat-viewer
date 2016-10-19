@@ -26,10 +26,10 @@
 	  
 	  "Algemeen": "landschapstype-algemeen",
 	  
-	  "kkRelief": "kernkwaliteit-relief",
-	  "kkCultuurhistorie": "kernkwaliteit-cultuurhistorie",
-	  "kkGroenKarakter": "kernkwaliteit-groenkarakter",
-	  "kkOpenBesloten": "kernkwaliteit-openbesloten",
+	  "relief": "kernkwaliteit-relief",
+	  "cultuurhistorie": "kernkwaliteit-cultuurhistorie",
+	  "groenkarakter": "kernkwaliteit-groenkarakter",
+	  "openbesloten": "kernkwaliteit-openbesloten",
 	  
 	  "Baneheide": "deelgebied-baneheide",
 	  "Bekken van Heerlen": "deelgebied-bekken-heerlen",
@@ -135,15 +135,15 @@
 	    			"Landschapskaart_deelgebied_Schimmert", "Landschapskaart_deelgebied_Ubachsberg", 
 	    			"Landschapskaart_deelgebied_Vijlenerbos"],
 	    "Baneheide": 0,
-	    "BekkenvanHeerlen": 1,
+	    "Bekken van Heerlen": 1,
 	    "Doenrade": 2,
 	    "Eperheide": 3,
 	    "Geleenbeek": 4,
 	    "Geuldal": 5,
 	    "Maasdal": 6,
-	    "MaasterrasGronsveld": 7,
+	    "Maasterras Gronsveld": 7,
 	    "Margraten": 8,
-	    "RoodeBeek": 9,
+	    "Roode Beek": 9,
 	    "Schimmert": 10,
 	    "Ubachsberg": 11,
 	    "Vijlenerbos": 12

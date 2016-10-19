@@ -55,6 +55,16 @@ Template.main.onRendered(function() {
 		});
 	});
 	
+	String.prototype.replaceAll = function(s1, s2) {  
+		var str = this;  
+		var pos = str.indexOf(s1);  
+		while (pos > -1) {  
+			str = str.replace(s1, s2);
+			pos = str.indexOf(s1);
+		}
+		return (str);
+	}
+	
 	$('#banner').resize(setBannerSize);
 	$('#tabs-main').resize(setNavigationSize);
 	$('html').resize(setPageHeight);
@@ -148,5 +158,7 @@ function setPageHeight() {
 	
 	$('#page').attr('style', 'height:' + pageHeight + 'px');
 	
-	map.updateSize();
+	if(typeof map !== 'undefined') {
+		map.updateSize();
+	}
 }

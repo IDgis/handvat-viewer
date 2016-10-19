@@ -20,13 +20,13 @@ Template.explain.onRendered(function() {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getText', result.content, Meteor.settings.public.explainText, function(err, result) {
+		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.uitlegLinks, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$('#text-container-explain').append(result.content);
 			}
 		});
 		
-		Meteor.call('getText', result.content, Meteor.settings.public.explainImage, function(err, result) {
+		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.uitlegRechts, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$('#viewer-container-explain').append(result.content);
 			}

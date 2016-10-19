@@ -20,13 +20,13 @@ Template.step_1.onRendered(function() {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getText', result.content, Meteor.settings.public.step1Text, function(err, result) {
+		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap1Links, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$('#text-container-1').append(result.content);
 			}
 		});
 		
-		Meteor.call('getText', result.content, Meteor.settings.public.step1Image, function(err, result) {
+		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap1Rechts, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$('#viewer-container-1').append(result.content);
 			}

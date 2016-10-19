@@ -9,7 +9,7 @@ Template.entry.onRendered(function() {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getText', result.content, Meteor.settings.public.entryImage, function(err, result) {
+		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.entree, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$('#container-entry').append(result.content);
 			}

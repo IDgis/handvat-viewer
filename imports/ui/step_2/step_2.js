@@ -33,22 +33,12 @@ Template.step_2.onRendered(function() {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getText', result.content, Meteor.settings.public.step2Text, function(err, result) {
+		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap2Links, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$('#text-2').append(result.content);
 			}
 		});
 	});
-	
-	String.prototype.replaceAll = function(s1, s2) {  
-		var str = this;  
-		var pos = str.indexOf(s1);  
-		while (pos > -1) {  
-			str = str.replace(s1, s2);
-			pos = str.indexOf(s1);
-		}
-		return (str);
-	}
 	
 	var projection = new ol.proj.Projection({
 		code: 'EPSG:28992',

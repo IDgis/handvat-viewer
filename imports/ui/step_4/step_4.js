@@ -18,7 +18,7 @@ Template.step_4.onRendered(function() {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			Meteor.call('getText', result.content, Meteor.settings.public.step4Text, function(err, result) {
+			Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap4Links, function(err, result) {
 				if(typeof result !== 'undefined') {
 					$('#text-4').append(result.content);
 				}

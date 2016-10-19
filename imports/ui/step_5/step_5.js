@@ -31,7 +31,7 @@ Template.step_5.onRendered(function() {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap4Links, function(err, result) {
+			Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap5Links, function(err, result) {
 				if(typeof result !== 'undefined') {
 					$('#intro-text-5').append(result.content);
 				}

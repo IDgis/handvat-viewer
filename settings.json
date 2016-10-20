@@ -24,26 +24,10 @@
 	  "stap5Links": "stap-5-links",
 	  "stap6Links": "stap-6-links",
 	  
-	  "Algemeen": "landschapstype-algemeen",
-	  
 	  "relief": "kernkwaliteit-relief",
 	  "cultuurhistorie": "kernkwaliteit-cultuurhistorie",
 	  "groenkarakter": "kernkwaliteit-groenkarakter",
 	  "openbesloten": "kernkwaliteit-openbesloten",
-	  
-	  "Baneheide": "deelgebied-baneheide",
-	  "Bekken van Heerlen": "deelgebied-bekken-heerlen",
-	  "Doenrade": "deelgebied-doenrade",
-	  "Eperheide": "deelgebied-eperheide",
-	  "Geleenbeek": "deelgebied-geleenbeek",
-	  "Geuldal": "deelgebied-geuldal",
-	  "Maasdal": "deelgebied-maasdal",
-	  "Maasterras Gronsveld": "deelgebied-maasterras-gronsveld",
-	  "Margraten": "deelgebied-margraten",
-	  "Roode Beek": "deelgebied-roode-beek",
-	  "Schimmert": "deelgebied-schimmert",
-	  "Ubachsberg": "deelgebied-ubachsberg",
-	  "Vijlenerbos": "deelgebied-vijlenerbos",
 	  
 	  "cultuurhistorieService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?",

@@ -46,3 +46,8 @@ p.header {margin-bottom:0;font-weight:bold;}
 #js-home:hover, #js-previous:hover, #js-next:hover {cursor:pointer;}
 
 #footer {height:30px;width:66%;margin-right:30px;}
+
+#js-home-icon {-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);
+	-o-transform:rotate(45deg);transform:rotate(45deg);margin-right:3px;font-size:16px;}
+#js-home {margin-right:20px;position:relative;top:-1px;}
+#js-previous {margin-right:10px;}

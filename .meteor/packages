@@ -20,7 +20,7 @@ ecmascript@0.5.8              # Enable ECMAScript2015+ syntax in app code
 autopublish@1.0.7             # Publish all data to the clients (for prototyping)
 insecure@1.0.7                # Allow all DB writes from clients (for prototyping)
 iron:router
-mizzao:bootstrap-3
+twbs:bootstrap
 http@1.2.9
 session@1.1.6
 alon:ol3

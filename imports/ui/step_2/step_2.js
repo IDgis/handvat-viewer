@@ -385,7 +385,8 @@ function getIcon(coordinates, iconStyle) {
 }
 
 function setExtentCenter(item) {
-	if(item.Name[0] === 'Landschapskaart_deelgebied_' + Session.get('area')) {
+	var tiff = 'Landschapskaart_deelgebied_' + Session.get('area').replaceAll(' ', '_');
+	if(item.Name[0].toLowerCase() === tiff.toLowerCase()) {
 		var minx = item.BoundingBox[0].$.minx;
 		var maxx = item.BoundingBox[0].$.maxx;
 		var miny = item.BoundingBox[0].$.miny;

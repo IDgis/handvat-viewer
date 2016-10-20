@@ -70,12 +70,8 @@ Template.step_3.onRendered(function() {
 	
 	map.getLayers().item(0).setOpacity(0);
 	
-	var deelgebiedCoupling;
-	
 	if(typeof Session.get('area') !== 'undefined') {
-		var area = Session.get('area');
-		var layerId = Meteor.settings.public.landschapStructuurService[area];
-		deelgebiedCoupling = Meteor.settings.public[area];
+		var layerId = Meteor.settings.public.landschapStructuurService[Session.get('area')];
 		
 		var areaLayer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
@@ -105,8 +101,8 @@ Template.step_3.onRendered(function() {
 			}
 		});
 		
-		if(typeof deelgebiedCoupling !== 'undefined') {
-			Meteor.call('getTextFromCoupling', result.content, deelgebiedCoupling, function(err, result) {
+		if(typeof Session.get('area') !== 'undefined') {
+			Meteor.call('getTextFromName', result.content, Session.get('area'), function(err, result) {
 				if(typeof result !== 'undefined') {
 					$('#dg-text-3').append(result.content);
 				} else {

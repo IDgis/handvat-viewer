@@ -143,6 +143,24 @@ Template.main.events({
 		} else if(step === '5') {
 			Router.go('step_6');
 		}
+	},
+	'click #js-step-1': function() {
+		Router.go('step_1');
+	},
+	'click #js-step-2': function() {
+		Router.go('step_2');
+	},
+	'click #js-step-3': function() {
+		Router.go('step_3');
+	},
+	'click #js-step-4': function() {
+		Router.go('step_4');
+	},
+	'click #js-step-5': function() {
+		Router.go('step_5');
+	},
+	'click #js-step-6': function() {
+		Router.go('step_6');
 	}
 });
 
@@ -160,7 +178,7 @@ function setBannerSize() {
 function setTabsWidth() {
 	var tabsWidth = $(window).width() + 17;
 	
-	if(tabsWidth > 759) {
+	if(tabsWidth > 789) {
 		var tabWidth = (((tabsWidth /3) * 2) / 6) -4;
 		$('.tab-step').attr('style', 'width:' + tabWidth + 'px');
 	}

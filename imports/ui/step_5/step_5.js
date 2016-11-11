@@ -5,11 +5,6 @@ Template.step_5.onRendered(function() {
 	Session.set('stepNumber', '5');
 	Session.set('ltActive', true);
 	
-	var stepBarUrl = window.location.protocol + '//' + window.location.hostname + ':' + 
-					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/step_5.jpg';
-	
-	$('#tabs-main-img').attr('src', stepBarUrl);
-	
 	$('#js-previous').attr('style', 'pointer-events:auto;color:#ffffff !important;');
 	$('#js-previous-icon').attr('style', 'color:#ffffff !important;');
 	

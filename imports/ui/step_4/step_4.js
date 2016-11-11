@@ -4,11 +4,6 @@ import './step_4.css';
 Template.step_4.onRendered(function() {
 	Session.set('stepNumber', '4');
 	
-	var stepBarUrl = window.location.protocol + '//' + window.location.hostname + ':' + 
-					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/step_4.jpg';
-	
-	$('#tabs-main-img').attr('src', stepBarUrl);
-	
 	$('#js-previous').attr('style', 'pointer-events:auto;color:#ffffff !important;');
 	$('#js-previous-icon').attr('style', 'color:#ffffff !important;');
 	

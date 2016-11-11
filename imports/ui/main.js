@@ -66,8 +66,30 @@ Template.main.onRendered(function() {
 	}
 	
 	$('#banner').resize(setBannerSize);
-	$('#tabs-main').resize(setNavigationSize);
+	$('#tabs').resize(setTabsWidth);
 	$('html').resize(setPageHeight);
+});
+
+Template.main.helpers({
+	doneTab: function(page) {
+		var curPage = parseInt(Session.get('stepNumber'));
+		
+		if(curPage > page) {
+			return 'done-tab-step';
+		}
+	},
+	activeTab: function(page) {
+		var curPage = parseInt(Session.get('stepNumber'));
+		
+		if(curPage === page) {
+			return 'active';
+		}
+		
+		if(page === 'none' && curPage !== 1 && curPage !== 2 && curPage !== 3 && curPage !== 4 && 
+				curPage !== 5 && curPage !== 6) {
+			return 'active';
+		}
+	}
 });
 
 Template.main.events({
@@ -76,8 +98,9 @@ Template.main.events({
 		Session.clear();
 	},
 	'click #js-home': function() {
-		Router.go('start');
 		Session.clear();
+		Router.go('start');
+		Session.set('stepNumber', 'start');
 	},
 	'click #js-previous': function() {
 		var step = Session.get('stepNumber');
@@ -134,15 +157,13 @@ function setBannerSize() {
 	$('#banner-links').attr('style', 'top:' + linksOffset + 'px');
 }
 
-function setNavigationSize() {
-	var bannerWidth = $('#banner').width();
-	var bannerHeight = bannerWidth / 13.09375;
+function setTabsWidth() {
+	var tabsWidth = $(window).width() + 17;
 	
-	var tabsWidth = $('#tabs-main').width();
-	var tabsHeight = tabsWidth / 33.031008;
-	
-	var navigationOffset = (bannerHeight + (((tabsHeight * 0.6744) / 2)) - 8);
-	$('#navigation-buttons').attr('style', 'top:' + navigationOffset + 'px');
+	if(tabsWidth > 759) {
+		var tabWidth = (((tabsWidth /3) * 2) / 6) -4;
+		$('.tab-step').attr('style', 'width:' + tabWidth + 'px');
+	}
 }
 
 function setPageHeight() {
@@ -151,8 +172,7 @@ function setPageHeight() {
 	var bannerWidth = $('#banner').width();
 	var bannerHeight = bannerWidth / 13.09375;
 	
-	var tabsWidth = $('#tabs-main').width();
-	var tabsHeight = tabsWidth / 33.031008;
+	var tabsHeight = $('#tabs').height();
 	
 	var pageHeight = documentHeight - bannerHeight - tabsHeight - 20 - 45;
 	

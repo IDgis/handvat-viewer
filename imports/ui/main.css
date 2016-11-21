@@ -87,3 +87,5 @@ html.wait, html.wait * {cursor:wait !important;}
 	-o-transform:rotate(45deg);transform:rotate(45deg);margin-right:3px;font-size:16px;}
 #js-home {margin-right:20px;position:relative;top:-1px;}
 #js-previous {margin-right:10px;}
+
+.icon-button {height:14px;margin-right:5px;}

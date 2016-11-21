@@ -313,12 +313,20 @@ Template.step_5.helpers({
 				Session.get('kernkwaliteitId') === null) {
 			return 'hide-element';
 		}
+	},
+	chBaseLayerOptions: function() {
+		if(!Session.get('chActive')) {
+			return 'hide-element';
+		}
 	}
 });
 
 Template.step_5.events ({
 	'click .kernkwaliteit-img': function(e) {
 		var coupling = $(e.target).attr('data-coupling');
+		Session.set('chActive', false);
+		
+		$('#ch-base-select-5')[0].options[0].selected = 'selected';
 		
 		if(coupling === Meteor.settings.public.openbesloten) {
 			addServiceLayers(e.target.id, false, e.target, Meteor.settings.public.openBeslotenService.url, 
@@ -328,6 +336,8 @@ Template.step_5.events ({
 			addServiceLayers(e.target.id, false, e.target, Meteor.settings.public.cultuurhistorieService.url, 
 					Meteor.settings.public.cultuurhistorieService.layers, 
 					Meteor.settings.public.cultuurhistorieService.version);
+			
+			Session.set('chActive', true);
 		} else if(coupling === Meteor.settings.public.relief) {
 			addServiceLayers(e.target.id, false, e.target, Meteor.settings.public.reliefService.url, 
 					Meteor.settings.public.reliefService.layers, 
@@ -357,14 +367,46 @@ Template.step_5.events ({
 		addServiceLayers(null, true, e.target, Meteor.settings.public.landschapstypenService.url, 
 				Meteor.settings.public.landschapstypenService.layers, 
 				Meteor.settings.public.landschapstypenService.version);
+		
+		Session.set('chActive', false);
 	},
 	'click #pol-img': function(e) {
 		addServiceLayers(null, false, e.target, Meteor.settings.public.polService.url, 
 				Meteor.settings.public.polService.layers, Meteor.settings.public.polService.version);
+		
+		Session.set('chActive', false);
 	},
 	'click #nb-img': function(e) {
 		addServiceLayers(null, false, e.target, Meteor.settings.public.natuurbeheerService.url, 
 				Meteor.settings.public.natuurbeheerService.layers, Meteor.settings.public.natuurbeheerService.version);
+		
+		Session.set('chActive', false);
+	},
+	'change #ch-base-select-5': function(e) {
+		map.getLayers().clear();
+		
+		if(e.target.value === 'Luchtfoto') {
+			setLufoLayers();
+		} else if(e.target.value === 'Tranchot') {
+			setTranchotLayers();
+		}
+		
+		var chUrl = Meteor.settings.public.cultuurhistorieService.url;
+		var chVersion = Meteor.settings.public.cultuurhistorieService.version;
+		var chLayers = Meteor.settings.public.cultuurhistorieService.layers;
+		
+		chLayers.forEach(function(item) {
+			var layer = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: chUrl, 
+					params: {'LAYERS': item, 'VERSION': chVersion} 
+				})
+			});
+			
+			map.addLayer(layer);
+		});
+		
+		setOpacity();
 	}
 });
 
@@ -443,6 +485,23 @@ function setLufoLayers() {
 			source: new ol.source.ImageWMS({
 				url: urlLufo, 
 				params: {'LAYERS': item, 'VERSION': versionLufo} 
+			})
+		});
+		
+		map.addLayer(layer);
+	});
+}
+
+function setTranchotLayers() {
+	var urlTranchot = Meteor.settings.public.tranchotService.url;
+	var layersTranchot = Meteor.settings.public.tranchotService.layers;
+	var versionTranchot = Meteor.settings.public.tranchotService.version;
+	
+	layersTranchot.forEach(function(item) {
+		var layer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
+				url: urlTranchot, 
+				params: {'LAYERS': item, 'VERSION': versionTranchot} 
 			})
 		});
 		

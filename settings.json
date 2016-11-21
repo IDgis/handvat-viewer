@@ -71,6 +71,11 @@
 	    "version": "1.1.1",
 	    "layers": ["Luchtfoto hoge resolutie"]
 	  },
+	  "tranchotService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?",
+	    "version": "1.1.1",
+	    "layers": ["Tranchotkaarten"]
+	  },
 	  "top10Service": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/topoNLZL?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
 	    "version": "1.1.1",

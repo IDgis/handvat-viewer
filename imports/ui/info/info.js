@@ -2,6 +2,8 @@ import './info.html';
 import './info.css';
 
 Template.info.onRendered(function() {
+	setCursorInProgress();
+	
 	Session.set('stepNumber', 'info');
 	
 	$('#js-previous').attr('style', 'pointer-events:auto;color:#ffffff !important;');
@@ -26,5 +28,7 @@ Template.info.onRendered(function() {
 				$('#viewer-container-info').append(result.content);
 			}
 		});
+		
+		setCursorDone();
 	});
 });

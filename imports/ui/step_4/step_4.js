@@ -8,6 +8,8 @@ Template.step_4.onRendered(function() {
 	$('#js-previous-icon').attr('style', 'color:#ffffff !important;');
 	
 	if(typeof Session.get('area') !== 'undefined' && Session.get('area') !== null) {
+		setCursorInProgress();
+		
 		HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
@@ -53,6 +55,8 @@ Template.step_4.onRendered(function() {
 					}
 				});
 			});
+			
+			setCursorDone();
 		});
 	} else {
 		$('#text-4').append('U heeft geen valide deelgebied geselecteerd.');
@@ -69,6 +73,8 @@ Template.step_4.onRendered(function() {
 
 Template.step_4.events ({
 	'click .sector-btn-4': function(e) {
+		setCursorInProgress();
+		
 		var sectorName = $(e.target).attr('data-name');
 		Session.set('sectorName', sectorName);
 		
@@ -96,6 +102,8 @@ Template.step_4.events ({
 					$('#js-next-icon').attr('style', 'color:grey !important;');
 				}
 			});
+			
+			setCursorDone();
 		});
 	}
 });

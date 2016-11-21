@@ -2,6 +2,7 @@ import './step_3.html';
 import './step_3.css';
 
 Template.step_3.onRendered(function() {
+	setCursorInProgress();
 	Session.set('stepNumber', '3');
 	
 	$('#js-previous').attr('style', 'pointer-events:auto;color:#ffffff !important;');
@@ -105,6 +106,8 @@ Template.step_3.onRendered(function() {
 				}
 			});
 		}
+		
+		setCursorDone();
 	});
 	
 	var iconStyle = new ol.style.Style({
@@ -167,6 +170,8 @@ Template.step_3.helpers({
 		$('#lb-text-3').empty();
 		
 		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null) {
+			setCursorInProgress();
+			
 			HTTP.get("http://148.251.183.26/handvat-admin/coupling/leidend/json", {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
@@ -236,6 +241,8 @@ Template.step_3.helpers({
 						}
 					});
 				});
+				
+				setCursorDone();
 			});
 		}
 	}

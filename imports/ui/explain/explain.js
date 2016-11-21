@@ -2,6 +2,8 @@ import './explain.html';
 import './explain.css';
 
 Template.explain.onRendered(function() {
+	setCursorInProgress();
+	
 	Session.set('stepNumber', 'explain');
 	
 	$('#js-previous').attr('style', 'pointer-events:auto;color:#ffffff !important;');
@@ -26,5 +28,7 @@ Template.explain.onRendered(function() {
 				$('#viewer-container-explain').append(result.content);
 			}
 		});
+		
+		setCursorDone();
 	});
 });

@@ -2,6 +2,8 @@ import './start.html';
 import './start.css';
 
 Template.start.onRendered(function() {
+	setCursorInProgress();
+	
 	Session.set('stepNumber', 'start');
 	
 	$('#js-previous').attr('style', 'pointer-events:none;color:grey !important;');
@@ -26,5 +28,7 @@ Template.start.onRendered(function() {
 				$('#viewer-container-start').append(result.content);
 			}
 		});
+		
+		setCursorDone();
 	});
 });

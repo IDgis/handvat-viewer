@@ -2,6 +2,8 @@ import './step_5.html';
 import './step_5.css';
 
 Template.step_5.onRendered(function() {
+	setCursorInProgress();
+	
 	Session.set('stepNumber', '5');
 	Session.set('ltActive', true);
 	
@@ -31,6 +33,8 @@ Template.step_5.onRendered(function() {
 					$('#intro-text-5').append(result.content);
 				}
 			});
+			
+			setCursorDone();
 		});
 	} else {
 		if((typeof Session.get('area') === 'undefined' || Session.get('area') === null) &&
@@ -112,6 +116,8 @@ Template.step_5.onRendered(function() {
 			
 			setBorderThumbnail($('#landschapstype-img'));
 		});
+		
+		setCursorDone();
 	});
 	
 	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCenter') === 'undefined') {
@@ -191,6 +197,8 @@ Template.step_5.helpers({
 		$('#kk-text-5').empty();
 		
 		if(typeof Session.get('kernkwaliteitId') !== 'undefined' && Session.get('kernkwaliteitId') !== null) {
+			setCursorInProgress();
+			
 			HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
@@ -204,6 +212,8 @@ Template.step_5.helpers({
 						$('#kk-text-5').append(div);
 					}
 				});
+				
+				setCursorDone();
 			});
 		}
 	},
@@ -213,6 +223,8 @@ Template.step_5.helpers({
 		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null &&
 				typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null &&
 				typeof Session.get('kernkwaliteitId') !== 'undefined' && Session.get('kernkwaliteitId') !== null) {
+			setCursorInProgress();
+			
 			HTTP.get("http://148.251.183.26/handvat-admin/coupling/ontwerp/json", {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
@@ -287,6 +299,8 @@ Template.step_5.helpers({
 						}
 					});
 				});
+				
+				setCursorDone();
 			});
 		}
 	},
@@ -468,5 +482,5 @@ function addServiceLayers(kkId, ltActive, element, url, layers, version) {
 		map.addLayer(iconLayer);
 	}
 	
-	setOpacity();
+	setOpacity()
 }

@@ -6,6 +6,8 @@ import './main.css';
 import './main.html';
 
 Template.main.onRendered(function() {
+	setCursorInProgress();
+	
 	var bannerUrl = window.location.protocol + '//' + window.location.hostname + ':' + 
 					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/banner.jpg';
 	
@@ -53,6 +55,8 @@ Template.main.onRendered(function() {
 				$('#disclaimer-main').append(result.content);
 			}
 		});
+		
+		setCursorDone();
 	});
 	
 	String.prototype.replaceAll = function(s1, s2) {  

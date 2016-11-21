@@ -2,6 +2,8 @@ import './step_2.html';
 import './step_2.css';
 
 Template.step_2.onRendered(function() {
+	setCursorInProgress();
+	
 	Session.set('stepNumber', '2');
 	
 	$('#js-previous').attr('style', 'pointer-events:auto;color:#ffffff !important;');
@@ -33,6 +35,8 @@ Template.step_2.onRendered(function() {
 				$('#text-2').append(result.content);
 			}
 		});
+		
+		setCursorDone();
 	});
 	
 	var projection = new ol.proj.Projection({
@@ -152,6 +156,8 @@ Template.step_2.onRendered(function() {
 
 Template.step_2.events ({
 	'keyup #js-input-address-search': function(e) {
+		setCursorInProgress();
+		
 		if(e.target.value !== '') {
 			$('#address-suggestions').attr('style', 'display:block;');
 		} else {
@@ -192,8 +198,12 @@ Template.step_2.events ({
 				}
 			});
 		});
+		
+		setCursorDone();
 	},
 	'keyup #js-input-cadastre-search': function(e) {
+		setCursorInProgress();
+		
 		if(e.target.value !== '') {
 			$('#cadastre-suggestions').attr('style', 'display:block;');
 		} else {
@@ -235,24 +245,36 @@ Template.step_2.events ({
 				}
 			});
 		});
+		
+		setCursorDone();
 	},	
 	'click .address-suggestion': function(e) {
+		setCursorInProgress();
+		
 		var element = $(e.target).parent()[0];
 		var input = $('.address-input', element)[0];
 		var suggestion = $('.address-suggestion-append', element)[0];
 		
 		$('#js-input-address-search').val(input.innerHTML + suggestion.innerHTML);
 		$('#address-suggestions').attr('style', 'display:none;');
+		
+		setCursorDone();
 	},	
 	'click .cadastre-suggestion': function(e) {
+		setCursorInProgress();
+		
 		var element = $(e.target).parent()[0];
 		var input = $('.cadastre-input', element)[0];
 		var suggestion = $('.cadastre-suggestion-append', element)[0];
 		
 		$('#js-input-cadastre-search').val(input.innerHTML + suggestion.innerHTML.replaceAll('&nbsp;', ' '));
 		$('#cadastre-suggestions').attr('style', 'display:none;');
+		
+		setCursorDone();
 	},
 	'click #js-execute-address-search': function(e) {
+		setCursorInProgress();
+		
 		$('#address-suggestions').attr('style', 'display:none;');
 		var searchValue = $('#js-input-address-search').val();
 		var url = 'http://bag.idgis.nl/geoide-search-service/bag/search?q=' + searchValue + '&srs=28992';
@@ -295,8 +317,12 @@ Template.step_2.events ({
 				$('#no-results-found-search').attr('style', 'display:block;');
 			}
 		});
+		
+		setCursorDone();
 	},
 	'click #js-execute-cadastre-search': function(e) {
+		setCursorInProgress();
+		
 		$('#cadastre-suggestions').attr('style', 'display:none;');
 		$('#cadastre-search-results').empty();
 		
@@ -350,8 +376,12 @@ Template.step_2.events ({
 				$('#no-results-found-search').attr('style', 'display:block;');
 			}
 		});
+		
+		setCursorDone();
 	},
 	'change #search-method-select': function(e) {
+		setCursorInProgress();
+		
 		var searchValue = e.target.value;
 		if(searchValue === 'address') {
 			$('#address-search').attr('style', 'display:block;');
@@ -360,6 +390,8 @@ Template.step_2.events ({
 			$('#address-search').attr('style', 'display:none;');
 			$('#cadastre-search').attr('style', 'display:block;');
 		}
+		
+		setCursorDone();
 	}
 });
 

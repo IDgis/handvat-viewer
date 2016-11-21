@@ -12,6 +12,8 @@ Template.step_6.onRendered(function() {
 	
 	if(typeof Session.get('area') !== 'undefined' && Session.get('area') !== null &&
 			typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
+		setCursorInProgress();
+		
 		HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
@@ -22,6 +24,8 @@ Template.step_6.onRendered(function() {
 					$('#intro-text-6').append(result.content);
 				}
 			});
+			
+			setCursorDone();
 		});
 	} else {
 		$('#text-6').attr('style', 'display:none;');

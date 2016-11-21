@@ -2,6 +2,8 @@ import './entry.html';
 import './entry.css';
 
 Template.entry.onRendered(function() {
+	setCursorInProgress();
+	
 	Session.set('stepNumber', 'entry');
 	
 	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
@@ -14,6 +16,8 @@ Template.entry.onRendered(function() {
 				$('#container-entry').append(result.content);
 			}
 		});
+		
+		setCursorDone();
 	});
 });
 

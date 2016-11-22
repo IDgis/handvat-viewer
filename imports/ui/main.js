@@ -26,31 +26,31 @@ Template.main.onRendered(function() {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getText', result.content, Meteor.settings.public.handleidingId, function(err, result) {
+		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.popupHandleiding, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$('#handleiding-main').append(result.content);
 			}
 		});
 		
-		Meteor.call('getText', result.content, Meteor.settings.public.helpId, function(err, result) {
+		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.popupHelp, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$('#help-main').append(result.content);
 			}
 		});
 		
-		Meteor.call('getText', result.content, Meteor.settings.public.contactId, function(err, result) {
+		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.popupContact, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$('#contact-main').append(result.content);
 			}
 		});
 		
-		Meteor.call('getText', result.content, Meteor.settings.public.linksId, function(err, result) {
+		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.popupLinks, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$('#links-main').append(result.content);
 			}
 		});
 		
-		Meteor.call('getText', result.content, Meteor.settings.public.disclaimerId, function(err, result) {
+		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.popupDisclaimer, function(err, result) {
 			if(typeof result !== 'undefined') {
 				$('#disclaimer-main').append(result.content);
 			}
@@ -165,6 +165,70 @@ Template.main.events({
 	},
 	'click #js-step-6': function() {
 		Router.go('step_6');
+	},
+	'click .js-zoom-in': function(e) {
+		var body = $(e.target).parent().siblings('.modal-body')[0];
+		var zoomOut = $(e.target).siblings('.js-zoom-out')[0];
+		
+		$(body).removeClass('zoom-level-1');
+		$(body).removeClass('zoom-level-2');
+		$(body).removeClass('zoom-level-3');
+		$(body).removeClass('zoom-level-4');
+		$(body).removeClass('zoom-level-5');
+		
+		var zLevel = $(e.target).attr('data-zoom-level');
+		
+		if(zLevel === '1') {
+			$(body).addClass('zoom-level-2');
+			$(e.target).attr('data-zoom-level', '2');
+			$(zoomOut).attr('data-zoom-level', '2');
+		} else if(zLevel === '2') {
+			$(body).addClass('zoom-level-3');
+			$(e.target).attr('data-zoom-level', '3');
+			$(zoomOut).attr('data-zoom-level', '3');
+		} else if(zLevel === '3') {
+			$(body).addClass('zoom-level-4');
+			$(e.target).attr('data-zoom-level', '4');
+			$(zoomOut).attr('data-zoom-level', '4');
+		} else if(zLevel === '4' || zLevel === '5') {
+			$(body).addClass('zoom-level-5');
+			$(e.target).attr('data-zoom-level', '5');
+			$(zoomOut).attr('data-zoom-level', '5');
+		}
+	},
+	'click .js-zoom-out': function(e) {
+		var body = $(e.target).parent().siblings('.modal-body')[0];
+		var zoomIn = $(e.target).siblings('.js-zoom-in')[0];
+		
+		$(body).removeClass('zoom-level-1');
+		$(body).removeClass('zoom-level-2');
+		$(body).removeClass('zoom-level-3');
+		$(body).removeClass('zoom-level-4');
+		$(body).removeClass('zoom-level-5');
+		
+		var zLevel = $(e.target).attr('data-zoom-level');
+		
+		if(zLevel === '1') {
+			$(body).addClass('zoom-level-1');
+			$(e.target).attr('data-zoom-level', '1');
+			$(zoomIn).attr('data-zoom-level', '1');
+		} else if(zLevel === '2') {
+			$(body).addClass('zoom-level-1');
+			$(e.target).attr('data-zoom-level', '1');
+			$(zoomIn).attr('data-zoom-level', '1');
+		} else if(zLevel === '3') {
+			$(body).addClass('zoom-level-2');
+			$(e.target).attr('data-zoom-level', '2');
+			$(zoomIn).attr('data-zoom-level', '2');
+		} else if(zLevel === '4') {
+			$(body).addClass('zoom-level-3');
+			$(e.target).attr('data-zoom-level', '3');
+			$(zoomIn).attr('data-zoom-level', '3');
+		} else if(zLevel === '5') {
+			$(body).addClass('zoom-level-4');
+			$(e.target).attr('data-zoom-level', '4');
+			$(zoomIn).attr('data-zoom-level', '4');
+		}
 	}
 });
 

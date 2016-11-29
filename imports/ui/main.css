@@ -57,7 +57,8 @@ html.wait, html.wait * {cursor:wait !important;}
 #viewer-container-start, #viewer-container-info, #viewer-container-explain, #viewer-container-1, 
 #viewer-container-2, #viewer-container-3, #viewer-container-4, #viewer-container-5, #viewer-container-6 {
 	height:100%;margin-bottom:15px;overflow-y:auto;}
-#map-start, #map-info, #map-explain, #map-1, #map-2, #map-3, #map-4, #map-5, #map-6 {height:100%;}
+#map-start, #map-info, #map-explain, #map-1, #map-2, #map-3, #map-4, #map-5 {height:100%;}
+#map-6 {height:80%;width:80%;margin-left:auto;margin-right:auto;margin-top:15px;border:1px solid black;}
 
 .modal .modal-body {
 	max-height:500px;

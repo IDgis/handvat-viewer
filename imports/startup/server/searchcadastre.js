@@ -17,7 +17,7 @@ Meteor.methods({
 			});
 		}
 		
-		return elements;
+		return elements.sort();
 	},
 	getCadastreObjects: function(url) {
 		var res = HTTP.get(url);
@@ -35,7 +35,7 @@ Meteor.methods({
 			});
 		}
 		
-		return elements;
+		return elements.sort();
 	},
 	getCadastreCoordinates: function(url) {
 		var res = HTTP.get(url);

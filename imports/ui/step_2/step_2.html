@@ -10,14 +10,20 @@
 			<div id="address-search">
 				<p class="label-2">Adres en woonplaats</p>
 				<div class="input-group">
-					<input type="text" class="form-control" id="js-input-address-search">
-					<span class="input-group-btn">
-						<button type="button" class="btn btn-default btn-add-on-2" id="js-execute-address-search">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</span>
+					<select class="form-control" id="js-address-city">
+						<option value="none">--</option>
+					</select>
 				</div>
-				<ul class="list-group" id="address-suggestions"></ul>
+				<div class="input-group">
+					<select class="form-control" id="js-address-street">
+						<option value="none">--</option>
+					</select>
+				</div>
+				<div class="input-group">
+					<select class="form-control" id="js-address-number">
+						<option value="none">--</option>
+					</select>
+				</div>
 			</div>
 			<div id="cadastre-search">
 				<p class="label-2">Kadastrale percelen</p>
@@ -25,9 +31,13 @@
 					<select class="form-control" id="js-cadastre-kadgem">
 						<option value="none">--</option>
 					</select>
+				</div>	
+				<div class="input-group">
 					<select class="form-control" id="js-cadastre-kadsek">
 						<option value="none">--</option>
 					</select>
+				</div>
+				<div class="input-group">
 					<select class="form-control" id="js-cadastre-kadobj">
 						<option value="none">--</option>
 					</select>

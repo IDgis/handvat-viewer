@@ -17,3 +17,11 @@
 #slider-id-2 {position:relative;top:4px;}
 
 #no-results-found-search {display:none;}
+
+#js-address-city {margin-bottom:10px;}
+#js-address-street {margin-bottom:10px;display:none;}
+#js-address-number {margin-bottom:10px;display:none;}
+
+#js-cadastre-kadgem {margin-bottom:10px;}
+#js-cadastre-kadsek {margin-bottom:10px;display:none;}
+#js-cadastre-kadobj {margin-bottom:10px;display:none;}

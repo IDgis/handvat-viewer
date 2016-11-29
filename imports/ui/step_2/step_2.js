@@ -159,6 +159,7 @@ Template.step_2.onRendered(function() {
 			map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
 		}
 		
+		Session.set('location', 'x-coördinaat: ' + evt.coordinate[0] + ' | y-coördinaat: ' + evt.coordinate[1]);
 		Session.set('mapCoordinates', evt.coordinate);
 		iconLayer = getIcon(evt.coordinate, iconStyle);
 		map.addLayer(iconLayer);
@@ -228,6 +229,14 @@ Template.step_2.events ({
 	},
 	'change #js-address-number': function(e) {
 		setCursorInProgress();
+		
+		if(e.target.value !== 'none') {
+			var city = $('#js-address-city')[0].options[$('#js-address-city')[0].selectedIndex].text;
+			var street = $('#js-address-street')[0].options[$('#js-address-street')[0].selectedIndex].text;
+			var number = $('#js-address-number')[0].options[$('#js-address-number')[0].selectedIndex].text;
+			
+			Session.set('location', street + ' ' + number + ', ' + city);
+		}
 		
 		var url = 'http://bag.idgis.nl/bag/services?&TYPENAME=bag:AdresseerbaarObject&VERSION=1.1.0&' +
 		'SERVICE=WFS&REQUEST=GetFeature&FILTER=%3CFilter%20xmlns=%27http://www.opengis.net/ogc%27%20' +
@@ -344,6 +353,14 @@ Template.step_2.events ({
 	},
 	'change #js-cadastre-kadobj': function(e) {
 		setCursorInProgress();
+		
+		if(e.target.value !== 'none') {
+			var kadgem = $('#js-cadastre-kadgem')[0].value;
+			var kadsek = $('#js-cadastre-kadsek')[0].value;
+			var kadobj = $('#js-cadastre-kadobj')[0].value;
+			
+			Session.set('location', kadgem + kadsek + ' ' + kadobj);
+		}
 		
 		var url = "http://portal.prvlimburg.nl/geoservices/kad_perceel?&TYPENAME=kad_perceel_v&VERSION=1.1.0&" +
 				"SERVICE=WFS&REQUEST=GetFeature&FILTER=%3CFilter%20xmlns=%27http://www.opengis.net/ogc%27%20" +

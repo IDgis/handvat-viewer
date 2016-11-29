@@ -52,5 +52,62 @@ Template.step_6.helpers({
 		} else {
 			return "niets ingevuld";
 		}
+	},
+	getLocation: function() {
+		var location = Session.get('location');
+		
+		if(typeof location !== 'undefined') {
+			return location;
+		} else {
+			return "niets ingevuld";
+		}
+	}
+});
+
+Template.step_6.events({
+	'click #js-print-6': function(e) {
+		var title = $('#input-title-6')[0].value.trim();
+		var name = $('#input-name-6')[0].value.trim();
+		var address = $('#input-address-6')[0].value.trim();
+		var residence = $('#input-residence-6')[0].value.trim();
+		var comment = $('#input-comment-6')[0].value.trim();
+		
+		if(title === '') {
+			$('#alert-title-6').css('display', 'block');
+		} else {
+			$('#alert-title-6').css('display', 'none');
+			Session.set('titleInitiative', title);
+		}
+		
+		if(name === '') {
+			$('#alert-name-6').css('display', 'block');
+		} else {
+			$('#alert-name-6').css('display', 'none');
+			Session.set('nameInitiator', name);
+		}
+		
+		if(address === '') {
+			$('#alert-address-6').css('display', 'block');
+		} else {
+			$('#alert-address-6').css('display', 'none');
+			Session.set('addressInitiator', address);
+		}
+		
+		if(residence === '') {
+			$('#alert-residence-6').css('display', 'block');
+		} else {
+			$('#alert-residence-6').css('display', 'none');
+			Session.set('residenceInitiator', residence);
+		}
+		
+		if(comment.split(' ').length > 200) {
+			$('#alert-comment-6').css('display', 'block');
+		} else {
+			$('#alert-comment-6').css('display', 'none');
+			
+			if(comment !== '') {
+				Session.set('commentInitiator', comment);
+			}
+		}
 	}
 });

@@ -3,16 +3,48 @@
 		<div id="intro-text-6"></div>
 		<div id="text-6">
 			<p id="summary-header-6">Samenvatting ingevulde gegevens</p>
-			<p><b>Naam:</b></p>
-			<div class="input-field-6">
-				<input type="text" class="form-control">
+			<div class="form-group input-field-6">
+				<label for="input-title-6">Titel:</label>
+				<input type="text" class="form-control" id="input-title-6">
+				<div id="alert-title-6" class="alert alert-danger alert-form-6" role="alert">Dit is een verplicht veld.</div>
 			</div>
-			<p><b>Ingevulde sector:</b></p>
-			<div class="panel panel-default">
-				<div class="panel-body">
-					{{getSector}}
+			<div class="form-group input-field-6">
+				<label for="input-name-6">Naam:</label>
+				<input type="text" class="form-control" id="input-name-6">
+				<div id="alert-name-6" class="alert alert-danger alert-form-6" role="alert">Dit is een verplicht veld.</div>
+			</div>
+			<div class="form-group input-field-6">
+				<label for="input-address-6">Adres:</label>
+				<input type="text" class="form-control" id="input-address-6">
+				<div id="alert-address-6" class="alert alert-danger alert-form-6" role="alert">Dit is een verplicht veld.</div>
+			</div>
+			<div class="form-group input-field-6">
+				<label for="input-residence-6">Woonplaats:</label>
+				<input type="text" class="form-control" id="input-residence-6">
+				<div id="alert-residence-6" class="alert alert-danger alert-form-6" role="alert">Dit is een verplicht veld.</div>
+			</div>
+			<div class="form-group input-field-6">
+				<label for="input-comment-6">Commentaar (maximaal 200 woorden):</label>
+				<textarea class="form-control" id="input-comment-6" rows="4"></textarea>
+				<div id="alert-comment-6" class="alert alert-danger alert-form-6" role="alert">De grens van 200 woorden is overschreden.</div>
+			</div>
+			<div class="form-group input-field-6">
+				<label for="panelSector-6">Ingevulde sector:</label>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						{{getSector}}
+					</div>
 				</div>
 			</div>
+			<div class="form-group input-field-6">
+				<label for="panelSector-6">Ingevoerde locatie:</label>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						{{getLocation}}
+					</div>
+				</div>
+			</div>
+			<button id="js-print-6" class="btn btn-default">Print</button>
 		</div>
 	</div>
 	<div id="viewer-container-6" class="col-xs-8"></div>

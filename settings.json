@@ -58,12 +58,12 @@
 	  "groenKarakterService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/groen_karakter?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
 	    "version": "1.1.1",
-	    "layers": ["grasland_heide_zand", "akkerland", "dorpsmantel_v", "bebouwde_kom", "top10nl_gebouw_v", 
-	    			"cultuurhistorische_elementen_v", "boomgaard", "bos", "landschapstypen_v", 
-	    			"waterstaatswerk_watergang_v", "top10nl_waterdeel_v", "top10nl_wegdeel_hartlijn_l", 
-	    			"top10nl_spoorbaandeel_l", "waterstaatswerk_regenwbuf_v", "primaire_bronnen_p", "heg_haag", 
-	    			"top10nl_relief_hogezijde_l", "bomenrij", "boom", "masker_beschermingsgebied_v", 
-	    			"masker_zuid_limburg_v", "beschermingsgeb_nat_landsc_v"]
+	    "layers": ["grasland_heide_zand", "akkerland", "top10nl_plaats_bebouwdekom_v", "dorpsmantel_v", 
+	    			"bebouwde_kom", "top10nl_gebouw_v", "cultuurhistorische_elementen_v", "boomgaard", "bos", 
+	    			"landschapstypen_v", "waterstaatswerk_watergang_v", "top10nl_waterdeel_v", 
+	    			"top10nl_wegdeel_hartlijn_l", "top10nl_spoorbaandeel_l", "waterstaatswerk_regenwbuf_v", 
+	    			"primaire_bronnen_p", "heg_haag", "top10nl_relief_hogezijde_l", "bomenrij", "boom", 
+	    			"masker_beschermingsgebied_v", "masker_zuid_limburg_v", "beschermingsgeb_nat_landsc_v"]
 	  },
 	  "luchtfotoService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/luchtfoto?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",

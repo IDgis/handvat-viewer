@@ -15,7 +15,7 @@ Meteor.methods({
 		
 		if(typeof xml.msGMLOutput.landschapstypen_v_layer !== 'undefined') {
 			var lt = xml.msGMLOutput.landschapstypen_v_layer[0].landschapstypen_v_feature[0].TYPE[0];
-			var texts = HTTP.get("http://148.251.183.26/handvat-admin/text/json");
+			var texts = HTTP.get(Meteor.settings.public.hostname + '/handvat-admin/text/json');
 			var json = JSON.parse(texts.content);
 			
 			var id;

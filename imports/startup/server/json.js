@@ -79,7 +79,7 @@ Meteor.methods({
 		return object;
 	},
 	getIdFromName: function(name) {
-		var res = HTTP.get('http://148.251.183.26/handvat-admin/text/json');
+		var res = HTTP.get(Meteor.settings.public.hostname + '/handvat-admin/text/json');
 		var json = JSON.parse(res.content);
 		
 		var id;

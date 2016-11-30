@@ -10,7 +10,7 @@ Template.step_4.onRendered(function() {
 	if(typeof Session.get('area') !== 'undefined' && Session.get('area') !== null) {
 		setCursorInProgress();
 		
-		HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
@@ -78,7 +78,7 @@ Template.step_4.events ({
 		var sectorName = $(e.target).attr('data-name');
 		Session.set('sectorName', sectorName);
 		
-		HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}

@@ -1,6 +1,7 @@
 {
   "public": {
 	  "domainSuffix": "",
+	  "hostname": "http://148.251.183.26",
 	  
 	  "popupHandleiding": "popup-handleiding",
 	  "popupHelp": "popup-help",

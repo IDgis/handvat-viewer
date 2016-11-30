@@ -23,7 +23,7 @@ Template.step_5.onRendered(function() {
 	
 	if(typeof Session.get('area') !== 'undefined' && Session.get('area') !== null &&
 			typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
-		HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
@@ -47,7 +47,7 @@ Template.step_5.onRendered(function() {
 		}
 	}
 	
-	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
@@ -199,7 +199,7 @@ Template.step_5.helpers({
 		if(typeof Session.get('kernkwaliteitId') !== 'undefined' && Session.get('kernkwaliteitId') !== null) {
 			setCursorInProgress();
 			
-			HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
 				}
@@ -225,7 +225,7 @@ Template.step_5.helpers({
 				typeof Session.get('kernkwaliteitId') !== 'undefined' && Session.get('kernkwaliteitId') !== null) {
 			setCursorInProgress();
 			
-			HTTP.get("http://148.251.183.26/handvat-admin/coupling/ontwerp/json", {
+			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/coupling/ontwerp/json", {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
 				}
@@ -249,7 +249,7 @@ Template.step_5.helpers({
 							$(innerDiv).attr('class', 'col-xs-6 text-div');
 							$('#op-text-5').append(outerDiv);
 							
-							HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+							HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
 								headers: {
 									'Content-Type' : 'application/json; charset=UTF-8'
 								}
@@ -276,7 +276,7 @@ Template.step_5.helpers({
 							$(innerDiv).attr('class', 'col-xs-6 text-div');
 							$('#ontwerpprincipe-' + itemCount).append(innerDiv);
 							
-							HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+							HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
 								headers: {
 									'Content-Type' : 'application/json; charset=UTF-8'
 								}

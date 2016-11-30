@@ -25,7 +25,7 @@ Template.step_2.onRendered(function() {
 		$('#js-next-icon').attr('style', 'color:#ffffff !important;');
 	}
 	
-	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}

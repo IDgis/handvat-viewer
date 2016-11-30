@@ -80,7 +80,7 @@ Template.step_3.onRendered(function() {
 		map.addLayer(areaLayer);
 	}
 	
-	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
@@ -172,7 +172,7 @@ Template.step_3.helpers({
 		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null) {
 			setCursorInProgress();
 			
-			HTTP.get("http://148.251.183.26/handvat-admin/coupling/leidend/json", {
+			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/coupling/leidend/json", {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
 				}
@@ -191,7 +191,7 @@ Template.step_3.helpers({
 							$(innerDiv).attr('class', 'col-xs-6 text-div');
 							$('#lb-text-3').append(outerDiv);
 							
-							HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+							HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
 								headers: {
 									'Content-Type' : 'application/json; charset=UTF-8'
 								}
@@ -218,7 +218,7 @@ Template.step_3.helpers({
 							$(innerDiv).attr('class', 'col-xs-6 text-div');
 							$('#leidendbeginsel-' + itemCount).append(innerDiv);
 							
-							HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+							HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
 								headers: {
 									'Content-Type' : 'application/json; charset=UTF-8'
 								}

@@ -21,7 +21,7 @@ Template.main.onRendered(function() {
 		alsoResize: ".modal-body"
 	});
 	
-	HTTP.get("http://148.251.183.26/handvat-admin/text/json", {
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}

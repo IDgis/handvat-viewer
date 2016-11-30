@@ -141,7 +141,7 @@ Template.step_2.onRendered(function() {
 		value: 100,
 		slide: function(e, ui) {
 			$.each(map.getLayers().getArray(), function(index, item) {
-				if(index > 9) {
+				if(index > 10) {
 					if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
 						if(index !== map.getLayers().getLength() - 1) {
 							map.getLayers().item(index).setOpacity(ui.value / 100);

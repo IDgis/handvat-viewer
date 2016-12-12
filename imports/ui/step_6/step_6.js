@@ -187,7 +187,7 @@ Template.step_6.events({
 				Session.set('commentInitiator', comment);
 			}
 		}
-	},
+	},s
 	'click #set-location-center-6': function() {
 		if(typeof Session.get('mapCoordinates') !== 'undefined' && Session.get('mapCoordinates') !== null) {
 			map.getView().setCenter(Session.get('mapCoordinates'));

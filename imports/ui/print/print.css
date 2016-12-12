@@ -1,0 +1,13 @@
+.print-page div {height:33.33%;}
+
+@media screen {
+	.print-page {border-bottom:1px dotted black;margin-left:auto;margin-right:auto;border-left:1px solid black;
+		border-right:1px solid black;}
+	#print-pages {margin-top:20px;margin-bottom:20px;}
+}
+
+@media print {
+	.print-page {page-break-after:always;}
+}
+
+.print-page {width:29.7cm;height:20.3cm;}

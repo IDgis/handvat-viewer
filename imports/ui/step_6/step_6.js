@@ -150,8 +150,11 @@ Template.step_6.events({
 		var residence = $('#input-residence-6')[0].value.trim();
 		var comment = $('#input-comment-6')[0].value.trim();
 		
+		var goToPrint = true;
+		
 		if(title === '') {
 			$('#alert-title-6').css('display', 'block');
+			goToPrint = false;
 		} else {
 			$('#alert-title-6').css('display', 'none');
 			Session.set('titleInitiative', title);
@@ -159,6 +162,7 @@ Template.step_6.events({
 		
 		if(name === '') {
 			$('#alert-name-6').css('display', 'block');
+			goToPrint = false;
 		} else {
 			$('#alert-name-6').css('display', 'none');
 			Session.set('nameInitiator', name);
@@ -166,6 +170,7 @@ Template.step_6.events({
 		
 		if(address === '') {
 			$('#alert-address-6').css('display', 'block');
+			goToPrint = false;
 		} else {
 			$('#alert-address-6').css('display', 'none');
 			Session.set('addressInitiator', address);
@@ -173,6 +178,7 @@ Template.step_6.events({
 		
 		if(residence === '') {
 			$('#alert-residence-6').css('display', 'block');
+			goToPrint = false;
 		} else {
 			$('#alert-residence-6').css('display', 'none');
 			Session.set('residenceInitiator', residence);
@@ -180,6 +186,7 @@ Template.step_6.events({
 		
 		if(comment.split(' ').length > 200) {
 			$('#alert-comment-6').css('display', 'block');
+			goToPrint = false;
 		} else {
 			$('#alert-comment-6').css('display', 'none');
 			
@@ -187,7 +194,11 @@ Template.step_6.events({
 				Session.set('commentInitiator', comment);
 			}
 		}
-	},s
+		
+		if(goToPrint) {
+			Router.go('print');
+		}
+	},
 	'click #set-location-center-6': function() {
 		if(typeof Session.get('mapCoordinates') !== 'undefined' && Session.get('mapCoordinates') !== null) {
 			map.getView().setCenter(Session.get('mapCoordinates'));

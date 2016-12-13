@@ -29,7 +29,7 @@
 				<div id="alert-comment-6" class="alert alert-danger alert-form-6" role="alert">De grens van 200 woorden is overschreden.</div>
 			</div>
 			<div class="form-group input-field-6">
-				<label for="panelSector-6">Ingevulde sector:</label>
+				<label for="panel-sector-6">Ingevulde sector:</label>
 				<div class="panel panel-default">
 					<div class="panel-body">
 						{{getSector}}
@@ -37,10 +37,55 @@
 				</div>
 			</div>
 			<div class="form-group input-field-6">
-				<label for="panelSector-6">Ingevoerde locatie:</label>
+				<label for="panel-location-6">Ingevoerde locatie:</label>
 				<div class="panel panel-default">
 					<div class="panel-body">
 						{{getLocation}}
+					</div>
+				</div>
+			</div>
+			<div class="form-group input-field-6">
+				<label for="chapters-checkboxes">Hoofdstukken:</label>
+				<div id="chapters-checkboxes">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" checked="checked" disabled="disabled">Titelpagina
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" checked="checked" disabled="disabled">Handvat NLZL
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" checked="checked" disabled="disabled">Inhoudsopgave
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" checked="checked" disabled="disabled">Locatie
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" checked="checked" id="js-chapter-deelgebied">Deelgebied
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" checked="checked" id="js-chapter-beginselen">Leidende beginselen
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" checked="checked" id="js-chapter-sector">Sector
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" checked="checked" id="js-chapter-ontwerpprincipes">Ontwerpprincipes
+						</label>
 					</div>
 				</div>
 			</div>

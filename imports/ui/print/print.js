@@ -2,7 +2,31 @@ import './print.html';
 import './print.css';
 
 Template.print.onRendered(function() {
+	var chapter = 4;
+	var page = 5;
 	
+	if(Session.get('chapterDeelgebied')) {
+		chapter++;
+		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + chapter + ' - Deelgebied - pagina ' + page + '</p>');
+		page++;
+	}
+	
+	if(Session.get('chapterBeginselen')) {
+		chapter++;
+		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + chapter + ' - Leidende beginselen - pagina ' + page + '</p>');
+		page += 2;
+	}
+	
+	if(Session.get('chapterSector')) {
+		chapter++;
+		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + chapter + ' - Sector - pagina ' + page + '</p>');
+		page++;
+	}
+	
+	if(Session.get('chapterOntwerpprincipes')) {
+		chapter++;
+		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + chapter + ' - Ontwerpprincipes - pagina ' + page + '</p>');
+	}
 });
 
 Template.print.helpers({

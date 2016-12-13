@@ -195,6 +195,30 @@ Template.step_6.events({
 			}
 		}
 		
+		if($('#js-chapter-deelgebied')[0].checked) {
+			Session.set('chapterDeelgebied', true);
+		} else {
+			Session.set('chapterDeelgebied', false);
+		}
+		
+		if($('#js-chapter-beginselen')[0].checked) {
+			Session.set('chapterBeginselen', true);
+		} else {
+			Session.set('chapterBeginselen', false);
+		}
+		
+		if($('#js-chapter-sector')[0].checked) {
+			Session.set('chapterSector', true);
+		} else {
+			Session.set('chapterSector', false);
+		}
+		
+		if($('#js-chapter-ontwerpprincipes')[0].checked) {
+			Session.set('chapterOntwerpprincipes', true);
+		} else {
+			Session.set('chapterOntwerpprincipes', false);
+		}
+		
 		if(goToPrint) {
 			Router.go('print');
 		}

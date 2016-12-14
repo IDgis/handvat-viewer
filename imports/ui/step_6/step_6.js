@@ -10,12 +10,14 @@ Template.step_6.onRendered(function() {
 	$('#js-next').attr('style', 'pointer-events:none;color:grey !important;');
 	$('#js-next-icon').attr('style', 'color:grey !important;');
 	
+	var extent;
+	var center;
 	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCoordinates') === 'undefined') {
-		var extent = [165027, 306558, 212686, 338329];
-		var center = [188856, 322443];
+		extent = [165027, 306558, 212686, 338329];
+		center = [188856, 322443];
 	} else {
-		var extent = Session.get('mapExtent');
-		var center = Session.get('mapCoordinates');
+		extent = Session.get('mapExtent');
+		center = Session.get('mapCoordinates');
 	}
 	
 	var projection = new ol.proj.Projection({

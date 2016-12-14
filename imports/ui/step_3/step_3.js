@@ -19,12 +19,14 @@ Template.step_3.onRendered(function() {
 		alsoResize: ".modal-body"
 	});
 	
+	var extent;
+	var center;
 	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCenter') === 'undefined') {
-		var extent = [165027, 306558, 212686, 338329];
-		var center = [188856, 322443];
+		extent = [165027, 306558, 212686, 338329];
+		center = [188856, 322443];
 	} else {
-		var extent = Session.get('mapExtent');
-		var center = Session.get('mapCenter');
+		extent = Session.get('mapExtent');
+		center = Session.get('mapCenter');
 	}
 	
 	var projection = new ol.proj.Projection({
@@ -179,8 +181,10 @@ Template.step_3.helpers({
 				}
 			}, function(err, result) {
 				Meteor.call('getBeginselen', result.content, Session.get('landschapstypeId'), function(err, result) {
-					itemCount = 1;
-					divCount = 0;
+					var itemCount = 1;
+					var divCount = 0;
+					
+					var innerDiv;
 					
 					$.each(result, function(index, item) {
 						if(divCount === 0) {
@@ -188,7 +192,7 @@ Template.step_3.helpers({
 							$(outerDiv).attr('id', 'leidendbeginsel-' + itemCount);
 							$(outerDiv).attr('class', 'col-xs-12 text-div');
 							
-							var innerDiv = document.createElement('div');
+							innerDiv = document.createElement('div');
 							$(innerDiv).attr('class', 'col-xs-6 text-div');
 							$('#lb-text-3').append(outerDiv);
 							
@@ -215,7 +219,7 @@ Template.step_3.helpers({
 							divCount++;
 						
 						} else {
-							var innerDiv = document.createElement('div');
+							innerDiv = document.createElement('div');
 							$(innerDiv).attr('class', 'col-xs-6 text-div');
 							$('#leidendbeginsel-' + itemCount).append(innerDiv);
 							

@@ -120,12 +120,14 @@ Template.step_5.onRendered(function() {
 		setCursorDone();
 	});
 	
+	var extent;
+	var center;
 	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCenter') === 'undefined') {
-		var extent = [165027, 306558, 212686, 338329];
-		var center = [188856, 322443];
+		extent = [165027, 306558, 212686, 338329];
+		center = [188856, 322443];
 	} else {
-		var extent = Session.get('mapExtent');
-		var center = Session.get('mapCenter');
+		extent = Session.get('mapExtent');
+		center = Session.get('mapCenter');
 	}
 	
 	var projection = new ol.proj.Projection({
@@ -236,8 +238,10 @@ Template.step_5.helpers({
 						Session.get('kernkwaliteitId'),
 						function(err, result) {
 					
-					itemCount = 1;
-					divCount = 0;
+					var itemCount = 1;
+					var divCount = 0;
+					
+					var innerDiv;
 					
 					$.each(result, function(index, item) {
 						if(divCount === 0) {
@@ -245,7 +249,7 @@ Template.step_5.helpers({
 							$(outerDiv).attr('id', 'ontwerpprincipe-' + itemCount);
 							$(outerDiv).attr('class', 'col-xs-12 text-div');
 							
-							var innerDiv = document.createElement('div');
+							innerDiv = document.createElement('div');
 							$(innerDiv).attr('class', 'col-xs-6 text-div');
 							$('#op-text-5').append(outerDiv);
 							
@@ -272,7 +276,7 @@ Template.step_5.helpers({
 							divCount++;
 						
 						} else {
-							var innerDiv = document.createElement('div');
+							innerDiv = document.createElement('div');
 							$(innerDiv).attr('class', 'col-xs-6 text-div');
 							$('#ontwerpprincipe-' + itemCount).append(innerDiv);
 							
@@ -547,7 +551,7 @@ function addServiceLayers(kkId, ltActive, element, url, layers, version) {
 	});
 	
 	if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
-		iconLayer = getIcon(Session.get('mapCoordinates'));
+		var iconLayer = getIcon(Session.get('mapCoordinates'));
 		map.addLayer(iconLayer);
 	}
 	

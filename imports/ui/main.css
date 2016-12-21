@@ -96,3 +96,8 @@ html.wait, html.wait * {cursor:wait !important;}
 .zoom-level-3, .zoom-level-3 * {font-size:20px;}
 .zoom-level-4, .zoom-level-4 * {font-size:24px;}
 .zoom-level-5, .zoom-level-5 * {font-size:30px;}
+
+.disabled {pointer-events:none;}
+
+#set-location-center-2, #set-location-center-3, #set-location-center-5, #set-location-center-6 
+	{position:absolute;top:5px;right:25px;}

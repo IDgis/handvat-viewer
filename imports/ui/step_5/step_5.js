@@ -318,6 +318,11 @@ Template.step_5.helpers({
 		if(!Session.get('chActive')) {
 			return 'hide-element';
 		}
+	},
+	disableElement: function() {
+		if(typeof Session.get('mapCoordinates') === 'undefined' || Session.get('mapCoordinates') === null) {
+			return 'disabled';
+		}
 	}
 });
 
@@ -407,6 +412,11 @@ Template.step_5.events ({
 		});
 		
 		setOpacity();
+	},
+	'click #set-location-center-5': function() {
+		if(typeof Session.get('mapCoordinates') !== 'undefined' && Session.get('mapCoordinates') !== null) {
+			map.getView().setCenter(Session.get('mapCoordinates'));
+		}
 	}
 });
 

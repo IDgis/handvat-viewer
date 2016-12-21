@@ -11,7 +11,7 @@ Template.step_6.onRendered(function() {
 	$('#js-next-icon').attr('style', 'color:grey !important;');
 	
 	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCoordinates') === 'undefined') {
-		var extent: [165027, 306558, 212686, 338329]
+		var extent = [165027, 306558, 212686, 338329];
 		var center = [188856, 322443];
 	} else {
 		var extent = Session.get('mapExtent');
@@ -134,6 +134,11 @@ Template.step_6.helpers({
 		} else {
 			return "niets ingevuld";
 		}
+	},
+	disableElement: function() {
+		if(typeof Session.get('mapCoordinates') === 'undefined' || Session.get('mapCoordinates') === null) {
+			return 'disabled';
+		}
 	}
 });
 
@@ -181,6 +186,11 @@ Template.step_6.events({
 			if(comment !== '') {
 				Session.set('commentInitiator', comment);
 			}
+		}
+	},
+	'click #set-location-center-6': function() {
+		if(typeof Session.get('mapCoordinates') !== 'undefined' && Session.get('mapCoordinates') !== null) {
+			map.getView().setCenter(Session.get('mapCoordinates'));
 		}
 	}
 });

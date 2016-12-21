@@ -20,7 +20,7 @@ Template.step_3.onRendered(function() {
 	});
 	
 	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCenter') === 'undefined') {
-		var extent: [165027, 306558, 212686, 338329]
+		var extent = [165027, 306558, 212686, 338329];
 		var center = [188856, 322443];
 	} else {
 		var extent = Session.get('mapExtent');
@@ -130,6 +130,7 @@ Template.step_3.onRendered(function() {
 		setLandschapstypeId(Session.get('mapCoordinates'));
 	} else {
 		$('#error-3').append('U heeft geen valide deelgebied geselecteerd.');
+		$('#dg-text-3').append('U heeft geen valide deelgebied geselecteerd.');
 		$('#lb-text-3').append('U heeft geen valide deelgebied geselecteerd.');
 	}
 	
@@ -244,6 +245,19 @@ Template.step_3.helpers({
 				
 				setCursorDone();
 			});
+		}
+	},
+	disableElement: function() {
+		if(typeof Session.get('mapCoordinates') === 'undefined' || Session.get('mapCoordinates') === null) {
+			return 'disabled';
+		}
+	}
+});
+
+Template.step_3.events({
+	'click #set-location-center-3': function() {
+		if(typeof Session.get('mapCoordinates') !== 'undefined' && Session.get('mapCoordinates') !== null) {
+			map.getView().setCenter(Session.get('mapCoordinates'));
 		}
 	}
 });

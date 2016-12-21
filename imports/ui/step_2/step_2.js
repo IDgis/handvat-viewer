@@ -169,6 +169,14 @@ Template.step_2.onRendered(function() {
 	});
 });
 
+Template.step_2.helpers ({
+	disableElement: function() {
+		if(typeof Session.get('mapCoordinates') === 'undefined' || Session.get('mapCoordinates') === null) {
+			return 'disabled';
+		}
+	}
+});
+
 Template.step_2.events ({
 	'change #js-address-city': function(e) {
 		setCursorInProgress();
@@ -428,6 +436,11 @@ Template.step_2.events ({
 		}
 		
 		setCursorDone();
+	},
+	'click #set-location-center-2': function() {
+		if(typeof Session.get('mapCoordinates') !== 'undefined' && Session.get('mapCoordinates') !== null) {
+			map.getView().setCenter(Session.get('mapCoordinates'));
+		}
 	}
 });
 

@@ -118,10 +118,10 @@
 	  "landschapStructuurService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
 	    "version": "1.1.1",
-	    "layers": ["Landschapskaart_deelgebied_Baneheide", "Landschapskaart_deelgebied_Heerlen", 
+	    "layers": ["Landschapskaart_deelgebied_Baneheide", "Landschapskaart_deelgebied_Bekken_van_Heerlen", 
 	    			"Landschapskaart_deelgebied_Doenrade", "Landschapskaart_deelgebied_Eperheide", 
 	    			"Landschapskaart_deelgebied_Geleenbeek", "Landschapskaart_deelgebied_Geuldal", 
-	    			"Landschapskaart_deelgebied_Maasdal", "Landschapskaart_deelgebied_Gronsveld", 
+	    			"Landschapskaart_deelgebied_Maasdal", "Landschapskaart_deelgebied_Maasterras_Gronsveld", 
 	    			"Landschapskaart_deelgebied_Margraten", "Landschapskaart_deelgebied_Roode_beek", 
 	    			"Landschapskaart_deelgebied_Schimmert", "Landschapskaart_deelgebied_Ubachsberg", 
 	    			"Landschapskaart_deelgebied_Vijlenerbos"],

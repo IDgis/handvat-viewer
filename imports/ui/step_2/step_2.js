@@ -302,25 +302,21 @@ Template.step_2.events ({
 		$('#js-cadastre-kadsek').append('<option value="none">--</option>');
 		$('#js-cadastre-kadobj').append('<option value="none">--</option>');
 		
-		var url = "http://portal.prvlimburg.nl/geoservices/brk?&TYPENAME=BRK_KAD_PERCELEN_V&" +
-				"VERSION=1.1.0&SERVICE=WFS&REQUEST=GetFeature&FILTER=%3CFilter%20xmlns%3D%27http%3A%2F%" +
-				"2Fwww.opengis.net%2Fogc%27%20xmlns%3Aapp%3D%27http%3A%2F%2Fwww.deegree.org%2Fapp%27%3E%" +
-				"3CPropertyIsEqualTo%20wildCard%3D%22*%22%20singleChar%3D%22%23%22%20escape%3D%22!%22%3E" +
-				"%0A%3CPropertyName%3EKADGEMEENTE%3C%2FPropertyName%3E%3CLiteral%3E" + e.target.value + "%3C%2FLite" +
-				"ral%3E%3C%2FPropertyIsEqualTo%3E%3C%2FFilter%3E";
-		
-		Meteor.call('getCadastreSectors', url, function(err, result) {
-			result.forEach(function(item) {
-				var option = '<option value="' + item + '">' + item + '</option>';
-				$('#js-cadastre-kadsek').append(option);
-			});
-			
-			if(e.target.value !== 'none') {
-				$('#js-cadastre-kadsek').css('display', 'block');
+		var sections = Meteor.settings.public.kadGemeentes;
+		sections.forEach(function(item) {
+			if(e.target.value === item.value) {
+				item.sections.forEach(function(item) {
+					var option = '<option value="' + item + '">' + item + '</option>';
+					$('#js-cadastre-kadsek').append(option);
+				});
 			}
-			
-			setCursorDone();
 		});
+		 
+		if(e.target.value !== 'none') {
+			$('#js-cadastre-kadsek').css('display', 'block');
+		}
+		
+		setCursorDone();
 	},
 	'change #js-cadastre-kadsek': function(e) {
 		setCursorInProgress();

@@ -1,24 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 
 Meteor.methods({
-	getCadastreSectors: function(url) {
-		var res = HTTP.get(url);
-		var xml = xml2js.parseStringSync(res.content);
-		
-		var features = xml['wfs:FeatureCollection']['gml:featureMember'];
-		
-		var elements = [];
-		if(typeof features !== 'undefined') {
-			features.forEach(function(item) {
-				var kadsek = item['ms:BRK_KAD_PERCELEN_V'][0]['ms:KADSECTIE'][0];
-				if(elements.indexOf(kadsek) === -1) {
-					elements.push(kadsek);
-				}
-			});
-		}
-		
-		return elements.sort();
-	},
 	getCadastreObjects: function(url) {
 		var res = HTTP.get(url);
 		var xml = xml2js.parseStringSync(res.content);

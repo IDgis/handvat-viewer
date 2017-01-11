@@ -2,8 +2,7 @@
 .print-height-2 {height:66.66%;}
 .print-height-3 {height:100%;}
 .print-page div div {padding-left:0;padding-right:0;}
-#map-print-location {height:100%;padding-bottom:10px;}
-#map-print-deelgebied {height:100%;padding-bottom:10px;}
+#map-print-location, #map-print-deelgebied,  #map-print-beginselen {height:100%;padding-bottom:10px;}
 
 @media screen {
 	.print-page {border-bottom:1px dotted black;margin-left:auto;margin-right:auto;border-left:1px solid black;

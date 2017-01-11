@@ -56,16 +56,16 @@ Meteor.methods({
 		
 		return object;
 	},
-	getTextFromTypeName: function(content, type, name) {
-		var html;
+	getTextPrintFromTypeName: function(content, type, name) {
+		var print;
 		var json = JSON.parse(content);
 		json.forEach(function(item) {
 			if(item.texttype === type && item.name === name) {
-				html = item.htmlprint;
+				print = item.print;
 			}
 		});
 		
-		return html;
+		return print;
 	},
 	getTextFromCoupling: function(content, appCoupling) {
 		var object;

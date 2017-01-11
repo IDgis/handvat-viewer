@@ -28,18 +28,6 @@ Template.print.onRendered(function() {
 		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + chapter + ' - Ontwerpprincipes - pagina ' + page + '</p>');
 	}
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
-		headers: {
-			'Content-Type' : 'application/json; charset=UTF-8'
-		}
-	}, function(err, result) {
-		Meteor.call('getTextFromTypeName', result.content, 'sector_icoon', Session.get('sectorName'), function(err, result) {
-			if(typeof result !== 'undefined') {
-				$('#print-location-sector-icon').append(result);
-			}
-		});
-	});
-	
 	var extent;
 	var center;
 	var coordinates;
@@ -105,6 +93,19 @@ Template.print.helpers({
 		var todayYear = today.getFullYear();
 		
 		return todayDay + '-' + todayMonth + '-' + todayYear;
+	},
+	getSectorIcon: function() {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+			headers: {
+				'Content-Type' : 'application/json; charset=UTF-8'
+			}
+		}, function(err, result) {
+			Meteor.call('getTextPrintFromTypeName', result.content, 'sector_icoon', Session.get('sectorName'), function(err, result) {
+				if(typeof result !== 'undefined') {
+					$('.print-location-sector-icon').append(result);
+				}
+			});
+		});
 	},
 	getComment: function() {
 		return Session.get('commentInitiator');
@@ -179,6 +180,19 @@ Template.print.helpers({
 				});
 			});
 		}
+	},
+	getSectorIntro: function() {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+			headers: {
+				'Content-Type' : 'application/json; charset=UTF-8'
+			}
+		}, function(err, result) {
+			Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap4Links, function(err, result) {
+				if(typeof result !== 'undefined') {
+					$('#print-sector-general').append(result.contentPrint);
+				}
+			});
+		});
 	}
 });
 

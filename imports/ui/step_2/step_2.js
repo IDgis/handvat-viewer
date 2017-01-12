@@ -143,10 +143,10 @@ Template.step_2.onRendered(function() {
 				if(index > 10) {
 					if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
 						if(index !== map.getLayers().getLength() - 1) {
-							map.getLayers().item(index).setOpacity(ui.value / 100);
+							item.setOpacity(ui.value / 100);
 						}
 					} else {
-						map.getLayers().item(index).setOpacity(ui.value / 100);
+						item.setOpacity(ui.value / 100);
 					}
 				}
 			});

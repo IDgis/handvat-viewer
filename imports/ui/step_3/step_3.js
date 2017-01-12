@@ -184,16 +184,14 @@ Template.step_3.helpers({
 					var itemCount = 1;
 					var divCount = 0;
 					
-					var innerDiv;
-					
 					$.each(result, function(index, item) {
 						if(divCount === 0) {
 							var outerDiv = document.createElement('div');
 							$(outerDiv).attr('id', 'leidendbeginsel-' + itemCount);
 							$(outerDiv).attr('class', 'col-xs-12 text-div');
 							
-							innerDiv = document.createElement('div');
-							$(innerDiv).attr('class', 'col-xs-6 text-div');
+							var innerDivLeft = document.createElement('div');
+							$(innerDivLeft).attr('class', 'col-xs-6 text-div');
 							$('#lb-text-3').append(outerDiv);
 							
 							HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
@@ -204,24 +202,24 @@ Template.step_3.helpers({
 								Meteor.call('getTextFromId', result.content, item, function(err, result) {
 									if(typeof result !== 'undefined') {
 										$.each(result.images, function(ix, elt) {
-											$(innerDiv).append(elt);
+											$(innerDivLeft).append(elt);
 										});
 										
 										cleanImages('lb-text-3', 'text-div-img');
 										
-										$(innerDiv).append(result.content);
+										$(innerDivLeft).append(result.content);
 									}
 								});
 							});
 							
-							$(outerDiv).append(innerDiv);
+							$(outerDiv).append(innerDivLeft);
 							
 							divCount++;
 						
 						} else {
-							innerDiv = document.createElement('div');
-							$(innerDiv).attr('class', 'col-xs-6 text-div');
-							$('#leidendbeginsel-' + itemCount).append(innerDiv);
+							var innerDivRight = document.createElement('div');
+							$(innerDivRight).attr('class', 'col-xs-6 text-div');
+							$('#leidendbeginsel-' + itemCount).append(innerDivRight);
 							
 							HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
 								headers: {
@@ -231,12 +229,12 @@ Template.step_3.helpers({
 								Meteor.call('getTextFromId', result.content, item, function(err, result) {
 									if(typeof result !== 'undefined') {
 										$.each(result.images, function(ix, elt) {
-											$(innerDiv).append(elt);
+											$(innerDivRight).append(elt);
 										});
 										
 										cleanImages('lb-text-3', 'text-div-img');
 										
-										$(innerDiv).append(result.content);
+										$(innerDivRight).append(result.content);
 									}
 								});
 							});

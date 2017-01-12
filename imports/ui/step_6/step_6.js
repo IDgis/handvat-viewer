@@ -91,12 +91,14 @@ Template.step_6.onRendered(function() {
 	} else {
 		$('#text-6').attr('style', 'display:none;');
 		
-		if((typeof Session.get('area') === 'undefined' || Session.get('area') === null) &&
-				(typeof Session.get('sectorId') === 'undefined' || Session.get('sectorId') === null)) {
+		var areaBln = typeof Session.get('area') === 'undefined' || Session.get('area') === null;
+		var sectorBln = typeof Session.get('sectorId') === 'undefined' || Session.get('sectorId') === null;
+		
+		if(areaBln && sectorBln) {
 			$('#intro-text-6').append('U heeft geen valide deelgebied en geen sector geselecteerd.');
-		} else if(typeof Session.get('area') === 'undefined' || Session.get('area') === null) {
+		} else if(areaBln) {
 			$('#intro-text-6').append('U heeft geen valide deelgebied geselecteerd.');
-		} else if(typeof Session.get('sectorId') === 'undefined' || Session.get('sectorId') === null) {
+		} else if(sectorBln) {
 			$('#intro-text-6').append('U heeft geen sector geselecteerd.');
 		}
 	}

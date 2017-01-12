@@ -52,10 +52,16 @@ Template.print.onRendered(function() {
 		zoom: 2
 	});
 	
-	var viewCoordinateCentered = new ol.View({
+	var viewCoordinateCentered1 = new ol.View({
 		projection: projection,
 		center: center,
 		zoom: 1
+	});
+	
+	var viewCoordinateCentered2 = new ol.View({
+		projection: projection,
+		center: center,
+		zoom: 2
 	});
 	
 	var zoomControl = new ol.control.Zoom();
@@ -68,12 +74,36 @@ Template.print.onRendered(function() {
 	var skLayerId = Meteor.settings.public.landschapStructuurService[Session.get('area')];
 	var skVersion = Meteor.settings.public.landschapStructuurService.version;
 	
+	var reliefUrl = Meteor.settings.public.reliefService.url;
+	var reliefLayers = Meteor.settings.public.reliefService.layers;
+	var reliefVersion = Meteor.settings.public.reliefService.version;
+	
+	var openBeslotenUrl = Meteor.settings.public.openBeslotenService.url;
+	var openBeslotenLayers = Meteor.settings.public.openBeslotenService.layers;
+	var openBeslotenVersion = Meteor.settings.public.openBeslotenService.version;
+	
+	var cultuurHistorieUrl = Meteor.settings.public.cultuurhistorieService.url;
+	var cultuurHistorieLayers = Meteor.settings.public.cultuurhistorieService.layers;
+	var cultuurHistorieVersion = Meteor.settings.public.cultuurhistorieService.version;
+	
+	var groenKarakterUrl = Meteor.settings.public.groenKarakterService.url;
+	var groenKarakterLayers = Meteor.settings.public.groenKarakterService.layers;
+	var groenKarakterVersion = Meteor.settings.public.groenKarakterService.version;
+	
 	addMapGroup(zoomControl, viewLocationCentered, 'map-print-location', top10Url, top10Layers, 
 			top10Version, true);
-	addMapLayer(zoomControl, viewCoordinateCentered, 'map-print-deelgebied', skUrl, skLayerId, 
+	addMapLayer(zoomControl, viewCoordinateCentered1, 'map-print-deelgebied', skUrl, skLayerId, 
 			skVersion, false);
 	addMapLayer(zoomControl, viewLocationCentered, 'map-print-beginselen', skUrl, skLayerId, 
 			skVersion, true);
+	addMapGroup(zoomControl, viewCoordinateCentered2, 'map-kk-r', reliefUrl, reliefLayers, 
+			reliefVersion, true);
+	addMapGroup(zoomControl, viewCoordinateCentered2, 'map-kk-ob', openBeslotenUrl, openBeslotenLayers, 
+			openBeslotenVersion, true);
+	addMapGroup(zoomControl, viewCoordinateCentered2, 'map-kk-ch', cultuurHistorieUrl, 
+			cultuurHistorieLayers,  cultuurHistorieVersion, true);
+	addMapGroup(zoomControl, viewCoordinateCentered2, 'map-kk-gk', groenKarakterUrl, groenKarakterLayers, 
+			groenKarakterVersion, true);
 });
 
 Template.print.helpers({
@@ -100,9 +130,9 @@ Template.print.helpers({
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			Meteor.call('getTextPrintFromTypeName', result.content, 'sector_icoon', Session.get('sectorName'), function(err, result) {
+			Meteor.call('getTextFromTypeName', result.content, 'sector_icoon', Session.get('sectorName'), function(err, result) {
 				if(typeof result !== 'undefined') {
-					$('.print-location-sector-icon').append(result);
+					$('.print-location-sector-icon').append(result.contentPrint);
 				}
 			});
 		});
@@ -187,9 +217,42 @@ Template.print.helpers({
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap4Links, function(err, result) {
+			Meteor.call('getTextFromId', result.content, Session.get('sectorId'), function(err, result) {
 				if(typeof result !== 'undefined') {
 					$('#print-sector-general').append(result.contentPrint);
+				}
+			});
+		});
+	},
+	getKkText: function(kk) {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+			headers: {
+				'Content-Type' : 'application/json; charset=UTF-8'
+			}
+		}, function(err, result) {
+			Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public[kk], function(err, result) {
+				if(typeof result !== 'undefined') {
+					$('#print-kk-' + kk + '-text').append(result.contentPrint);
+				}
+			});
+		});
+	},
+	getLegenda: function(kk, part) {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+			headers: {
+				'Content-Type' : 'application/json; charset=UTF-8'
+			}
+		}, function(err, result) {
+			var json = result.content;
+			
+			Meteor.call('getTextFromCoupling', json, Meteor.settings.public[kk], function(err, result) {
+				if(typeof result !== 'undefined') {
+					var legendaItem = result.name + '-' + part;
+					Meteor.call('getTextFromTypeName', json, 'legenda', legendaItem, function(err, result) {
+						if(typeof result !== 'undefined') {
+							$('#print-kk-' + kk + '-legenda-' + part).append(result.content);
+						}
+					});
 				}
 			});
 		});

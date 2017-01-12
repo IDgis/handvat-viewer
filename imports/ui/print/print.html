@@ -1,6 +1,6 @@
 <template name="print">
 	<div id="print-pages">
-		<div class="print-page" id="print-page-1">
+		<div class="print-page">
 			<div class="col-xs-4 print-height-1"></div>
 			<div class="col-xs-4 print-height-1"></div>
 			<div class="col-xs-4 print-height-1"></div>
@@ -19,7 +19,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="print-page" id="print-page-2">
+		<div class="print-page">
 			<div class="col-xs-4 print-height-1">
 				<div>
 					<p><strong>HANDVAT KERNKWALITEITEN NATIONAAL LANDSCHAP ZUID-LIMBURG</strong></p>
@@ -44,7 +44,7 @@
 				</div>
 			</div>
 		</div>
-	  	<div class="print-page" id="print-page-3">
+	  	<div class="print-page">
 			<div class="col-xs-4 print-height-1">
 				<div id="print-index">
 					<p><strong>INHOUDSOPGAVE</strong></p>
@@ -63,7 +63,7 @@
 			<div class="col-xs-4 print-height-1"></div>
 			<div class="col-xs-4 print-height-1"></div>
 		</div>
-	  	<div class="print-page" id="print-page-4">
+	  	<div class="print-page">
 			<div class="col-xs-8 print-height-3">
 				<div class="col-xs-6 print-height-1">
 					<div>
@@ -83,7 +83,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="print-page" id="print-page-5">
+		<div class="print-page">
 			<div class="col-xs-8 print-height-3">
 				<div class="col-xs-12 print-height-1" id="print-deelgebied-general">
 					{{getDeelgebiedIntro}}
@@ -96,7 +96,7 @@
 				{{getDeelgebiedText}}
 			</div>
 		</div>
-		<div class="print-page" id="print-page-6">
+		<div class="print-page">
 			<div class="col-xs-8 print-height-3">
 				<div class="col-xs-12 print-height-1" id="print-beginselen-general">
 					{{getBeginselenIntro}}
@@ -111,7 +111,7 @@
 				<div class="col-xs-12 print-height-2" id="print-lb-2"></div>
 			</div>
 		</div>
-		<div class="print-page" id="print-page-7">
+		<div class="print-page">
 			<div class="col-xs-4 print-height-3">
 				<div class="col-xs-12 print-height-1" id="print-lb-3"></div>
 				<div class="col-xs-12 print-height-1" id="print-lb-4"></div>
@@ -128,13 +128,133 @@
 				<div class="col-xs-12 print-height-1"></div>
 			</div>
 		</div>
-		<div class="print-page" id="print-page-8">
+		<div class="print-page">
 			<div class="col-xs-4 print-height-3">
 				<div class="col-xs-12 print-height-3" id="print-sector-general">{{getSectorIntro}}</div>
 			</div>
 			<div class="col-xs-4 print-height-3"></div>
 			<div class="col-xs-4 print-height-3">
 				<div class="col-xs-12 print-height-1 print-location-sector-icon"></div>
+			</div>
+		</div>
+		<div class="print-page">
+			<div class="col-xs-4 print-height-3">
+				<div class="col-xs-12 print-height-1" id="print-kk-relief-text">
+					{{getKkText 'relief'}}
+				</div>
+				<div class="col-xs-12 print-height-2" id="print-kk-relief-legenda-1">
+					{{getLegenda 'relief' 1}}
+				</div>
+			</div>
+			<div class="col-xs-8 print-height-3">
+				<div class="col-xs-12 print-height-3 olMap" id="map-kk-r"></div>
+			</div>
+		</div>
+		<div class="print-page">
+			<div class="col-xs-4 print-height-3">
+				<div class="col-xs-12 print-height-3" id="print-kk-relief-legenda-2">
+					{{getLegenda 'relief' 2}}
+				</div>
+			</div>
+			<div class="col-xs-4 print-height-3">
+				<div class="col-xs-12 print-height-1"></div>
+				<div class="col-xs-12 print-height-1"></div>
+				<div class="col-xs-12 print-height-1"></div>
+			</div>
+			<div class="col-xs-4 print-height-3">
+				<div class="col-xs-12 print-height-1"></div>
+				<div class="col-xs-12 print-height-1"></div>
+				<div class="col-xs-12 print-height-1"></div>
+			</div>
+		</div>
+		<div class="print-page">
+			<div class="col-xs-4 print-height-3">
+				<div class="col-xs-12 print-height-1" id="print-kk-openbesloten-text">
+					{{getKkText 'openbesloten'}}
+				</div>
+				<div class="col-xs-12 print-height-2" id="print-kk-openbesloten-legenda-1">
+					{{getLegenda 'openbesloten' 1}}
+				</div>
+			</div>
+			<div class="col-xs-8 print-height-3">
+				<div class="col-xs-12 print-height-3 olMap" id="map-kk-ob"></div>
+			</div>
+		</div>
+		<div class="print-page">
+			<div class="col-xs-4 print-height-3">
+				<div class="col-xs-12 print-height-3" id="print-kk-openbesloten-legenda-2">
+					{{getLegenda 'openbesloten' 2}}
+				</div>
+			</div>
+			<div class="col-xs-4 print-height-3">
+				<div class="col-xs-12 print-height-1"></div>
+				<div class="col-xs-12 print-height-1"></div>
+				<div class="col-xs-12 print-height-1"></div>
+			</div>
+			<div class="col-xs-4 print-height-3">
+				<div class="col-xs-12 print-height-1"></div>
+				<div class="col-xs-12 print-height-1"></div>
+				<div class="col-xs-12 print-height-1"></div>
+			</div>
+		</div>
+		<div class="print-page">
+			<div class="col-xs-4 print-height-3">
+				<div class="col-xs-12 print-height-1" id="print-kk-cultuurhistorie-text">
+					{{getKkText 'cultuurhistorie'}}
+				</div>
+				<div class="col-xs-12 print-height-2" id="print-kk-cultuurhistorie-legenda-1">
+					{{getLegenda 'cultuurhistorie' 1}}
+				</div>
+			</div>
+			<div class="col-xs-8 print-height-3">
+				<div class="col-xs-12 print-height-3 olMap" id="map-kk-ch"></div>
+			</div>
+		</div>
+		<div class="print-page">
+			<div class="col-xs-4 print-height-3">
+				<div class="col-xs-12 print-height-3" id="print-kk-cultuurhistorie-legenda-2">
+					{{getLegenda 'cultuurhistorie' 2}}
+				</div>
+			</div>
+			<div class="col-xs-4 print-height-3">
+				<div class="col-xs-12 print-height-1"></div>
+				<div class="col-xs-12 print-height-1"></div>
+				<div class="col-xs-12 print-height-1"></div>
+			</div>
+			<div class="col-xs-4 print-height-3">
+				<div class="col-xs-12 print-height-1"></div>
+				<div class="col-xs-12 print-height-1"></div>
+				<div class="col-xs-12 print-height-1"></div>
+			</div>
+		</div>
+		<div class="print-page">
+			<div class="col-xs-4 print-height-3">
+				<div class="col-xs-12 print-height-1" id="print-kk-groenkarakter-text">
+					{{getKkText 'groenkarakter'}}
+				</div>
+				<div class="col-xs-12 print-height-2" id="print-kk-groenkarakter-legenda-1">
+					{{getLegenda 'groenkarakter' 1}}
+				</div>
+			</div>
+			<div class="col-xs-8 print-height-3">
+				<div class="col-xs-12 print-height-3 olMap" id="map-kk-gk"></div>
+			</div>
+		</div>
+		<div class="print-page">
+			<div class="col-xs-4 print-height-3">
+				<div class="col-xs-12 print-height-3" id="print-kk-groenkarakter-legenda-2">
+					{{getLegenda 'groenkarakter' 2}}
+				</div>
+			</div>
+			<div class="col-xs-4 print-height-3">
+				<div class="col-xs-12 print-height-1"></div>
+				<div class="col-xs-12 print-height-1"></div>
+				<div class="col-xs-12 print-height-1"></div>
+			</div>
+			<div class="col-xs-4 print-height-3">
+				<div class="col-xs-12 print-height-1"></div>
+				<div class="col-xs-12 print-height-1"></div>
+				<div class="col-xs-12 print-height-1"></div>
 			</div>
 		</div>
 	</div>

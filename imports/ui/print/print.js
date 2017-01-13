@@ -256,8 +256,107 @@ Template.print.helpers({
 				}
 			});
 		});
+	},
+	getOntwerpPrincipes: function() {
+		$('#op-text-5').empty();
+		var ltBln = typeof Session.get('landschapstypeId') !== 'undefined' && 
+						Session.get('landschapstypeId') !== null;
+		var sBln = typeof Session.get('sectorId') !== 'undefined' && 
+						Session.get('sectorId') !== null;
+		
+		if(ltBln && sBln) {
+			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+				headers: {
+					'Content-Type' : 'application/json; charset=UTF-8'
+				}
+			}, function(err, res) {
+				var json = res.content;
+				
+				Meteor.call('getTexts', 
+						json, 'kernkwaliteit', 
+						function(err, obj) {
+					if(typeof obj !== 'undefined') {
+						for(var h = 0; h < obj.length; h++) {
+							createOpPages(obj[h]);
+						}
+					}
+				});
+			});
+		}
 	}
 });
+
+function createOpPages(item) {
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/coupling/ontwerp/json", {
+		headers: {
+			'Content-Type' : 'application/json; charset=UTF-8'
+		}
+	}, function(err, result) {
+		Meteor.call('getOntwerpen', result.content, 
+				Session.get('landschapstypeId'), 
+				Session.get('sectorId'),
+				item.id,
+				function(err, result) {
+			
+			var extraAmount = result.length - 6;
+			var pages = 0;
+			
+			while(extraAmount > 0) {
+				extraAmount -= 9;
+				pages++;
+			}
+			
+			var opPage = 1;
+			
+			for(var i = 0; i < pages; i++) {
+				var outerDivKk = document.createElement('div');
+				$(outerDivKk).attr('class', 'print-page');
+				$(outerDivKk).attr('id', item.appCoupling + '-ops-' + (opPage + 1));
+				
+				var innerDivKk = document.createElement('div');
+				$(innerDivKk).attr('class', 'col-xs-4 print-height-3');
+				
+				var textDivKk = document.createElement('div');
+				$(textDivKk).attr('class', 'col-xs-12 print-height-1 print-op-' 
+						+ item.appCoupling);
+				
+				$(textDivKk).clone().appendTo(innerDivKk);
+				$(textDivKk).clone().appendTo(innerDivKk);
+				$(textDivKk).clone().appendTo(innerDivKk);
+				
+				$(innerDivKk).clone().appendTo(outerDivKk);
+				$(innerDivKk).clone().appendTo(outerDivKk);
+				$(innerDivKk).clone().appendTo(outerDivKk);
+				
+				$('#' + item.appCoupling + '-ops-' + opPage).after(outerDivKk);
+				opPage++;
+			}
+			
+			var ops = $('.print-op-' + item.appCoupling);
+			for(var j = 0; j < result.length; j++) {
+				getOntwerpPrincipe(ops, j, result[j]);
+			}
+		});
+	});
+}
+
+function getOntwerpPrincipe(ops, item, id) {
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+		headers: {
+			'Content-Type' : 'application/json; charset=UTF-8'
+		}
+	}, function(err, res) {
+		var json = res.content;
+		
+		Meteor.call('getTextFromId', 
+				json, id, 
+				function(err, obj) {
+			if(typeof obj !== 'undefined') {
+				$(ops[item]).append(obj.content);
+			}
+		});
+	});
+}
 
 function addMapGroup(zoomControl, view, target, url, layers, version, setMarker) {
 	var map = new ol.Map({

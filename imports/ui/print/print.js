@@ -125,160 +125,149 @@ Template.print.helpers({
 		return todayDay + '-' + todayMonth + '-' + todayYear;
 	},
 	getSectorIcon: function() {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/typename/sector_icoon/"
+				+ Session.get('sectorName'), {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			Meteor.call('getTextFromTypeName', result.content, 'sector_icoon', Session.get('sectorName'), function(err, result) {
-				if(typeof result !== 'undefined') {
-					$('.print-location-sector-icon').append(result.contentPrint);
-				}
-			});
+			if(typeof result.data[0] !== 'undefined') {
+				$('.print-location-sector-icon').append(result.data[0].print);
+			}
 		});
 	},
 	getComment: function() {
 		return Session.get('commentInitiator');
 	},
 	getDeelgebiedIntro: function() {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/" 
+				+ Meteor.settings.public.stap3Deelgebied, {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap3Deelgebied, function(err, result) {
-				if(typeof result !== 'undefined') {
-					$('#print-deelgebied-general').append(result.contentPrint);
-				}
-			});
+			if(typeof result.data !== 'undefined') {
+				$('#print-deelgebied-general').append(result.data.print);
+			}
 		});
 	},
 	getDeelgebiedText: function() {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/name/" 
+				+ Session.get('area'), {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			if(typeof Session.get('area') !== 'undefined') {
-				Meteor.call('getTextFromName', result.content, Session.get('area'), function(err, result) {
-					if(typeof result !== 'undefined') {
-						$('#print-deelgebied-text').append(result.contentPrint);
-					} else {
-						$('#print-deelgebied-text').append('U heeft geen valide deelgebied geselecteerd.');
-					}
-				});
+			if(typeof result.data[0] !== 'undefined') {
+				$('#print-deelgebied-text').append(result.data[0].print);
+			} else {
+				$('#print-deelgebied-text').append('U heeft geen valide deelgebied geselecteerd.');
 			}
 		});
 	},
 	getBeginselenIntro: function() {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+				+ Meteor.settings.public.stap3Beginselen, {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap3Beginselen, function(err, result) {
-				if(typeof result !== 'undefined') {
-					$('#print-beginselen-general').append(result.contentPrint);
-				}
-			});
+			if(typeof result.data !== 'undefined') {
+				$('#print-beginselen-general').append(result.data.print);
+			}
 		});
 	},
 	getBeginselen: function() {
-		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null) {
+		var boolLtNotUndefined = typeof Session.get('landschapstypeId') !== 'undefined';
+		var boolLtNotNull = Session.get('landschapstypeId') !== null;
+		
+		if(boolLtNotUndefined && boolLtNotNull) {
 			var count = 1;
 			
-			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/coupling/leidend/json", {
+			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/coupling/leidend/json/"
+					+ Session.get('landschapstypeId'), {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
 				}
 			}, function(err, result) {
-				Meteor.call('getBeginselen', result.content, Session.get('landschapstypeId'), function(err, result) {
-					$.each(result, function(index, item) {
-						HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
-							headers: {
-								'Content-Type' : 'application/json; charset=UTF-8'
-							}
-						}, function(err, result) {
-							Meteor.call('getTextFromId', result.content, item, function(err, result) {
-								if(typeof result !== 'undefined') {
-									$('#print-lb-' + count).append(result.contentPrint);
-									count++;
-								}
-							});
-						});
+				$.each(result.data, function(index, item) {
+					HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/"
+							+ item, {
+						headers: {
+							'Content-Type' : 'application/json; charset=UTF-8'
+						}
+					}, function(err, res) {
+						if(typeof res.data !== 'undefined') {
+							$('#print-lb-' + count).append(res.data.print);
+							count++;
+						}
 					});
 				});
 			});
 		}
 	},
 	getSectorIntro: function() {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/" + Session.get('sectorId'), {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			Meteor.call('getTextFromId', result.content, Session.get('sectorId'), function(err, result) {
-				if(typeof result !== 'undefined') {
-					$('#print-sector-general').append(result.contentPrint);
-				}
-			});
+			if(typeof result.data !== 'undefined') {
+				$('#print-sector-general').append(result.data.print);
+			}
 		});
 	},
 	getKkText: function(kk) {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+				+ Meteor.settings.public[kk], {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public[kk], function(err, result) {
-				if(typeof result !== 'undefined') {
-					$('#print-kk-' + kk + '-text').append(result.contentPrint);
-				}
-			});
+			if(typeof result.data !== 'undefined') {
+				$('#print-kk-' + kk + '-text').append(result.data.print);
+			}
 		});
 	},
 	getLegenda: function(kk, part) {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+				+ Meteor.settings.public[kk], {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			var json = result.content;
-			
-			Meteor.call('getTextFromCoupling', json, Meteor.settings.public[kk], function(err, result) {
-				if(typeof result !== 'undefined') {
-					var legendaItem = result.name + '-' + part;
-					Meteor.call('getTextFromTypeName', json, 'legenda', legendaItem, function(err, result) {
-						if(typeof result !== 'undefined') {
-							$('#print-kk-' + kk + '-legenda-' + part).append(result.content);
-						}
-					});
-				}
-			});
+			if(typeof result.data !== 'undefined') {
+				var legendaItem = result.data.name + '-' + part;
+				
+				HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/typename/legenda/"
+						+ legendaItem, {
+					headers: {
+						'Content-Type' : 'application/json; charset=UTF-8'
+					}
+				}, function(err, res) {
+					if(typeof res.data[0] !== 'undefined') {
+						$('#print-kk-' + kk + '-legenda-' + part).append(res.data[0].print);
+					}
+				});
+			}
 		});
 	},
 	getOntwerpPrincipes: function() {
 		$('#op-text-5').empty();
-		var ltBln = typeof Session.get('landschapstypeId') !== 'undefined' && 
+		var boolLt = typeof Session.get('landschapstypeId') !== 'undefined' && 
 						Session.get('landschapstypeId') !== null;
-		var sBln = typeof Session.get('sectorId') !== 'undefined' && 
+		var boolS = typeof Session.get('sectorId') !== 'undefined' && 
 						Session.get('sectorId') !== null;
 		
-		if(ltBln && sBln) {
-			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+		if(boolLt && boolS) {
+			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/texttype/kernkwaliteit", {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
 				}
 			}, function(err, res) {
-				var json = res.content;
-				
-				Meteor.call('getTexts', 
-						json, 'kernkwaliteit', 
-						function(err, obj) {
-					if(typeof obj !== 'undefined') {
-						for(var h = 0; h < obj.length; h++) {
-							createOpPages(obj[h]);
-						}
+				$.each(res.data, function(index, item) {
+					if(typeof item !== 'undefined') {
+						createOpPages(item);
 					}
 				});
 			});
@@ -287,74 +276,66 @@ Template.print.helpers({
 });
 
 function createOpPages(item) {
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/coupling/ontwerp/json", {
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/coupling/ontwerp/json/" 
+			+ Session.get('landschapstypeId') 
+			+ "/"
+			+ Session.get('sectorId')
+			+ "/"
+			+ item.id, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getOntwerpen', result.content, 
-				Session.get('landschapstypeId'), 
-				Session.get('sectorId'),
-				item.id,
-				function(err, result) {
+		var extraAmount = result.data.length - 6;
+		var pages = 0;
+		
+		while(extraAmount > 0) {
+			extraAmount -= 9;
+			pages++;
+		}
+		
+		var opPage = 1;
+		
+		for(var i = 0; i < pages; i++) {
+			var outerDivKk = document.createElement('div');
+			$(outerDivKk).attr('class', 'print-page');
+			$(outerDivKk).attr('id', item.appCoupling + '-ops-' + (opPage + 1));
 			
-			var extraAmount = result.length - 6;
-			var pages = 0;
+			var innerDivKk = document.createElement('div');
+			$(innerDivKk).attr('class', 'col-xs-4 print-height-3');
 			
-			while(extraAmount > 0) {
-				extraAmount -= 9;
-				pages++;
-			}
+			var textDivKk = document.createElement('div');
+			$(textDivKk).attr('class', 'col-xs-12 print-height-1 print-op-' 
+					+ item.appCoupling);
 			
-			var opPage = 1;
+			$(textDivKk).clone().appendTo(innerDivKk);
+			$(textDivKk).clone().appendTo(innerDivKk);
+			$(textDivKk).clone().appendTo(innerDivKk);
 			
-			for(var i = 0; i < pages; i++) {
-				var outerDivKk = document.createElement('div');
-				$(outerDivKk).attr('class', 'print-page');
-				$(outerDivKk).attr('id', item.appCoupling + '-ops-' + (opPage + 1));
-				
-				var innerDivKk = document.createElement('div');
-				$(innerDivKk).attr('class', 'col-xs-4 print-height-3');
-				
-				var textDivKk = document.createElement('div');
-				$(textDivKk).attr('class', 'col-xs-12 print-height-1 print-op-' 
-						+ item.appCoupling);
-				
-				$(textDivKk).clone().appendTo(innerDivKk);
-				$(textDivKk).clone().appendTo(innerDivKk);
-				$(textDivKk).clone().appendTo(innerDivKk);
-				
-				$(innerDivKk).clone().appendTo(outerDivKk);
-				$(innerDivKk).clone().appendTo(outerDivKk);
-				$(innerDivKk).clone().appendTo(outerDivKk);
-				
-				$('#' + item.appCoupling + '-ops-' + opPage).after(outerDivKk);
-				opPage++;
-			}
+			$(innerDivKk).clone().appendTo(outerDivKk);
+			$(innerDivKk).clone().appendTo(outerDivKk);
+			$(innerDivKk).clone().appendTo(outerDivKk);
 			
-			var ops = $('.print-op-' + item.appCoupling);
-			for(var j = 0; j < result.length; j++) {
-				getOntwerpPrincipe(ops, j, result[j]);
-			}
-		});
+			$('#' + item.appCoupling + '-ops-' + opPage).after(outerDivKk);
+			opPage++;
+		}
+		
+		var ops = $('.print-op-' + item.appCoupling);
+		for(var j = 0; j < result.data.length; j++) {
+			getOntwerpPrincipe(ops, j, result.data[j]);
+		}
 	});
 }
 
 function getOntwerpPrincipe(ops, item, id) {
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/" + id, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
-	}, function(err, res) {
-		var json = res.content;
-		
-		Meteor.call('getTextFromId', 
-				json, id, 
-				function(err, obj) {
-			if(typeof obj !== 'undefined') {
-				$(ops[item]).append(obj.content);
-			}
-		});
+	}, function(err, result) {
+		if(typeof result.data !== 'undefined') {
+			$(ops[item]).append(result.data.print);
+		}
 	});
 }
 

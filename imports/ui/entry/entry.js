@@ -6,16 +6,15 @@ Template.entry.onRendered(function() {
 	
 	Session.set('stepNumber', 'entry');
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/" 
+			+ Meteor.settings.public.entree, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.entree, function(err, result) {
-			if(typeof result !== 'undefined') {
-				$('#container-entry').append(result.content);
-			}
-		});
+		if(typeof result.data !== 'undefined') {
+			$('#container-entry').append(result.data.html);
+		}
 		
 		setCursorDone();
 	});

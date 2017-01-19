@@ -2,30 +2,33 @@ import './print.html';
 import './print.css';
 
 Template.print.onRendered(function() {
-	var chapter = 4;
+	var chapter = 5;
 	var page = 5;
 	
 	if(Session.get('chapterDeelgebied')) {
+		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + 
+				chapter + ' - Deelgebied - pagina ' + page + '</p>');
 		chapter++;
-		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + chapter + ' - Deelgebied - pagina ' + page + '</p>');
 		page++;
 	}
 	
 	if(Session.get('chapterBeginselen')) {
+		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + 
+				chapter + ' - Leidende beginselen - pagina ' + page + '</p>');
 		chapter++;
-		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + chapter + ' - Leidende beginselen - pagina ' + page + '</p>');
 		page += 2;
 	}
 	
 	if(Session.get('chapterSector')) {
+		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + 
+				chapter + ' - Sector - pagina ' + page + '</p>');
 		chapter++;
-		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + chapter + ' - Sector - pagina ' + page + '</p>');
 		page++;
 	}
 	
 	if(Session.get('chapterOntwerpprincipes')) {
-		chapter++;
-		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + chapter + ' - Ontwerpprincipes - pagina ' + page + '</p>');
+		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + 
+				chapter + ' - Ontwerpprincipes - pagina ' + page + '</p>');
 	}
 	
 	var extent;
@@ -107,6 +110,11 @@ Template.print.onRendered(function() {
 });
 
 Template.print.helpers({
+	hideChapter: function(chapter) {
+		if(!Session.get(chapter)) {
+			return "hide-element";
+		}
+	},	
 	getLocation: function() {
 		return Session.get('location');
 	},
@@ -254,12 +262,13 @@ Template.print.helpers({
 	},
 	getOntwerpPrincipes: function() {
 		$('#op-text-5').empty();
+		var chapterOps = Session.get('chapterOntwerpprincipes');
 		var boolLt = typeof Session.get('landschapstypeId') !== 'undefined' && 
 						Session.get('landschapstypeId') !== null;
 		var boolS = typeof Session.get('sectorId') !== 'undefined' && 
 						Session.get('sectorId') !== null;
 		
-		if(boolLt && boolS) {
+		if(chapterOps && boolLt && boolS) {
 			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/texttype/kernkwaliteit", {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'

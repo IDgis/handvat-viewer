@@ -13,6 +13,7 @@ import '../../ui/step_3/step_3.js';
 import '../../ui/step_4/step_4.js';
 import '../../ui/step_5/step_5.js';
 import '../../ui/step_6/step_6.js';
+import '../../ui/print/print.js';
 
 Router.configure({
 	layoutTemplate: 'main'
@@ -77,4 +78,11 @@ Router.route('/handvat-viewer/6', function () {
 	  this.render('step_6');
 	}, {
 	  name: 'step_6'
+});
+
+Router.route('/handvat-viewer/print', function () {
+	this.layout('print');
+	this.render('print');
+	}, {
+	  name: 'print'
 });

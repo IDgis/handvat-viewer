@@ -19,12 +19,14 @@ Template.step_3.onRendered(function() {
 		alsoResize: ".modal-body"
 	});
 	
+	var extent;
+	var center;
 	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCenter') === 'undefined') {
-		var extent = [165027, 306558, 212686, 338329];
-		var center = [188856, 322443];
+		extent = [165027, 306558, 212686, 338329];
+		center = [188856, 322443];
 	} else {
-		var extent = Session.get('mapExtent');
-		var center = Session.get('mapCenter');
+		extent = Session.get('mapExtent');
+		center = Session.get('mapCenter');
 	}
 	
 	var projection = new ol.proj.Projection({
@@ -179,8 +181,8 @@ Template.step_3.helpers({
 				}
 			}, function(err, result) {
 				Meteor.call('getBeginselen', result.content, Session.get('landschapstypeId'), function(err, result) {
-					itemCount = 1;
-					divCount = 0;
+					var itemCount = 1;
+					var divCount = 0;
 					
 					$.each(result, function(index, item) {
 						if(divCount === 0) {
@@ -188,8 +190,8 @@ Template.step_3.helpers({
 							$(outerDiv).attr('id', 'leidendbeginsel-' + itemCount);
 							$(outerDiv).attr('class', 'col-xs-12 text-div');
 							
-							var innerDiv = document.createElement('div');
-							$(innerDiv).attr('class', 'col-xs-6 text-div');
+							var innerDivLeft = document.createElement('div');
+							$(innerDivLeft).attr('class', 'col-xs-6 text-div');
 							$('#lb-text-3').append(outerDiv);
 							
 							HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
@@ -200,24 +202,24 @@ Template.step_3.helpers({
 								Meteor.call('getTextFromId', result.content, item, function(err, result) {
 									if(typeof result !== 'undefined') {
 										$.each(result.images, function(ix, elt) {
-											$(innerDiv).append(elt);
+											$(innerDivLeft).append(elt);
 										});
 										
 										cleanImages('lb-text-3', 'text-div-img');
 										
-										$(innerDiv).append(result.content);
+										$(innerDivLeft).append(result.content);
 									}
 								});
 							});
 							
-							$(outerDiv).append(innerDiv);
+							$(outerDiv).append(innerDivLeft);
 							
 							divCount++;
 						
 						} else {
-							var innerDiv = document.createElement('div');
-							$(innerDiv).attr('class', 'col-xs-6 text-div');
-							$('#leidendbeginsel-' + itemCount).append(innerDiv);
+							var innerDivRight = document.createElement('div');
+							$(innerDivRight).attr('class', 'col-xs-6 text-div');
+							$('#leidendbeginsel-' + itemCount).append(innerDivRight);
 							
 							HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
 								headers: {
@@ -227,12 +229,12 @@ Template.step_3.helpers({
 								Meteor.call('getTextFromId', result.content, item, function(err, result) {
 									if(typeof result !== 'undefined') {
 										$.each(result.images, function(ix, elt) {
-											$(innerDiv).append(elt);
+											$(innerDivRight).append(elt);
 										});
 										
 										cleanImages('lb-text-3', 'text-div-img');
 										
-										$(innerDiv).append(result.content);
+										$(innerDivRight).append(result.content);
 									}
 								});
 							});

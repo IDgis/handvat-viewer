@@ -50,7 +50,18 @@ Meteor.methods({
 		var json = JSON.parse(content);
 		json.forEach(function(item) {
 			if(item.name === name) {
-				object = {'id': item.id, 'name' : item.name, 'content' : item.html, 'images' : item.images};
+				object = {'id': item.id, 'name' : item.name, 'content' : item.html, 'contentPrint' : item.print, 'images' : item.images};
+			}
+		});
+		
+		return object;
+	},
+	getTextFromTypeName: function(content, type, name) {
+		var object;
+		var json = JSON.parse(content);
+		json.forEach(function(item) {
+			if(item.texttype === type && item.name === name) {
+				object = {'content' :  item.html, 'contentPrint' : item.print};
 			}
 		});
 		
@@ -61,7 +72,7 @@ Meteor.methods({
 		var json = JSON.parse(content);
 		json.forEach(function(item) {
 			if(item.appCoupling === appCoupling) {
-				object = {'id': item.id, 'name' : item.name, 'content' : item.html, 'images' : item.images};
+				object = {'id': item.id, 'name' : item.name, 'content' : item.html, 'contentPrint' : item.print, 'images' : item.images};
 			}
 		});
 		
@@ -72,7 +83,7 @@ Meteor.methods({
 		var json = JSON.parse(content);
 		json.forEach(function(item) {
 			if(item.id === id) {
-				object = {'id': item.id, 'name' : item.name, 'content' : item.html, 'images' : item.images};
+				object = {'id': item.id, 'name' : item.name, 'content' : item.html, 'contentPrint' : item.print, 'images' : item.images};
 			}
 		});
 		

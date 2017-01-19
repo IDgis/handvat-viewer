@@ -10,12 +10,14 @@ Template.step_6.onRendered(function() {
 	$('#js-next').attr('style', 'pointer-events:none;color:grey !important;');
 	$('#js-next-icon').attr('style', 'color:grey !important;');
 	
+	var extent;
+	var center;
 	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCoordinates') === 'undefined') {
-		var extent = [165027, 306558, 212686, 338329];
-		var center = [188856, 322443];
+		extent = [165027, 306558, 212686, 338329];
+		center = [188856, 322443];
 	} else {
-		var extent = Session.get('mapExtent');
-		var center = Session.get('mapCoordinates');
+		extent = Session.get('mapExtent');
+		center = Session.get('mapCoordinates');
 	}
 	
 	var projection = new ol.proj.Projection({
@@ -89,12 +91,14 @@ Template.step_6.onRendered(function() {
 	} else {
 		$('#text-6').attr('style', 'display:none;');
 		
-		if((typeof Session.get('area') === 'undefined' || Session.get('area') === null) &&
-				(typeof Session.get('sectorId') === 'undefined' || Session.get('sectorId') === null)) {
+		var areaBln = typeof Session.get('area') === 'undefined' || Session.get('area') === null;
+		var sectorBln = typeof Session.get('sectorId') === 'undefined' || Session.get('sectorId') === null;
+		
+		if(areaBln && sectorBln) {
 			$('#intro-text-6').append('U heeft geen valide deelgebied en geen sector geselecteerd.');
-		} else if(typeof Session.get('area') === 'undefined' || Session.get('area') === null) {
+		} else if(areaBln) {
 			$('#intro-text-6').append('U heeft geen valide deelgebied geselecteerd.');
-		} else if(typeof Session.get('sectorId') === 'undefined' || Session.get('sectorId') === null) {
+		} else if(sectorBln) {
 			$('#intro-text-6').append('U heeft geen sector geselecteerd.');
 		}
 	}
@@ -150,8 +154,11 @@ Template.step_6.events({
 		var residence = $('#input-residence-6')[0].value.trim();
 		var comment = $('#input-comment-6')[0].value.trim();
 		
+		var goToPrint = true;
+		
 		if(title === '') {
 			$('#alert-title-6').css('display', 'block');
+			goToPrint = false;
 		} else {
 			$('#alert-title-6').css('display', 'none');
 			Session.set('titleInitiative', title);
@@ -159,6 +166,7 @@ Template.step_6.events({
 		
 		if(name === '') {
 			$('#alert-name-6').css('display', 'block');
+			goToPrint = false;
 		} else {
 			$('#alert-name-6').css('display', 'none');
 			Session.set('nameInitiator', name);
@@ -166,6 +174,7 @@ Template.step_6.events({
 		
 		if(address === '') {
 			$('#alert-address-6').css('display', 'block');
+			goToPrint = false;
 		} else {
 			$('#alert-address-6').css('display', 'none');
 			Session.set('addressInitiator', address);
@@ -173,6 +182,7 @@ Template.step_6.events({
 		
 		if(residence === '') {
 			$('#alert-residence-6').css('display', 'block');
+			goToPrint = false;
 		} else {
 			$('#alert-residence-6').css('display', 'none');
 			Session.set('residenceInitiator', residence);
@@ -180,12 +190,41 @@ Template.step_6.events({
 		
 		if(comment.split(' ').length > 200) {
 			$('#alert-comment-6').css('display', 'block');
+			goToPrint = false;
 		} else {
 			$('#alert-comment-6').css('display', 'none');
 			
 			if(comment !== '') {
 				Session.set('commentInitiator', comment);
 			}
+		}
+		
+		if($('#js-chapter-deelgebied')[0].checked) {
+			Session.set('chapterDeelgebied', true);
+		} else {
+			Session.set('chapterDeelgebied', false);
+		}
+		
+		if($('#js-chapter-beginselen')[0].checked) {
+			Session.set('chapterBeginselen', true);
+		} else {
+			Session.set('chapterBeginselen', false);
+		}
+		
+		if($('#js-chapter-sector')[0].checked) {
+			Session.set('chapterSector', true);
+		} else {
+			Session.set('chapterSector', false);
+		}
+		
+		if($('#js-chapter-ontwerpprincipes')[0].checked) {
+			Session.set('chapterOntwerpprincipes', true);
+		} else {
+			Session.set('chapterOntwerpprincipes', false);
+		}
+		
+		if(goToPrint) {
+			Router.go('print');
 		}
 	},
 	'click #set-location-center-6': function() {

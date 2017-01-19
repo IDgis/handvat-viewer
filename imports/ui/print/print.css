@@ -1,0 +1,22 @@
+.print-height-1 {height:33.33%;}
+.print-height-2 {height:66.66%;}
+.print-height-3 {height:100%;}
+.print-page div div {padding-left:0;padding-right:0;}
+#map-print-location, #map-print-deelgebied,  #map-print-beginselen {height:100%;padding-bottom:10px;}
+
+@media screen {
+	.print-page {border-bottom:1px dotted black;margin-left:auto;margin-right:auto;border-left:1px solid black;
+		border-right:1px solid black;}
+	#print-pages {margin-top:20px;margin-bottom:20px;}
+}
+
+@media print {
+	.print-page {page-break-after:always;}
+}
+
+.print-page {width:29.7cm;height:20.3cm;}
+
+.user-input-print {margin-top:75px;}
+.print-margin-top {padding-top:10px;}
+
+#print-deelgebied-general {-webkit-column-count:2;-moz-column-count:2;column-count:2;}

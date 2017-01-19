@@ -89,8 +89,7 @@ Template.main.helpers({
 			return 'active';
 		}
 		
-		if(page === 'none' && curPage !== 1 && curPage !== 2 && curPage !== 3 && curPage !== 4 && 
-				curPage !== 5 && curPage !== 6) {
+		if(page === 'none' && isNaN(curPage)) {
 			return 'active';
 		}
 	}
@@ -208,11 +207,7 @@ Template.main.events({
 		
 		var zLevel = $(e.target).attr('data-zoom-level');
 		
-		if(zLevel === '1') {
-			$(body).addClass('zoom-level-1');
-			$(e.target).attr('data-zoom-level', '1');
-			$(zoomIn).attr('data-zoom-level', '1');
-		} else if(zLevel === '2') {
+		if(zLevel === '1' || zLevel === '2') {
 			$(body).addClass('zoom-level-1');
 			$(e.target).attr('data-zoom-level', '1');
 			$(zoomIn).attr('data-zoom-level', '1');

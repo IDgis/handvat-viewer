@@ -75,16 +75,15 @@ Template.step_6.onRendered(function() {
 			typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
 		setCursorInProgress();
 		
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+				+ Meteor.settings.public.stap6Links, {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap6Links, function(err, result) {
-				if(typeof result !== 'undefined') {
-					$('#intro-text-6').append(result.content);
-				}
-			});
+			if(result.data !== null) {
+				$('#intro-text-6').append(result.data.html);
+			}
 			
 			setCursorDone();
 		});

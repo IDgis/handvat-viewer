@@ -12,22 +12,26 @@ Template.explain.onRendered(function() {
 	$('#js-next').attr('style', 'pointer-events:auto;color:#ffffff !important;');
 	$('#js-next-icon').attr('style', 'color:#ffffff !important;');
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+			+ Meteor.settings.public.uitlegLinks, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.uitlegLinks, function(err, result) {
-			if(typeof result !== 'undefined') {
-				$('#text-container-explain').append(result.content);
-			}
-		});
-		
-		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.uitlegRechts, function(err, result) {
-			if(typeof result !== 'undefined') {
-				$('#viewer-container-explain').append(result.content);
-			}
-		});
+		if(typeof result.data !== 'undefined') {
+			$('#text-container-explain').append(result.data.html);
+		}
+	});
+	
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+			+ Meteor.settings.public.uitlegRechts, {
+		headers: {
+			'Content-Type' : 'application/json; charset=UTF-8'
+		}
+	}, function(err, result) {
+		if(typeof result.data !== 'undefined') {
+			$('#viewer-container-explain').append(result.data.html);
+		}
 		
 		setCursorDone();
 	});

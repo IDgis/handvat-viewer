@@ -10,50 +10,54 @@ Template.step_4.onRendered(function() {
 	if(typeof Session.get('area') !== 'undefined' && Session.get('area') !== null) {
 		setCursorInProgress();
 		
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+				+ Meteor.settings.public.stap4Links, {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap4Links, function(err, result) {
-				if(typeof result !== 'undefined') {
-					$('#text-4').append(result.content);
-				}
-			});
+			if(result.data !== null) {
+				$('#text-4').append(result.data.html);
+			}
+		});
+		
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/texttype/sector_icoon", {
+			headers: {
+				'Content-Type' : 'application/json; charset=UTF-8'
+			}
+		}, function(err, result) {
+			var sectors = $('#js-sectors');
 			
-			Meteor.call('getTexts', result.content, 'sector_icoon', function(err, result) {
-				var sectors = $('#js-sectors');
+			var itemCount = 0;
+			var count = 0;
+			
+			$.each(result.data, function(index, item) {
+				var innerDiv = document.createElement('div');
+				$(innerDiv).attr('class', 'col-xs-6');
 				
-				var itemCount = 0;
-				var count = 0;
-				$.each(result, function(index, item) {
-					var innerDiv = document.createElement('div');
-					$(innerDiv).attr('class', 'col-xs-6');
+				$(innerDiv).append(item.html);
+				
+				var span = document.createElement('span');
+				$(span).append(item.name);
+				$(span).attr('class', 'sector-btn-4');
+				$(span).attr('data-name', item.name);
+				
+				$(innerDiv).append(span);
+				
+				if(count === 0) {
+					var outerDiv = document.createElement('div');
+					$(outerDiv).attr('class', 'col-xs-12 text-div');
+					$(outerDiv).attr('id', 'sector-' + itemCount);
+					$(outerDiv).append(innerDiv);
+					$(sectors).append(outerDiv);
 					
-					$(innerDiv).append(item.content);
+					count++;
+				} else {
+					$('#sector-' + itemCount).append(innerDiv);
 					
-					var span = document.createElement('span');
-					$(span).append(item.name);
-					$(span).attr('class', 'sector-btn-4');
-					$(span).attr('data-name', item.name);
-					
-					$(innerDiv).append(span);
-					
-					if(count === 0) {
-						var outerDiv = document.createElement('div');
-						$(outerDiv).attr('class', 'col-xs-12 text-div');
-						$(outerDiv).attr('id', 'sector-' + itemCount);
-						$(outerDiv).append(innerDiv);
-						$(sectors).append(outerDiv);
-						
-						count++;
-					} else {
-						$('#sector-' + itemCount).append(innerDiv);
-						
-						itemCount++;
-						count = 0;
-					}
-				});
+					itemCount++;
+					count = 0;
+				}
 			});
 			
 			setCursorDone();
@@ -78,30 +82,25 @@ Template.step_4.events ({
 		var sectorName = $(e.target).attr('data-name');
 		Session.set('sectorName', sectorName);
 		
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/typename/sector/"
+				+ sectorName, {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			Meteor.call('getTexts', result.content, 'sector', function(err, result) {
-				if(typeof result !== 'undefined') {
-					$.each(result, function(index, item) {
-						if(item.name === sectorName) {
-							Session.set('sectorId', item.id);
-							$('#viewer-4').empty();
-							$('#viewer-4').append(item.content);
-						}
-					});
-				}
-				
-				if(typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
-					$('#js-next').attr('style', 'pointer-events:auto;color:#ffffff !important;');
-					$('#js-next-icon').attr('style', 'color:#ffffff !important;');
-				} else {
-					$('#js-next').attr('style', 'pointer-events:none;color:grey !important;');
-					$('#js-next-icon').attr('style', 'color:grey !important;');
-				}
-			});
+			if(result.data[0] !== null) {
+				Session.set('sectorId', result.data[0].id);
+				$('#viewer-4').empty();
+				$('#viewer-4').append(result.data[0].html);
+			}
+			
+			if(typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
+				$('#js-next').attr('style', 'pointer-events:auto;color:#ffffff !important;');
+				$('#js-next-icon').attr('style', 'color:#ffffff !important;');
+			} else {
+				$('#js-next').attr('style', 'pointer-events:none;color:grey !important;');
+				$('#js-next-icon').attr('style', 'color:grey !important;');
+			}
 			
 			setCursorDone();
 		});

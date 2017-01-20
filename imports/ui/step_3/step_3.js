@@ -82,34 +82,43 @@ Template.step_3.onRendered(function() {
 		map.addLayer(areaLayer);
 	}
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+		+ Meteor.settings.public.stap3Deelgebied, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap3Deelgebied, function(err, result) {
-			if(typeof result !== 'undefined') {
-				$('#intro-dg-3').append(result.content);
-			}
-		});
-		
-		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap3Beginselen, function(err, result) {
-			if(typeof result !== 'undefined') {
-				$('#intro-lb-3').append(result.content);
-			}
-		});
-		
-		if(typeof Session.get('area') !== 'undefined') {
-			Meteor.call('getTextFromName', result.content, Session.get('area'), function(err, result) {
-				if(typeof result !== 'undefined') {
-					$('#dg-text-3').append(result.content);
-				} else {
-					$('#dg-text-3').append('U heeft geen valide deelgebied geselecteerd.');
-				}
-			});
+		if(result.data !== null) {
+			$('#intro-dg-3').append(result.data.html);
 		}
 		
 		setCursorDone();
+	});
+	
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+		+ Meteor.settings.public.stap3Beginselen, {
+		headers: {
+			'Content-Type' : 'application/json; charset=UTF-8'
+		}
+	}, function(err, result) {
+		if(result.data !== null) {
+			$('#intro-lb-3').append(result.data.html);
+		}
+	});
+	
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/name/"
+		+ Session.get('area'), {
+		headers: {
+			'Content-Type' : 'application/json; charset=UTF-8'
+		}
+	}, function(err, result) {
+		if(typeof Session.get('area') !== 'undefined') {
+			if(result.data[0] !== null) {
+				$('#dg-text-3').append(result.data[0].html);
+			} else {
+				$('#dg-text-3').append('U heeft geen valide deelgebied geselecteerd.');
+			}
+		}
 	});
 	
 	var iconStyle = new ol.style.Style({
@@ -175,74 +184,71 @@ Template.step_3.helpers({
 		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null) {
 			setCursorInProgress();
 			
-			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/coupling/leidend/json", {
+			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/coupling/leidend/json/"
+				+ Session.get('landschapstypeId'), {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
 				}
 			}, function(err, result) {
-				Meteor.call('getBeginselen', result.content, Session.get('landschapstypeId'), function(err, result) {
-					var itemCount = 1;
-					var divCount = 0;
-					
-					$.each(result, function(index, item) {
-						if(divCount === 0) {
-							var outerDiv = document.createElement('div');
-							$(outerDiv).attr('id', 'leidendbeginsel-' + itemCount);
-							$(outerDiv).attr('class', 'col-xs-12 text-div');
-							
-							var innerDivLeft = document.createElement('div');
-							$(innerDivLeft).attr('class', 'col-xs-6 text-div');
-							$('#lb-text-3').append(outerDiv);
-							
-							HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
-								headers: {
-									'Content-Type' : 'application/json; charset=UTF-8'
-								}
-							}, function(err, result) {
-								Meteor.call('getTextFromId', result.content, item, function(err, result) {
-									if(typeof result !== 'undefined') {
-										$.each(result.images, function(ix, elt) {
-											$(innerDivLeft).append(elt);
-										});
-										
-										cleanImages('lb-text-3', 'text-div-img');
-										
-										$(innerDivLeft).append(result.content);
-									}
-								});
-							});
-							
-							$(outerDiv).append(innerDivLeft);
-							
-							divCount++;
+				var itemCount = 1;
+				var divCount = 0;
+				
+				$.each(result.data, function(index, item) {
+					if(divCount === 0) {
+						var outerDiv = document.createElement('div');
+						$(outerDiv).attr('id', 'leidendbeginsel-' + itemCount);
+						$(outerDiv).attr('class', 'col-xs-12 text-div');
 						
-						} else {
-							var innerDivRight = document.createElement('div');
-							$(innerDivRight).attr('class', 'col-xs-6 text-div');
-							$('#leidendbeginsel-' + itemCount).append(innerDivRight);
-							
-							HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
-								headers: {
-									'Content-Type' : 'application/json; charset=UTF-8'
-								}
-							}, function(err, result) {
-								Meteor.call('getTextFromId', result.content, item, function(err, result) {
-									if(typeof result !== 'undefined') {
-										$.each(result.images, function(ix, elt) {
-											$(innerDivRight).append(elt);
-										});
-										
-										cleanImages('lb-text-3', 'text-div-img');
-										
-										$(innerDivRight).append(result.content);
-									}
+						var innerDivLeft = document.createElement('div');
+						$(innerDivLeft).attr('class', 'col-xs-6 text-div');
+						$('#lb-text-3').append(outerDiv);
+						
+						HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/"
+							+ item, {
+							headers: {
+								'Content-Type' : 'application/json; charset=UTF-8'
+							}
+						}, function(err, result) {
+							if(result.data !== null) {
+								$.each(result.data.images, function(ix, elt) {
+									$(innerDivLeft).append(elt);
 								});
-							});
-							
-							itemCount++;
-							divCount = 0;
-						}
-					});
+								
+								cleanImages('lb-text-3', 'text-div-img');
+								
+								$(innerDivLeft).append(result.data.html);
+							}
+						});
+						
+						$(outerDiv).append(innerDivLeft);
+						
+						divCount++;
+					
+					} else {
+						var innerDivRight = document.createElement('div');
+						$(innerDivRight).attr('class', 'col-xs-6 text-div');
+						$('#leidendbeginsel-' + itemCount).append(innerDivRight);
+						
+						HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/"
+							+ item, {
+							headers: {
+								'Content-Type' : 'application/json; charset=UTF-8'
+							}
+						}, function(err, result) {
+							if(result.data !== null) {
+								$.each(result.data.images, function(ix, elt) {
+									$(innerDivRight).append(elt);
+								});
+								
+								cleanImages('lb-text-3', 'text-div-img');
+								
+								$(innerDivRight).append(result.data.html);
+							}
+						});
+						
+						itemCount++;
+						divCount = 0;
+					}
 				});
 				
 				setCursorDone();

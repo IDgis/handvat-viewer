@@ -21,42 +21,61 @@ Template.main.onRendered(function() {
 		alsoResize: ".modal-body"
 	});
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+			+ Meteor.settings.public.popupHandleiding, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.popupHandleiding, function(err, result) {
-			if(typeof result !== 'undefined') {
-				$('#handleiding-main').append(result.content);
-			}
-		});
-		
-		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.popupHelp, function(err, result) {
-			if(typeof result !== 'undefined') {
-				$('#help-main').append(result.content);
-			}
-		});
-		
-		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.popupContact, function(err, result) {
-			if(typeof result !== 'undefined') {
-				$('#contact-main').append(result.content);
-			}
-		});
-		
-		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.popupLinks, function(err, result) {
-			if(typeof result !== 'undefined') {
-				$('#links-main').append(result.content);
-			}
-		});
-		
-		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.popupDisclaimer, function(err, result) {
-			if(typeof result !== 'undefined') {
-				$('#disclaimer-main').append(result.content);
-			}
-		});
+		if(result.data !== null) {
+			$('#handleiding-main').append(result.data.html);
+		}
 		
 		setCursorDone();
+	});
+	
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+			+ Meteor.settings.public.popupHelp, {
+		headers: {
+			'Content-Type' : 'application/json; charset=UTF-8'
+		}
+	}, function(err, result) {
+		if(result.data !== null) {
+			$('#help-main').append(result.data.html);
+		}
+	});
+	
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+			+ Meteor.settings.public.popupContact, {
+		headers: {
+			'Content-Type' : 'application/json; charset=UTF-8'
+		}
+	}, function(err, result) {
+		if(result.data !== null) {
+			$('#contact-main').append(result.data.html);
+		}
+	});
+	
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+			+ Meteor.settings.public.popupLinks, {
+		headers: {
+			'Content-Type' : 'application/json; charset=UTF-8'
+		}
+	}, function(err, result) {
+		if(result.data !== null) {
+			$('#links-main').append(result.data.html);
+		}
+	});
+	
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+			+ Meteor.settings.public.popupDisclaimer, {
+		headers: {
+			'Content-Type' : 'application/json; charset=UTF-8'
+		}
+	}, function(err, result) {
+		if(result.data !== null) {
+			$('#disclaimer-main').append(result.data.html);
+		}
 	});
 	
 	String.prototype.replaceAll = function(s1, s2) {  

@@ -88,7 +88,7 @@ Template.step_4.events ({
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			if(result.data[0] !== null) {
+			if(typeof result.data[0] !== 'undefined') {
 				Session.set('sectorId', result.data[0].id);
 				$('#viewer-4').empty();
 				$('#viewer-4').append(result.data[0].html);

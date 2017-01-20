@@ -113,7 +113,7 @@ Template.step_3.onRendered(function() {
 		}
 	}, function(err, result) {
 		if(typeof Session.get('area') !== 'undefined') {
-			if(result.data[0] !== null) {
+			if(typeof result.data[0] !== 'undefined') {
 				$('#dg-text-3').append(result.data[0].html);
 			} else {
 				$('#dg-text-3').append('U heeft geen valide deelgebied geselecteerd.');

@@ -18,7 +18,7 @@ Template.step_1.onRendered(function() {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		if(typeof result.data !== 'undefined') {
+		if(result.data !== null) {
 			$('#text-container-1').append(result.data.html);
 		}
 	});
@@ -29,7 +29,7 @@ Template.step_1.onRendered(function() {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		if(typeof result.data !== 'undefined') {
+		if(result.data !== null) {
 			$('#viewer-container-1').append(result.data.html);
 		}
 		

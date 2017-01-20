@@ -23,16 +23,15 @@ Template.step_5.onRendered(function() {
 	
 	if(typeof Session.get('area') !== 'undefined' && Session.get('area') !== null &&
 			typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+				+ Meteor.settings.public.stap5Links, {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap5Links, function(err, result) {
-				if(typeof result !== 'undefined') {
-					$('#intro-text-5').append(result.content);
-				}
-			});
+			if(result.data !== null) {
+				$('#intro-text-5').append(result.data.html);
+			}
 			
 			setCursorDone();
 		});
@@ -47,75 +46,73 @@ Template.step_5.onRendered(function() {
 		}
 	}
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/texttype/kernkwaliteit", {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getTexts', result.content, 'kernkwaliteit', function(err, result) {
-			$.each(result, function(index, item) {
-				var header = document.createElement('p');
-				$(header).attr('class', 'header');
-				header.innerHTML = item.name;
-				$('#js-kk-thumbnails-5').append(header);
-				
-				var image = document.createElement('img');
-				$(image).attr('class', 'kernkwaliteit-img');
-				$(image).attr('id', item.id);
-				$(image).attr('data-coupling', item.appCoupling);
-				
-				if(item.appCoupling === Meteor.settings.public.cultuurhistorie) {
-					$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
-							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/ch.jpg');
-				} else if(item.appCoupling === Meteor.settings.public.openbesloten) {
-					$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
-							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/ob.jpg');
-				} else if(item.appCoupling === Meteor.settings.public.relief) {
-					$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
-							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/r.jpg');
-				} else if(item.appCoupling === Meteor.settings.public.groenkarakter) {
-					$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
-							window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/gk.jpg');
-				}
-				
-				$('#js-kk-thumbnails-5').append(image);
-			});
+		$.each(result.data, function(index, item) {
+			var header = document.createElement('p');
+			$(header).attr('class', 'header');
+			header.innerHTML = item.name;
+			$('#js-kk-thumbnails-5').append(header);
 			
-			var ltHeader = document.createElement('p');
-			$(ltHeader).attr('class', 'header');
-			ltHeader.innerHTML = 'Landschapstype';
-			$('#js-overig-thumbnails-5').append(ltHeader);
+			var image = document.createElement('img');
+			$(image).attr('class', 'kernkwaliteit-img');
+			$(image).attr('id', item.id);
+			$(image).attr('data-coupling', item.appCoupling);
 			
-			var ltImage = document.createElement('img');
-			$(ltImage).attr('id', 'landschapstype-img');
-			$(ltImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-					'/' + Meteor.settings.public.domainSuffix + '/images/lt.png');
-			$('#js-overig-thumbnails-5').append(ltImage);
+			if(item.appCoupling === Meteor.settings.public.cultuurhistorie) {
+				$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
+						window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/ch.jpg');
+			} else if(item.appCoupling === Meteor.settings.public.openbesloten) {
+				$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
+						window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/ob.jpg');
+			} else if(item.appCoupling === Meteor.settings.public.relief) {
+				$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
+						window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/r.jpg');
+			} else if(item.appCoupling === Meteor.settings.public.groenkarakter) {
+				$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
+						window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/gk.jpg');
+			}
 			
-			var polHeader = document.createElement('p');
-			$(polHeader).attr('class', 'header');
-			polHeader.innerHTML = 'POL';
-			$('#js-overig-thumbnails-5').append(polHeader);
-			
-			var polImage = document.createElement('img');
-			$(polImage).attr('id', 'pol-img');
-			$(polImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-					'/' + Meteor.settings.public.domainSuffix + '/images/pol.png');
-			$('#js-overig-thumbnails-5').append(polImage);
-			
-			var nbHeader = document.createElement('p');
-			$(nbHeader).attr('class', 'header');
-			nbHeader.innerHTML = 'Natuurbeheer';
-			$('#js-overig-thumbnails-5').append(nbHeader);
-			
-			var nbImage = document.createElement('img');
-			$(nbImage).attr('id', 'nb-img');
-			$(nbImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-					'/' + Meteor.settings.public.domainSuffix + '/images/nb.png');
-			$('#js-overig-thumbnails-5').append(nbImage);
-			
-			setBorderThumbnail($('#landschapstype-img'));
+			$('#js-kk-thumbnails-5').append(image);
 		});
+		
+		var ltHeader = document.createElement('p');
+		$(ltHeader).attr('class', 'header');
+		ltHeader.innerHTML = 'Landschapstype';
+		$('#js-overig-thumbnails-5').append(ltHeader);
+		
+		var ltImage = document.createElement('img');
+		$(ltImage).attr('id', 'landschapstype-img');
+		$(ltImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+				'/' + Meteor.settings.public.domainSuffix + '/images/lt.png');
+		$('#js-overig-thumbnails-5').append(ltImage);
+		
+		var polHeader = document.createElement('p');
+		$(polHeader).attr('class', 'header');
+		polHeader.innerHTML = 'POL';
+		$('#js-overig-thumbnails-5').append(polHeader);
+		
+		var polImage = document.createElement('img');
+		$(polImage).attr('id', 'pol-img');
+		$(polImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+				'/' + Meteor.settings.public.domainSuffix + '/images/pol.png');
+		$('#js-overig-thumbnails-5').append(polImage);
+		
+		var nbHeader = document.createElement('p');
+		$(nbHeader).attr('class', 'header');
+		nbHeader.innerHTML = 'Natuurbeheer';
+		$('#js-overig-thumbnails-5').append(nbHeader);
+		
+		var nbImage = document.createElement('img');
+		$(nbImage).attr('id', 'nb-img');
+		$(nbImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+				'/' + Meteor.settings.public.domainSuffix + '/images/nb.png');
+		$('#js-overig-thumbnails-5').append(nbImage);
+		
+		setBorderThumbnail($('#landschapstype-img'));
 		
 		setCursorDone();
 	});
@@ -201,19 +198,18 @@ Template.step_5.helpers({
 		if(typeof Session.get('kernkwaliteitId') !== 'undefined' && Session.get('kernkwaliteitId') !== null) {
 			setCursorInProgress();
 			
-			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/"
+					+ Session.get('kernkwaliteitId'), {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
 				}
 			}, function(err, result) {
-				Meteor.call('getTextFromId', result.content, Session.get('kernkwaliteitId'), function(err, result) {
-					if(typeof result !== 'undefined') {
-						var div = document.createElement('div');
-						$(div).attr('class', 'col-xs-12 text-div');
-						$(div).append(result.content);
-						$('#kk-text-5').append(div);
-					}
-				});
+				if(result.data !== null) {
+					var div = document.createElement('div');
+					$(div).attr('class', 'col-xs-12 text-div');
+					$(div).append(result.data.html);
+					$('#kk-text-5').append(div);
+				}
 				
 				setCursorDone();
 			});
@@ -232,79 +228,74 @@ Template.step_5.helpers({
 		if(ltBln && sBln && kkBln) {
 			setCursorInProgress();
 			
-			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/coupling/ontwerp/json", {
+			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/coupling/ontwerp/json/"
+					+ Session.get('landschapstypeId')
+					+ "/"
+					+ Session.get('sectorId')
+					+ "/"
+					+ Session.get('kernkwaliteitId'), {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
 				}
 			}, function(err, result) {
-				Meteor.call('getOntwerpen', result.content, 
-						Session.get('landschapstypeId'), 
-						Session.get('sectorId'),
-						Session.get('kernkwaliteitId'),
-						function(err, result) {
-					
-					var itemCount = 1;
-					var divCount = 0;
-					
-					$.each(result, function(index, item) {
-						if(divCount === 0) {
-							var outerDiv = document.createElement('div');
-							$(outerDiv).attr('id', 'ontwerpprincipe-' + itemCount);
-							$(outerDiv).attr('class', 'col-xs-12 text-div');
-							
-							var innerDivLeft = document.createElement('div');
-							$(innerDivLeft).attr('class', 'col-xs-6 text-div');
-							$('#op-text-5').append(outerDiv);
-							
-							HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
-								headers: {
-									'Content-Type' : 'application/json; charset=UTF-8'
-								}
-							}, function(err, result) {
-								Meteor.call('getTextFromId', result.content, item, function(err, result) {
-									if(typeof result !== 'undefined') {
-										$.each(result.images, function(ix, elt) {
-											$(innerDivLeft).append(elt);
-										});
-										
-										cleanImages('op-text-5');
-										
-										$(innerDivLeft).append(result.content);
-									}
-								});
-							});
-							
-							$(outerDiv).append(innerDivLeft);
-							
-							divCount++;
+				var itemCount = 1;
+				var divCount = 0;
+				
+				$.each(result.data, function(index, item) {
+					if(divCount === 0) {
+						var outerDiv = document.createElement('div');
+						$(outerDiv).attr('id', 'ontwerpprincipe-' + itemCount);
+						$(outerDiv).attr('class', 'col-xs-12 text-div');
 						
-						} else {
-							var innerDivRight = document.createElement('div');
-							$(innerDivRight).attr('class', 'col-xs-6 text-div');
-							$('#ontwerpprincipe-' + itemCount).append(innerDivRight);
-							
-							HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
-								headers: {
-									'Content-Type' : 'application/json; charset=UTF-8'
-								}
-							}, function(err, result) {
-								Meteor.call('getTextFromId', result.content, item, function(err, result) {
-									if(typeof result !== 'undefined') {
-										$.each(result.images, function(ix, elt) {
-											$(innerDivRight).append(elt);
-										});
-										
-										cleanImages('op-text-5');
-										
-										$(innerDivRight).append(result.content);
-									}
+						var innerDivLeft = document.createElement('div');
+						$(innerDivLeft).attr('class', 'col-xs-6 text-div');
+						$('#op-text-5').append(outerDiv);
+						
+						HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/"
+								+ item, {
+							headers: {
+								'Content-Type' : 'application/json; charset=UTF-8'
+							}
+						}, function(err, result) {
+							if(result.data !== null) {
+								$.each(result.data.images, function(ix, elt) {
+									$(innerDivLeft).append(elt);
 								});
-							});
-							
-							itemCount++;
-							divCount = 0;
-						}
-					});
+								
+								cleanImages('op-text-5');
+								
+								$(innerDivLeft).append(result.data.html);
+							}
+						});
+						
+						$(outerDiv).append(innerDivLeft);
+						
+						divCount++;
+					} else {
+						var innerDivRight = document.createElement('div');
+						$(innerDivRight).attr('class', 'col-xs-6 text-div');
+						$('#ontwerpprincipe-' + itemCount).append(innerDivRight);
+						
+						HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/"
+								+ item, {
+							headers: {
+								'Content-Type' : 'application/json; charset=UTF-8'
+							}
+						}, function(err, result) {
+							if(result.data !== null) {
+								$.each(result.data.images, function(ix, elt) {
+									$(innerDivRight).append(elt);
+								});
+								
+								cleanImages('op-text-5');
+								
+								$(innerDivRight).append(result.data.html);
+							}
+						});
+						
+						itemCount++;
+						divCount = 0;
+					}
 				});
 				
 				setCursorDone();

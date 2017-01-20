@@ -154,7 +154,7 @@ Template.print.helpers({
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			if(typeof result.data !== 'undefined') {
+			if(result.data !== null) {
 				$('#print-deelgebied-general').append(result.data.print);
 			}
 		});
@@ -180,7 +180,7 @@ Template.print.helpers({
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			if(typeof result.data !== 'undefined') {
+			if(result.data !== null) {
 				$('#print-beginselen-general').append(result.data.print);
 			}
 		});
@@ -205,7 +205,7 @@ Template.print.helpers({
 							'Content-Type' : 'application/json; charset=UTF-8'
 						}
 					}, function(err, res) {
-						if(typeof res.data !== 'undefined') {
+						if(res.data !== null) {
 							$('#print-lb-' + count).append(res.data.print);
 							count++;
 						}
@@ -220,7 +220,7 @@ Template.print.helpers({
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			if(typeof result.data !== 'undefined') {
+			if(result.data !== null) {
 				$('#print-sector-general').append(result.data.print);
 			}
 		});
@@ -232,7 +232,7 @@ Template.print.helpers({
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			if(typeof result.data !== 'undefined') {
+			if(result.data !== null) {
 				$('#print-kk-' + kk + '-text').append(result.data.print);
 			}
 		});
@@ -244,7 +244,7 @@ Template.print.helpers({
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
 		}, function(err, result) {
-			if(typeof result.data !== 'undefined') {
+			if(result.data !== null) {
 				var legendaItem = result.data.name + '-' + part;
 				
 				HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/typename/legenda/"
@@ -275,9 +275,7 @@ Template.print.helpers({
 				}
 			}, function(err, res) {
 				$.each(res.data, function(index, item) {
-					if(typeof item !== 'undefined') {
-						createOpPages(item);
-					}
+					createOpPages(item);
 				});
 			});
 		}
@@ -342,7 +340,7 @@ function getOntwerpPrincipe(ops, item, id) {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		if(typeof result.data !== 'undefined') {
+		if(result.data !== null) {
 			$(ops[item]).append(result.data.print);
 		}
 	});

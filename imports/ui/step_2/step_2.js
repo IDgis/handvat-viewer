@@ -25,16 +25,15 @@ Template.step_2.onRendered(function() {
 		$('#js-next-icon').attr('style', 'color:#ffffff !important;');
 	}
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json", {
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+			+ Meteor.settings.public.stap2Links, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		Meteor.call('getTextFromCoupling', result.content, Meteor.settings.public.stap2Links, function(err, result) {
-			if(typeof result !== 'undefined') {
-				$('#text-2').append(result.content);
-			}
-		});
+		if(result.data !== null) {
+			$('#text-2').append(result.data.html);
+		}
 		
 		setCursorDone();
 	});

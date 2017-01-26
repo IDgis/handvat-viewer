@@ -47,6 +47,7 @@ html.wait, html.wait * {cursor:wait !important;}
 .text-paragraph {margin-bottom:20px;}
 .negate-border {border:none;}
 .negate-margin {margin:0;}
+.negate-padding {padding:0;}
 
 .text-div-img {width:100%;}
 .text-div {padding-left:0;padding-right:10px;margin-bottom:10px;}

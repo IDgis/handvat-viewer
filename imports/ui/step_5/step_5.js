@@ -179,6 +179,45 @@ Template.step_5.onRendered(function() {
 	});
 	
 	$('#kk-container-5').resize(setThumbnailSize);
+	
+	map.on('singleclick', function(evt) {
+		if(Session.get('natuurbeheerActive')) {
+			setCursorInProgress();
+			$('#layer-popup-5').empty();
+			$('#layer-popup-5').append('<div class="layer-popup-content">Gegevens opvragen...</div>');
+			
+			var layerString = Meteor.settings.public.natuurbeheerService.layers.join(',');
+			
+			var layer = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: Meteor.settings.public.natuurbeheerService.url, 
+					params: {'LAYERS': layerString,  
+						'VERSION': Meteor.settings.public.natuurbeheerService.version}
+				})
+			});
+			
+			var url = layer.getSource()
+				.getGetFeatureInfoUrl(evt.coordinate, map.getView().getResolution(), 
+						map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
+			
+			Meteor.call('getBeheertypeData', url, function(err, result) {
+				if(result.length !== 0) {
+					result.forEach(function(item) {
+						$('#layer-popup-5').empty();
+						$('#layer-popup-5').append('<div class="layer-popup-content">'
+							+ '<p class="negate-margin"><strong>Beheertype:</strong></p>'
+							+ '<p class="negate-margin">'
+							+ item +'</p></div>');
+						$('#layer-popup-5').css({'display': 'block'});
+					});
+				} else {
+					$('#layer-popup-5').css({'display': 'none'});
+				}
+				
+				setCursorDone();
+			});
+		}
+	});
 });
 
 Template.step_5.helpers({
@@ -320,6 +359,7 @@ Template.step_5.events ({
 	'click .kernkwaliteit-img': function(e) {
 		var coupling = $(e.target).attr('data-coupling');
 		Session.set('chActive', false);
+		Session.set('natuurbeheerActive', false);
 		
 		$('#ch-base-select-5')[0].options[0].selected = 'selected';
 		
@@ -374,6 +414,7 @@ Template.step_5.events ({
 		addServiceLayers(null, true, e.target, [landschapstype]);
 		
 		Session.set('chActive', false);
+		Session.set('natuurbeheerActive', false);
 	},
 	'click #pol-img': function(e) {
 		var pol = {url: Meteor.settings.public.polService.url,
@@ -387,6 +428,7 @@ Template.step_5.events ({
 		addServiceLayers(null, false, e.target, [pol, natura2000]);
 		
 		Session.set('chActive', false);
+		Session.set('natuurbeheerActive', false);
 	},
 	'click #nb-img': function(e) {
 		var natuurbeheer = {url: Meteor.settings.public.natuurbeheerService.url,
@@ -404,6 +446,7 @@ Template.step_5.events ({
 		addServiceLayers(null, false, e.target, [natuurbeheer, beheerplan2017, natura2000]);
 		
 		Session.set('chActive', false);
+		Session.set('natuurbeheerActive', true);
 	},
 	'change #ch-base-select-5': function(e) {
 		map.getLayers().clear();

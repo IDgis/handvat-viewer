@@ -31,5 +31,29 @@ Meteor.methods({
 		var res = HTTP.get(url);
 		var xml = xml2js.parseStringSync(res.content);
 		return xml.WMT_MS_Capabilities.Capability[0].Layer[0].Layer;
+	},
+	getBeheertypeData: function(url) {
+		var res = HTTP.get(url);
+		var xml = xml2js.parseStringSync(res.content);
+		
+		var infos = [];
+		var info;
+		
+		if(typeof xml.msGMLOutput["beheertypenkaart_n_layer"] !== 'undefined') {
+			info = xml.msGMLOutput["beheertypenkaart_n_layer"][0]["beheertypenkaart_n_feature"][0].BEHEERTYPE[0];
+			infos.push(info);
+		}
+		
+		if(typeof xml.msGMLOutput["beheertypenkaart_nn_layer"] !== 'undefined') {
+			info = xml.msGMLOutput["beheertypenkaart_nn_layer"][0]["beheertypenkaart_nn_feature"][0].BEHEERTYPE[0];
+			infos.push(info);
+		}
+		
+		if(typeof xml.msGMLOutput["beheertypenkaart_l_layer"] !== 'undefined') {
+			info = xml.msGMLOutput["beheertypenkaart_l_layer"][0]["beheertypenkaart_l_feature"][0].BEHEERTYPE[0];
+			infos.push(info);
+		}
+		
+		return infos;
 	}
 });

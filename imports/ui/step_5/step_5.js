@@ -52,11 +52,6 @@ Template.step_5.onRendered(function() {
 		}
 	}, function(err, result) {
 		$.each(result.data, function(index, item) {
-			var header = document.createElement('p');
-			$(header).attr('class', 'header');
-			header.innerHTML = item.name;
-			$('#js-kk-thumbnails-5').append(header);
-			
 			var image = document.createElement('img');
 			$(image).attr('class', 'kernkwaliteit-img');
 			$(image).attr('id', item.id);
@@ -79,37 +74,22 @@ Template.step_5.onRendered(function() {
 			$('#js-kk-thumbnails-5').append(image);
 		});
 		
-		var ltHeader = document.createElement('p');
-		$(ltHeader).attr('class', 'header');
-		ltHeader.innerHTML = 'Landschapstype';
-		$('#js-overig-thumbnails-5').append(ltHeader);
-		
 		var ltImage = document.createElement('img');
 		$(ltImage).attr('id', 'landschapstype-img');
 		$(ltImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-				'/' + Meteor.settings.public.domainSuffix + '/images/lt.png');
+				'/' + Meteor.settings.public.domainSuffix + '/images/lt.jpg');
 		$('#js-overig-thumbnails-5').append(ltImage);
-		
-		var polHeader = document.createElement('p');
-		$(polHeader).attr('class', 'header');
-		polHeader.innerHTML = 'POL';
-		$('#js-overig-thumbnails-5').append(polHeader);
 		
 		var polImage = document.createElement('img');
 		$(polImage).attr('id', 'pol-img');
 		$(polImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-				'/' + Meteor.settings.public.domainSuffix + '/images/pol.png');
+				'/' + Meteor.settings.public.domainSuffix + '/images/pol.jpg');
 		$('#js-overig-thumbnails-5').append(polImage);
-		
-		var nbHeader = document.createElement('p');
-		$(nbHeader).attr('class', 'header');
-		nbHeader.innerHTML = 'Natuurbeheer';
-		$('#js-overig-thumbnails-5').append(nbHeader);
 		
 		var nbImage = document.createElement('img');
 		$(nbImage).attr('id', 'nb-img');
 		$(nbImage).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-				'/' + Meteor.settings.public.domainSuffix + '/images/nb.png');
+				'/' + Meteor.settings.public.domainSuffix + '/images/nb.jpg');
 		$('#js-overig-thumbnails-5').append(nbImage);
 		
 		setBorderThumbnail($('#landschapstype-img'));

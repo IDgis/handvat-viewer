@@ -1,5 +1,6 @@
 #intro-text-5 {margin-bottom:20px;}
-#kk-container-5 {height:100%;float:left;position:relative;min-height:1px;padding-right:15px;width:20%;overflow-y:scroll;padding-left:15px;}
+#text-container-5 {height:100%;float:left;position:relative;min-height:1px;padding-right:15px;width:32.625%;overflow-y:scroll;padding-left:15px;}
+#kk-container-5 {height:100%;float:left;position:relative;min-height:1px;padding-right:15px;width:12.375%;overflow-y:scroll;padding-left:15px;}
 .step-3-viewer {float:left;position:relative;min-height:1px;padding-right:15px;width:55%}
 
 .kernkwaliteit-img, #landschapstype-img, #pol-img, #nb-img {width:100%;margin-top:0;margin-bottom:10px;}

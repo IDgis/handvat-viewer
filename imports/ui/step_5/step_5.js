@@ -383,11 +383,15 @@ Template.step_5.events ({
 				layers: Meteor.settings.public.natuurbeheerService.layers, 
 				version: Meteor.settings.public.natuurbeheerService.version};
 		
+		var beheerplan2017 = {url: Meteor.settings.public.natuurbeheerplan2017Service.url,
+				layers: Meteor.settings.public.natuurbeheerplan2017Service.layers, 
+				version: Meteor.settings.public.natuurbeheerplan2017Service.version};
+		
 		var natura2000 = {url: Meteor.settings.public.natura2000Service.url,
 				layers: Meteor.settings.public.natura2000Service.layers, 
 				version: Meteor.settings.public.natura2000Service.version};
 		
-		addServiceLayers(null, false, e.target, [natuurbeheer, natura2000]);
+		addServiceLayers(null, false, e.target, [natuurbeheer, beheerplan2017, natura2000]);
 		
 		Session.set('chActive', false);
 	},

@@ -144,6 +144,11 @@
 	    "version": "1.1.1",
 	    "layers": ["natura2000_limb_v"]
 	  },
+	  "natuurbeheerplan2017Service": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/natuurbeheerplan2017?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+	    "version": "1.1.1",
+	    "layers": ["def_beheertypenkaart_v"]
+	  },
 	  "woonplaatsen": [
 	    {"label": "Amstenrade", "value": "2099"},
 	    {"label": "Baneheide", "value": "3067"},

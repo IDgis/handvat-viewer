@@ -33,16 +33,10 @@ Template.step_4.onRendered(function() {
 			
 			$.each(result.data, function(index, item) {
 				var innerDiv = document.createElement('div');
-				$(innerDiv).attr('class', 'col-xs-6');
+				$(innerDiv).attr('class', 'col-xs-6 sector-img-4');
+				$(innerDiv).attr('data-name', item.name);
 				
 				$(innerDiv).append(item.html);
-				
-				var span = document.createElement('span');
-				$(span).append(item.name);
-				$(span).attr('class', 'sector-btn-4');
-				$(span).attr('data-name', item.name);
-				
-				$(innerDiv).append(span);
 				
 				if(count === 0) {
 					var outerDiv = document.createElement('div');
@@ -76,10 +70,10 @@ Template.step_4.onRendered(function() {
 });
 
 Template.step_4.events ({
-	'click .sector-btn-4': function(e) {
+	'click .sector-img-4': function(e) {
 		setCursorInProgress();
 		
-		var sectorName = $(e.target).attr('data-name');
+		var sectorName = $(e.currentTarget).attr('data-name');
 		Session.set('sectorName', sectorName);
 		
 		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/typename/sector/"

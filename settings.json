@@ -113,7 +113,7 @@
 	  "natuurbeheerService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/groen_karakter?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
 	    "version": "1.1.1",
-	    "layers": ["beheertypenkaart_v"]
+	    "layers": ["beheertypenkaart_n", "beheertypenkaart_nn", "beheertypenkaart_l"]
 	  },
 	  "landschapStructuurService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
@@ -138,6 +138,16 @@
 	    "Schimmert": 10,
 	    "Ubachsberg": 11,
 	    "Vijlenerbos": 12
+	  },
+	  "natura2000Service": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/beleidskaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+	    "version": "1.1.1",
+	    "layers": ["natura2000_limb_v"]
+	  },
+	  "natuurbeheerplan2017Service": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/natuurbeheerplan2017?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+	    "version": "1.1.1",
+	    "layers": ["def_beheertypenkaart_v"]
 	  },
 	  "woonplaatsen": [
 	    {"label": "Amstenrade", "value": "2099"},

@@ -59,19 +59,29 @@ Template.step_5.onRendered(function() {
 			
 			if(item.appCoupling === Meteor.settings.public.cultuurhistorie) {
 				$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
-						window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/ch.jpg');
+						window.location.port + '/' + Meteor.settings.public.domainSuffix + 
+						'/images/ch.jpg');
+				
+				$('#js-kk-thumbnails-5').append(image);
 			} else if(item.appCoupling === Meteor.settings.public.openbesloten) {
 				$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
-						window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/ob.jpg');
+						window.location.port + '/' + Meteor.settings.public.domainSuffix + 
+						'/images/ob.jpg');
+				
+				$('#js-kk-thumbnails-5').append(image);
 			} else if(item.appCoupling === Meteor.settings.public.relief) {
 				$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
-						window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/r.jpg');
+						window.location.port + '/' + Meteor.settings.public.domainSuffix + 
+						'/images/r.jpg');
+				
+				$('#js-kk-thumbnails-5').append(image);
 			} else if(item.appCoupling === Meteor.settings.public.groenkarakter) {
 				$(image).attr('src', window.location.protocol + '//' + window.location.hostname + ':' + 
-						window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/gk.jpg');
+						window.location.port + '/' + Meteor.settings.public.domainSuffix + 
+						'/images/gk.jpg');
+				
+				$('#js-kk-thumbnails-5').append(image);
 			}
-			
-			$('#js-kk-thumbnails-5').append(image);
 		});
 		
 		var ltImage = document.createElement('img');

@@ -92,11 +92,11 @@ html.wait, html.wait * {cursor:wait !important;}
 
 .icon-button {height:14px;margin-right:5px;}
 
-.zoom-level-1, .zoom-level-1 * {font-size:14px;}
-.zoom-level-2, .zoom-level-2 * {font-size:16px;}
-.zoom-level-3, .zoom-level-3 * {font-size:20px;}
-.zoom-level-4, .zoom-level-4 * {font-size:24px;}
-.zoom-level-5, .zoom-level-5 * {font-size:30px;}
+.zoom-level-1, .zoom-level-1 * {font-size:14px !important;}
+.zoom-level-2, .zoom-level-2 * {font-size:16px !important;}
+.zoom-level-3, .zoom-level-3 * {font-size:20px !important;}
+.zoom-level-4, .zoom-level-4 * {font-size:24px !important;}
+.zoom-level-5, .zoom-level-5 * {font-size:30px !important;}
 
 .disabled {pointer-events:none;}
 

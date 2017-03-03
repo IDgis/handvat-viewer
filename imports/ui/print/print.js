@@ -78,8 +78,6 @@ Template.print.onRendered(function() {
 		zoom: 2
 	});
 	
-	var zoomControl = new ol.control.Zoom();
-	
 	var top10Url = Meteor.settings.public.top10Service.url;
 	var top10Layers = Meteor.settings.public.top10Service.layers;
 	var top10Version = Meteor.settings.public.top10Service.version;
@@ -104,19 +102,19 @@ Template.print.onRendered(function() {
 	var groenKarakterLayers = Meteor.settings.public.groenKarakterService.layers;
 	var groenKarakterVersion = Meteor.settings.public.groenKarakterService.version;
 	
-	addMapGroup(zoomControl, viewLocationCentered, 'map-print-location', top10Url, top10Layers, 
+	addMapGroup(viewLocationCentered, 'map-print-location', top10Url, top10Layers, 
 			top10Version, true);
-	addMapLayer(zoomControl, viewCoordinateCentered1, 'map-print-deelgebied', skUrl, skLayerId, 
+	addMapLayer(viewCoordinateCentered1, 'map-print-deelgebied', skUrl, skLayerId, 
 			skVersion, false);
-	addMapLayer(zoomControl, viewLocationCentered, 'map-print-beginselen', skUrl, skLayerId, 
+	addMapLayer(viewLocationCentered, 'map-print-beginselen', skUrl, skLayerId, 
 			skVersion, true);
-	addMapGroup(zoomControl, viewCoordinateCentered2, 'map-kk-r', reliefUrl, reliefLayers, 
+	addMapGroup(viewCoordinateCentered2, 'map-kk-r', reliefUrl, reliefLayers, 
 			reliefVersion, true);
-	addMapGroup(zoomControl, viewCoordinateCentered2, 'map-kk-ob', openBeslotenUrl, openBeslotenLayers, 
+	addMapGroup(viewCoordinateCentered2, 'map-kk-ob', openBeslotenUrl, openBeslotenLayers, 
 			openBeslotenVersion, true);
-	addMapGroup(zoomControl, viewCoordinateCentered2, 'map-kk-ch', cultuurHistorieUrl, 
+	addMapGroup(viewCoordinateCentered2, 'map-kk-ch', cultuurHistorieUrl, 
 			cultuurHistorieLayers,  cultuurHistorieVersion, true);
-	addMapGroup(zoomControl, viewCoordinateCentered2, 'map-kk-gk', groenKarakterUrl, groenKarakterLayers, 
+	addMapGroup(viewCoordinateCentered2, 'map-kk-gk', groenKarakterUrl, groenKarakterLayers, 
 			groenKarakterVersion, true);
 });
 
@@ -379,11 +377,16 @@ function getOntwerpPrincipe(ops, item, id) {
 	});
 }
 
-function addMapGroup(zoomControl, view, target, url, layers, version, setMarker) {
+function addMapGroup(view, target, url, layers, version, setMarker) {
 	var map = new ol.Map({
-		control: zoomControl,
+		controls: [],
+		interactions: ol.interaction.defaults({mouseWheelZoom: false}),
 		target: target,
 		view: view
+	});
+	
+	map.getInteractions().forEach(function(interaction) {
+		map.removeInteraction(interaction);
 	});
 	
 	layers.forEach(function(item) {
@@ -402,11 +405,16 @@ function addMapGroup(zoomControl, view, target, url, layers, version, setMarker)
 	}
 }
 
-function addMapLayer(zoomControl, view, target, url, id, version, setMarker) {
+function addMapLayer(view, target, url, id, version, setMarker) {
 	var map = new ol.Map({
-		control: zoomControl,
+		controls: [],
+		interactions: ol.interaction.defaults({mouseWheelZoom: false}),
 		target: target,
 		view: view
+	});
+	
+	map.getInteractions().forEach(function(interaction) {
+		map.removeInteraction(interaction);
 	});
 	
 	var layer = new ol.layer.Image({

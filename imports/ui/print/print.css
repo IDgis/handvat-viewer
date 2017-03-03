@@ -1,4 +1,5 @@
 #start-page {background-image:url("/images/print-background-first-page.jpg");background-size:100%;}
+#last-page {background-image:url("/images/print-background-last-page.jpg");background-size:100%;}
 
 .print-height-1 {height:33.33%;}
 .print-height-2 {height:66.66%;}

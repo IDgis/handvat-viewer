@@ -30,3 +30,5 @@
 	-moz-column-fill:auto;-webkit-column-fill:auto;column-fill:auto;}
 #print-beginselen-general {-webkit-column-count:2;-moz-column-count:2;column-count:2;
 	-moz-column-fill:auto;-webkit-column-fill:auto;column-fill:auto;}
+#print-sector-general {-webkit-column-count:2;-moz-column-count:2;column-count:2;
+	-moz-column-fill:auto;-webkit-column-fill:auto;column-fill:auto;}

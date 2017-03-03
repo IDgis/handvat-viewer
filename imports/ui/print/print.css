@@ -1,6 +1,9 @@
 #start-page {background-image:url("/images/print-background-first-page.jpg");background-size:100%;}
 #last-page {background-image:url("/images/print-background-last-page.jpg");background-size:100%;}
 
+#print-app-inleiding {-moz-column-count:2;-webkit-column-count:2;column-count:2;height:100%;
+	-moz-column-fill:auto;-webkit-column-fill:auto;column-fill:auto;}
+
 .print-height-1 {height:33.33%;}
 .print-height-2 {height:66.66%;}
 .print-height-3 {height:100%;}

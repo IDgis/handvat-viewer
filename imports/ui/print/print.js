@@ -132,6 +132,17 @@ Template.print.helpers({
 		
 		return todayDay + '-' + todayMonth + '-' + todayYear;
 	},
+	getAppInleiding: function() {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/start-links", {
+			headers: {
+				'Content-Type' : 'application/json; charset=UTF-8'
+			}
+		}, function(err, result) {
+			if(typeof result.data !== 'undefined') {
+				$('#print-app-inleiding').append(result.data.print);				
+			}
+		});
+	},
 	getSectorIcon: function() {
 		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/typename/sector_icoon/"
 				+ Session.get('sectorName'), {

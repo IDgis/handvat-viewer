@@ -181,29 +181,64 @@ Template.step_5.onRendered(function() {
 	$('#kk-container-5').resize(setThumbnailSize);
 	
 	map.on('singleclick', function(evt) {
-		if(Session.get('natuurbeheerActive')) {
+		if(Session.get('cultuurActive') || Session.get('natuurbeheerActive')) {
 			setCursorInProgress();
 			$('#layer-popup-5').empty();
 			$('#layer-popup-5').append('<div class="layer-popup-content">Gegevens opvragen...</div>');
+		}
+		
+		if(Session.get('cultuurActive')) {
+			var chLayerString = Meteor.settings.public.cultuurhistorieHoverableService.layers.join(',');
+			var chLayer = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: Meteor.settings.public.cultuurhistorieHoverableService.url, 
+					params: {'LAYERS': chLayerString,  
+						'VERSION': Meteor.settings.public.cultuurhistorieHoverableService.version}
+				})
+			});
 			
-			var layerString = Meteor.settings.public.natuurbeheerService.layers.join(',');
+			var chUrl = chLayer.getSource()
+				.getGetFeatureInfoUrl(evt.coordinate, map.getView().getResolution(), 
+						map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
 			
-			var layer = new ol.layer.Image({
+			Meteor.call('getCultuurhistorieData', chUrl, function(err, result) {
+				if(result.length !== 0) {
+					$('#layer-popup-5').empty();
+					
+					result.forEach(function(item) {
+						$('#layer-popup-5').append('<div class="layer-popup-content">'
+							+ '<p class="negate-margin"><strong>' + item.label + ':</strong></p>'
+							+ '<p class="negate-margin">'
+							+ item.value +'</p></div>');
+						$('#layer-popup-5').css({'display': 'block'});
+					});
+				} else {
+					$('#layer-popup-5').css({'display': 'none'});
+				}
+				
+				setCursorDone();
+			});
+		}
+		
+		if(Session.get('natuurbeheerActive')) {
+			var nbLayerString = Meteor.settings.public.natuurbeheerService.layers.join(',');
+			var nbLayer = new ol.layer.Image({
 				source: new ol.source.ImageWMS({
 					url: Meteor.settings.public.natuurbeheerService.url, 
-					params: {'LAYERS': layerString,  
+					params: {'LAYERS': nbLayerString,  
 						'VERSION': Meteor.settings.public.natuurbeheerService.version}
 				})
 			});
 			
-			var url = layer.getSource()
+			var nbUrl = nbLayer.getSource()
 				.getGetFeatureInfoUrl(evt.coordinate, map.getView().getResolution(), 
 						map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
 			
-			Meteor.call('getBeheertypeData', url, function(err, result) {
+			Meteor.call('getBeheertypeData', nbUrl, function(err, result) {
 				if(result.length !== 0) {
+					$('#layer-popup-5').empty();
+					
 					result.forEach(function(item) {
-						$('#layer-popup-5').empty();
 						$('#layer-popup-5').append('<div class="layer-popup-content">'
 							+ '<p class="negate-margin"><strong>Beheertype:</strong></p>'
 							+ '<p class="negate-margin">'
@@ -343,8 +378,8 @@ Template.step_5.helpers({
 			return 'hide-element';
 		}
 	},
-	chBaseLayerOptions: function() {
-		if(!Session.get('chActive')) {
+	cultuurBaseLayerOptions: function() {
+		if(!Session.get('cultuurActive')) {
 			return 'hide-element';
 		}
 	},
@@ -358,7 +393,7 @@ Template.step_5.helpers({
 Template.step_5.events ({
 	'click .kernkwaliteit-img': function(e) {
 		var coupling = $(e.target).attr('data-coupling');
-		Session.set('chActive', false);
+		Session.set('cultuurActive', false);
 		Session.set('natuurbeheerActive', false);
 		
 		$('#ch-base-select-5')[0].options[0].selected = 'selected';
@@ -376,7 +411,7 @@ Template.step_5.events ({
 			
 			addServiceLayers(e.target.id, false, e.target, [cultuur]);
 			
-			Session.set('chActive', true);
+			Session.set('cultuurActive', true);
 		} else if(coupling === Meteor.settings.public.relief) {
 			var relief = {url: Meteor.settings.public.reliefService.url,
 					layers: Meteor.settings.public.reliefService.layers, 
@@ -413,7 +448,7 @@ Template.step_5.events ({
 		
 		addServiceLayers(null, true, e.target, [landschapstype]);
 		
-		Session.set('chActive', false);
+		Session.set('cultuurActive', false);
 		Session.set('natuurbeheerActive', false);
 	},
 	'click #pol-img': function(e) {
@@ -427,7 +462,7 @@ Template.step_5.events ({
 		
 		addServiceLayers(null, false, e.target, [pol, natura2000]);
 		
-		Session.set('chActive', false);
+		Session.set('cultuurActive', false);
 		Session.set('natuurbeheerActive', false);
 	},
 	'click #nb-img': function(e) {
@@ -445,7 +480,7 @@ Template.step_5.events ({
 		
 		addServiceLayers(null, false, e.target, [natuurbeheer, beheerplan2017, natura2000]);
 		
-		Session.set('chActive', false);
+		Session.set('cultuurActive', false);
 		Session.set('natuurbeheerActive', true);
 	},
 	'change #ch-base-select-5': function(e) {

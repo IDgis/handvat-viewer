@@ -40,6 +40,14 @@
 	    			"lvzl_kloosters_p", "geologisch_monument_p", "rijksmonumenten_p", "masker_beschermingsgebied_v", 
 	    			"masker_zuid_limburg_v", "beschermingsgeb_nat_landsc_v"]
 	  },
+	  "cultuurhistorieHoverableService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?",
+	    "version": "1.1.1",
+	    "layers": ["cultuurhistorische_elementen_p", "rijksmonumenten_p", "geologisch_monument_p", 
+	    			"cultuurhistorische_elementen_l", "Cultuurlandschap_ZL_L", "panden", 
+	    			"prov_archeol_aandachtsgeb_v", "historische_buitenplaatsen_v", 
+	    			"archeologische_monumenten_v"]
+	  },
 	  "openBeslotenService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?",
 	    "version": "1.1.1",

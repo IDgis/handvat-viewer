@@ -55,5 +55,59 @@ Meteor.methods({
 		}
 		
 		return infos;
+	},
+	getCultuurhistorieData: function(url) {
+		var res = HTTP.get(url);
+		var xml = xml2js.parseStringSync(res.content);
+		
+		var infos = [];
+		var info;
+		
+		if(typeof xml.msGMLOutput["cultuurhistorische_elementen_p_layer"] !== 'undefined') {
+			info = xml.msGMLOutput["cultuurhistorische_elementen_p_layer"][0]["cultuurhistorische_elementen_p_feature"][0].BETEKENIS[0];
+			infos.push({label: 'Cultuurhistorisch element', value: info});
+		}
+		
+		if(typeof xml.msGMLOutput["rijksmonumenten_p_layer"] !== 'undefined') {
+			info = xml.msGMLOutput["rijksmonumenten_p_layer"][0]["rijksmonumenten_p_feature"][0].CBSCATEGOR[0];
+			infos.push({label: 'Rijksmonument', value: info});
+		}
+		
+		if(typeof xml.msGMLOutput["geologisch_monument_p_layer"] !== 'undefined') {
+			info = xml.msGMLOutput["geologisch_monument_p_layer"][0]["geologisch_monument_p_feature"][0].TYPE[0];
+			infos.push({label: 'Geologisch monument', value: info});
+		}
+		
+		if(typeof xml.msGMLOutput["cultuurhistorische_elementen_l_layer"] !== 'undefined') {
+			info = xml.msGMLOutput["cultuurhistorische_elementen_l_layer"][0]["cultuurhistorische_elementen_l_feature"][0].BETEKENIS[0];
+			infos.push({label: 'Cultuurhistorisch element', value: info});
+		}
+		
+		if(typeof xml.msGMLOutput["cultuurlandschap_zl_v_layer"] !== 'undefined') {
+			info = xml.msGMLOutput["cultuurlandschap_zl_v_layer"][0]["cultuurlandschap_zl_v_feature"][0].GRONDGEBRUIK[0];
+			infos.push({label: 'Grondgebruik', value: info});
+		}
+		
+		if(typeof xml.msGMLOutput["panden_layer"] !== 'undefined') {
+			info = xml.msGMLOutput["panden_layer"][0]["panden_feature"][0].BOUWJAAR[0];
+			infos.push({label: 'Bouwjaar pand', value: info});
+		}
+		
+		if(typeof xml.msGMLOutput["prov_archeol_aandachtsgeb_v_layer"] !== 'undefined') {
+			info = xml.msGMLOutput["prov_archeol_aandachtsgeb_v_layer"][0]["prov_archeol_aandachtsgeb_v_feature"][0].GEBIED[0];
+			infos.push({label: 'Provinciaal aandachtsgebied', value: info});
+		}
+		
+		if(typeof xml.msGMLOutput["historische_buitenplaatsen_v_layer"] !== 'undefined') {
+			info = xml.msGMLOutput["historische_buitenplaatsen_v_layer"][0]["historische_buitenplaatsen_v_feature"][0].NAAM[0];
+			infos.push({label: 'Historische buitenplaats', value: info});
+		}
+		
+		if(typeof xml.msGMLOutput["archeologische_monumenten_v_layer"] !== 'undefined') {
+			info = xml.msGMLOutput["archeologische_monumenten_v_layer"][0]["archeologische_monumenten_v_feature"][0].COMPLEX[0];
+			infos.push({label: 'Archeologisch monument', value: info});
+		}
+		
+		return infos;
 	}
 });

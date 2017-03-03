@@ -326,7 +326,7 @@ function createOpPages(item) {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		var extraAmount = result.data.length - 6;
+		var extraAmount = result.data.length - 12;
 		var pages = 0;
 		
 		while(extraAmount > 0) {
@@ -334,7 +334,7 @@ function createOpPages(item) {
 			pages++;
 		}
 		
-		var opPage = 1;
+		var opPage = 2;
 		
 		for(var i = 0; i < pages; i++) {
 			var outerDivKk = document.createElement('div');

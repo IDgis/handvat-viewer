@@ -5,30 +5,41 @@ Template.print.onRendered(function() {
 	var chapter = 5;
 	var page = 5;
 	
+	writeChapterPage('Hoofdstuk ' + chapter + ' - Deelgebied');
 	if(Session.get('chapterDeelgebied')) {
-		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + 
-				chapter + ' - Deelgebied - pagina ' + page + '</p>');
+		writeChapterPage('Pagina ' + page);
+		
 		chapter++;
 		page++;
+	} else {
+		writeChapterPage('niet weergegeven');
 	}
 	
+	writeChapterPage('Hoofdstuk ' + chapter + ' - Leidende beginselen');
 	if(Session.get('chapterBeginselen')) {
-		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + 
-				chapter + ' - Leidende beginselen - pagina ' + page + '</p>');
+		writeChapterPage('Pagina ' + page);
+		
 		chapter++;
 		page += 2;
+	} else {
+		writeChapterPage('niet weergegeven');
 	}
 	
+	writeChapterPage('Hoofdstuk ' + chapter + ' - Sector');
 	if(Session.get('chapterSector')) {
-		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + 
-				chapter + ' - Sector - pagina ' + page + '</p>');
+		writeChapterPage('Pagina ' + page);
+		
 		chapter++;
 		page++;
+	} else {
+		writeChapterPage('niet weergegeven');
 	}
 	
+	writeChapterPage('Hoofdstuk ' + chapter + ' - Ontwerpprincipes');
 	if(Session.get('chapterOntwerpprincipes')) {
-		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + 
-				chapter + ' - Ontwerpprincipes - pagina ' + page + '</p>');
+		writeChapterPage('Pagina ' + page);
+	} else {
+		writeChapterPage('niet weergegeven');
 	}
 	
 	var extent;
@@ -430,4 +441,9 @@ function setIcon(map, coordinates) {
 		
 		map.addLayer(vectorLayer);
 	}
+}
+
+function writeChapterPage(value) {
+	$('#print-index').append('<div class="col-xs-6"><div class="negate-margin">' + 
+			value + '</div></div>');
 }

@@ -5,30 +5,41 @@ Template.print.onRendered(function() {
 	var chapter = 5;
 	var page = 5;
 	
+	writeChapterPage('Hoofdstuk ' + chapter + ' - Deelgebied');
 	if(Session.get('chapterDeelgebied')) {
-		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + 
-				chapter + ' - Deelgebied - pagina ' + page + '</p>');
+		writeChapterPage('Pagina ' + page);
+		
 		chapter++;
 		page++;
+	} else {
+		writeChapterPage('niet weergegeven');
 	}
 	
+	writeChapterPage('Hoofdstuk ' + chapter + ' - Leidende beginselen');
 	if(Session.get('chapterBeginselen')) {
-		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + 
-				chapter + ' - Leidende beginselen - pagina ' + page + '</p>');
+		writeChapterPage('Pagina ' + page);
+		
 		chapter++;
 		page += 2;
+	} else {
+		writeChapterPage('niet weergegeven');
 	}
 	
+	writeChapterPage('Hoofdstuk ' + chapter + ' - Sector');
 	if(Session.get('chapterSector')) {
-		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + 
-				chapter + ' - Sector - pagina ' + page + '</p>');
+		writeChapterPage('Pagina ' + page);
+		
 		chapter++;
 		page++;
+	} else {
+		writeChapterPage('niet weergegeven');
 	}
 	
+	writeChapterPage('Hoofdstuk ' + chapter + ' - Ontwerpprincipes');
 	if(Session.get('chapterOntwerpprincipes')) {
-		$('#print-index').append('<p class="negate-margin">Hoofdstuk ' + 
-				chapter + ' - Ontwerpprincipes - pagina ' + page + '</p>');
+		writeChapterPage('Pagina ' + page);
+	} else {
+		writeChapterPage('niet weergegeven');
 	}
 	
 	var extent;
@@ -67,8 +78,6 @@ Template.print.onRendered(function() {
 		zoom: 2
 	});
 	
-	var zoomControl = new ol.control.Zoom();
-	
 	var top10Url = Meteor.settings.public.top10Service.url;
 	var top10Layers = Meteor.settings.public.top10Service.layers;
 	var top10Version = Meteor.settings.public.top10Service.version;
@@ -93,19 +102,19 @@ Template.print.onRendered(function() {
 	var groenKarakterLayers = Meteor.settings.public.groenKarakterService.layers;
 	var groenKarakterVersion = Meteor.settings.public.groenKarakterService.version;
 	
-	addMapGroup(zoomControl, viewLocationCentered, 'map-print-location', top10Url, top10Layers, 
+	addMapGroup(viewLocationCentered, 'map-print-location', top10Url, top10Layers, 
 			top10Version, true);
-	addMapLayer(zoomControl, viewCoordinateCentered1, 'map-print-deelgebied', skUrl, skLayerId, 
+	addMapLayer(viewCoordinateCentered1, 'map-print-deelgebied', skUrl, skLayerId, 
 			skVersion, false);
-	addMapLayer(zoomControl, viewLocationCentered, 'map-print-beginselen', skUrl, skLayerId, 
+	addMapLayer(viewLocationCentered, 'map-print-beginselen', skUrl, skLayerId, 
 			skVersion, true);
-	addMapGroup(zoomControl, viewCoordinateCentered2, 'map-kk-r', reliefUrl, reliefLayers, 
+	addMapGroup(viewCoordinateCentered2, 'map-kk-r', reliefUrl, reliefLayers, 
 			reliefVersion, true);
-	addMapGroup(zoomControl, viewCoordinateCentered2, 'map-kk-ob', openBeslotenUrl, openBeslotenLayers, 
+	addMapGroup(viewCoordinateCentered2, 'map-kk-ob', openBeslotenUrl, openBeslotenLayers, 
 			openBeslotenVersion, true);
-	addMapGroup(zoomControl, viewCoordinateCentered2, 'map-kk-ch', cultuurHistorieUrl, 
+	addMapGroup(viewCoordinateCentered2, 'map-kk-ch', cultuurHistorieUrl, 
 			cultuurHistorieLayers,  cultuurHistorieVersion, true);
-	addMapGroup(zoomControl, viewCoordinateCentered2, 'map-kk-gk', groenKarakterUrl, groenKarakterLayers, 
+	addMapGroup(viewCoordinateCentered2, 'map-kk-gk', groenKarakterUrl, groenKarakterLayers, 
 			groenKarakterVersion, true);
 });
 
@@ -131,6 +140,17 @@ Template.print.helpers({
 		var todayYear = today.getFullYear();
 		
 		return todayDay + '-' + todayMonth + '-' + todayYear;
+	},
+	getAppInleiding: function() {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/start-links", {
+			headers: {
+				'Content-Type' : 'application/json; charset=UTF-8'
+			}
+		}, function(err, result) {
+			if(typeof result.data !== 'undefined') {
+				$('#print-app-inleiding').append(result.data.print);				
+			}
+		});
 	},
 	getSectorIcon: function() {
 		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/typename/sector_icoon/"
@@ -225,6 +245,17 @@ Template.print.helpers({
 			}
 		});
 	},
+	getKkIntro: function() {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/stap-5-links", {
+			headers: {
+				'Content-Type' : 'application/json; charset=UTF-8'
+			}
+		}, function(err, result) {
+			if(result.data !== null) {
+				$('#print-kk-general').append(result.data.print);
+			}
+		});
+	},
 	getKkText: function(kk) {
 		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
 				+ Meteor.settings.public[kk], {
@@ -293,7 +324,7 @@ function createOpPages(item) {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		var extraAmount = result.data.length - 6;
+		var extraAmount = result.data.length - 12;
 		var pages = 0;
 		
 		while(extraAmount > 0) {
@@ -301,7 +332,7 @@ function createOpPages(item) {
 			pages++;
 		}
 		
-		var opPage = 1;
+		var opPage = 2;
 		
 		for(var i = 0; i < pages; i++) {
 			var outerDivKk = document.createElement('div');
@@ -346,11 +377,16 @@ function getOntwerpPrincipe(ops, item, id) {
 	});
 }
 
-function addMapGroup(zoomControl, view, target, url, layers, version, setMarker) {
+function addMapGroup(view, target, url, layers, version, setMarker) {
 	var map = new ol.Map({
-		control: zoomControl,
+		controls: [],
+		interactions: ol.interaction.defaults({mouseWheelZoom: false}),
 		target: target,
 		view: view
+	});
+	
+	map.getInteractions().forEach(function(interaction) {
+		map.removeInteraction(interaction);
 	});
 	
 	layers.forEach(function(item) {
@@ -369,11 +405,16 @@ function addMapGroup(zoomControl, view, target, url, layers, version, setMarker)
 	}
 }
 
-function addMapLayer(zoomControl, view, target, url, id, version, setMarker) {
+function addMapLayer(view, target, url, id, version, setMarker) {
 	var map = new ol.Map({
-		control: zoomControl,
+		controls: [],
+		interactions: ol.interaction.defaults({mouseWheelZoom: false}),
 		target: target,
 		view: view
+	});
+	
+	map.getInteractions().forEach(function(interaction) {
+		map.removeInteraction(interaction);
 	});
 	
 	var layer = new ol.layer.Image({
@@ -419,4 +460,9 @@ function setIcon(map, coordinates) {
 		
 		map.addLayer(vectorLayer);
 	}
+}
+
+function writeChapterPage(value) {
+	$('#print-index').append('<div class="col-xs-6"><div class="negate-margin">' + 
+			value + '</div></div>');
 }

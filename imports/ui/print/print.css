@@ -8,6 +8,7 @@
 .print-height-1 {height:33.33%;}
 .print-height-2 {height:66.66%;}
 .print-height-3 {height:100%;}
+.print-height-half {height:50%;}
 .print-page div div {padding-left:0;padding-right:0;}
 #map-print-location, #map-print-deelgebied,  #map-print-beginselen {height:100%;padding-bottom:10px;}
 
@@ -32,3 +33,7 @@
 	-moz-column-fill:auto;-webkit-column-fill:auto;column-fill:auto;}
 #print-sector-general {-webkit-column-count:2;-moz-column-count:2;column-count:2;
 	-moz-column-fill:auto;-webkit-column-fill:auto;column-fill:auto;}
+#print-kk-general {-webkit-column-count:2;-moz-column-count:2;column-count:2;
+	-moz-column-fill:auto;-webkit-column-fill:auto;column-fill:auto;}
+
+.print-kk-icon {height:100%;}

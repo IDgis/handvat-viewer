@@ -247,6 +247,17 @@ Template.print.helpers({
 			}
 		});
 	},
+	getKkIntro: function() {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/stap-5-links", {
+			headers: {
+				'Content-Type' : 'application/json; charset=UTF-8'
+			}
+		}, function(err, result) {
+			if(result.data !== null) {
+				$('#print-kk-general').append(result.data.print);
+			}
+		});
+	},
 	getKkText: function(kk) {
 		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
 				+ Meteor.settings.public[kk], {

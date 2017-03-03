@@ -40,6 +40,14 @@
 	    			"lvzl_kloosters_p", "geologisch_monument_p", "rijksmonumenten_p", "masker_beschermingsgebied_v", 
 	    			"masker_zuid_limburg_v", "beschermingsgeb_nat_landsc_v"]
 	  },
+	  "cultuurhistorieHoverableService": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?",
+	    "version": "1.1.1",
+	    "layers": ["cultuurhistorische_elementen_p", "rijksmonumenten_p", "geologisch_monument_p", 
+	    			"cultuurhistorische_elementen_l", "Cultuurlandschap_ZL_L", "panden", 
+	    			"prov_archeol_aandachtsgeb_v", "historische_buitenplaatsen_v", 
+	    			"archeologische_monumenten_v"]
+	  },
 	  "openBeslotenService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?",
 	    "version": "1.1.1",
@@ -64,7 +72,8 @@
 	    			"landschapstypen_v", "waterstaatswerk_watergang_v", "top10nl_waterdeel_v", 
 	    			"top10nl_wegdeel_hartlijn_l", "top10nl_spoorbaandeel_l", "waterstaatswerk_regenwbuf_v", 
 	    			"primaire_bronnen_p", "heg_haag", "top10nl_relief_hogezijde_l", "bomenrij", "boom", 
-	    			"masker_beschermingsgebied_v", "masker_zuid_limburg_v", "beschermingsgeb_nat_landsc_v"]
+	    			"masker_beschermingsgebied_v", "masker_zuid_limburg_v", "beschermingsgeb_nat_landsc_v",
+	    			"beheertypenkaart_n", "beheertypenkaart_nn", "beheertypenkaart_l"]
 	  },
 	  "luchtfotoService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/luchtfoto?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",

@@ -116,6 +116,8 @@ Template.print.onRendered(function() {
 			cultuurHistorieLayers,  cultuurHistorieVersion, true);
 	addMapGroup(viewCoordinateCentered2, 'map-kk-gk', groenKarakterUrl, groenKarakterLayers, 
 			groenKarakterVersion, true);
+	
+	writePageNumbers();
 });
 
 Template.print.helpers({
@@ -354,7 +356,12 @@ function createOpPages(item) {
 			$(innerDivKk).clone().appendTo(outerDivKk);
 			$(innerDivKk).clone().appendTo(outerDivKk);
 			
+			$(outerDivKk).append('<div class="page-number"></div>');
+			
 			$('#' + item.appCoupling + '-ops-' + opPage).after(outerDivKk);
+			
+			writePageNumbers();
+			
 			opPage++;
 		}
 		
@@ -465,4 +472,12 @@ function setIcon(map, coordinates) {
 function writeChapterPage(value) {
 	$('#print-index').append('<div class="col-xs-6"><div class="negate-margin">' + 
 			value + '</div></div>');
+}
+
+function writePageNumbers() {
+	var pageNumbers = $('.page-number');
+	
+	$.each(pageNumbers, function(index, item) {
+		$(item).html(index + 1);
+	});
 }

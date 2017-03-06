@@ -22,7 +22,7 @@
 	.print-page {page-break-after:always;}
 }
 
-.print-page {width:29.7cm;height:20.3cm;}
+.print-page {width:29.7cm;height:20.3cm;position:relative;}
 
 .user-input-print {margin-top:75px;}
 .print-margin-top {padding-top:10px;}
@@ -37,3 +37,5 @@
 	-moz-column-fill:auto;-webkit-column-fill:auto;column-fill:auto;}
 
 .print-kk-icon {height:100%;}
+
+.page-number {position:absolute;bottom:8px;left:14.4cm;}

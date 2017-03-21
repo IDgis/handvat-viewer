@@ -63,7 +63,7 @@ Template.print.onRendered(function() {
 	var viewLocationCentered = new ol.View({
 		projection: projection,
 		center: coordinates,
-		zoom: 2
+		zoom: 3
 	});
 	
 	var viewCoordinateCentered1 = new ol.View({
@@ -75,7 +75,7 @@ Template.print.onRendered(function() {
 	var viewCoordinateCentered2 = new ol.View({
 		projection: projection,
 		center: center,
-		zoom: 2
+		zoom: 6
 	});
 	
 	var top10Url = Meteor.settings.public.top10Service.url;

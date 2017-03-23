@@ -19,6 +19,10 @@ Router.configure({
 	layoutTemplate: 'main'
 });
 
+Router.route('/', function () {
+	Router.go('entry');
+});
+
 Router.route('/handvat-viewer', function () {
 	this.layout('entry');
 	this.render('entry');

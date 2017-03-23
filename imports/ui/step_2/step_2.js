@@ -331,14 +331,15 @@ Template.step_2.events ({
 		$('#js-cadastre-kadobj').empty();
 		$('#js-cadastre-kadobj').append('<option value="none">--</option>');
 		
-		var url = "http://portal.prvlimburg.nl/geoservices/brk?&TYPENAME=BRK_KAD_PERCELEN_V&VERSION" +
+		var url = "http://portal.prvlimburg.nl/geoservices/brk?&TYPENAME=MV_KAD_PERCELENKAART&VERSION" +
 				"=1.1.0&SERVICE=WFS&REQUEST=GetFeature&FILTER=%3CFilter%20xmlns=%27http%3A//www.opengis." +
 				"net/ogc%27%20xmlns%3Aapp=%27http%3A//www.deegree.org/app%27%3E%3CAND%3E%3CPropertyIsEqu" +
 				"alTo%20wildCard=%22*%22%20singleChar=%22%23%22%20escape=%22!%22%3E%0A%3CPropertyName%3E" +
-				"KADGEMEENTE%3C/PropertyName%3E%3CLiteral%3E" + $('#js-cadastre-kadgem')[0].value + "%3C/Literal%3E%" +
-				"3C/PropertyIsEqualTo%3E%3CPropertyIsEqualTo%20wildCard=%22*%22%20singleChar=%22%23%22%20escape" +
-				"=%22!%22%3E%3CPropertyName%3EKADSECTIE%3C/PropertyName%3E%3CLiteral%3E" + e.target.value + "%3C/" +
-				"Literal%3E%3C/PropertyIsEqualTo%3E%3C/AND%3E%3C/Filter%3E";
+				"KAD_GEMCODE%3C/PropertyName%3E%3CLiteral%3E" + $('#js-cadastre-kadgem')[0].value + 
+				"%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3CPropertyIsEqualTo%20wildCard=%22*%22%20" +
+				"singleChar=%22%23%22%20escape=%22!%22%3E%3CPropertyName%3EKAD_SECTIE%3C/PropertyName" +
+				"%3E%3CLiteral%3E" + e.target.value + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C" +
+				"/AND%3E%3C/Filter%3E";
 		
 		Meteor.call('getCadastreObjects', url, function(err, result) {
 			result.forEach(function(item) {
@@ -364,15 +365,16 @@ Template.step_2.events ({
 			Session.set('location', kadgem + kadsek + ' ' + kadobj);
 		}
 		
-		var url = "http://portal.prvlimburg.nl/geoservices/brk?&TYPENAME=BRK_KAD_PERCELEN_V&VERSION=1.1.0&" +
-				"SERVICE=WFS&REQUEST=GetFeature&FILTER=%3CFilter%20xmlns=%27http://www.opengis.net/ogc%27%20" +
-				"xmlns:app=%27http://www.deegree.org/app%27%3E%3CAND%3E%3CPropertyIsEqualTo%20wildCard=%22*%22" +
-				"%20singleChar=%22%23%22%20escape=%22!%22%3E%0A%3CPropertyName%3EKADGEMEENTE%3C/PropertyName%3E%3C" +
-				"Literal%3E" + $('#js-cadastre-kadgem')[0].value + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C" +
-				"PropertyIsEqualTo%20wildCard=%22*%22%20singleChar=%22%23%22%20escape=%22!%22%3E%3CPropertyName" +
-				"%3EKADSECTIE%3C/PropertyName%3E%3CLiteral%3E" + $('#js-cadastre-kadsek')[0].value + "%3C/Literal" +
-				"%3E%3C/PropertyIsEqualTo%3E%3CPropertyIsEqualTo%20wildCard=%22*%22%20singleChar=%22%23%22%20" +
-				"escape=%22!%22%3E%3CPropertyName%3EKADPERCEELNR%3C/PropertyName%3E%3CLiteral%3E" + e.target.value + 
+		var url = "http://portal.prvlimburg.nl/geoservices/brk?&TYPENAME=MV_KAD_PERCELENKAART&VERSION&" +
+				"VERSION=1.1.0&SERVICE=WFS&REQUEST=GetFeature&FILTER=%3CFilter%20xmlns=%27http://www." +
+				"opengis.net/ogc%27%20xmlns:app=%27http://www.deegree.org/app%27%3E%3CAND%3E%3CProperty" +
+				"IsEqualTo%20wildCard=%22*%22%20singleChar=%22%23%22%20escape=%22!%22%3E%0A%3CProperty" +
+				"Name%3EKAD_GEMCODE%3C/PropertyName%3E%3CLiteral%3E" + $('#js-cadastre-kadgem')[0].value + 
+				"%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3CPropertyIsEqualTo%20wildCard=%22*%22%20single" +
+				"Char=%22%23%22%20escape=%22!%22%3E%3CPropertyName%3EKAD_SECTIE%3C/PropertyName%3E%3C" +
+				"Literal%3E" + $('#js-cadastre-kadsek')[0].value + "%3C/Literal%3E%3C/PropertyIsEqualTo" +
+				"%3E%3CPropertyIsEqualTo%20wildCard=%22*%22%20singleChar=%22%23%22%20escape=%22!%22" +
+				"%3E%3CPropertyName%3EKAD_PERCEELNR%3C/PropertyName%3E%3CLiteral%3E" + e.target.value + 
 				"%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/AND%3E%3C/Filter%3E";
 		
 		Meteor.call('getCadastreCoordinates', url, function(err, result) {

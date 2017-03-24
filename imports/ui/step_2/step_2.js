@@ -115,8 +115,8 @@ Template.step_2.onRendered(function() {
 	
 	var iconLayer;
 	
-	if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
-		iconLayer = getIcon(Session.get('mapCoordinates'), iconStyle);
+	if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
+		iconLayer = getIcon(Session.get('locationCoordinates'), iconStyle);
 		map.addLayer(iconLayer);
 		Session.set('iconLayerSet', true);
 	}
@@ -140,7 +140,7 @@ Template.step_2.onRendered(function() {
 		slide: function(e, ui) {
 			$.each(map.getLayers().getArray(), function(index, item) {
 				if(index > 10) {
-					if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+					if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
 						if(index !== map.getLayers().getLength() - 1) {
 							item.setOpacity(ui.value / 100);
 						}
@@ -158,7 +158,7 @@ Template.step_2.onRendered(function() {
 		}
 		
 		Session.set('location', 'x-coördinaat: ' + evt.coordinate[0] + ' | y-coördinaat: ' + evt.coordinate[1]);
-		Session.set('mapCoordinates', evt.coordinate);
+		Session.set('locationCoordinates', evt.coordinate);
 		iconLayer = getIcon(evt.coordinate, iconStyle);
 		map.addLayer(iconLayer);
 		Session.set('iconLayerSet', true);
@@ -169,7 +169,7 @@ Template.step_2.onRendered(function() {
 
 Template.step_2.helpers ({
 	disableElement: function() {
-		if(typeof Session.get('mapCoordinates') === 'undefined' || Session.get('mapCoordinates') === null) {
+		if(typeof Session.get('locationCoordinates') === 'undefined' || Session.get('locationCoordinates') === null) {
 			return 'disabled';
 		}
 	}
@@ -263,7 +263,7 @@ Template.step_2.events ({
 				var center1 = ((maxX - minX) / 2) + minX;
 				var center2 = ((maxY - minY) / 2) + minY;
 				
-				if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+				if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
 					map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
 				}
 				
@@ -280,13 +280,13 @@ Template.step_2.events ({
 				});
 				
 				var center = [center1, center2];
-				Session.set('mapCoordinates', center);
+				Session.set('locationCoordinates', center);
 				var iconLayer = getIcon(center, iconStyle);
 				map.addLayer(iconLayer);
 				Session.set('iconLayerSet', true);
-				getDeelgebied(Session.get('mapCoordinates'));
+				getDeelgebied(Session.get('locationCoordinates'));
 			} else {
-				if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+				if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
 					map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
 				}
 				
@@ -390,7 +390,7 @@ Template.step_2.events ({
 				var center1 = ((maxX - minX) / 2) + minX;
 				var center2 = ((maxY - minY) / 2) + minY;
 				
-				if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+				if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
 					map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
 				}
 				
@@ -407,13 +407,13 @@ Template.step_2.events ({
 				});
 				
 				var center = [center1, center2];
-				Session.set('mapCoordinates', center);
+				Session.set('locationCoordinates', center);
 				var iconLayer = getIcon(center, iconStyle);
 				map.addLayer(iconLayer);
 				Session.set('iconLayerSet', true);
-				getDeelgebied(Session.get('mapCoordinates'));
+				getDeelgebied(Session.get('locationCoordinates'));
 			} else {
-				if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+				if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
 					map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
 				}
 				
@@ -438,8 +438,8 @@ Template.step_2.events ({
 		setCursorDone();
 	},
 	'click #set-location-center-2': function() {
-		if(typeof Session.get('mapCoordinates') !== 'undefined' && Session.get('mapCoordinates') !== null) {
-			map.getView().setCenter(Session.get('mapCoordinates'));
+		if(typeof Session.get('locationCoordinates') !== 'undefined' && Session.get('locationCoordinates') !== null) {
+			map.getView().setCenter(Session.get('locationCoordinates'));
 		}
 	}
 });
@@ -475,7 +475,7 @@ function setExtentCenter(item) {
 		var center = [center1, center2];
 		
 		Session.set('mapExtent', extent);
-		Session.set('mapCenter', center);
+		Session.set('mapExtentCenter', center);
 	}
 }
 
@@ -493,7 +493,7 @@ function getDeelgebied(coordinates) {
 		} else {
 			Session.set('area', null);
 			Session.set('mapExtent', null);
-			Session.set('mapCenter', null);
+			Session.set('mapExtentCenter', null);
 			
 			$('#js-next').attr('style', 'pointer-events:none;color:grey !important;');
 			$('#js-next-icon').attr('style', 'color:grey !important;');

@@ -12,12 +12,12 @@ Template.step_6.onRendered(function() {
 	
 	var extent;
 	var center;
-	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCoordinates') === 'undefined') {
+	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('locationCoordinates') === 'undefined') {
 		extent = [165027, 306558, 212686, 338329];
 		center = [188856, 322443];
 	} else {
 		extent = Session.get('mapExtent');
-		center = Session.get('mapCoordinates');
+		center = Session.get('locationCoordinates');
 	}
 	
 	var projection = new ol.proj.Projection({
@@ -66,8 +66,8 @@ Template.step_6.onRendered(function() {
 		}))
 	});
 	
-	if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
-		var iconLayer = getIcon(Session.get('mapCoordinates'));
+	if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
+		var iconLayer = getIcon(Session.get('locationCoordinates'));
 		map.addLayer(iconLayer);
 	}
 	
@@ -139,7 +139,7 @@ Template.step_6.helpers({
 		}
 	},
 	disableElement: function() {
-		if(typeof Session.get('mapCoordinates') === 'undefined' || Session.get('mapCoordinates') === null) {
+		if(typeof Session.get('locationCoordinates') === 'undefined' || Session.get('locationCoordinates') === null) {
 			return 'disabled';
 		}
 	}
@@ -227,8 +227,8 @@ Template.step_6.events({
 		}
 	},
 	'click #set-location-center-6': function() {
-		if(typeof Session.get('mapCoordinates') !== 'undefined' && Session.get('mapCoordinates') !== null) {
-			map.getView().setCenter(Session.get('mapCoordinates'));
+		if(typeof Session.get('locationCoordinates') !== 'undefined' && Session.get('locationCoordinates') !== null) {
+			map.getView().setCenter(Session.get('locationCoordinates'));
 		}
 	}
 });

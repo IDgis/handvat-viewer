@@ -109,12 +109,12 @@ Template.step_5.onRendered(function() {
 	
 	var extent;
 	var center;
-	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCenter') === 'undefined') {
+	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapExtentCenter') === 'undefined') {
 		extent = [165027, 306558, 212686, 338329];
 		center = [188856, 322443];
 	} else {
 		extent = Session.get('mapExtent');
-		center = Session.get('mapCenter');
+		center = Session.get('mapExtentCenter');
 	}
 	
 	var projection = new ol.proj.Projection({
@@ -153,8 +153,8 @@ Template.step_5.onRendered(function() {
 		map.addLayer(layer);
 	});
 	
-	if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
-		var iconLayer = getIcon(Session.get('mapCoordinates'));
+	if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
+		var iconLayer = getIcon(Session.get('locationCoordinates'));
 		map.addLayer(iconLayer);
 	}
 	
@@ -164,7 +164,7 @@ Template.step_5.onRendered(function() {
 		slide: function(e, ui) {
 			$.each(map.getLayers().getArray(), function(index, item) {
 				if(index !== 0) {
-					if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+					if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
 						if(index !== map.getLayers().getLength() - 1) {
 							item.setOpacity(ui.value / 100);
 						}
@@ -387,7 +387,7 @@ Template.step_5.helpers({
 		}
 	},
 	disableElement: function() {
-		if(typeof Session.get('mapCoordinates') === 'undefined' || Session.get('mapCoordinates') === null) {
+		if(typeof Session.get('locationCoordinates') === 'undefined' || Session.get('locationCoordinates') === null) {
 			return 'disabled';
 		}
 	}
@@ -513,8 +513,8 @@ Template.step_5.events ({
 		setOpacity();
 	},
 	'click #set-location-center-5': function() {
-		if(typeof Session.get('mapCoordinates') !== 'undefined' && Session.get('mapCoordinates') !== null) {
-			map.getView().setCenter(Session.get('mapCoordinates'));
+		if(typeof Session.get('locationCoordinates') !== 'undefined' && Session.get('locationCoordinates') !== null) {
+			map.getView().setCenter(Session.get('locationCoordinates'));
 		}
 	}
 });
@@ -573,7 +573,7 @@ function setBorderThumbnail(target) {
 function setOpacity() {
 	$.each(map.getLayers().getArray(), function(index, item) {
 		if(index !== 0) {
-			if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+			if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
 				if(index !== map.getLayers().getLength() - 1) {
 					item.setOpacity(Session.get('sliderValue-2') / 100);
 				}
@@ -648,8 +648,8 @@ function addServiceLayers(kkId, ltActive, element, layerObjects) {
 		})
 	});
 	
-	if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
-		var iconLayer = getIcon(Session.get('mapCoordinates'));
+	if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
+		var iconLayer = getIcon(Session.get('locationCoordinates'));
 		map.addLayer(iconLayer);
 	}
 	

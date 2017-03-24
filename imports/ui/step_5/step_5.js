@@ -256,6 +256,9 @@ Template.step_5.onRendered(function() {
 });
 
 Template.step_5.helpers({
+	getImageLink: function(filename) {
+		return Meteor.absoluteUrl() + Meteor.settings.public.domainSuffix + '/images/' + filename;
+	},
 	getKernKwaliteit: function() {
 		$('#kk-text-5').empty();
 		

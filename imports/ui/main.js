@@ -8,11 +8,6 @@ import './main.html';
 Template.main.onRendered(function() {
 	setCursorInProgress();
 	
-	var bannerUrl = window.location.protocol + '//' + window.location.hostname + ':' + 
-					window.location.port + '/' + Meteor.settings.public.domainSuffix + '/images/banner.jpg';
-	
-	$('#banner-img').attr('src', bannerUrl);
-	
 	$(".modal").draggable({
 		handle: ".modal-header"
 	});
@@ -94,6 +89,9 @@ Template.main.onRendered(function() {
 });
 
 Template.main.helpers({
+	getImageLink: function(filename) {
+		return Meteor.absoluteUrl() + Meteor.settings.public.domainSuffix + '/images/' + filename;
+	},
 	doneTab: function(page) {
 		var curPage = parseInt(Session.get('stepNumber'));
 		

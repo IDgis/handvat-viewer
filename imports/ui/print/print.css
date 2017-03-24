@@ -1,5 +1,5 @@
-#start-page {background-image:url("/images/print-background-first-page.jpg");background-size:100%;}
-#last-page {background-image:url("/images/print-background-last-page.jpg");background-size:100%;}
+#start-page {background-size:100%;}
+#last-page {background-size:100%;}
 
 #print-app-title {font-size:18px;}
 #print-app-inleiding {-moz-column-count:2;-webkit-column-count:2;column-count:2;height:100%;

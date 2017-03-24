@@ -130,6 +130,13 @@ Template.print.helpers({
 			return "hide-element";
 		}
 	},	
+	setPageNrClass: function(chapter) {
+		if(Session.get(chapter)) {
+			return "page-number";
+		} else {
+			return "page-number-hide";
+		}
+	},
 	getLocation: function() {
 		return Session.get('location');
 	},

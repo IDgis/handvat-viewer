@@ -111,7 +111,8 @@ function setImageNoSector() {
 	var img = document.createElement('img');
 	$(img).attr('id', 'no-sector-selected-img-4');
 	$(img).attr('src', 
-			Meteor.absoluteUrl() + Meteor.settings.public.domainSuffix + '/images/no_sector.jpg');
+			window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + 
+			'/' +  Meteor.settings.public.domainSuffix + '/images/' + 'no_sector.jpg');
 	
 	$('#viewer-4').empty();
 	$('#viewer-4').append(img);

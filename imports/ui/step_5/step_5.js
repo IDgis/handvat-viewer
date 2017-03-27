@@ -259,12 +259,11 @@ Template.step_5.helpers({
 	getImageLink: function(filename) {
 		return Meteor.absoluteUrl() + Meteor.settings.public.domainSuffix + '/images/' + filename;
 	},
-	getKernKwaliteit: function() {
-		$('#kk-text-5').empty();
+	getContentText: function() {
+		setCursorInProgress();
+		$('#content-text-5').empty();
 		
 		if(typeof Session.get('kernkwaliteitId') !== 'undefined' && Session.get('kernkwaliteitId') !== null) {
-			setCursorInProgress();
-			
 			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/"
 					+ Session.get('kernkwaliteitId'), {
 				headers: {
@@ -275,11 +274,29 @@ Template.step_5.helpers({
 					var div = document.createElement('div');
 					$(div).attr('class', 'col-xs-12 text-div');
 					$(div).append(result.data.html);
-					$('#kk-text-5').append(div);
+					$('#content-text-5').append(div);
 				}
 				
 				setCursorDone();
 			});
+		} else if(typeof Session.get('overigKaartActive') !== 'undefined' &&
+			Session.get('overigKaartActive') !== null) {
+			
+				HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+						+ Session.get('overigKaartActive'), {
+					headers: {
+						'Content-Type' : 'application/json; charset=UTF-8'
+					}
+				}, function(err, result) {
+					if(result.data !== null) {
+						var div = document.createElement('div');
+						$(div).attr('class', 'col-xs-12 text-div');
+						$(div).append(result.data.html);
+						$('#content-text-5').append(div);
+					}
+					
+					setCursorDone();
+				});
 		}
 	},
 	getOntwerpPrincipes: function() {
@@ -396,6 +413,7 @@ Template.step_5.helpers({
 Template.step_5.events ({
 	'click .kernkwaliteit-img': function(e) {
 		var coupling = $(e.target).attr('data-coupling');
+		Session.set('overigKaartActive', null);
 		Session.set('cultuurActive', false);
 		Session.set('natuurbeheerActive', false);
 		
@@ -451,6 +469,7 @@ Template.step_5.events ({
 		
 		addServiceLayers(null, true, e.target, [landschapstype]);
 		
+		Session.set('overigKaartActive', Meteor.settings.public.landschapstypen);
 		Session.set('cultuurActive', false);
 		Session.set('natuurbeheerActive', false);
 	},
@@ -465,6 +484,7 @@ Template.step_5.events ({
 		
 		addServiceLayers(null, false, e.target, [pol, natura2000]);
 		
+		Session.set('overigKaartActive', Meteor.settings.public.pol);
 		Session.set('cultuurActive', false);
 		Session.set('natuurbeheerActive', false);
 	},
@@ -483,6 +503,7 @@ Template.step_5.events ({
 		
 		addServiceLayers(null, false, e.target, [natuurbeheer, beheerplan2017, natura2000]);
 		
+		Session.set('overigKaartActive', Meteor.settings.public.natuurbeheerplan);
 		Session.set('cultuurActive', false);
 		Session.set('natuurbeheerActive', true);
 	},

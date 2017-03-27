@@ -30,6 +30,10 @@
 	  "groenkarakter": "kernkwaliteit-groenkarakter",
 	  "openbesloten": "kernkwaliteit-openbesloten",
 	  
+	  "pol": "kaart-pol",
+	  "landschapstypen": "kaart-landschapstypen",
+	  "natuurbeheerplan": "kaart-natuurbeheerplan",
+	  
 	  "cultuurhistorieService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?",
 	    "version": "1.1.1",

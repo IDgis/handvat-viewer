@@ -43,16 +43,17 @@ Template.print.onRendered(function() {
 	}
 	
 	var extent;
-	var center;
-	var coordinates;
-	if(typeof Session.get('mapCoordinates') === 'undefined') {
+	var extentCenter;
+	var locationCoordinates;
+	
+	if(typeof Session.get('locationCoordinates') === 'undefined') {
 		extent = [165027, 306558, 212686, 338329];
-		center = [188856, 322443];
-		coordinates = [188856, 322443];
+		extentCenter = [188856, 322443];
+		locationCoordinates = [188856, 322443];
 	} else {
 		extent = Session.get('mapExtent');
-		center = Session.get('mapCenter');
-		coordinates = Session.get('mapCoordinates');
+		extentCenter = Session.get('mapExtentCenter');
+		locationCoordinates = Session.get('locationCoordinates');
 	}
 	
 	var projection = new ol.proj.Projection({
@@ -62,19 +63,19 @@ Template.print.onRendered(function() {
 	
 	var viewLocationCentered = new ol.View({
 		projection: projection,
-		center: coordinates,
+		center: locationCoordinates,
 		zoom: 3
 	});
 	
-	var viewCoordinateCentered1 = new ol.View({
+	var viewExtentCentered = new ol.View({
 		projection: projection,
-		center: center,
+		center: extentCenter,
 		zoom: 1
 	});
 	
-	var viewCoordinateCentered2 = new ol.View({
+	var viewKernkwaliteit = new ol.View({
 		projection: projection,
-		center: center,
+		center: locationCoordinates,
 		zoom: 6
 	});
 	
@@ -104,28 +105,38 @@ Template.print.onRendered(function() {
 	
 	addMapGroup(viewLocationCentered, 'map-print-location', top10Url, top10Layers, 
 			top10Version, true);
-	addMapLayer(viewCoordinateCentered1, 'map-print-deelgebied', skUrl, skLayerId, 
+	addMapLayer(viewExtentCentered, 'map-print-deelgebied', skUrl, skLayerId, 
 			skVersion, false);
 	addMapLayer(viewLocationCentered, 'map-print-beginselen', skUrl, skLayerId, 
 			skVersion, true);
-	addMapGroup(viewCoordinateCentered2, 'map-kk-r', reliefUrl, reliefLayers, 
+	addMapGroup(viewKernkwaliteit, 'map-kk-r', reliefUrl, reliefLayers, 
 			reliefVersion, true);
-	addMapGroup(viewCoordinateCentered2, 'map-kk-ob', openBeslotenUrl, openBeslotenLayers, 
+	addMapGroup(viewKernkwaliteit, 'map-kk-ob', openBeslotenUrl, openBeslotenLayers, 
 			openBeslotenVersion, true);
-	addMapGroup(viewCoordinateCentered2, 'map-kk-ch', cultuurHistorieUrl, 
+	addMapGroup(viewKernkwaliteit, 'map-kk-ch', cultuurHistorieUrl, 
 			cultuurHistorieLayers,  cultuurHistorieVersion, true);
-	addMapGroup(viewCoordinateCentered2, 'map-kk-gk', groenKarakterUrl, groenKarakterLayers, 
+	addMapGroup(viewKernkwaliteit, 'map-kk-gk', groenKarakterUrl, groenKarakterLayers, 
 			groenKarakterVersion, true);
 	
 	writePageNumbers();
 });
 
 Template.print.helpers({
+	getImageLink: function(filename) {
+		return Meteor.absoluteUrl() + Meteor.settings.public.domainSuffix + '/images/' + filename;
+	},
 	hideChapter: function(chapter) {
 		if(!Session.get(chapter)) {
 			return "hide-element";
 		}
 	},	
+	setPageNrClass: function(chapter) {
+		if(Session.get(chapter)) {
+			return "page-number";
+		} else {
+			return "page-number-hide";
+		}
+	},
 	getLocation: function() {
 		return Session.get('location');
 	},
@@ -408,7 +419,7 @@ function addMapGroup(view, target, url, layers, version, setMarker) {
 	});
 	
 	if(setMarker) {
-		setIcon(map, Session.get('mapCoordinates'));
+		setIcon(map, Session.get('locationCoordinates'));
 	}
 }
 
@@ -435,12 +446,12 @@ function addMapLayer(view, target, url, id, version, setMarker) {
 	map.addLayer(layer);
 	
 	if(setMarker) {
-		setIcon(map, Session.get('mapCoordinates'));
+		setIcon(map, Session.get('locationCoordinates'));
 	}
 }
 
 function setIcon(map, coordinates) {
-	if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+	if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
 		var iconStyle = new ol.style.Style({
 			image: new ol.style.Icon(({
 				anchor: [0.5, 32],

@@ -109,12 +109,12 @@ Template.step_5.onRendered(function() {
 	
 	var extent;
 	var center;
-	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCenter') === 'undefined') {
+	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapExtentCenter') === 'undefined') {
 		extent = [165027, 306558, 212686, 338329];
 		center = [188856, 322443];
 	} else {
 		extent = Session.get('mapExtent');
-		center = Session.get('mapCenter');
+		center = Session.get('mapExtentCenter');
 	}
 	
 	var projection = new ol.proj.Projection({
@@ -153,8 +153,8 @@ Template.step_5.onRendered(function() {
 		map.addLayer(layer);
 	});
 	
-	if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
-		var iconLayer = getIcon(Session.get('mapCoordinates'));
+	if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
+		var iconLayer = getIcon(Session.get('locationCoordinates'));
 		map.addLayer(iconLayer);
 	}
 	
@@ -164,7 +164,7 @@ Template.step_5.onRendered(function() {
 		slide: function(e, ui) {
 			$.each(map.getLayers().getArray(), function(index, item) {
 				if(index !== 0) {
-					if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+					if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
 						if(index !== map.getLayers().getLength() - 1) {
 							item.setOpacity(ui.value / 100);
 						}
@@ -256,12 +256,14 @@ Template.step_5.onRendered(function() {
 });
 
 Template.step_5.helpers({
-	getKernKwaliteit: function() {
-		$('#kk-text-5').empty();
+	getImageLink: function(filename) {
+		return Meteor.absoluteUrl() + Meteor.settings.public.domainSuffix + '/images/' + filename;
+	},
+	getContentText: function() {
+		setCursorInProgress();
+		$('#content-text-5').empty();
 		
 		if(typeof Session.get('kernkwaliteitId') !== 'undefined' && Session.get('kernkwaliteitId') !== null) {
-			setCursorInProgress();
-			
 			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/"
 					+ Session.get('kernkwaliteitId'), {
 				headers: {
@@ -272,11 +274,29 @@ Template.step_5.helpers({
 					var div = document.createElement('div');
 					$(div).attr('class', 'col-xs-12 text-div');
 					$(div).append(result.data.html);
-					$('#kk-text-5').append(div);
+					$('#content-text-5').append(div);
 				}
 				
 				setCursorDone();
 			});
+		} else if(typeof Session.get('overigKaartActive') !== 'undefined' &&
+			Session.get('overigKaartActive') !== null) {
+			
+				HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+						+ Session.get('overigKaartActive'), {
+					headers: {
+						'Content-Type' : 'application/json; charset=UTF-8'
+					}
+				}, function(err, result) {
+					if(result.data !== null) {
+						var div = document.createElement('div');
+						$(div).attr('class', 'col-xs-12 text-div');
+						$(div).append(result.data.html);
+						$('#content-text-5').append(div);
+					}
+					
+					setCursorDone();
+				});
 		}
 	},
 	getOntwerpPrincipes: function() {
@@ -384,7 +404,7 @@ Template.step_5.helpers({
 		}
 	},
 	disableElement: function() {
-		if(typeof Session.get('mapCoordinates') === 'undefined' || Session.get('mapCoordinates') === null) {
+		if(typeof Session.get('locationCoordinates') === 'undefined' || Session.get('locationCoordinates') === null) {
 			return 'disabled';
 		}
 	}
@@ -393,6 +413,7 @@ Template.step_5.helpers({
 Template.step_5.events ({
 	'click .kernkwaliteit-img': function(e) {
 		var coupling = $(e.target).attr('data-coupling');
+		Session.set('overigKaartActive', null);
 		Session.set('cultuurActive', false);
 		Session.set('natuurbeheerActive', false);
 		
@@ -448,6 +469,7 @@ Template.step_5.events ({
 		
 		addServiceLayers(null, true, e.target, [landschapstype]);
 		
+		Session.set('overigKaartActive', Meteor.settings.public.landschapstypen);
 		Session.set('cultuurActive', false);
 		Session.set('natuurbeheerActive', false);
 	},
@@ -462,6 +484,7 @@ Template.step_5.events ({
 		
 		addServiceLayers(null, false, e.target, [pol, natura2000]);
 		
+		Session.set('overigKaartActive', Meteor.settings.public.pol);
 		Session.set('cultuurActive', false);
 		Session.set('natuurbeheerActive', false);
 	},
@@ -480,6 +503,7 @@ Template.step_5.events ({
 		
 		addServiceLayers(null, false, e.target, [natuurbeheer, beheerplan2017, natura2000]);
 		
+		Session.set('overigKaartActive', Meteor.settings.public.natuurbeheerplan);
 		Session.set('cultuurActive', false);
 		Session.set('natuurbeheerActive', true);
 	},
@@ -510,8 +534,8 @@ Template.step_5.events ({
 		setOpacity();
 	},
 	'click #set-location-center-5': function() {
-		if(typeof Session.get('mapCoordinates') !== 'undefined' && Session.get('mapCoordinates') !== null) {
-			map.getView().setCenter(Session.get('mapCoordinates'));
+		if(typeof Session.get('locationCoordinates') !== 'undefined' && Session.get('locationCoordinates') !== null) {
+			map.getView().setCenter(Session.get('locationCoordinates'));
 		}
 	}
 });
@@ -570,7 +594,7 @@ function setBorderThumbnail(target) {
 function setOpacity() {
 	$.each(map.getLayers().getArray(), function(index, item) {
 		if(index !== 0) {
-			if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
+			if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
 				if(index !== map.getLayers().getLength() - 1) {
 					item.setOpacity(Session.get('sliderValue-2') / 100);
 				}
@@ -645,8 +669,8 @@ function addServiceLayers(kkId, ltActive, element, layerObjects) {
 		})
 	});
 	
-	if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
-		var iconLayer = getIcon(Session.get('mapCoordinates'));
+	if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
+		var iconLayer = getIcon(Session.get('locationCoordinates'));
 		map.addLayer(iconLayer);
 	}
 	

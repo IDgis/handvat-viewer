@@ -7,6 +7,10 @@ Template.step_4.onRendered(function() {
 	$('#js-previous').attr('style', 'pointer-events:auto;color:#ffffff !important;');
 	$('#js-previous-icon').attr('style', 'color:#ffffff !important;');
 	
+	if(typeof Session.get('sectorName') === 'undefined' || Session.get('sectorName') === null) {
+		setImageNoSector();
+	}
+	
 	if(typeof Session.get('area') !== 'undefined' && Session.get('area') !== null) {
 		setCursorInProgress();
 		
@@ -59,44 +63,56 @@ Template.step_4.onRendered(function() {
 	} else {
 		$('#text-4').append('U heeft geen valide deelgebied geselecteerd.');
 	}
-	
-	if(typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
-		$('#js-next').attr('style', 'pointer-events:auto;color:#ffffff !important;');
-		$('#js-next-icon').attr('style', 'color:#ffffff !important;');
-	} else {
-		$('#js-next').attr('style', 'pointer-events:none;color:grey !important;');
-		$('#js-next-icon').attr('style', 'color:grey !important;');
+});
+
+Template.step_4.helpers({
+	setSector: function() {
+		setCursorInProgress();
+		
+		if(typeof Session.get('sectorName') === 'undefined' || Session.get('sectorName') === null) {
+			setImageNoSector();
+			
+			setCursorDone();
+		} else {
+			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/typename/sector/"
+					+ Session.get('sectorName'), {
+				headers: {
+					'Content-Type' : 'application/json; charset=UTF-8'
+				}
+			}, function(err, result) {
+				if(typeof result.data[0] !== 'undefined') {
+					Session.set('sectorId', result.data[0].id);
+					$('#viewer-4').empty();
+					$('#viewer-4').append(result.data[0].html);
+				}
+				
+				setCursorDone();
+			});
+		}
+	},
+	setNavBtnStatus: function() {
+		if(typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
+			$('#js-next').attr('style', 'pointer-events:auto;color:#ffffff !important;');
+			$('#js-next-icon').attr('style', 'color:#ffffff !important;');
+		} else {
+			$('#js-next').attr('style', 'pointer-events:none;color:grey !important;');
+			$('#js-next-icon').attr('style', 'color:grey !important;');
+		}
 	}
 });
 
-Template.step_4.events ({
+Template.step_4.events({
 	'click .sector-img-4': function(e) {
-		setCursorInProgress();
-		
-		var sectorName = $(e.currentTarget).attr('data-name');
-		Session.set('sectorName', sectorName);
-		
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/typename/sector/"
-				+ sectorName, {
-			headers: {
-				'Content-Type' : 'application/json; charset=UTF-8'
-			}
-		}, function(err, result) {
-			if(typeof result.data[0] !== 'undefined') {
-				Session.set('sectorId', result.data[0].id);
-				$('#viewer-4').empty();
-				$('#viewer-4').append(result.data[0].html);
-			}
-			
-			if(typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
-				$('#js-next').attr('style', 'pointer-events:auto;color:#ffffff !important;');
-				$('#js-next-icon').attr('style', 'color:#ffffff !important;');
-			} else {
-				$('#js-next').attr('style', 'pointer-events:none;color:grey !important;');
-				$('#js-next-icon').attr('style', 'color:grey !important;');
-			}
-			
-			setCursorDone();
-		});
+		Session.set('sectorName', $(e.currentTarget).attr('data-name'));
 	}
 });
+
+function setImageNoSector() {
+	var img = document.createElement('img');
+	$(img).attr('id', 'no-sector-selected-img-4');
+	$(img).attr('src', 
+			Meteor.absoluteUrl() + Meteor.settings.public.domainSuffix + '/images/no_sector.jpg');
+	
+	$('#viewer-4').empty();
+	$('#viewer-4').append(img);
+}

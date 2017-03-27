@@ -21,12 +21,12 @@ Template.step_3.onRendered(function() {
 	
 	var extent;
 	var center;
-	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapCenter') === 'undefined') {
+	if(typeof Session.get('mapExtent') === 'undefined' || typeof Session.get('mapExtentCenter') === 'undefined') {
 		extent = [165027, 306558, 212686, 338329];
 		center = [188856, 322443];
 	} else {
 		extent = Session.get('mapExtent');
-		center = Session.get('mapCenter');
+		center = Session.get('mapExtentCenter');
 	}
 	
 	var projection = new ol.proj.Projection({
@@ -135,10 +135,10 @@ Template.step_3.onRendered(function() {
 	
 	var iconLayer;
 	
-	if(Session.get('mapCoordinates') !== null && typeof Session.get('mapCoordinates') !== 'undefined') {
-		iconLayer = getIcon(Session.get('mapCoordinates'));
+	if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
+		iconLayer = getIcon(Session.get('locationCoordinates'));
 		map.addLayer(iconLayer);
-		setLandschapstypeId(Session.get('mapCoordinates'));
+		setLandschapstypeId(Session.get('locationCoordinates'));
 	} else {
 		$('#error-3').append('U heeft geen valide deelgebied geselecteerd.');
 		$('#dg-text-3').append('U heeft geen valide deelgebied geselecteerd.');
@@ -152,10 +152,10 @@ Template.step_3.onRendered(function() {
 		Meteor.call('getLandschapsType', url, function(err, result) {
 			if(typeof result !== 'undefined') {
 				Session.set('landschapstypeId', result);
-				Session.set('mapCoordinates', coordinates);
+				Session.set('locationCoordinates', coordinates);
 			} else {
 				Session.set('landschapstypeId', null);
-				Session.set('mapCoordinates', null);
+				Session.set('locationCoordinates', null);
 			}
 		});
 	}
@@ -178,6 +178,9 @@ Template.step_3.onRendered(function() {
 });
 
 Template.step_3.helpers({
+	getImageLink: function(filename) {
+		return Meteor.absoluteUrl() + Meteor.settings.public.domainSuffix + '/images/' + filename;
+	},
 	getLeidendeBeginselen: function() {
 		$('#lb-text-3').empty();
 		
@@ -256,7 +259,7 @@ Template.step_3.helpers({
 		}
 	},
 	disableElement: function() {
-		if(typeof Session.get('mapCoordinates') === 'undefined' || Session.get('mapCoordinates') === null) {
+		if(typeof Session.get('locationCoordinates') === 'undefined' || Session.get('locationCoordinates') === null) {
 			return 'disabled';
 		}
 	}
@@ -264,8 +267,8 @@ Template.step_3.helpers({
 
 Template.step_3.events({
 	'click #set-location-center-3': function() {
-		if(typeof Session.get('mapCoordinates') !== 'undefined' && Session.get('mapCoordinates') !== null) {
-			map.getView().setCenter(Session.get('mapCoordinates'));
+		if(typeof Session.get('locationCoordinates') !== 'undefined' && Session.get('locationCoordinates') !== null) {
+			map.getView().setCenter(Session.get('locationCoordinates'));
 		}
 	}
 });

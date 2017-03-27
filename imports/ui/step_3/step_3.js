@@ -179,7 +179,8 @@ Template.step_3.onRendered(function() {
 
 Template.step_3.helpers({
 	getImageLink: function(filename) {
-		return Meteor.absoluteUrl() + Meteor.settings.public.domainSuffix + '/images/' + filename;
+		return window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + 
+			'/' +  Meteor.settings.public.domainSuffix + '/images/' + filename;
 	},
 	getLeidendeBeginselen: function() {
 		$('#lb-text-3').empty();

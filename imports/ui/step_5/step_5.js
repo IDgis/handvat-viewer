@@ -241,8 +241,8 @@ Template.step_5.onRendered(function() {
 					result.forEach(function(item) {
 						$('#layer-popup-5').append('<div class="layer-popup-content">'
 							+ '<p class="negate-margin"><strong>Beheertype:</strong></p>'
-							+ '<p class="negate-margin">'
-							+ item +'</p></div>');
+							+ '<p class="negate-margin">' + item.code + '</p>'
+							+ '<p class="negate-margin">' + item.info + '</p></div>');
 						$('#layer-popup-5').css({'display': 'block'});
 					});
 				} else {

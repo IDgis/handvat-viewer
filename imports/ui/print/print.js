@@ -259,17 +259,6 @@ Template.print.helpers({
 			}
 		});
 	},
-	getKkIntro: function() {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/stap-5-links", {
-			headers: {
-				'Content-Type' : 'application/json; charset=UTF-8'
-			}
-		}, function(err, result) {
-			if(result.data !== null) {
-				$('#print-kk-general').append(result.data.print);
-			}
-		});
-	},
 	getKkText: function(kk) {
 		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
 				+ Meteor.settings.public[kk], {
@@ -338,11 +327,11 @@ function createOpPages(item) {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		var extraAmount = result.data.length - 12;
+		var extraAmount = result.data.length - 4;
 		var pages = 0;
 		
 		while(extraAmount > 0) {
-			extraAmount -= 9;
+			extraAmount -= 3;
 			pages++;
 		}
 		
@@ -354,15 +343,8 @@ function createOpPages(item) {
 			$(outerDivKk).attr('id', item.appCoupling + '-ops-' + (opPage + 1));
 			
 			var innerDivKk = document.createElement('div');
-			$(innerDivKk).attr('class', 'col-xs-4 print-height-3');
-			
-			var textDivKk = document.createElement('div');
-			$(textDivKk).attr('class', 'col-xs-12 print-height-1 print-op-' 
+			$(innerDivKk).attr('class', 'col-xs-4 print-height-3 print-op-' 
 					+ item.appCoupling);
-			
-			$(textDivKk).clone().appendTo(innerDivKk);
-			$(textDivKk).clone().appendTo(innerDivKk);
-			$(textDivKk).clone().appendTo(innerDivKk);
 			
 			$(innerDivKk).clone().appendTo(outerDivKk);
 			$(innerDivKk).clone().appendTo(outerDivKk);

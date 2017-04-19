@@ -27,14 +27,8 @@
 .user-input-print {margin-top:75px;}
 .print-margin-top {padding-top:10px;}
 
-#print-deelgebied-general {-webkit-column-count:2;-moz-column-count:2;column-count:2;
-	-moz-column-fill:auto;-webkit-column-fill:auto;column-fill:auto;}
-#print-beginselen-general {-webkit-column-count:2;-moz-column-count:2;column-count:2;
-	-moz-column-fill:auto;-webkit-column-fill:auto;column-fill:auto;}
-#print-sector-general {-webkit-column-count:2;-moz-column-count:2;column-count:2;
-	-moz-column-fill:auto;-webkit-column-fill:auto;column-fill:auto;}
-#print-kk-general {-webkit-column-count:2;-moz-column-count:2;column-count:2;
-	-moz-column-fill:auto;-webkit-column-fill:auto;column-fill:auto;}
+.two-columns {-webkit-column-count:2;-moz-column-count:2;column-count:2;
+	-moz-column-fill:auto;-webkit-column-fill:auto;column-fill:auto}
 
 .print-kk-icon {height:100%;}
 

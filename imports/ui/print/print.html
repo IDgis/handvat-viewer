@@ -92,7 +92,7 @@
 		</div>
 		<div class="print-page {{hideChapter 'chapterDeelgebied'}}">
 			<div class="col-xs-8 print-height-3">
-				<div class="col-xs-12 print-height-1" id="print-deelgebied-general">
+				<div class="col-xs-12 print-height-1 two-columns" id="print-deelgebied-general">
 					{{getDeelgebiedIntro}}
 				</div>
 				<div class="col-xs-12 print-height-2">
@@ -106,41 +106,36 @@
 		</div>
 		<div class="print-page {{hideChapter 'chapterBeginselen'}}">
 			<div class="col-xs-8 print-height-3">
-				<div class="col-xs-12 print-height-1" id="print-beginselen-general">
+				<div class="col-xs-12 print-height-1 two-columns" id="print-beginselen-general">
 					{{getBeginselenIntro}}
 				</div>
 				<div class="col-xs-12 print-height-2">
 					<div id="map-print-beginselen" class="olMap"></div>
 				</div>
 			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1"></div>
-				<div class="col-xs-12 print-height-1" id="print-lb-1"></div>
-				<div class="col-xs-12 print-height-2" id="print-lb-2"></div>
-			</div>
 			<div class="{{setPageNrClass 'chapterBeginselen'}}"></div>
 		</div>
 		<div class="print-page {{hideChapter 'chapterBeginselen'}}">
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1" id="print-lb-3"></div>
-				<div class="col-xs-12 print-height-1" id="print-lb-4"></div>
-				<div class="col-xs-12 print-height-1" id="print-lb-5"></div>
-			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1" id="print-lb-6"></div>
-				<div class="col-xs-12 print-height-1" id="print-lb-7"></div>
-				<div class="col-xs-12 print-height-1" id="print-lb-8"></div>
-			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1" id="print-lb-9"></div>
-				<div class="col-xs-12 print-height-1" id="print-lb-10"></div>
-				<div class="col-xs-12 print-height-1"></div>
-			</div>
+			<div class="col-xs-4 print-height-3" id="print-lb-1"></div>
+			<div class="col-xs-4 print-height-3" id="print-lb-2"></div>
+			<div class="col-xs-4 print-height-3" id="print-lb-3"></div>
+			<div class="{{setPageNrClass 'chapterBeginselen'}}"></div>
+		</div>
+		<div class="print-page {{hideChapter 'chapterBeginselen'}}">
+			<div class="col-xs-4 print-height-3" id="print-lb-4"></div>
+			<div class="col-xs-4 print-height-3" id="print-lb-5"></div>
+			<div class="col-xs-4 print-height-3" id="print-lb-6"></div>
+			<div class="{{setPageNrClass 'chapterBeginselen'}}"></div>
+		</div>
+		<div class="print-page {{hideChapter 'chapterBeginselen'}}">
+			<div class="col-xs-4 print-height-3" id="print-lb-7"></div>
+			<div class="col-xs-4 print-height-3" id="print-lb-8"></div>
+			<div class="col-xs-4 print-height-3" id="print-lb-9"></div>
 			<div class="{{setPageNrClass 'chapterBeginselen'}}"></div>
 		</div>
 		<div class="print-page {{hideChapter 'chapterSector'}}">
 			<div class="col-xs-8 print-height-3">
-				<div class="col-xs-12 print-height-3" id="print-sector-general">{{getSectorIntro}}</div>
+				<div class="col-xs-12 print-height-3 two-columns" id="print-sector-general">{{getSectorIntro}}</div>
 			</div>
 			<div class="col-xs-4 print-height-3">
 				<div class="col-xs-12 print-height-1 print-location-sector-icon"></div>
@@ -149,16 +144,15 @@
 		</div>
 		<div class="print-page {{hideChapter 'chapterOntwerpprincipes'}}">
 			<div class="col-xs-12 print-height-1">
-				<div class="col-xs-8 print-height-3" id="print-kk-general">{{getKkIntro}}</div>
+				<div class="col-xs-8 print-height-3 two-columns" id="print-kk-relief-text">
+					{{getKkText 'relief'}}
+				</div>
 				<div class="col-xs-4 print-height-3">
 					<img class="print-kk-icon pull-right" src="{{getImageLink 'r.jpg'}}"/>
 				</div>
 			</div>
 			<div class="col-xs-4 print-height-2">
-				<div class="col-xs-12 print-height-half" id="print-kk-relief-text">
-					{{getKkText 'relief'}}
-				</div>
-				<div class="col-xs-12 print-height-half" id="print-kk-relief-legenda-1">
+				<div class="col-xs-12" id="print-kk-relief-legenda-1">
 					{{getLegenda 'relief' 1}}
 				</div>
 			</div>
@@ -173,16 +167,8 @@
 					{{getLegenda 'relief' 2}}
 				</div>
 			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-relief"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-relief"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-relief"></div>
-			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-relief"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-relief"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-relief"></div>
-			</div>
+			<div class="col-xs-4 print-height-3 print-op-kernkwaliteit-relief"></div>
+			<div class="col-xs-4 print-height-3 print-op-kernkwaliteit-relief"></div>
 			<div class="{{setPageNrClass 'chapterOntwerpprincipes'}}"></div>
 		</div>
 		<div class="print-page {{hideChapter 'chapterOntwerpprincipes'}}" id="kernkwaliteit-relief-ops-2">
@@ -191,29 +177,20 @@
 					{{getLegenda 'relief' 3}}
 				</div>
 			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-relief"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-relief"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-relief"></div>
-			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-relief"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-relief"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-relief"></div>
-			</div>
+			<div class="col-xs-4 print-height-3 print-op-kernkwaliteit-relief"></div>
+			<div class="col-xs-4 print-height-3 print-op-kernkwaliteit-relief"></div>
 			<div class="{{setPageNrClass 'chapterOntwerpprincipes'}}"></div>
 		</div>
 		<div class="print-page {{hideChapter 'chapterOntwerpprincipes'}}">
 			<div class="col-xs-12 print-height-1">
-				<div class="col-xs-8"></div>
+				<div class="col-xs-8 print-height-3 two-columns" id="print-kk-openbesloten-text">
+					{{getKkText 'openbesloten'}}
+				</div>
 				<div class="col-xs-4 print-height-3">
 					<img class="print-kk-icon pull-right" src="{{getImageLink 'ob.jpg'}}"/>
 				</div>
 			</div>
 			<div class="col-xs-4 print-height-2">
-				<div class="col-xs-12 print-height-half" id="print-kk-openbesloten-text">
-					{{getKkText 'openbesloten'}}
-				</div>
 				<div class="col-xs-12 print-height-half" id="print-kk-openbesloten-legenda-1">
 					{{getLegenda 'openbesloten' 1}}
 				</div>
@@ -229,16 +206,8 @@
 					{{getLegenda 'openbesloten' 2}}
 				</div>
 			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-openbesloten"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-openbesloten"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-openbesloten"></div>
-			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-openbesloten"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-openbesloten"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-openbesloten"></div>
-			</div>
+			<div class="col-xs-4 print-height-3 print-op-kernkwaliteit-openbesloten"></div>
+			<div class="col-xs-4 print-height-3 print-op-kernkwaliteit-openbesloten"></div>
 			<div class="{{setPageNrClass 'chapterOntwerpprincipes'}}"></div>
 		</div>
 		<div class="print-page {{hideChapter 'chapterOntwerpprincipes'}}" id="kernkwaliteit-openbesloten-ops-2">
@@ -247,29 +216,20 @@
 					{{getLegenda 'openbesloten' 3}}
 				</div>
 			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-openbesloten"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-openbesloten"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-openbesloten"></div>
-			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-openbesloten"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-openbesloten"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-openbesloten"></div>
-			</div>
+			<div class="col-xs-4 print-height-3 print-op-kernkwaliteit-openbesloten"></div>
+			<div class="col-xs-4 print-height-3 print-op-kernkwaliteit-openbesloten"></div>
 			<div class="{{setPageNrClass 'chapterOntwerpprincipes'}}"></div>
 		</div>
 		<div class="print-page {{hideChapter 'chapterOntwerpprincipes'}}">
 			<div class="col-xs-12 print-height-1">
-				<div class="col-xs-8"></div>
+				<div class="col-xs-8 print-height-3 two-columns" id="print-kk-cultuurhistorie-text">
+					{{getKkText 'cultuurhistorie'}}
+				</div>
 				<div class="col-xs-4 print-height-3">
 					<img class="print-kk-icon pull-right" src="{{getImageLink 'ch.jpg'}}"/>
 				</div>
 			</div>
 			<div class="col-xs-4 print-height-2">
-				<div class="col-xs-12 print-height-half" id="print-kk-cultuurhistorie-text">
-					{{getKkText 'cultuurhistorie'}}
-				</div>
 				<div class="col-xs-12 print-height-half" id="print-kk-cultuurhistorie-legenda-1">
 					{{getLegenda 'cultuurhistorie' 1}}
 				</div>
@@ -285,16 +245,8 @@
 					{{getLegenda 'cultuurhistorie' 2}}
 				</div>
 			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-cultuurhistorie"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-cultuurhistorie"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-cultuurhistorie"></div>
-			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-cultuurhistorie"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-cultuurhistorie"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-cultuurhistorie"></div>
-			</div>
+			<div class="col-xs-4 print-height-3 print-op-kernkwaliteit-cultuurhistorie"></div>
+			<div class="col-xs-4 print-height-3 print-op-kernkwaliteit-cultuurhistorie"></div>
 			<div class="{{setPageNrClass 'chapterOntwerpprincipes'}}"></div>
 		</div>
 		<div class="print-page {{hideChapter 'chapterOntwerpprincipes'}}" id="kernkwaliteit-cultuurhistorie-ops-2">
@@ -303,29 +255,20 @@
 					{{getLegenda 'cultuurhistorie' 3}}
 				</div>
 			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-cultuurhistorie"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-cultuurhistorie"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-cultuurhistorie"></div>
-			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-cultuurhistorie"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-cultuurhistorie"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-cultuurhistorie"></div>
-			</div>
+			<div class="col-xs-4 print-height-3 print-op-kernkwaliteit-cultuurhistorie"></div>
+			<div class="col-xs-4 print-height-3 print-op-kernkwaliteit-cultuurhistorie"></div>
 			<div class="{{setPageNrClass 'chapterOntwerpprincipes'}}"></div>
 		</div>
 		<div class="print-page {{hideChapter 'chapterOntwerpprincipes'}}">
 			<div class="col-xs-12 print-height-1">
-				<div class="col-xs-8"></div>
+				<div class="col-xs-8 print-height-3 two-columns" id="print-kk-groenkarakter-text">
+					{{getKkText 'groenkarakter'}}
+				</div>
 				<div class="col-xs-4 print-height-3">
 					<img class="print-kk-icon pull-right" src="{{getImageLink 'gk.jpg'}}"/>
 				</div>
 			</div>
 			<div class="col-xs-4 print-height-2">
-				<div class="col-xs-12 print-height-half" id="print-kk-groenkarakter-text">
-					{{getKkText 'groenkarakter'}}
-				</div>
 				<div class="col-xs-12 print-height-half" id="print-kk-groenkarakter-legenda-1">
 					{{getLegenda 'groenkarakter' 1}}
 				</div>
@@ -341,16 +284,8 @@
 					{{getLegenda 'groenkarakter' 2}}
 				</div>
 			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-groenkarakter"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-groenkarakter"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-groenkarakter"></div>
-			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-groenkarakter"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-groenkarakter"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-groenkarakter"></div>
-			</div>
+			<div class="col-xs-4 print-height-3 print-op-kernkwaliteit-groenkarakter"></div>
+			<div class="col-xs-4 print-height-3 print-op-kernkwaliteit-groenkarakter"></div>
 			<div class="{{setPageNrClass 'chapterOntwerpprincipes'}}"></div>
 		</div>
 		<div class="print-page {{hideChapter 'chapterOntwerpprincipes'}}" id="kernkwaliteit-groenkarakter-ops-2">
@@ -359,37 +294,9 @@
 					{{getLegenda 'groenkarakter' 3}}
 				</div>
 			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-groenkarakter"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-groenkarakter"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-groenkarakter"></div>
-			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-groenkarakter"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-groenkarakter"></div>
-				<div class="col-xs-12 print-height-1 print-op-kernkwaliteit-groenkarakter"></div>
-			</div>
+			<div class="col-xs-4 print-height-3 print-op-kernkwaliteit-groenkarakter"></div>
+			<div class="col-xs-4 print-height-3 print-op-kernkwaliteit-groenkarakter"></div>
 			<div class="{{setPageNrClass 'chapterOntwerpprincipes'}}"></div>
-		</div>
-		<div class="print-page">
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1"></div>
-				<div class="col-xs-12 print-height-1"></div>
-				<div class="col-xs-12 print-height-1"></div>
-			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1"></div>
-				<div class="col-xs-12 print-height-1"></div>
-				<div class="col-xs-12 print-height-1">
-					<p><strong>Disclaimer / colofon</strong></p>
-				</div>
-			</div>
-			<div class="col-xs-4 print-height-3">
-				<div class="col-xs-12 print-height-1"></div>
-				<div class="col-xs-12 print-height-1"></div>
-				<div class="col-xs-12 print-height-1"></div>
-			</div>
-			<div class="page-number"></div>
 		</div>
 		<div class="print-page" id="last-page" style="background-image:url({{getImageLink 'print-background-last-page.jpg'}}) !important;"></div>
 	</div>

@@ -1,6 +1,6 @@
 <template name="print">
 	<div id="print-pages">
-		<div class="print-page" id="start-page" style="background-image:url({{getImageLink 'print-background-first-page.jpg'}});">
+		<div class="print-page" id="start-page" style="background-image:url({{getImageLink 'print-background-first-page.jpg'}}) !important;">
 			<div class="col-xs-4 print-height-1"></div>
 			<div class="col-xs-4 print-height-1"></div>
 			<div class="col-xs-4 print-height-1"></div>
@@ -391,7 +391,7 @@
 			</div>
 			<div class="page-number"></div>
 		</div>
-		<div class="print-page" id="last-page" style="background-image:url({{getImageLink 'print-background-last-page.jpg'}});"></div>
+		<div class="print-page" id="last-page" style="background-image:url({{getImageLink 'print-background-last-page.jpg'}}) !important;"></div>
 	</div>
 	
 	{{getAppInleiding}}

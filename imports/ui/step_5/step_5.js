@@ -221,12 +221,12 @@ Template.step_5.onRendered(function() {
 		}
 		
 		if(Session.get('natuurbeheerActive')) {
-			var nbLayerString = Meteor.settings.public.natuurbeheerService.layers.join(',');
+			var nbLayerString = Meteor.settings.public.natuurbeheerplan2017Service.layers.join(',');
 			var nbLayer = new ol.layer.Image({
 				source: new ol.source.ImageWMS({
-					url: Meteor.settings.public.natuurbeheerService.url, 
+					url: Meteor.settings.public.natuurbeheerplan2017Service.url, 
 					params: {'LAYERS': nbLayerString,  
-						'VERSION': Meteor.settings.public.natuurbeheerService.version}
+						'VERSION': Meteor.settings.public.natuurbeheerplan2017Service.version}
 				})
 			});
 			
@@ -241,8 +241,8 @@ Template.step_5.onRendered(function() {
 					result.forEach(function(item) {
 						$('#layer-popup-5').append('<div class="layer-popup-content">'
 							+ '<p class="negate-margin"><strong>Beheertype:</strong></p>'
-							+ '<p class="negate-margin">'
-							+ item +'</p></div>');
+							+ '<p class="negate-margin">' + item.code + '</p>'
+							+ '<p class="negate-margin">' + item.info + '</p></div>');
 						$('#layer-popup-5').css({'display': 'block'});
 					});
 				} else {

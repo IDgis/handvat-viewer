@@ -40,23 +40,9 @@ Meteor.methods({
 		var code;
 		var info;
 		
-		if(typeof xml.msGMLOutput["beheertypenkaart_n_layer"] !== 'undefined') {
-			code = xml.msGMLOutput["beheertypenkaart_n_layer"][0]["beheertypenkaart_n_feature"][0].BEHEERTYPE[0];
-			info = xml.msGMLOutput["beheertypenkaart_n_layer"][0]["beheertypenkaart_n_feature"][0].OMSCHRIJVING[0];
-			
-			infos.push({'code': code, 'info': info});
-		}
-		
-		if(typeof xml.msGMLOutput["beheertypenkaart_nn_layer"] !== 'undefined') {
-			code = xml.msGMLOutput["beheertypenkaart_nn_layer"][0]["beheertypenkaart_nn_feature"][0].BEHEERTYPE[0];
-			info = xml.msGMLOutput["beheertypenkaart_nn_layer"][0]["beheertypenkaart_nn_feature"][0].OMSCHRIJVING[0];
-			
-			infos.push({'code': code, 'info': info});
-		}
-		
-		if(typeof xml.msGMLOutput["beheertypenkaart_l_layer"] !== 'undefined') {
-			code = xml.msGMLOutput["beheertypenkaart_l_layer"][0]["beheertypenkaart_l_feature"][0].BEHEERTYPE[0];
-			info = xml.msGMLOutput["beheertypenkaart_l_layer"][0]["beheertypenkaart_l_feature"][0].OMSCHRIJVING[0];
+		if(typeof xml.msGMLOutput["def_beheertypenkaart_v_layer"] !== 'undefined') {
+			code = xml.msGMLOutput["def_beheertypenkaart_v_layer"][0]["def_beheertypenkaart_v_feature"][0].BEHEERTYPE[0];
+			info = xml.msGMLOutput["def_beheertypenkaart_v_layer"][0]["def_beheertypenkaart_v_feature"][0].OMSCHRIJVING[0];
 			
 			infos.push({'code': code, 'info': info});
 		}

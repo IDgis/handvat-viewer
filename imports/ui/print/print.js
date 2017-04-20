@@ -2,7 +2,7 @@ import './print.html';
 import './print.css';
 
 Template.print.onRendered(function() {
-	var chapter = 5;
+	var chapter = 4;
 	var page = 5;
 	
 	writeChapterPage('Hoofdstuk ' + chapter + ' - Deelgebied');
@@ -20,7 +20,7 @@ Template.print.onRendered(function() {
 		writeChapterPage('Pagina ' + page);
 		
 		chapter++;
-		page += 2;
+		page += 4;
 	} else {
 		writeChapterPage('niet weergegeven');
 	}

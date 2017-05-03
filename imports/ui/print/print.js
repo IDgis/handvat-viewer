@@ -2,6 +2,16 @@ import './print.html';
 import './print.css';
 
 Template.print.onRendered(function() {
+	$(".modal").draggable({
+		handle: ".modal-header"
+	});
+	
+	$('.modal-content').resizable({
+		alsoResize: ".modal-body"
+	});
+	
+	$('#print-modal').modal();
+	
 	var chapter = 4;
 	var page = 5;
 	

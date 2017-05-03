@@ -301,6 +301,35 @@
 		<div class="print-page" id="last-page" style="background-image:url({{getImageLink 'print-background-last-page.jpg'}}) !important;"></div>
 	</div>
 	
+	<div class="modal fade" tabindex="-1" role="dialog" id="print-modal">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Tips voor het printen</h4>
+				</div>
+				<div class="modal-body" id="op-text-5">
+					<div id="print-modal-text">
+						<p>Hieronder staan een aantal tips vermeld over hoe je het beste kunt printen:</p>
+						<ul>
+							<li>De print kun je starten met de toets combinatie CTRL+P</li>
+							<li>De print moet liggend ingesteld zijn</li>
+							<li>De kop- en voettekst moet uitgeschakeld zijn</li>
+							<li>De achtergrondafbeeldingen moeten aangevinkt zijn / toegestaan zijn</li>
+							<li>De schaal moet op 100% staan</li>
+							<li>De marges moeten op 4 mm of automatisch staan</li>
+						</ul>
+					</div>
+				</div>
+				<div class="modal-footer negate-border">
+					<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	{{getAppInleiding}}
 	{{getSectorIcon}}
 	{{getBeginselen}}

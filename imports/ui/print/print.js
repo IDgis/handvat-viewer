@@ -337,15 +337,23 @@ function createOpPages(item) {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
 	}, function(err, result) {
-		var extraAmount = result.data.length - 4;
+		var extraAmount;
+		var opPage;
+		
+		if(item.appCoupling === 'kernkwaliteit-cultuurhistorie') {
+			extraAmount = result.data.length - 4;
+			opPage = 2;
+		} else {
+			extraAmount = result.data.length;
+			opPage = 0;
+		}
+		
 		var pages = 0;
 		
 		while(extraAmount > 0) {
 			extraAmount -= 3;
 			pages++;
 		}
-		
-		var opPage = 2;
 		
 		for(var i = 0; i < pages; i++) {
 			var outerDivKk = document.createElement('div');
@@ -362,7 +370,11 @@ function createOpPages(item) {
 			
 			$(outerDivKk).append('<div class="page-number"></div>');
 			
-			$('#' + item.appCoupling + '-ops-' + opPage).after(outerDivKk);
+			if(opPage === 0) {
+				$('#' + item.appCoupling + '-main').after(outerDivKk);
+			} else {
+				$('#' + item.appCoupling + '-ops-' + opPage).after(outerDivKk);
+			}
 			
 			writePageNumbers();
 			

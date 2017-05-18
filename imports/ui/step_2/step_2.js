@@ -56,6 +56,18 @@ Template.step_2.onRendered(function() {
 		target: 'map-2',
 		view: view
 	});
+
+	var ltLayer = new ol.layer.Image({
+		source: new ol.source.ImageWMS({
+			url: Meteor.settings.public.landschapstypenService.url,
+			opacity: 0,
+			params: {'LAYERS': Meteor.settings.public.landschapstypenService.layers[0], 
+				'VERSION': Meteor.settings.public.landschapstypenService.version} 
+		})
+	});
+	
+	map.addLayer(ltLayer);
+	map.getLayers().item(0).setOpacity(0);
 	
 	var urlTop10 = Meteor.settings.public.top10Service.url;
 	var layersTop10 = Meteor.settings.public.top10Service.layers;
@@ -157,14 +169,30 @@ Template.step_2.onRendered(function() {
 			map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
 		}
 		
+		getDeelgebied(evt.coordinate);
+		
 		Session.set('location', 'x-coördinaat: ' + evt.coordinate[0] + ' | y-coördinaat: ' + evt.coordinate[1]);
 		Session.set('locationCoordinates', evt.coordinate);
+		setLandschapstypeId(Session.get('locationCoordinates'));
 		iconLayer = getIcon(evt.coordinate, iconStyle);
 		map.addLayer(iconLayer);
 		Session.set('iconLayerSet', true);
-		
-		getDeelgebied(evt.coordinate);
 	});
+	
+	function setLandschapstypeId(coordinates) {
+		var url = map.getLayers().item(0).getSource().getGetFeatureInfoUrl(coordinates, map.getView().
+				getResolution(), map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
+		
+		Meteor.call('getLandschapsType', url, function(err, result) {
+			if(typeof result !== 'undefined') {
+				Session.set('landschapstypeId', result);
+				Session.set('locationCoordinates', coordinates);
+			} else {
+				Session.set('landschapstypeId', null);
+				Session.set('locationCoordinates', null);
+			}
+		});
+	}
 });
 
 Template.step_2.helpers ({
@@ -480,7 +508,7 @@ function setExtentCenter(item) {
 }
 
 function getDeelgebied(coordinates) {
-	var url = map.getLayers().item(Meteor.settings.public.deelgebiedenService.indexDG)
+	var url = map.getLayers().item(12)
 		.getSource().getGetFeatureInfoUrl(coordinates, map.getView().getResolution(), 
 				map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
 	

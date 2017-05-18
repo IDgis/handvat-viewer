@@ -102,8 +102,7 @@
 	    "urlSK": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
 	    "version": "1.1.1",
 	    "layersDG": ["Deelgebieden"],
-	    "layersSK": ["Landschapskaart_Structuur_Beschermingsgebied", "top50namen_grotere_steden", "top50namen_overig"],
-	    "indexDG": 11
+	    "layersSK": ["Landschapskaart_Structuur_Beschermingsgebied", "top50namen_grotere_steden", "top50namen_overig"]
 	  },
 	  "toponiemenService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
@@ -114,8 +113,7 @@
 	    "url": "http://portal.prvlimburg.nl/geoservices/landschapstypen?",
 	    "version": "1.1.1",
 	    "layers": ["landschapstypen_v", "masker_beschermingsgebied_v", "masker_zuid_limburg_v", 
-	    			"beschermingsgeb_nat_landsc_v"],
-	    "indexLT": 0
+	    			"beschermingsgeb_nat_landsc_v"]
 	  },
 	  "polService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/beleidskaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",

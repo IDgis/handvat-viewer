@@ -178,21 +178,6 @@ Template.step_2.onRendered(function() {
 		map.addLayer(iconLayer);
 		Session.set('iconLayerSet', true);
 	});
-	
-	function setLandschapstypeId(coordinates) {
-		var url = map.getLayers().item(0).getSource().getGetFeatureInfoUrl(coordinates, map.getView().
-				getResolution(), map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
-		
-		Meteor.call('getLandschapsType', url, function(err, result) {
-			if(typeof result !== 'undefined') {
-				Session.set('landschapstypeId', result);
-				Session.set('locationCoordinates', coordinates);
-			} else {
-				Session.set('landschapstypeId', null);
-				Session.set('locationCoordinates', null);
-			}
-		});
-	}
 });
 
 Template.step_2.helpers ({
@@ -309,10 +294,11 @@ Template.step_2.events ({
 				
 				var center = [center1, center2];
 				Session.set('locationCoordinates', center);
+				setLandschapstypeId(center);
 				var iconLayer = getIcon(center, iconStyle);
 				map.addLayer(iconLayer);
 				Session.set('iconLayerSet', true);
-				getDeelgebied(Session.get('locationCoordinates'));
+				getDeelgebied(center);
 			} else {
 				if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
 					map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
@@ -436,10 +422,11 @@ Template.step_2.events ({
 				
 				var center = [center1, center2];
 				Session.set('locationCoordinates', center);
+				setLandschapstypeId(center);
 				var iconLayer = getIcon(center, iconStyle);
 				map.addLayer(iconLayer);
 				Session.set('iconLayerSet', true);
-				getDeelgebied(Session.get('locationCoordinates'));
+				getDeelgebied(center);
 			} else {
 				if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
 					map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
@@ -534,5 +521,20 @@ function getDeelgebied(coordinates) {
 				}
 			});
 		});
+	});
+}
+
+function setLandschapstypeId(coordinates) {
+	var url = map.getLayers().item(0).getSource().getGetFeatureInfoUrl(coordinates, map.getView().
+			getResolution(), map.getView().getProjection(), {'INFO_FORMAT': 'application/vnd.ogc.gml'});
+	
+	Meteor.call('getLandschapsType', url, function(err, result) {
+		if(typeof result !== 'undefined') {
+			Session.set('landschapstypeId', result);
+			Session.set('locationCoordinates', coordinates);
+		} else {
+			Session.set('landschapstypeId', null);
+			Session.set('locationCoordinates', null);
+		}
 	});
 }

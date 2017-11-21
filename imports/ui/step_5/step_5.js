@@ -221,12 +221,12 @@ Template.step_5.onRendered(function() {
 		}
 		
 		if(Session.get('natuurbeheerActive')) {
-			var nbLayerString = Meteor.settings.public.natuurbeheerplan2017Service.layers.join(',');
+			var nbLayerString = Meteor.settings.public.natuurbeheerplan2018Service.layers.join(',');
 			var nbLayer = new ol.layer.Image({
 				source: new ol.source.ImageWMS({
-					url: Meteor.settings.public.natuurbeheerplan2017Service.url, 
+					url: Meteor.settings.public.natuurbeheerplan2018Service.url, 
 					params: {'LAYERS': nbLayerString,  
-						'VERSION': Meteor.settings.public.natuurbeheerplan2017Service.version}
+						'VERSION': Meteor.settings.public.natuurbeheerplan2018Service.version}
 				})
 			});
 			
@@ -490,19 +490,15 @@ Template.step_5.events ({
 		Session.set('natuurbeheerActive', false);
 	},
 	'click #nb-img': function(e) {
-		var natuurbeheer = {url: Meteor.settings.public.natuurbeheerService.url,
-				layers: Meteor.settings.public.natuurbeheerService.layers, 
-				version: Meteor.settings.public.natuurbeheerService.version};
-		
-		var beheerplan2017 = {url: Meteor.settings.public.natuurbeheerplan2017Service.url,
-				layers: Meteor.settings.public.natuurbeheerplan2017Service.layers, 
-				version: Meteor.settings.public.natuurbeheerplan2017Service.version};
+		var beheerplan2018 = {url: Meteor.settings.public.natuurbeheerplan2018Service.url,
+				layers: Meteor.settings.public.natuurbeheerplan2018Service.layers, 
+				version: Meteor.settings.public.natuurbeheerplan2018Service.version};
 		
 		var natura2000 = {url: Meteor.settings.public.natura2000Service.url,
 				layers: Meteor.settings.public.natura2000Service.layers, 
 				version: Meteor.settings.public.natura2000Service.version};
 		
-		addServiceLayers(null, false, e.target, [natuurbeheer, beheerplan2017, natura2000]);
+		addServiceLayers(null, false, e.target, [beheerplan2018, natura2000]);
 		
 		Session.set('overigKaartActive', Meteor.settings.public.natuurbeheerplan);
 		Session.set('cultuurActive', false);

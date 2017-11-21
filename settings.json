@@ -121,11 +121,6 @@
 	    "layers": ["pol2014_gzb_v", "pol2014_buitengebied_v", "pol2014_natuurbeek_l", "masker_zuid_limburg_v", 
 	    			"verord_besch_nat_landsch_v", "pol2014_nat_landschap_zl_v"]
 	  },
-	  "natuurbeheerService": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/groen_karakter?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-	    "version": "1.1.1",
-	    "layers": ["beheertypenkaart_n", "beheertypenkaart_nn", "beheertypenkaart_l"]
-	  },
 	  "landschapStructuurService": {
 	    "url": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
 	    "version": "1.1.1",
@@ -155,10 +150,10 @@
 	    "version": "1.1.1",
 	    "layers": ["natura2000_limb_v"]
 	  },
-	  "natuurbeheerplan2017Service": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/natuurbeheerplan2017?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+	  "natuurbeheerplan2018Service": {
+	    "url": "http://portal.prvlimburg.nl/geoservices/natuurbeheerplan2018?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
 	    "version": "1.1.1",
-	    "layers": ["def_beheertypenkaart_v"]
+	    "layers": ["def_2018_beheertypekaart_v"]
 	  },
 	  "woonplaatsen": [
 	    {"label": "Amstenrade", "value": "2099"},

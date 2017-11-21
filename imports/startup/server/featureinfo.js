@@ -40,9 +40,9 @@ Meteor.methods({
 		var code;
 		var info;
 		
-		if(typeof xml.msGMLOutput["def_beheertypenkaart_v_layer"] !== 'undefined') {
-			code = xml.msGMLOutput["def_beheertypenkaart_v_layer"][0]["def_beheertypenkaart_v_feature"][0].BEHEERTYPE[0];
-			info = xml.msGMLOutput["def_beheertypenkaart_v_layer"][0]["def_beheertypenkaart_v_feature"][0].OMSCHRIJVING[0];
+		if(typeof xml.msGMLOutput["def_2018_beheertypekaart_v_layer"] !== 'undefined') {
+			code = xml.msGMLOutput["def_2018_beheertypekaart_v_layer"][0]["def_2018_beheertypekaart_v_feature"][0].BEHEERTYPE[0];
+			info = xml.msGMLOutput["def_2018_beheertypekaart_v_layer"][0]["def_2018_beheertypekaart_v_feature"][0].OMSCHRIJVING[0];
 			
 			infos.push({'code': code, 'info': info});
 		}

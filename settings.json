@@ -35,41 +35,76 @@
 	  "natuurbeheerplan": "kaart-natuurbeheerplan",
 	  
 	  "cultuurhistorieService": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?",
-	    "version": "1.1.1",
-	    "layers": ["cultuurlandschap_zl_v", "archeologische_monumenten_v", "historische_buitenplaatsen_v", 
-	    			"prov_archeol_aandachtsgeb_v", "panden", "Cultuurlandschap_ZL_L", 
-	    			"cultuurhistorische_elementen_v", "cultuurhistorische_elementen_l", 
-	    			"cultuurhistorische_elementen_p", "lvzl_kerken_point_p", "lvzl_sympoint_p", 
-	    			"lvzl_kloosters_p", "geologisch_monument_p", "rijksmonumenten_p", "masker_beschermingsgebied_v", 
-	    			"masker_zuid_limburg_v", "beschermingsgeb_nat_landsc_v"]
+	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+	    "version": "1.3.0",
+	    "layers": ["CULTUURLANDSCHAP_ZL_V_handvat_kernkwaliteiten",
+	    			"ARCHEOLOG_MONUMENT_COMPLEX_V_handvat_kernkwaliteiten",
+	    			"HISTORISCHE_BUITENPLAATSEN_V_handvat_kernkwaliteiten", 
+	    			"PROV_ARCHEOL_AANDACHTSGEB_V_handvat_kernkwaliteiten",
+	    			"PANDEN_handvat_kernkwaliteiten",
+	    			"CULTUURLANDSCHAP_ZL_L_handvat_kernkwaliteiten",
+	    			"CULTUURHISTORISCHE_ELEMENTEN_V_mijnbouwkolonie",
+	    			"CULTUURHISTORISCHE_ELEMENTEN_L_handvat_kernkwaliteiten", 
+	    			"CULTUURHISTORISCHE_ELEMENTEN_P_handvat_kernkwaliteiten",
+	    			"LVZL_KERKEN_POINT_P",
+	    			"LVZL_SYMPOINT_P", 
+	    			"LVZL_KLOOSTERS_P",
+	    			"GEOLOGISCH_MONUMENT_P",
+	    			"RIJKSMONUMENTEN_P_handvat_kernkwaliteiten",
+	    			"BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten",
+	    			"MASKER_BESCHERMINGSGEBIED_V", 
+	    			"MASKER_ZUID_LIMBURG_V"]
 	  },
 	  "cultuurhistorieHoverableService": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?",
-	    "version": "1.1.1",
-	    "layers": ["cultuurhistorische_elementen_p", "rijksmonumenten_p", "geologisch_monument_p", 
-	    			"cultuurhistorische_elementen_l", "Cultuurlandschap_ZL_L", "panden", 
-	    			"prov_archeol_aandachtsgeb_v", "historische_buitenplaatsen_v", 
-	    			"archeologische_monumenten_v"]
+	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+	    "version": "1.3.0",
+	    "layers": ["CULTUURHISTORISCHE_ELEMENTEN_P_handvat_kernkwaliteiten",
+	    			"RIJKSMONUMENTEN_P_handvat_kernkwaliteiten",
+	    			"GEOLOGISCH_MONUMENT_P", 
+	    			"CULTUURHISTORISCHE_ELEMENTEN_L_handvat_kernkwaliteiten",
+	    			"CULTUURLANDSCHAP_ZL_V_handvat_kernkwaliteiten",
+	    			"PANDEN_handvat_kernkwaliteiten", 
+	    			"PROV_ARCHEOL_AANDACHTSGEB_V_handvat_kernkwaliteiten",
+	    			"HISTORISCHE_BUITENPLAATSEN_V_handvat_kernkwaliteiten", 
+	    			"ARCHEOLOG_MONUMENT_COMPLEX_V_handvat_kernkwaliteiten"]
 	  },
 	  "openBeslotenService": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/schaalcontrast_open_besloten?",
-	    "version": "1.1.1",
-	    "layers": ["hillshade", "landschapstypen_v", "top10nl_spoorbaandeel_l", "bos_boomgaard_kwekerij", 
-	    			"dorpsmantel_v", "panden", "top10nl_relief_hogezijde_l", "landschapstypen_v_plateau", 
-	    			"heg_haag", "bomenrij", "boom", "masker_beschermingsgebied_v", "masker_zuid_limburg_v", 
-	    			"beschermingsgeb_nat_landsc_v"]
+	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+	    "version": "1.3.0",
+	    "layers": ["hillsha_ahn53",
+	    			"LANDSCHAPSTYPEN_V",
+	    			"TOP10NL_SPOORBAANDEEL_L_handvat_kernkwaliteiten",
+	    			"TOP10NL_TERREIN_V_bos_boomgaard_kwekerij", 
+	    			"DORPSMANTEL_V",
+	    			"PANDEN_handvat_kernkwaliteiten",
+	    			"TOP10NL_RELIEF_HOGEZIJDE_L",
+	    			"LANDSCHAPSTYPEN_V_plateau", 
+	    			"TOP10NL_INRICHTINGSELEMENT_L_heg_haag",
+	    			"TOP10NL_INRICHTINGSELEMENT_L_bomenrij",
+	    			"TOP10NL_INRICHTINGSELEMENT_P_boom",
+	    			"BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten",
+	    			"MASKER_BESCHERMINGSGEBIED_V",
+	    			"MASKER_ZUID_LIMBURG_V"]
 	  },
 	  "reliefService": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/relief?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-	    "version": "1.1.1",
-	    "layers": ["AHN25helling", "top10nl_isohoogtelijn_l", "top10nl_relief_hogezijde_l", "landschapstypen_v", 
-	    			"landschapstypen_v_plateau", "panden", "waterstaatswerk_watergang_v", "top10nl_waterdeel_v", 
-	    			"waterstaatswerk_regenwbuf_v", "primaire_bronnen_p", "masker_beschermingsgebied_v", 
-	    			"masker_zuid_limburg_v", "beschermingsgeb_nat_landsc_v"]
+	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+	    "version": "1.3.0",
+	    "layers": ["ahn25helling",
+	    			"TOP10NL_HOOGTE_L",
+	    			"TOP10NL_RELIEF_HOGEZIJDE_L",
+	    			"LANDSCHAPSTYPEN_V", 
+	    			"LANDSCHAPSTYPEN_V_plateau",
+	    			"PANDEN_handvat_kernkwaliteiten",
+	    			"WATERSTAATSWERK_WATERGANG_V",
+	    			"TOP10NL_WATERDEEL_V_handvat_kernkwaliteiten", 
+	    			"WATERSTAATSWERK_REGENWBUF_V",
+	    			"PRIMAIRE_BRONNEN_P",
+	    			"BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten",
+	    			"MASKER_BESCHERMINGSGEBIED_V", 
+	    			"MASKER_ZUID_LIMBURG_V"]
 	  },
 	  "groenKarakterService": {
-	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?request=GetCapabilities",
+	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
 	    "version": "1.3.0",
 	    "layers": ["TOP10NL_TERREIN_V_grasland_heide_zand",
 	    			"TOP10NL_TERREIN_V_akkerland",
@@ -88,67 +123,96 @@
 	    			"WATERSTAATSWERK_REGENWBUF_V", 
 	    			"PRIMAIRE_BRONNEN_P",
 	    			"TOP10NL_INRICHTINGSELEMENT_L_heg_haag",
-	    			"TOP10NL_RELIEF_L_hogezijde",
+	    			"TOP10NL_RELIEF_HOGEZIJDE_L",
 	    			"TOP10NL_INRICHTINGSELEMENT_L_bomenrij",
-	    			"TOP10NL_INRICHTINGSELEMENT_P_boom", 
-	    			"MASKER_BESCHERMINGSGEBIED_V",
-	    			"MASKER_ZUID_LIMBURG_V",
+	    			"TOP10NL_INRICHTINGSELEMENT_P_boom",
 	    			"BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten",
 	    			"DEF_2018_BEHEERTYPEKAART_V_n0103_n1302",
 	    			"DEF_2018_BEHEERTYPEKAART_V_n1401_n1706",
-	    			"DEF_2018_BEHEERTYPEKAART_V_l0101_l0202"]
+	    			"DEF_2018_BEHEERTYPEKAART_V_l0101_l0202",
+	    			"MASKER_BESCHERMINGSGEBIED_V",
+	    			"MASKER_ZUID_LIMBURG_V"]
 	  },
 	  "luchtfotoService": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/luchtfoto?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-	    "version": "1.1.1",
-	    "layers": ["Luchtfoto hoge resolutie"]
+	    "url": "https://portal.prvlimburg.nl/geodata/LUCHTFOTO/wms?",
+	    "version": "1.3.0",
+	    "layers": ["LUFO_ACTUEEL_LAAG"]
 	  },
 	  "tranchotService": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/cultuurhistoriekaart?",
-	    "version": "1.1.1",
-	    "layers": ["Tranchotkaarten"]
+	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+	    "version": "1.3.0",
+	    "layers": ["tranchotkaarten"]
 	  },
 	  "top10Service": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/topoNLZL?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-	    "version": "1.1.1",
-	    "layers": ["top10nl_wegdeel_v", "top10nl_gebouw_v", "top10nl_terrein_v", "top10nl_waterdeel_v", 
-	    			"top10nl_relief_hogezijde_l", "top10nl_relief_lagezijde_l", "top10nl_spoorbaandeel_l", 
-	    			"top10nl_waterdeel_l", "nwb_wegvakken_limb_l_straatnamen", "plaatsnamen_p",
-	    			"masker_zuid_limburg_v"]
+	    "url": "https://portal.prvlimburg.nl/geodata/TOPOGRAFIE/wms?",
+	    "version": "1.3.0",
+	    "layers": ["TOP10NL_WEGDEEL_V_topoNLZL",
+	    			"TOP10NL_GEBOUW_V_topoNLZL",
+	    			"TOP10NL_TERREIN_V_topoNLZL",
+	    			"TOP10NL_WATERDEEL_V_topoNLZL", 
+	    			"TOP10NL_RELIEF_HOGEZIJDE_L_topoNLZL",
+	    			"TOP10NL_RELIEF_LAGEZIJDE_L_topoNLZL",
+	    			"TOP10NL_SPOORBAANDEEL_L_topoNLZL", 
+	    			"TOP10NL_WATERDEEL_L_topoNLZL",
+	    			"PLAATSNAMEN_P_topoNLZL",
+	    			"LIMBURG_MASKER"]
+	  },
+	  "infrastructuurService": {
+		"url": "https://portal.prvlimburg.nl/geodata/INFRASTRUCTUUR/wms?",
+		"version": "1.3.0",
+		"layers": ["NWB_WEGVAKKEN_LIMB_L_topoNLZL"]
 	  },
 	  "deelgebiedenService": {
-	    "urlDG": "http://portal.prvlimburg.nl/geoservices/deelgebieden?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-	    "urlSK": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-	    "version": "1.1.1",
-	    "layersDG": ["Deelgebieden"],
-	    "layersSK": ["Landschapskaart_Structuur_Beschermingsgebied", "top50namen_grotere_steden", "top50namen_overig"]
+	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?request=GetCapabilities",
+	    "version": "1.3.0",
+	    "layers": ["DEELGEBIEDEN_V",
+	    			"Structuur_Beschermingsgebied_141116_151_NIEUW",
+	    			"TOP50NAMEN_P_grotere_steden",
+	    			"TOP50NAMEN_P_overig"]
 	  },
 	  "toponiemenService": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-	    "version": "1.1.1",
-	    "layers": ["top50namen_grotere_steden", "top50namen_overig"]
+	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+	    "version": "1.3.0",
+	    "layers": ["TOP50NAMEN_P_grotere_steden",
+	    			"TOP50NAMEN_P_overig"]
 	  },
 	  "landschapstypenService": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/landschapstypen?",
-	    "version": "1.1.1",
-	    "layers": ["landschapstypen_v", "masker_beschermingsgebied_v", "masker_zuid_limburg_v", 
-	    			"beschermingsgeb_nat_landsc_v"]
+	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+	    "version": "1.3.0",
+	    "layers": ["LANDSCHAPSTYPEN_V",
+	    			"BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten",
+	    			"MASKER_BESCHERMINGSGEBIED_V",
+	    			"MASKER_ZUID_LIMBURG_V"]
+	  },
+	  "maskerZuidLimburgService": {
+	  	"url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+	  	"version": "1.3.0",
+	  	"layers": ["MASKER_ZUID_LIMBURG_V"]
 	  },
 	  "polService": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/beleidskaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-	    "version": "1.1.1",
-	    "layers": ["pol2014_gzb_v", "pol2014_buitengebied_v", "pol2014_natuurbeek_l", "masker_zuid_limburg_v", 
-	    			"verord_besch_nat_landsch_v", "pol2014_nat_landschap_zl_v"]
+	    "url": "https://portal.prvlimburg.nl/geodata/POL/wms?",
+	    "version": "1.3.0",
+	    "layers": ["POL2014_GZB_V",
+	    			"POL2014_BUITENGEBIED_V",
+	    			"POL2014_NATUURBEEK_L",
+	    			"POL2014_BESCH_NAT_LANDSCH_V",
+	    			"POL2014_NAT_LANDSCHAP_ZL_V"]
 	  },
 	  "landschapStructuurService": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/structuurkaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-	    "version": "1.1.1",
-	    "layers": ["Landschapskaart_deelgebied_Baneheide", "Landschapskaart_deelgebied_Bekken_van_Heerlen", 
-	    			"Landschapskaart_deelgebied_Doenrade", "Landschapskaart_deelgebied_Eperheide", 
-	    			"Landschapskaart_deelgebied_Geleenbeek", "Landschapskaart_deelgebied_Geuldal", 
-	    			"Landschapskaart_deelgebied_Maasdal", "Landschapskaart_deelgebied_Maasterras_Gronsveld", 
-	    			"Landschapskaart_deelgebied_Margraten", "Landschapskaart_deelgebied_Roode_beek", 
-	    			"Landschapskaart_deelgebied_Schimmert", "Landschapskaart_deelgebied_Ubachsberg", 
+	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+	    "version": "1.3.0",
+	    "layers": ["Landschapskaart_deelgebied_Baneheide",
+	    			"Landschapskaart_deelgebied_Bekken_van_Heerlen", 
+	    			"Landschapskaart_deelgebied_Doenrade",
+	    			"Landschapskaart_deelgebied_Eperheide", 
+	    			"Landschapskaart_deelgebied_Geleenbeek",
+	    			"Landschapskaart_deelgebied_Geuldal", 
+	    			"Landschapskaart_deelgebied_Maasdal",
+	    			"Landschapskaart_deelgebied_Maasterras_Gronsveld", 
+	    			"Landschapskaart_deelgebied_Margraten",
+	    			"Landschapskaart_deelgebied_Roode_beek", 
+	    			"Landschapskaart_deelgebied_Schimmert",
+	    			"Landschapskaart_deelgebied_Ubachsberg", 
 	    			"Landschapskaart_deelgebied_Vijlenerbos"],
 	    "Baneheide": 0,
 	    "Bekken van Heerlen": 1,
@@ -165,14 +229,14 @@
 	    "Vijlenerbos": 12
 	  },
 	  "natura2000Service": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/beleidskaart?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-	    "version": "1.1.1",
-	    "layers": ["natura2000_limb_v"]
+	    "url": "https://portal.prvlimburg.nl/geodata/NATUUR/wms?",
+	    "version": "1.3.0",
+	    "layers": ["NATURA2000_LIMB_V"]
 	  },
-	  "natuurbeheerplan2018Service": {
-	    "url": "http://portal.prvlimburg.nl/geoservices/natuurbeheerplan2018?&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-	    "version": "1.1.1",
-	    "layers": ["def_2018_beheertypekaart_v"]
+	  "natuurbeheerplanService": {
+	    "url": "https://portal.prvlimburg.nl/geodata/NATUUR/wms?",
+	    "version": "1.3.0",
+	    "layers": ["DEF_2019_BEHEERTYPEKAART_V"]
 	  },
 	  "woonplaatsen": [
 	    {"label": "Amstenrade", "value": "2099"},

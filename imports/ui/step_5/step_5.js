@@ -192,8 +192,11 @@ Template.step_5.onRendered(function() {
 			var chLayer = new ol.layer.Image({
 				source: new ol.source.ImageWMS({
 					url: Meteor.settings.public.cultuurhistorieHoverableService.url, 
-					params: {'LAYERS': chLayerString,  
-						'VERSION': Meteor.settings.public.cultuurhistorieHoverableService.version}
+					params: {
+						'LAYERS': chLayerString,  
+						'VERSION': Meteor.settings.public.cultuurhistorieHoverableService.version,
+						'FEATURE_COUNT': '20'
+					}
 				})
 			});
 			
@@ -221,12 +224,15 @@ Template.step_5.onRendered(function() {
 		}
 		
 		if(Session.get('natuurbeheerActive')) {
-			var nbLayerString = Meteor.settings.public.natuurbeheerplan2018Service.layers.join(',');
+			var nbLayerString = Meteor.settings.public.natuurbeheerplanService.layers.join(',');
 			var nbLayer = new ol.layer.Image({
 				source: new ol.source.ImageWMS({
-					url: Meteor.settings.public.natuurbeheerplan2018Service.url, 
-					params: {'LAYERS': nbLayerString,  
-						'VERSION': Meteor.settings.public.natuurbeheerplan2018Service.version}
+					url: Meteor.settings.public.natuurbeheerplanService.url, 
+					params: {
+						'LAYERS': nbLayerString,  
+						'VERSION': Meteor.settings.public.natuurbeheerplanService.version,
+						'FEATURE_COUNT': '20'
+					}
 				})
 			});
 			
@@ -476,29 +482,33 @@ Template.step_5.events ({
 	},
 	'click #pol-img': function(e) {
 		var pol = {url: Meteor.settings.public.polService.url,
-			layers: Meteor.settings.public.polService.layers, 
-			version: Meteor.settings.public.polService.version};
+				layers: Meteor.settings.public.polService.layers, 
+				version: Meteor.settings.public.polService.version};
 		
 		var natura2000 = {url: Meteor.settings.public.natura2000Service.url,
 				layers: Meteor.settings.public.natura2000Service.layers, 
 				version: Meteor.settings.public.natura2000Service.version};
 		
-		addServiceLayers(null, false, e.target, [pol, natura2000]);
+		var masker = {url: Meteor.settings.public.maskerZuidLimburgService.url,
+				layers: Meteor.settings.public.maskerZuidLimburgService.layers, 
+				version: Meteor.settings.public.maskerZuidLimburgService.version};
+		
+		addServiceLayers(null, false, e.target, [pol, natura2000, masker]);
 		
 		Session.set('overigKaartActive', Meteor.settings.public.pol);
 		Session.set('cultuurActive', false);
 		Session.set('natuurbeheerActive', false);
 	},
 	'click #nb-img': function(e) {
-		var beheerplan2018 = {url: Meteor.settings.public.natuurbeheerplan2018Service.url,
-				layers: Meteor.settings.public.natuurbeheerplan2018Service.layers, 
-				version: Meteor.settings.public.natuurbeheerplan2018Service.version};
+		var beheerplan = {url: Meteor.settings.public.natuurbeheerplanService.url,
+				layers: Meteor.settings.public.natuurbeheerplanService.layers, 
+				version: Meteor.settings.public.natuurbeheerplanService.version};
 		
 		var natura2000 = {url: Meteor.settings.public.natura2000Service.url,
 				layers: Meteor.settings.public.natura2000Service.layers, 
 				version: Meteor.settings.public.natura2000Service.version};
 		
-		addServiceLayers(null, false, e.target, [beheerplan2018, natura2000]);
+		addServiceLayers(null, false, e.target, [beheerplan, natura2000]);
 		
 		Session.set('overigKaartActive', Meteor.settings.public.natuurbeheerplan);
 		Session.set('cultuurActive', false);

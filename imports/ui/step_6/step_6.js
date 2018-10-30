@@ -40,14 +40,29 @@ Template.step_6.onRendered(function() {
 	});
 	
 	var urlTop10 = Meteor.settings.public.top10Service.url;
-	var layersTop10 = Meteor.settings.public.top10Service.layers;
 	var versionTop10 = Meteor.settings.public.top10Service.version;
+	var layersTop10 = Meteor.settings.public.top10Service.layers;
 	
 	layersTop10.forEach(function(item) {
 		var layer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
 				url: urlTop10, 
 				params: {'LAYERS': item, 'VERSION': versionTop10} 
+			})
+		});
+		
+		map.addLayer(layer);
+	});
+	
+	var urlInfrastructuur = Meteor.settings.public.infrastructuurService.url;
+	var versionInfrastructuur = Meteor.settings.public.infrastructuurService.version;
+	var layersInfrastructuur = Meteor.settings.public.infrastructuurService.layers;
+	
+	layersInfrastructuur.forEach(function(item) {
+		var layer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
+				url: urlInfrastructuur, 
+				params: {'LAYERS': item, 'VERSION': versionInfrastructuur} 
 			})
 		});
 		

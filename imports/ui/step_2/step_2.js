@@ -84,28 +84,29 @@ Template.step_2.onRendered(function() {
 		map.addLayer(layer);
 	});
 	
-	var urlDG = Meteor.settings.public.deelgebiedenService.urlDG;
-	var layersDG = Meteor.settings.public.deelgebiedenService.layersDG;
-	var version = Meteor.settings.public.deelgebiedenService.version;
+	var urlInfrastructuur = Meteor.settings.public.infrastructuurService.url;
+	var versionInfrastructuur = Meteor.settings.public.infrastructuurService.version;
+	var layersInfrastructuur = Meteor.settings.public.infrastructuurService.layers;
 	
-	layersDG.forEach(function(item) {
+	layersInfrastructuur.forEach(function(item) {
 		var layer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
-				url: urlDG, 
-				params: {'LAYERS': item, 'VERSION': version} 
+				url: urlInfrastructuur, 
+				params: {'LAYERS': item, 'VERSION': versionInfrastructuur} 
 			})
 		});
 		
 		map.addLayer(layer);
 	});
 	
-	var urlSK = Meteor.settings.public.deelgebiedenService.urlSK;
-	var layersSK = Meteor.settings.public.deelgebiedenService.layersSK;
+	var url = Meteor.settings.public.deelgebiedenService.url;
+	var layers = Meteor.settings.public.deelgebiedenService.layers;
+	var version = Meteor.settings.public.deelgebiedenService.version;
 	
-	layersSK.forEach(function(item) {
+	layers.forEach(function(item) {
 		var layer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
-				url: urlSK, 
+				url: url, 
 				params: {'LAYERS': item, 'VERSION': version} 
 			})
 		});
@@ -151,7 +152,7 @@ Template.step_2.onRendered(function() {
 		value: 100,
 		slide: function(e, ui) {
 			$.each(map.getLayers().getArray(), function(index, item) {
-				if(index > 10) {
+				if(index > 11) {
 					if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
 						if(index !== map.getLayers().getLength() - 1) {
 							item.setOpacity(ui.value / 100);
@@ -478,19 +479,23 @@ function getIcon(coordinates, iconStyle) {
 function setExtentCenter(item) {
 	var tiff = 'Landschapskaart_deelgebied_' + Session.get('area').replaceAll(' ', '_');
 	if(item.Name[0].toLowerCase() === tiff.toLowerCase()) {
-		var minx = item.BoundingBox[0].$.minx;
-		var maxx = item.BoundingBox[0].$.maxx;
-		var miny = item.BoundingBox[0].$.miny;
-		var maxy = item.BoundingBox[0].$.maxy;
-		
-		var center1 = ((+maxx - +minx) / 2) + +minx;
-		var center2 = ((+maxy - +miny) / 2) + +miny;
-		
-		var extent = [minx, miny, maxx, maxy];
-		var center = [center1, center2];
-		
-		Session.set('mapExtent', extent);
-		Session.set('mapExtentCenter', center);
+		item.BoundingBox.forEach(function(item) {
+			if(item.$.CRS === 'EPSG:28992') {
+				var minx = item.$.minx;
+				var maxx = item.$.maxx;
+				var miny = item.$.miny;
+				var maxy = item.$.maxy;
+				
+				var center1 = ((+maxx - +minx) / 2) + +minx;
+				var center2 = ((+maxy - +miny) / 2) + +miny;
+				
+				var extent = [minx, miny, maxx, maxy];
+				var center = [center1, center2];
+				
+				Session.set('mapExtent', extent);
+				Session.set('mapExtentCenter', center);
+			}
+		});
 	}
 }
 
@@ -514,7 +519,7 @@ function getDeelgebied(coordinates) {
 			$('#js-next-icon').attr('style', 'color:grey !important;');
 		}
 		
-		Meteor.call('getLayer', Meteor.settings.public.deelgebiedenService.urlSK, function(err, result) {
+		Meteor.call('getLayer', Meteor.settings.public.deelgebiedenService.url, function(err, result) {
 			$.each(result, function(index, item) {
 				if(typeof Session.get('area') !== 'undefined' && Session.get('area') !== null) {
 					setExtentCenter(item);

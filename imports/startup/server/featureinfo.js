@@ -5,16 +5,16 @@ Meteor.methods({
 		var res = HTTP.get(url);
 		var xml = xml2js.parseStringSync(res.content);
 		
-		if(typeof xml.msGMLOutput.Deelgebieden_layer !== 'undefined') {
-			return xml.msGMLOutput.Deelgebieden_layer[0].Deelgebieden_feature[0].OMSCHRIJVI[0].trim();
+		if(typeof xml['wfs:FeatureCollection']['gml:featureMember']) {
+			return xml['wfs:FeatureCollection']['gml:featureMember'][0]['LANDSCHAP:DEELGEBIEDEN_V'][0]['LANDSCHAP:OMSCHRIJVI'][0].trim();
 		}
 	},
 	getLandschapsType: function(url) {
 		var res = HTTP.get(url);
 		var xml = xml2js.parseStringSync(res.content);
 		
-		if(typeof xml.msGMLOutput.landschapstypen_v_layer !== 'undefined') {
-			var lt = xml.msGMLOutput.landschapstypen_v_layer[0].landschapstypen_v_feature[0].TYPE[0];
+		if(xml['wfs:FeatureCollection']['gml:featureMember']) {
+			var lt = xml['wfs:FeatureCollection']['gml:featureMember'][0]['LANDSCHAP:LANDSCHAPSTYPEN_V'][0]['LANDSCHAP:TYPE'][0];
 			var texts = HTTP.get(Meteor.settings.public.hostname + '/handvat-admin/text/json');
 			var json = JSON.parse(texts.content);
 			
@@ -30,7 +30,7 @@ Meteor.methods({
 	getLayer: function(url) {
 		var res = HTTP.get(url);
 		var xml = xml2js.parseStringSync(res.content);
-		return xml.WMT_MS_Capabilities.Capability[0].Layer[0].Layer;
+		return xml.WMS_Capabilities.Capability[0].Layer[0].Layer;
 	},
 	getBeheertypeData: function(url) {
 		var res = HTTP.get(url);
@@ -40,11 +40,13 @@ Meteor.methods({
 		var code;
 		var info;
 		
-		if(typeof xml.msGMLOutput["def_2018_beheertypekaart_v_layer"] !== 'undefined') {
-			code = xml.msGMLOutput["def_2018_beheertypekaart_v_layer"][0]["def_2018_beheertypekaart_v_feature"][0].BEHEERTYPE[0];
-			info = xml.msGMLOutput["def_2018_beheertypekaart_v_layer"][0]["def_2018_beheertypekaart_v_feature"][0].OMSCHRIJVING[0];
-			
-			infos.push({'code': code, 'info': info});
+		if(xml['wfs:FeatureCollection']['gml:featureMember']) {
+			xml['wfs:FeatureCollection']['gml:featureMember'].forEach(function(featureMember) {
+				code = featureMember['NATUUR:DEF_2019_BEHEERTYPEKAART_V'][0]['NATUUR:BEHEERTYPE'][0];
+				info = featureMember['NATUUR:DEF_2019_BEHEERTYPEKAART_V'][0]['NATUUR:OMSCHRIJVING'][0];
+				
+				infos.push({'code': code, 'info': info});
+			});
 		}
 		
 		return infos;
@@ -52,53 +54,29 @@ Meteor.methods({
 	getCultuurhistorieData: function(url) {
 		var res = HTTP.get(url);
 		var xml = xml2js.parseStringSync(res.content);
-		
 		var infos = [];
-		var info;
 		
-		if(typeof xml.msGMLOutput["cultuurhistorische_elementen_p_layer"] !== 'undefined') {
-			info = xml.msGMLOutput["cultuurhistorische_elementen_p_layer"][0]["cultuurhistorische_elementen_p_feature"][0].BETEKENIS[0];
-			infos.push({label: 'Cultuurhistorisch element', value: info});
-		}
+		var featureInfoItems = [
+			{layer: 'LANDSCHAP:CULTUURHISTORISCHE_ELEMENTEN_P_handvat_kernkwaliteiten', field: 'LANDSCHAP:BETEKENIS', label: 'Cultuurhistorisch element'},
+			{layer: 'LANDSCHAP:RIJKSMONUMENTEN_P_handvat_kernkwaliteiten', field: 'LANDSCHAP:CBSCATEGOR', label: 'Rijksmonument'},
+			{layer: 'LANDSCHAP:GEOLOGISCH_MONUMENT_P', field: 'LANDSCHAP:TYPE', label: 'Geologisch monument'},
+			{layer: 'LANDSCHAP:CULTUURHISTORISCHE_ELEMENTEN_L_handvat_kernkwaliteiten', field: 'LANDSCHAP:BETEKENIS', label: 'Cultuurhistorisch element'},
+			{layer: 'LANDSCHAP:CULTUURLANDSCHAP_ZL_V_handvat_kernkwaliteiten', field: 'LANDSCHAP:GRONDGEBRUIK', label: 'Grondgebruik'},
+			{layer: 'LANDSCHAP:PANDEN_handvat_kernkwaliteiten', field: 'LANDSCHAP:BOUWJAAR', label: 'Bouwjaar pand'},
+			{layer: 'LANDSCHAP:PROV_ARCHEOL_AANDACHTSGEB_V_handvat_kernkwaliteiten', field: 'LANDSCHAP:GEBIED', label: 'Provinciaal aandachtsgebied'},
+			{layer: 'LANDSCHAP:HISTORISCHE_BUITENPLAATSEN_V_handvat_kernkwaliteiten', field: 'LANDSCHAP:NAAM', label: 'Historische buitenplaats'},
+			{layer: 'LANDSCHAP:ARCHEOLOG_MONUMENT_COMPLEX_V_handvat_kernkwaliteiten', field: 'LANDSCHAP:COMPLEX', label: 'Archeologisch monument'}
+		];
 		
-		if(typeof xml.msGMLOutput["rijksmonumenten_p_layer"] !== 'undefined') {
-			info = xml.msGMLOutput["rijksmonumenten_p_layer"][0]["rijksmonumenten_p_feature"][0].CBSCATEGOR[0];
-			infos.push({label: 'Rijksmonument', value: info});
-		}
-		
-		if(typeof xml.msGMLOutput["geologisch_monument_p_layer"] !== 'undefined') {
-			info = xml.msGMLOutput["geologisch_monument_p_layer"][0]["geologisch_monument_p_feature"][0].TYPE[0];
-			infos.push({label: 'Geologisch monument', value: info});
-		}
-		
-		if(typeof xml.msGMLOutput["cultuurhistorische_elementen_l_layer"] !== 'undefined') {
-			info = xml.msGMLOutput["cultuurhistorische_elementen_l_layer"][0]["cultuurhistorische_elementen_l_feature"][0].BETEKENIS[0];
-			infos.push({label: 'Cultuurhistorisch element', value: info});
-		}
-		
-		if(typeof xml.msGMLOutput["cultuurlandschap_zl_v_layer"] !== 'undefined') {
-			info = xml.msGMLOutput["cultuurlandschap_zl_v_layer"][0]["cultuurlandschap_zl_v_feature"][0].GRONDGEBRUIK[0];
-			infos.push({label: 'Grondgebruik', value: info});
-		}
-		
-		if(typeof xml.msGMLOutput["panden_layer"] !== 'undefined') {
-			info = xml.msGMLOutput["panden_layer"][0]["panden_feature"][0].BOUWJAAR[0];
-			infos.push({label: 'Bouwjaar pand', value: info});
-		}
-		
-		if(typeof xml.msGMLOutput["prov_archeol_aandachtsgeb_v_layer"] !== 'undefined') {
-			info = xml.msGMLOutput["prov_archeol_aandachtsgeb_v_layer"][0]["prov_archeol_aandachtsgeb_v_feature"][0].GEBIED[0];
-			infos.push({label: 'Provinciaal aandachtsgebied', value: info});
-		}
-		
-		if(typeof xml.msGMLOutput["historische_buitenplaatsen_v_layer"] !== 'undefined') {
-			info = xml.msGMLOutput["historische_buitenplaatsen_v_layer"][0]["historische_buitenplaatsen_v_feature"][0].NAAM[0];
-			infos.push({label: 'Historische buitenplaats', value: info});
-		}
-		
-		if(typeof xml.msGMLOutput["archeologische_monumenten_v_layer"] !== 'undefined') {
-			info = xml.msGMLOutput["archeologische_monumenten_v_layer"][0]["archeologische_monumenten_v_feature"][0].COMPLEX[0];
-			infos.push({label: 'Archeologisch monument', value: info});
+		if(xml['wfs:FeatureCollection']['gml:featureMember']) {
+			featureInfoItems.forEach(function(featureInfoItem) {
+				xml['wfs:FeatureCollection']['gml:featureMember'].forEach(function(featureMember) {
+					if(featureMember[featureInfoItem.layer]) {
+						var info = featureMember[featureInfoItem.layer][0][featureInfoItem.field][0];
+						infos.push({label: featureInfoItem.label, value: info});
+					}
+				});
+			});
 		}
 		
 		return infos;

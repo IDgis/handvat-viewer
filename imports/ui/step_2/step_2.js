@@ -61,7 +61,7 @@ Template.step_2.onRendered(function() {
 		source: new ol.source.ImageWMS({
 			url: Meteor.settings.public.landschapstypenService.url,
 			opacity: 0,
-			params: {'LAYERS': Meteor.settings.public.landschapstypenService.layers[0], 
+			params: {'LAYERS': Meteor.settings.public.landschapstypenService.layers[0].name, 
 				'VERSION': Meteor.settings.public.landschapstypenService.version} 
 		})
 	});
@@ -77,7 +77,7 @@ Template.step_2.onRendered(function() {
 		var layer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
 				url: urlTop10, 
-				params: {'LAYERS': item, 'VERSION': versionTop10} 
+				params: {'LAYERS': item.name, 'VERSION': versionTop10, 'STYLES': item.style} 
 			})
 		});
 		
@@ -92,7 +92,7 @@ Template.step_2.onRendered(function() {
 		var layer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
 				url: urlInfrastructuur, 
-				params: {'LAYERS': item, 'VERSION': versionInfrastructuur} 
+				params: {'LAYERS': item.name, 'VERSION': versionInfrastructuur, 'STYLES': item.style} 
 			})
 		});
 		
@@ -107,7 +107,7 @@ Template.step_2.onRendered(function() {
 		var layer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
 				url: url, 
-				params: {'LAYERS': item, 'VERSION': version} 
+				params: {'LAYERS': item.name, 'VERSION': version, 'STYLES': item.style} 
 			})
 		});
 		

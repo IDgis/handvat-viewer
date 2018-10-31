@@ -47,7 +47,7 @@ Template.step_6.onRendered(function() {
 		var layer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
 				url: urlTop10, 
-				params: {'LAYERS': item, 'VERSION': versionTop10} 
+				params: {'LAYERS': item.name, 'VERSION': versionTop10, 'STYLES': item.style} 
 			})
 		});
 		
@@ -62,7 +62,7 @@ Template.step_6.onRendered(function() {
 		var layer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
 				url: urlInfrastructuur, 
-				params: {'LAYERS': item, 'VERSION': versionInfrastructuur} 
+				params: {'LAYERS': item.name, 'VERSION': versionInfrastructuur, 'STYLES': item.style} 
 			})
 		});
 		

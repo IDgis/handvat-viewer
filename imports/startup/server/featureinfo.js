@@ -5,7 +5,7 @@ Meteor.methods({
 		var res = HTTP.get(url);
 		var xml = xml2js.parseStringSync(res.content);
 		
-		if(typeof xml['wfs:FeatureCollection']['gml:featureMember']) {
+		if(xml['wfs:FeatureCollection']['gml:featureMember']) {
 			return xml['wfs:FeatureCollection']['gml:featureMember'][0]['LANDSCHAP:DEELGEBIEDEN_V'][0]['LANDSCHAP:OMSCHRIJVI'][0].trim();
 		}
 	},

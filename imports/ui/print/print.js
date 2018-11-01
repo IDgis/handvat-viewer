@@ -416,7 +416,7 @@ function addMapGroup(view, target, url, layers, version, setMarker) {
 		var layer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
 				url: url, 
-				params: {'LAYERS': item, 'VERSION': version} 
+				params: {'LAYERS': item.name, 'VERSION': version, 'STYLES': item.style} 
 			})
 		});
 		

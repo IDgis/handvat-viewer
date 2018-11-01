@@ -146,7 +146,7 @@ Template.step_5.onRendered(function() {
 		var layer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
 				url: urlLt, 
-				params: {'LAYERS': item, 'VERSION': versionLt} 
+				params: {'LAYERS': item.name, 'VERSION': versionLt, 'STYLES': item.style} 
 			})
 		});
 		
@@ -188,7 +188,9 @@ Template.step_5.onRendered(function() {
 		}
 		
 		if(Session.get('cultuurActive')) {
-			var chLayerString = Meteor.settings.public.cultuurhistorieHoverableService.layers.join(',');
+			var chLayerString = Meteor.settings.public.cultuurhistorieHoverableService.layers.map(function(item) {
+				return item.name;
+			}).join(',');
 			var chLayer = new ol.layer.Image({
 				source: new ol.source.ImageWMS({
 					url: Meteor.settings.public.cultuurhistorieHoverableService.url, 
@@ -224,7 +226,9 @@ Template.step_5.onRendered(function() {
 		}
 		
 		if(Session.get('natuurbeheerActive')) {
-			var nbLayerString = Meteor.settings.public.natuurbeheerplanService.layers.join(',');
+			var nbLayerString = Meteor.settings.public.natuurbeheerplanService.layers.map(function(item) {
+				return item.name;
+			}).join(',');
 			var nbLayer = new ol.layer.Image({
 				source: new ol.source.ImageWMS({
 					url: Meteor.settings.public.natuurbeheerplanService.url, 
@@ -462,7 +466,7 @@ Template.step_5.events ({
 			var layer = new ol.layer.Image({
 				source: new ol.source.ImageWMS({
 					url: toponiemenUrl, 
-					params: {'LAYERS': item, 'VERSION': toponiemenVersion} 
+					params: {'LAYERS': item.name, 'VERSION': toponiemenVersion, 'STYLES': item.style} 
 				})
 			});
 			
@@ -531,7 +535,7 @@ Template.step_5.events ({
 			var layer = new ol.layer.Image({
 				source: new ol.source.ImageWMS({
 					url: chUrl, 
-					params: {'LAYERS': item, 'VERSION': chVersion} 
+					params: {'LAYERS': item.name, 'VERSION': chVersion, 'STYLES': item.style} 
 				})
 			});
 			
@@ -621,7 +625,7 @@ function setLufoLayers() {
 		var layer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
 				url: urlLufo, 
-				params: {'LAYERS': item, 'VERSION': versionLufo} 
+				params: {'LAYERS': item.name, 'VERSION': versionLufo, 'STYLES': item.style} 
 			})
 		});
 		
@@ -638,7 +642,7 @@ function setTranchotLayers() {
 		var layer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
 				url: urlTranchot, 
-				params: {'LAYERS': item, 'VERSION': versionTranchot} 
+				params: {'LAYERS': item.name, 'VERSION': versionTranchot, 'STYLES': item.style} 
 			})
 		});
 		
@@ -664,11 +668,11 @@ function addServiceLayers(kkId, ltActive, element, layerObjects) {
 	setLufoLayers();
 	
 	layerObjects.forEach(function(item) {
-		item.layers.forEach(function(layername) {
+		item.layers.forEach(function(layer) {
 			var layer = new ol.layer.Image({
 				source: new ol.source.ImageWMS({
 					url: item.url, 
-					params: {'LAYERS': layername, 'VERSION': item.version} 
+					params: {'LAYERS': layer.name, 'VERSION': item.version, 'STYLES': layer.style} 
 				})
 			});
 			

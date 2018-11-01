@@ -75,13 +75,14 @@
 	    			{"name": "LANDSCHAPSTYPEN_V", "style": ""},
 	    			{"name": "TOP10NL_SPOORBAANDEEL_L_handvat_kernkwaliteiten", "style": ""},
 	    			{"name": "TOP10NL_TERREIN_V_bos_boomgaard_kwekerij", "style": ""},
-	    			{"name": "DORPSMANTEL_V", "style": ""},
+	    			{"name": "DORPSMANTEL_V", "style": "dorpsmantel_v_contrastkaart"},
 	    			{"name": "PANDEN_handvat_kernkwaliteiten", "style": "panden_relief_en_contrastkaart_handvat_kernkwaliteiten"},
 	    			{"name": "TOP10NL_RELIEF_HOGEZIJDE_L", "style": ""},
-	    			{"name": "LANDSCHAPSTYPEN_V_plateau", "style": ""},
-	    			{"name": "TOP10NL_INRICHTINGSELEMENT_L_heg_haag", "style": ""},
-	    			{"name": "TOP10NL_INRICHTINGSELEMENT_L_bomenrij", "style": ""},
-	    			{"name": "TOP10NL_INRICHTINGSELEMENT_P_boom", "style": ""},
+	    			{"name": "LANDSCHAPSTYPEN_V_plateau", "style": "landschapstypen_v_plateau_contrastkaart"},
+	    			{"name": "LANDSCHAPSTYPEN_V_contrast_en_reliefkaart", "style": "landschapstypen_v_contrastkaart"},
+	    			{"name": "TOP10NL_INRICHTINGSELEMENT_L_heg_haag", "style": "top10nl_inrichtingselement_l_heg_haag_contrastkaart"},
+	    			{"name": "TOP10NL_INRICHTINGSELEMENT_L_bomenrij", "style": "top10nl_inrichtingselement_l_bomenrij_contrastkaart"},
+	    			{"name": "TOP10NL_INRICHTINGSELEMENT_P_boom", "style": "top10nl_inrichtingselement_p_boom_contrastkaart"},
 	    			{"name": "BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten", "style": ""},
 	    			{"name": "MASKER_BESCHERMINGSGEBIED_V", "style": ""},
 	    			{"name": "MASKER_ZUID_LIMBURG_V", "style": ""}]
@@ -94,7 +95,8 @@
 	    			{"name": "TOP10NL_RELIEF_HOGEZIJDE_L", "style": ""},
 	    			{"name": "LANDSCHAPSTYPEN_V", "style": ""},
 	    			{"name": "LANDSCHAPSTYPEN_V_plateau", "style": ""},
-	    			{"name": "PANDEN_handvat_kernkwaliteiten", "style": ""},
+	    			{"name": "LANDSCHAPSTYPEN_V_contrast_en_reliefkaart", "style": "landschapstypen_v_relief"},
+	    			{"name": "PANDEN_handvat_kernkwaliteiten", "style": "panden_relief_en_contrastkaart_handvat_kernkwaliteiten"},
 	    			{"name": "WATERSTAATSWERK_WATERGANG_V", "style": ""},
 	    			{"name": "TOP10NL_WATERDEEL_V_handvat_kernkwaliteiten", "style": ""},
 	    			{"name": "WATERSTAATSWERK_REGENWBUF_V", "style": ""},
@@ -114,22 +116,22 @@
 	    			{"name": "TOP10NL_GEBOUW_V", "style": ""},
 	    			{"name": "CULTUURHISTORISCHE_ELEMENTEN_V_dorpskernen", "style": ""},
 	    			{"name": "TOP10NL_TERREIN_V_boomgaard", "style": ""},
+	    			{"name": "TOP10NL_WEGDEEL_HARTLIJN_L", "style": ""},
+	    			{"name": "BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten", "style": ""},
 	    			{"name": "TOP10NL_TERREIN_V_bos", "style": ""},
 	    			{"name": "LANDSCHAPSTYPEN_V_dalbodem", "style": ""},
 	    			{"name": "WATERSTAATSWERK_WATERGANG_V", "style": ""},
 	    			{"name": "TOP10NL_WATERDEEL_V_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "TOP10NL_WEGDEEL_HARTLIJN_L", "style": ""},
 	    			{"name": "TOP10NL_SPOORBAANDEEL_L_handvat_kernkwaliteiten", "style": ""},
 	    			{"name": "WATERSTAATSWERK_REGENWBUF_V", "style": ""},
+	    			{"name": "DEF_2018_BEHEERTYPEKAART_V_n1401_n1706", "style": ""},
+	    			{"name": "DEF_2018_BEHEERTYPEKAART_V_n0103_n1302", "style": ""},
+	    			{"name": "DEF_2018_BEHEERTYPEKAART_V_l0101_l0202", "style": ""},
 	    			{"name": "PRIMAIRE_BRONNEN_P", "style": ""},
 	    			{"name": "TOP10NL_INRICHTINGSELEMENT_L_heg_haag", "style": ""},
 	    			{"name": "TOP10NL_RELIEF_HOGEZIJDE_L", "style": ""},
 	    			{"name": "TOP10NL_INRICHTINGSELEMENT_L_bomenrij", "style": ""},
 	    			{"name": "TOP10NL_INRICHTINGSELEMENT_P_boom", "style": ""},
-	    			{"name": "BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "DEF_2018_BEHEERTYPEKAART_V_n0103_n1302", "style": ""},
-	    			{"name": "DEF_2018_BEHEERTYPEKAART_V_n1401_n1706", "style": ""},
-	    			{"name": "DEF_2018_BEHEERTYPEKAART_V_l0101_l0202", "style": ""},
 	    			{"name": "MASKER_BESCHERMINGSGEBIED_V", "style": ""},
 	    			{"name": "MASKER_ZUID_LIMBURG_V", "style": ""}]
 	  },
@@ -196,7 +198,7 @@
 	    			{"name": "POL2014_BUITENGEBIED_V", "style": ""},
 	    			{"name": "POL2014_NATUURBEEK_L", "style": ""},
 	    			{"name": "POL2014_BESCH_NAT_LANDSCH_V", "style": ""},
-	    			{"name": "POL2014_NAT_LANDSCHAP_ZL_V", "style": ""}]
+	    			{"name": "POL2014_NAT_LANDSCHAP_ZL_V", "style": "pol2014_nat_landschap_zl_v_handvat_kerkkwaliteiten_rood"}]
 	  },
 	  "landschapStructuurService": {
 	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
@@ -229,9 +231,9 @@
 	    "Vijlenerbos": 12
 	  },
 	  "natura2000Service": {
-	    "url": "https://portal.prvlimburg.nl/geodata/NATUUR/wms?",
+	    "url": "https://portal.prvlimburg.nl/geodata/POL/wms",
 	    "version": "1.3.0",
-	    "layers": [{"name": "NATURA2000_LIMB_V", "style": ""}]
+	    "layers": [{"name": "POL2014_NATURA2000_V", "style": ""}]
 	  },
 	  "natuurbeheerplanService": {
 	    "url": "https://portal.prvlimburg.nl/geodata/NATUUR/wms?",

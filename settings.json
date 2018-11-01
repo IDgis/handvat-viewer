@@ -72,7 +72,7 @@
 	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
 	    "version": "1.3.0",
 	    "layers": [{"name": "hillsha_ahn53", "style": ""},
-	    			{"name": "LANDSCHAPSTYPEN_V", "style": ""},
+	    			{"name": "LANDSCHAPSTYPEN_V_contrast_en_reliefkaart", "style": "landschapstypen_v_contrastkaart"},
 	    			{"name": "TOP10NL_SPOORBAANDEEL_L_handvat_kernkwaliteiten", "style": ""},
 	    			{"name": "TOP10NL_TERREIN_V_bos_boomgaard_kwekerij", "style": ""},
 	    			{"name": "DORPSMANTEL_V", "style": "dorpsmantel_v_contrastkaart"},

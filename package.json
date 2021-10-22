@@ -2,9 +2,10 @@
   "name": "kernkwaliteitenhandvat",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run --settings settings.json"
   },
   "dependencies": {
+    "@babel/runtime": "^7.15.4",
     "meteor-node-stubs": "~0.2.0"
   }
 }

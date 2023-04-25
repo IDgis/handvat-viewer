@@ -42,8 +42,8 @@ Meteor.methods({
 		
 		if(xml['wfs:FeatureCollection']['gml:featureMember']) {
 			xml['wfs:FeatureCollection']['gml:featureMember'].forEach(function(featureMember) {
-				code = featureMember['NATUUR:DEF_2019_BEHEERTYPEKAART_V'][0]['NATUUR:BEHEERTYPE'][0];
-				info = featureMember['NATUUR:DEF_2019_BEHEERTYPEKAART_V'][0]['NATUUR:OMSCHRIJVING'][0];
+				code = featureMember['NATUUR:DEF_2023_BEHEERGEBIED_V'][0]['NATUUR:BEHEERTYPE'][0];
+				info = featureMember['NATUUR:DEF_2023_BEHEERGEBIED_V'][0]['NATUUR:BEHEERTYPE_OMSCHRIJVING'][0];
 				
 				infos.push({'code': code, 'info': info});
 			});

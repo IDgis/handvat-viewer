@@ -42,8 +42,8 @@ Meteor.methods({
 		
 		if(xml['wfs:FeatureCollection']['gml:featureMember']) {
 			xml['wfs:FeatureCollection']['gml:featureMember'].forEach(function(featureMember) {
-				code = featureMember['NATUUR:DEF_2019_BEHEERTYPEKAART_V'][0]['NATUUR:BEHEERTYPE'][0];
-				info = featureMember['NATUUR:DEF_2019_BEHEERTYPEKAART_V'][0]['NATUUR:OMSCHRIJVING'][0];
+				code = featureMember['NATUUR:DEF_2023_BEHEERGEBIED_V'][0]['NATUUR:BEHEERTYPE'][0];
+				info = featureMember['NATUUR:DEF_2023_BEHEERGEBIED_V'][0]['NATUUR:BEHEERTYPE_OMSCHRIJVING'][0];
 				
 				infos.push({'code': code, 'info': info});
 			});
@@ -58,7 +58,7 @@ Meteor.methods({
 		
 		var featureInfoItems = [
 			{layer: 'LANDSCHAP:CULTUURHISTORISCHE_ELEMENTEN_P_handvat_kernkwaliteiten', field: 'LANDSCHAP:BETEKENIS', label: 'Cultuurhistorisch element'},
-			{layer: 'LANDSCHAP:RIJKSMONUMENTEN_P_handvat_kernkwaliteiten', field: 'LANDSCHAP:CBSCATEGOR', label: 'Rijksmonument'},
+			{layer: 'LANDSCHAP:RIJKSMONUMENTEN_P_handvat_kernkwaliteiten', field: 'LANDSCHAP:HOOFDCATEGORIE', label: 'Rijksmonument'},
 			{layer: 'LANDSCHAP:GEOLOGISCH_MONUMENT_P', field: 'LANDSCHAP:TYPE', label: 'Geologisch monument'},
 			{layer: 'LANDSCHAP:CULTUURHISTORISCHE_ELEMENTEN_L_handvat_kernkwaliteiten', field: 'LANDSCHAP:BETEKENIS', label: 'Cultuurhistorisch element'},
 			{layer: 'LANDSCHAP:CULTUURLANDSCHAP_ZL_V_handvat_kernkwaliteiten', field: 'LANDSCHAP:GRONDGEBRUIK', label: 'Grondgebruik'},

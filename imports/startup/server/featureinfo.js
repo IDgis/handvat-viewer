@@ -58,7 +58,7 @@ Meteor.methods({
 		
 		var featureInfoItems = [
 			{layer: 'LANDSCHAP:CULTUURHISTORISCHE_ELEMENTEN_P_handvat_kernkwaliteiten', field: 'LANDSCHAP:BETEKENIS', label: 'Cultuurhistorisch element'},
-			{layer: 'LANDSCHAP:RIJKSMONUMENTEN_P_handvat_kernkwaliteiten', field: 'LANDSCHAP:CBSCATEGOR', label: 'Rijksmonument'},
+			{layer: 'LANDSCHAP:RIJKSMONUMENTEN_P_handvat_kernkwaliteiten', field: 'LANDSCHAP:HOOFDCATEGORIE', label: 'Rijksmonument'},
 			{layer: 'LANDSCHAP:GEOLOGISCH_MONUMENT_P', field: 'LANDSCHAP:TYPE', label: 'Geologisch monument'},
 			{layer: 'LANDSCHAP:CULTUURHISTORISCHE_ELEMENTEN_L_handvat_kernkwaliteiten', field: 'LANDSCHAP:BETEKENIS', label: 'Cultuurhistorisch element'},
 			{layer: 'LANDSCHAP:CULTUURLANDSCHAP_ZL_V_handvat_kernkwaliteiten', field: 'LANDSCHAP:GRONDGEBRUIK', label: 'Grondgebruik'},

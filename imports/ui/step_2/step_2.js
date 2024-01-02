@@ -347,7 +347,7 @@ Template.step_2.events ({
 		$('#js-cadastre-kadobj').append('<option value="none">--</option>');
 		
 		var url = "https://portal.prvlimburg.nl/geodata/KADASTER/wfs?" +
-			"TYPENAME=KADASTER:BRK_ONROERENDE_ZAKEN&" +
+			"TYPENAME=KADASTER:V_KAD_ONRRND_ZK_BRK20&" +
 			"VERSION=2.0.0&" +
 			"SERVICE=WFS&" +
 			"REQUEST=GetFeature&" +
@@ -398,7 +398,7 @@ Template.step_2.events ({
 		}
 		
 		var url = "https://portal.prvlimburg.nl/geodata/KADASTER/wfs?" +
-			"TYPENAME=KADASTER:BRK_ONROERENDE_ZAKEN&" +
+			"TYPENAME=KADASTER:V_KAD_ONRRND_ZK_BRK20&" +
 			"VERSION=2.0.0&" +
 			"SERVICE=WFS&" +
 			"REQUEST=GetFeature&" +

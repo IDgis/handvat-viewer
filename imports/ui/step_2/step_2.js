@@ -114,24 +114,10 @@ Template.step_2.onRendered(function() {
 		map.addLayer(layer);
 	});
 	
-	var iconStyle = new ol.style.Style({
-		image: new ol.style.Icon(({
-			anchor: [0.5, 32],
-			anchorXUnits: 'fraction',
-			anchorYUnits: 'pixels',
-			opacity: 0.75,
-			src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-				'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg',
-			size: [32, 32]
-		}))
-	});
-	
 	var iconLayer;
 	
 	if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
-		iconLayer = getIcon(Session.get('locationCoordinates'), iconStyle);
-		map.addLayer(iconLayer);
-		Session.set('iconLayerSet', true);
+		setIconLayer(Session.get('locationCoordinates'));
 	}
 	
 	var kadGemeentes = Meteor.settings.public.kadGemeentes;
@@ -159,18 +145,15 @@ Template.step_2.onRendered(function() {
 	});
 	
 	map.on('singleclick', function(evt) {
-		if(Session.get('iconLayerSet') === true) {
-			map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
+		if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
+			removeIconLayer();
 		}
-		
-		getDeelgebied(evt.coordinate);
 		
 		Session.set('location', 'x-coördinaat: ' + evt.coordinate[0] + ' | y-coördinaat: ' + evt.coordinate[1]);
 		Session.set('locationCoordinates', evt.coordinate);
+		setIconLayer(evt.coordinate);
 		setLandschapstypeId(Session.get('locationCoordinates'));
-		iconLayer = getIcon(evt.coordinate, iconStyle);
-		map.addLayer(iconLayer);
-		Session.set('iconLayerSet', true);
+		getDeelgebied(evt.coordinate);
 	});
 });
 
@@ -217,34 +200,18 @@ Template.step_2.events ({
 		Meteor.call('executeLocatieServerLookup', url, function(err, result) {
 			if(result) {
 				if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
-					map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
+					removeIconLayer();
 				}
-				
-				var iconStyle = new ol.style.Style({
-					image: new ol.style.Icon(({
-						anchor: [0.5, 32],
-						anchorXUnits: 'fraction',
-						anchorYUnits: 'pixels',
-						opacity: 0.75,
-						src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-							'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg',
-						size: [32, 32]
-					}))
-				});
 				
 				var center = [result.x, result.y];
 				Session.set('locationCoordinates', center);
+				setIconLayer(center);
 				setLandschapstypeId(center);
-				var iconLayer = getIcon(center, iconStyle);
-				map.addLayer(iconLayer);
-				Session.set('iconLayerSet', true);
 				getDeelgebied(center);
 			} else {
 				if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
-					map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
+					removeIconLayer();
 				}
-				
-				Session.set('iconLayerSet', false);
 			}
 		});
 		
@@ -384,34 +351,18 @@ Template.step_2.events ({
 				var center2 = ((maxY - minY) / 2) + minY;
 				
 				if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
-					map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
+					removeIconLayer();
 				}
-				
-				var iconStyle = new ol.style.Style({
-					image: new ol.style.Icon(({
-						anchor: [0.5, 32],
-						anchorXUnits: 'fraction',
-						anchorYUnits: 'pixels',
-						opacity: 0.75,
-						src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-							'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg',
-						size: [32, 32]
-					}))
-				});
 				
 				var center = [center1, center2];
 				Session.set('locationCoordinates', center);
+				setIconLayer(center);
 				setLandschapstypeId(center);
-				var iconLayer = getIcon(center, iconStyle);
-				map.addLayer(iconLayer);
-				Session.set('iconLayerSet', true);
 				getDeelgebied(center);
 			} else {
 				if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
-					map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
+					removeIconLayer();
 				}
-				
-				Session.set('iconLayerSet', false);
 			}
 			
 			setCursorDone();
@@ -440,7 +391,30 @@ Template.step_2.events ({
 	}
 });
 
-function getIcon(coordinates, iconStyle) {
+function removeIconLayer() {
+	map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
+	Session.set('iconLayerSet', false);
+}
+
+function setIconLayer(coordinates) {
+	iconLayer = getIcon(coordinates);
+	map.addLayer(iconLayer);
+	Session.set('iconLayerSet', true);
+}
+
+function getIcon(coordinates) {
+	var iconStyle = new ol.style.Style({
+		image: new ol.style.Icon(({
+			anchor: [0.5, 32],
+			anchorXUnits: 'fraction',
+			anchorYUnits: 'pixels',
+			opacity: 0.75,
+			src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+				'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg',
+			size: [32, 32]
+		}))
+	});
+	
 	var iconFeature = new ol.Feature({
 		geometry: new ol.geom.Point(coordinates)
 	});
@@ -516,12 +490,10 @@ function setLandschapstypeId(coordinates) {
 	Meteor.call('getLandschapsType', url, function(err, result) {
 		if(typeof result !== 'undefined') {
 			Session.set('landschapstypeId', result);
-			Session.set('locationCoordinates', coordinates);
 		} else {
 			Session.set('landschapstypeId', null);
 			Session.set('locationCoordinates', null);
-			
-			map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
+			removeIconLayer();
 		}
 	});
 }

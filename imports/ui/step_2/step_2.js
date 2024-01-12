@@ -189,28 +189,65 @@ Template.step_2.events ({
 		
 		var queryInput = e.target.value;
 		if(!!queryInput) {
-			
 			var url = "https://api.pdok.nl/bzk/locatieserver/search/v3_1/suggest?q=" + 
 				queryInput + 
 				"&fq=type:adres&fq=provincienaam:limburg&sort=sortering%20asc&rows=5";
 			
 			Meteor.call('executeLocatieServerSuggest', url, function(err, results) {
 				results.forEach(function(result) {
-					var addressSuggestItem = '<p data-id="' + result.id + '">' + result.name + '</p>';
+					var addressSuggestItem = '<p data-id="' + result.id + '" class="js-address-suggest-item">' + result.name + '</p>';
 					$('#js-address-results').append(addressSuggestItem);
-					$('#js-address-suggest').focus();
 				});
 			});
 		}
 		
 		setCursorDone();
+	},
+	'click .js-address-suggest-item': function(e) {
+		setCursorInProgress();
 		
-		//Session.get('locationCoordinates')
+		var clickedItem = e.target;
+		var suggestItemId = $(clickedItem).attr("data-id");
 		
-		//Session.set('location', street + ' ' + number + ', ' + city);
-		//Session.set('locationCoordinates', center);
-		//Session.set('iconLayerSet', true);
-		//Session.set('iconLayerSet', false);
+		Session.set('location', clickedItem.innerHTML);
+		
+		var url = "https://api.pdok.nl/bzk/locatieserver/search/v3_1/lookup?id=" + suggestItemId;
+		
+		Meteor.call('executeLocatieServerLookup', url, function(err, result) {
+			if(result) {
+				if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
+					map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
+				}
+				
+				var iconStyle = new ol.style.Style({
+					image: new ol.style.Icon(({
+						anchor: [0.5, 32],
+						anchorXUnits: 'fraction',
+						anchorYUnits: 'pixels',
+						opacity: 0.75,
+						src: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+							'/' +  Meteor.settings.public.domainSuffix + '/images/location.svg',
+						size: [32, 32]
+					}))
+				});
+				
+				var center = [result.x, result.y];
+				Session.set('locationCoordinates', center);
+				setLandschapstypeId(center);
+				var iconLayer = getIcon(center, iconStyle);
+				map.addLayer(iconLayer);
+				Session.set('iconLayerSet', true);
+				getDeelgebied(center);
+			} else {
+				if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
+					map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
+				}
+				
+				Session.set('iconLayerSet', false);
+			}
+		});
+		
+		setCursorDone();
 	},
 	'change #js-cadastre-kadgem': function(e) {
 		setCursorInProgress();

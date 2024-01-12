@@ -134,13 +134,6 @@ Template.step_2.onRendered(function() {
 		Session.set('iconLayerSet', true);
 	}
 	
-	var woonplaatsen = Meteor.settings.public.woonplaatsen;
-	
-	woonplaatsen.forEach(function(item) {
-		var option = '<option value="' + item.value + '">' + item.label + '</option>';
-		$('#js-address-city').append(option);
-	});
-	
 	var kadGemeentes = Meteor.settings.public.kadGemeentes;
 	
 	kadGemeentes.forEach(function(item) {
@@ -190,93 +183,39 @@ Template.step_2.helpers ({
 });
 
 Template.step_2.events ({
-	'change #js-address-city': function(e) {
+	'keyup #js-address-suggest': function(e) {
 		setCursorInProgress();
+		$('#js-address-results').empty();
 		
-		$('#js-address-street').css('display', 'none');
-		$('#js-address-number').css('display', 'none');
-		
-		$('#js-address-street').empty();
-		$('#js-address-number').empty();
-		
-		$('#js-address-street').append('<option value="none">--</option>');
-		$('#js-address-number').append('<option value="none">--</option>');
-		
-		var url = 'http://bag.idgis.nl/bag/services?&TYPENAME=bag:Openbareruimte&VERSION=1.1.0&SERVICE=' +
-			'WFS&REQUEST=GetFeature&FILTER=%3CFilter%20xmlns=%27http://www.opengis.net/ogc%27%20xmlns:app=' +
-			'%27http://www.deegree.org/app%27%3E%3CPropertyIsEqualTo%20wildCard=%22*%22%20singleChar=%22%23%' +
-			'22%20escape=%22!%22%3E%0A%3CPropertyName%3Ebag:woonplaats%3C/PropertyName%3E%3CLiteral%3E' + 
-			e.target.value + '%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Filter%3E';
-		
-		Meteor.call('getAddressStreets', url, function(err, result) {
-			result.forEach(function(item) {
-				var option = '<option value="' + item.id + '">' + item.straat + '</option>';
-				$('#js-address-street').append(option);
+		var queryInput = e.target.value;
+		if(!!queryInput) {
+			var url = "https://api.pdok.nl/bzk/locatieserver/search/v3_1/suggest?q=" + 
+				queryInput + 
+				"&fq=type:adres&fq=provincienaam:limburg&sort=sortering%20asc&rows=5";
+			
+			Meteor.call('executeLocatieServerSuggest', url, function(err, results) {
+				$('#js-address-results').empty();
+				results.forEach(function(result) {
+					var addressSuggestItem = '<p data-id="' + result.id + '" class="js-address-suggest-item">' + result.name + '</p>';
+					$('#js-address-results').append(addressSuggestItem);
+				});
 			});
-			
-			if(e.target.value !== 'none') {
-				$('#js-address-street').css('display', 'block');
-			}
-			
-			setCursorDone();
-		});
-	},
-	'change #js-address-street': function(e) {
-		setCursorInProgress();
-		
-		$('#js-address-number').css('display', 'none');
-		$('#js-address-number').empty();
-		$('#js-address-number').append('<option value="none">--</option>');
-		
-		var url = 'http://bag.idgis.nl/bag/services?&TYPENAME=bag:AdresseerbaarObject&VERSION=1.1.0&' +
-			'SERVICE=WFS&REQUEST=GetFeature&FILTER=%3CFilter%20xmlns=%27http://www.opengis.net/ogc%27%20' +
-			'xmlns:app=%27http://www.deegree.org/app%27%3E%3CPropertyIsEqualTo%20wildCard=%22*%22%20' +
-			'singleChar=%22%23%22%20escape=%22!%22%3E%0A%3CPropertyName%3Ebag:openbareruimte%3C/PropertyName' +
-			'%3E%3CLiteral%3E' + e.target.value + '%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Filter%3E';
-		
-		Meteor.call('getAddressNumbers', url, function(err, result) {
-			result.forEach(function(item) {
-				var option = '<option value="' + item.id + '">' + item.nummer + '</option>';
-				$('#js-address-number').append(option);
-			});
-			
-			if(e.target.value !== 'none') {
-				$('#js-address-number').css('display', 'block');
-			}
-			
-			setCursorDone();
-		});
-	},
-	'change #js-address-number': function(e) {
-		setCursorInProgress();
-		
-		if(e.target.value !== 'none') {
-			var city = $('#js-address-city')[0].options[$('#js-address-city')[0].selectedIndex].text;
-			var street = $('#js-address-street')[0].options[$('#js-address-street')[0].selectedIndex].text;
-			var number = $('#js-address-number')[0].options[$('#js-address-number')[0].selectedIndex].text;
-			
-			Session.set('location', street + ' ' + number + ', ' + city);
 		}
 		
-		var url = 'http://bag.idgis.nl/bag/services?&TYPENAME=bag:AdresseerbaarObject&VERSION=1.1.0&' +
-		'SERVICE=WFS&REQUEST=GetFeature&FILTER=%3CFilter%20xmlns=%27http://www.opengis.net/ogc%27%20' +
-		'xmlns:app=%27http://www.deegree.org/app%27%3E%3CPropertyIsEqualTo%20wildCard=%22*%22%20' +
-		'singleChar=%22%23%22%20escape=%22!%22%3E%0A%3CPropertyName%3Ebag:identificatie%3C/PropertyName' +
-		'%3E%3CLiteral%3E' + e.target.value + '%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Filter%3E';
+		setCursorDone();
+	},
+	'click .js-address-suggest-item': function(e) {
+		setCursorInProgress();
 		
-		Meteor.call('getAddressCoordinates', url, function(err, result) {
+		var clickedItem = e.target;
+		var suggestItemId = $(clickedItem).attr("data-id");
+		
+		Session.set('location', clickedItem.innerHTML);
+		
+		var url = "https://api.pdok.nl/bzk/locatieserver/search/v3_1/lookup?id=" + suggestItemId;
+		
+		Meteor.call('executeLocatieServerLookup', url, function(err, result) {
 			if(result) {
-				var lowerCorner = result.lowerCorner.split(' ');
-				var upperCorner = result.upperCorner.split(' ');
-				
-				var minX = parseFloat(lowerCorner[0]);
-				var maxX = parseFloat(upperCorner[0]);
-				var minY = parseFloat(lowerCorner[1]);
-				var maxY = parseFloat(upperCorner[1]);
-				
-				var center1 = ((maxX - minX) / 2) + minX;
-				var center2 = ((maxY - minY) / 2) + minY;
-				
 				if(Session.get('locationCoordinates') !== null && typeof Session.get('locationCoordinates') !== 'undefined') {
 					map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
 				}
@@ -293,7 +232,7 @@ Template.step_2.events ({
 					}))
 				});
 				
-				var center = [center1, center2];
+				var center = [result.x, result.y];
 				Session.set('locationCoordinates', center);
 				setLandschapstypeId(center);
 				var iconLayer = getIcon(center, iconStyle);
@@ -307,9 +246,9 @@ Template.step_2.events ({
 				
 				Session.set('iconLayerSet', false);
 			}
-			
-			setCursorDone();
 		});
+		
+		setCursorDone();
 	},
 	'change #js-cadastre-kadgem': function(e) {
 		setCursorInProgress();
@@ -347,7 +286,7 @@ Template.step_2.events ({
 		$('#js-cadastre-kadobj').append('<option value="none">--</option>');
 		
 		var url = "https://portal.prvlimburg.nl/geodata/KADASTER/wfs?" +
-			"TYPENAME=KADASTER:BRK_ONROERENDE_ZAKEN&" +
+			"TYPENAME=KADASTER:V_KAD_ONRRND_ZK_BRK20&" +
 			"VERSION=2.0.0&" +
 			"SERVICE=WFS&" +
 			"REQUEST=GetFeature&" +
@@ -398,7 +337,7 @@ Template.step_2.events ({
 		}
 		
 		var url = "https://portal.prvlimburg.nl/geodata/KADASTER/wfs?" +
-			"TYPENAME=KADASTER:BRK_ONROERENDE_ZAKEN&" +
+			"TYPENAME=KADASTER:V_KAD_ONRRND_ZK_BRK20&" +
 			"VERSION=2.0.0&" +
 			"SERVICE=WFS&" +
 			"REQUEST=GetFeature&" +
@@ -480,6 +419,8 @@ Template.step_2.events ({
 	},
 	'change #search-method-select': function(e) {
 		setCursorInProgress();
+		
+		$('#js-address-results').empty();
 		
 		var searchValue = e.target.value;
 		if(searchValue === 'address') {

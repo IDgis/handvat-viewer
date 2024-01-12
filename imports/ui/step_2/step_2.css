@@ -18,9 +18,9 @@
 
 #no-results-found-search {display:none;}
 
-#js-address-city {margin-bottom:10px;}
-#js-address-street {margin-bottom:10px;display:none;}
-#js-address-number {margin-bottom:10px;display:none;}
+#js-address-results {margin-bottom:20px;}
+#js-address-results p {text-decoration:underline;}
+#js-address-results p:hover {cursor:pointer}
 
 #js-cadastre-kadgem {margin-bottom:10px;}
 #js-cadastre-kadsek {margin-bottom:10px;display:none;}

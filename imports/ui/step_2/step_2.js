@@ -520,6 +520,8 @@ function setLandschapstypeId(coordinates) {
 		} else {
 			Session.set('landschapstypeId', null);
 			Session.set('locationCoordinates', null);
+			
+			map.removeLayer(map.getLayers().item(map.getLayers().getLength() -1));
 		}
 	});
 }

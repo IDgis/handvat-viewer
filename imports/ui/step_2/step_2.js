@@ -183,7 +183,7 @@ Template.step_2.helpers ({
 });
 
 Template.step_2.events ({
-	'input #js-address-suggest': function(e) {
+	'keyup #js-address-suggest': function(e) {
 		setCursorInProgress();
 		$('#js-address-results').empty();
 		
@@ -194,6 +194,7 @@ Template.step_2.events ({
 				"&fq=type:adres&fq=provincienaam:limburg&sort=sortering%20asc&rows=5";
 			
 			Meteor.call('executeLocatieServerSuggest', url, function(err, results) {
+				$('#js-address-results').empty();
 				results.forEach(function(result) {
 					var addressSuggestItem = '<p data-id="' + result.id + '" class="js-address-suggest-item">' + result.name + '</p>';
 					$('#js-address-results').append(addressSuggestItem);

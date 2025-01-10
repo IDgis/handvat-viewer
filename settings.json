@@ -1,6 +1,6 @@
 {
   "public": {
-	  "domainSuffix": "",
+	  "domainSuffix": "handvat-viewer",
 	  "hostname": "https://www.handvatnationaallandschap.nl",
 	  
 	  "popupHandleiding": "popup-handleiding",

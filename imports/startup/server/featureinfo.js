@@ -15,7 +15,7 @@ Meteor.methods({
 		
 		if(xml['wfs:FeatureCollection']['gml:featureMember']) {
 			var lt = xml['wfs:FeatureCollection']['gml:featureMember'][0]['LANDSCHAP:LANDSCHAPSTYPEN_V'][0]['LANDSCHAP:TYPE'][0];
-			var texts = HTTP.get("http://admin.web:3000" + '/handvat-admin/api/texts');
+			var texts = HTTP.get(Meteor.settings.public.hostname + '/handvat-admin/api/texts');
 			var json = JSON.parse(texts.content);
 			
 			var id;

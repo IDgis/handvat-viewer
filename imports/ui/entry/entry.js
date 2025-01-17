@@ -6,7 +6,7 @@ Template.entry.onRendered(function() {
 	
 	Session.set('stepNumber', 'entry');
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/" 
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/" 
 			+ Meteor.settings.public.entree, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'

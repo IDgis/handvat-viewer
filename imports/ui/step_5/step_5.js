@@ -23,7 +23,7 @@ Template.step_5.onRendered(function() {
 	
 	if(typeof Session.get('area') !== 'undefined' && Session.get('area') !== null &&
 			typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/"
 				+ Meteor.settings.public.stap5Links, {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
@@ -46,7 +46,7 @@ Template.step_5.onRendered(function() {
 		}
 	}
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/texttype/kernkwaliteit", {
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/texttype/kernkwaliteit", {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}
@@ -275,7 +275,7 @@ Template.step_5.helpers({
 		$('#content-text-5').empty();
 		
 		if(typeof Session.get('kernkwaliteitId') !== 'undefined' && Session.get('kernkwaliteitId') !== null) {
-			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/"
+			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/id/"
 					+ Session.get('kernkwaliteitId'), {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
@@ -293,7 +293,7 @@ Template.step_5.helpers({
 		} else if(typeof Session.get('overigKaartActive') !== 'undefined' &&
 			Session.get('overigKaartActive') !== null) {
 			
-				HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+				HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/"
 						+ Session.get('overigKaartActive'), {
 					headers: {
 						'Content-Type' : 'application/json; charset=UTF-8'
@@ -323,7 +323,7 @@ Template.step_5.helpers({
 		if(ltBln && sBln && kkBln) {
 			setCursorInProgress();
 			
-			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/coupling/ontwerp/json/"
+			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/coupling/ontwerp/"
 					+ Session.get('landschapstypeId')
 					+ "/"
 					+ Session.get('sectorId')
@@ -346,7 +346,7 @@ Template.step_5.helpers({
 						$(innerDivLeft).attr('class', 'col-xs-6 text-div');
 						$('#op-text-5').append(outerDiv);
 						
-						HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/"
+						HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/id/"
 								+ item, {
 							headers: {
 								'Content-Type' : 'application/json; charset=UTF-8'
@@ -371,7 +371,7 @@ Template.step_5.helpers({
 						$(innerDivRight).attr('class', 'col-xs-6 text-div');
 						$('#ontwerpprincipe-' + itemCount).append(innerDivRight);
 						
-						HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/"
+						HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/id/"
 								+ item, {
 							headers: {
 								'Content-Type' : 'application/json; charset=UTF-8'

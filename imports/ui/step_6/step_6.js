@@ -90,7 +90,7 @@ Template.step_6.onRendered(function() {
 			typeof Session.get('sectorId') !== 'undefined' && Session.get('sectorId') !== null) {
 		setCursorInProgress();
 		
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/"
 				+ Meteor.settings.public.stap6Links, {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'

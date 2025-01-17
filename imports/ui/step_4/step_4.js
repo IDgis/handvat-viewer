@@ -14,7 +14,7 @@ Template.step_4.onRendered(function() {
 	if(typeof Session.get('area') !== 'undefined' && Session.get('area') !== null) {
 		setCursorInProgress();
 		
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/"
 				+ Meteor.settings.public.stap4Links, {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
@@ -25,7 +25,7 @@ Template.step_4.onRendered(function() {
 			}
 		});
 		
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/texttype/sector_icoon", {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/texttype/sector_icoon", {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
@@ -74,7 +74,7 @@ Template.step_4.helpers({
 			
 			setCursorDone();
 		} else {
-			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/typename/sector/"
+			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/typename/sector/"
 					+ Session.get('sectorName'), {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'

@@ -12,7 +12,7 @@ Template.start.onRendered(function() {
 	$('#js-next').attr('style', 'pointer-events:auto;color:#ffffff !important;');
 	$('#js-next-icon').attr('style', 'color:#ffffff !important;');
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/"
 			+ Meteor.settings.public.startLinks, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
@@ -23,7 +23,7 @@ Template.start.onRendered(function() {
 		}
 	});
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/"
 			+ Meteor.settings.public.startRechts, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'

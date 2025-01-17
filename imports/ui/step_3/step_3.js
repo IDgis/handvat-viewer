@@ -66,7 +66,7 @@ Template.step_3.onRendered(function() {
 		map.addLayer(areaLayer);
 	}
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/"
 		+ Meteor.settings.public.stap3Deelgebied, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
@@ -79,7 +79,7 @@ Template.step_3.onRendered(function() {
 		setCursorDone();
 	});
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/"
 		+ Meteor.settings.public.stap3Beginselen, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
@@ -90,7 +90,7 @@ Template.step_3.onRendered(function() {
 		}
 	});
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/name/"
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/name/"
 		+ Session.get('area'), {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
@@ -156,7 +156,7 @@ Template.step_3.helpers({
 		if(typeof Session.get('landschapstypeId') !== 'undefined' && Session.get('landschapstypeId') !== null) {
 			setCursorInProgress();
 			
-			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/coupling/leidend/json/"
+			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/coupling/leidend/"
 				+ Session.get('landschapstypeId'), {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
@@ -175,7 +175,7 @@ Template.step_3.helpers({
 						$(innerDivLeft).attr('class', 'col-xs-6 text-div');
 						$('#lb-text-3').append(outerDiv);
 						
-						HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/"
+						HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/id/"
 							+ item, {
 							headers: {
 								'Content-Type' : 'application/json; charset=UTF-8'
@@ -201,7 +201,7 @@ Template.step_3.helpers({
 						$(innerDivRight).attr('class', 'col-xs-6 text-div');
 						$('#leidendbeginsel-' + itemCount).append(innerDivRight);
 						
-						HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/"
+						HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/id/"
 							+ item, {
 							headers: {
 								'Content-Type' : 'application/json; charset=UTF-8'

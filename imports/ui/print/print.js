@@ -166,7 +166,7 @@ Template.print.helpers({
 		return todayDay + '-' + todayMonth + '-' + todayYear;
 	},
 	getAppInleiding: function() {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/start-links", {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/start-links", {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
@@ -177,7 +177,7 @@ Template.print.helpers({
 		});
 	},
 	getSectorIcon: function() {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/typename/sector_icoon/"
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/typename/sector_icoon/"
 				+ Session.get('sectorName'), {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
@@ -192,7 +192,7 @@ Template.print.helpers({
 		return Session.get('commentInitiator');
 	},
 	getDeelgebiedIntro: function() {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/" 
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/" 
 				+ Meteor.settings.public.stap3Deelgebied, {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
@@ -204,7 +204,7 @@ Template.print.helpers({
 		});
 	},
 	getDeelgebiedText: function() {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/name/" 
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/name/" 
 				+ Session.get('area'), {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
@@ -218,7 +218,7 @@ Template.print.helpers({
 		});
 	},
 	getBeginselenIntro: function() {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/"
 				+ Meteor.settings.public.stap3Beginselen, {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
@@ -236,14 +236,14 @@ Template.print.helpers({
 		if(boolLtNotUndefined && boolLtNotNull) {
 			var count = 1;
 			
-			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/coupling/leidend/json/"
+			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/coupling/leidend/"
 					+ Session.get('landschapstypeId'), {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
 				}
 			}, function(err, result) {
 				$.each(result.data, function(index, item) {
-					HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/"
+					HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/id/"
 							+ item, {
 						headers: {
 							'Content-Type' : 'application/json; charset=UTF-8'
@@ -259,7 +259,7 @@ Template.print.helpers({
 		}
 	},
 	getSectorIntro: function() {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/" + Session.get('sectorId'), {
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/id/" + Session.get('sectorId'), {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
 			}
@@ -270,7 +270,7 @@ Template.print.helpers({
 		});
 	},
 	getKkText: function(kk) {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/"
 				+ Meteor.settings.public[kk], {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
@@ -282,7 +282,7 @@ Template.print.helpers({
 		});
 	},
 	getLegenda: function(kk, part) {
-		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+		HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/"
 				+ Meteor.settings.public[kk], {
 			headers: {
 				'Content-Type' : 'application/json; charset=UTF-8'
@@ -291,7 +291,7 @@ Template.print.helpers({
 			if(result.data !== null) {
 				var legendaItem = result.data.name + '-' + part;
 				
-				HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/typename/legenda/"
+				HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/typename/legenda/"
 						+ legendaItem, {
 					headers: {
 						'Content-Type' : 'application/json; charset=UTF-8'
@@ -313,7 +313,7 @@ Template.print.helpers({
 						Session.get('sectorId') !== null;
 		
 		if(chapterOps && boolLt && boolS) {
-			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/texttype/kernkwaliteit", {
+			HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/texttype/kernkwaliteit", {
 				headers: {
 					'Content-Type' : 'application/json; charset=UTF-8'
 				}
@@ -327,7 +327,7 @@ Template.print.helpers({
 });
 
 function createOpPages(item) {
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/coupling/ontwerp/json/" 
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/coupling/ontwerp/" 
 			+ Session.get('landschapstypeId') 
 			+ "/"
 			+ Session.get('sectorId')
@@ -389,7 +389,7 @@ function createOpPages(item) {
 }
 
 function getOntwerpPrincipe(ops, item, id) {
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/id/" + id, {
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/id/" + id, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
 		}

@@ -16,7 +16,7 @@ Template.main.onRendered(function() {
 		alsoResize: ".modal-body"
 	});
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/"
 			+ Meteor.settings.public.popupHandleiding, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
@@ -29,7 +29,7 @@ Template.main.onRendered(function() {
 		setCursorDone();
 	});
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/"
 			+ Meteor.settings.public.popupHelp, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
@@ -40,7 +40,7 @@ Template.main.onRendered(function() {
 		}
 	});
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/"
 			+ Meteor.settings.public.popupContact, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
@@ -51,7 +51,7 @@ Template.main.onRendered(function() {
 		}
 	});
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/"
 			+ Meteor.settings.public.popupLinks, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'
@@ -62,7 +62,7 @@ Template.main.onRendered(function() {
 		}
 	});
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/"
 			+ Meteor.settings.public.popupDisclaimer, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'

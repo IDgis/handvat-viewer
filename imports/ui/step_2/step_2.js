@@ -25,7 +25,7 @@ Template.step_2.onRendered(function() {
 		$('#js-next-icon').attr('style', 'color:#ffffff !important;');
 	}
 	
-	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/text/json/appCoupling/"
+	HTTP.get(Meteor.settings.public.hostname + "/handvat-admin/api/text/app-coupling/"
 			+ Meteor.settings.public.stap2Links, {
 		headers: {
 			'Content-Type' : 'application/json; charset=UTF-8'

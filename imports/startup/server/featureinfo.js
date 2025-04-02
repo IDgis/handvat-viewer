@@ -39,11 +39,15 @@ Meteor.methods({
 		var infos = [];
 		var code;
 		var info;
+
+		var layerName = Meteor.settings.public.natuurbeheerplanService.layers[0].name;
+		var layerFieldType = Meteor.settings.public.natuurbeheerplanService.layers[0].fields.type;
+		var layerFieldTypeDescription = Meteor.settings.public.natuurbeheerplanService.layers[0].fields.typeDescription;
 		
 		if(xml['wfs:FeatureCollection']['gml:featureMember']) {
 			xml['wfs:FeatureCollection']['gml:featureMember'].forEach(function(featureMember) {
-				code = featureMember['NATUUR:DEF_2023_BEHEERGEBIED_V'][0]['NATUUR:BEHEERTYPE'][0];
-				info = featureMember['NATUUR:DEF_2023_BEHEERGEBIED_V'][0]['NATUUR:BEHEERTYPE_OMSCHRIJVING'][0];
+				code = featureMember['NATUUR:' + layerName][0]['NATUUR:' + layerFieldType][0];
+				info = featureMember['NATUUR:' + layerName][0]['NATUUR:' + layerFieldTypeDescription][0];
 				
 				infos.push({'code': code, 'info': info});
 			});

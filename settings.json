@@ -170,7 +170,7 @@
 					"style": "dorpsmantel_v_contrastkaart"
 				},
 				{
-					"name": "DEF_2023_BEHEERGEBIED_V_N14.01_N17.06_en_L01.01_L03.01",
+					"name": "NAJAAR2025_BEHEERGEB_V_N14.01_N17.06_en_L01.01_L03.01",
 					"style": ""
 				},
 				{
@@ -346,15 +346,15 @@
 					"style": ""
 				},
 				{
-					"name": "DEF_2023_BEHEERGEBIED_V_N14.01_N17.06",
+					"name": "NAJAAR2025_BEHEERGEB_V_N14.01_N17.06",
 					"style": ""
 				},
 				{
-					"name": "DEF_2023_BEHEERGEBIED_V_N01.03_N13.02",
+					"name": "NAJAAR2025_BEHEERGEB_V_N01.03_N13.02",
 					"style": ""
 				},
 				{
-					"name": "DEF_2023_BEHEERGEBIED_V_L01.01-L03.01",
+					"name": "NAJAAR2025_BEHEERGEB_V_L01.01-L03.01",
 					"style": ""
 				},
 				{
@@ -604,8 +604,12 @@
 			"version": "1.3.0",
 			"layers": [
 				{
-					"name": "DEF_2023_BEHEERGEBIED_V",
-					"style": ""
+					"name": "NAJAAR2025_BEHEERGEB_V",
+					"style": "",
+					"fields": {
+						"type": "BEHEERTYPE",
+						"typeDescription": "BEHEERTYPE_OMS"
+					}
 				}
 			]
 		},

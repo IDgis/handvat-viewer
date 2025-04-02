@@ -1,315 +1,1293 @@
 {
-  "public": {
-	  "domainSuffix": "handvat-viewer",
-	  "hostname": "https://www.handvatnationaallandschap.nl",
-	  
-	  "popupHandleiding": "popup-handleiding",
-	  "popupHelp": "popup-help",
-	  "popupContact": "popup-contact",
-	  "popupLinks": "popup-links",
-	  "popupDisclaimer": "popup-disclaimer",
-	  
-	  "entree": "entree",
-	  "startLinks": "start-links",
-	  "startRechts": "start-rechts",
-	  "infoLinks": "info-links",
-	  "infoRechts": "info-rechts",
-	  "uitlegLinks": "uitleg-links",
-	  "uitlegRechts": "uitleg-rechts",
-	  "stap1Links": "stap-1-links",
-	  "stap1Rechts": "stap-1-rechts",
-	  "stap2Links": "stap-2-links",
-	  "stap3Deelgebied": "stap-3-deelgebied",
-	  "stap3Beginselen": "stap-3-beginselen",
-	  "stap4Links": "stap-4-links",
-	  "stap5Links": "stap-5-links",
-	  "stap6Links": "stap-6-links",
-	  
-	  "relief": "kernkwaliteit-relief",
-	  "cultuurhistorie": "kernkwaliteit-cultuurhistorie",
-	  "groenkarakter": "kernkwaliteit-groenkarakter",
-	  "openbesloten": "kernkwaliteit-openbesloten",
-	  
-	  "pol": "kaart-pol",
-	  "landschapstypen": "kaart-landschapstypen",
-	  "natuurbeheerplan": "kaart-natuurbeheerplan",
-	  
-	  "cultuurhistorieService": {
-	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
-	    "version": "1.3.0",
-	    "layers": [{"name": "CULTUURLANDSCHAP_ZL_V_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "ARCHEOLOG_MONUMENT_COMPLEX_V_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "HISTORISCHE_BUITENPLAATSEN_V_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "PROV_ARCHEOL_AANDACHTSGEB_V_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "PANDEN_handvat_kernkwaliteiten_cultuurhistoriekaart", "style": "panden_cultuurhistoriekaart_handvat_kernkwaliteiten"},
-	    			{"name": "CULTUURLANDSCHAP_ZL_L_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "CULTUURHISTORISCHE_ELEMENTEN_V_mijnbouwkolonie", "style": ""},
-	    			{"name": "CULTUURHISTORISCHE_ELEMENTEN_L_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "CULTUURHISTORISCHE_ELEMENTEN_P_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "LVZL_KERKEN_POINT_P", "style": ""},
-	    			{"name": "LVZL_SYMPOINT_P", "style": ""},
-	    			{"name": "LVZL_KLOOSTERS_P", "style": ""},
-	    			{"name": "GEOLOGISCH_MONUMENT_P", "style": ""},
-	    			{"name": "RIJKSMONUMENTEN_P_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "MASKER_BESCHERMINGSGEBIED_V", "style": ""},
-	    			{"name": "MASKER_ZUID_LIMBURG_V", "style": ""}]
-	  },
-	  "cultuurhistorieHoverableService": {
-	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
-	    "version": "1.3.0",
-	    "layers": [{"name": "CULTUURHISTORISCHE_ELEMENTEN_P_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "RIJKSMONUMENTEN_P_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "GEOLOGISCH_MONUMENT_P", "style": ""},
-	    			{"name": "CULTUURHISTORISCHE_ELEMENTEN_L_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "CULTUURLANDSCHAP_ZL_V_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "PANDEN_handvat_kernkwaliteiten_cultuurhistoriekaart", "style": "panden_cultuurhistoriekaart_handvat_kernkwaliteiten"},
-	    			{"name": "PROV_ARCHEOL_AANDACHTSGEB_V_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "HISTORISCHE_BUITENPLAATSEN_V_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "ARCHEOLOG_MONUMENT_COMPLEX_V_handvat_kernkwaliteiten", "style": ""}]
-	  },
-	  "openBeslotenService": {
-	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
-	    "version": "1.3.0",
-	    "layers": [{"name": "hillsha_ahn53", "style": ""},
-	    			{"name": "LANDSCHAPSTYPEN_V_contrast_en_reliefkaart", "style": "landschapstypen_v_contrastkaart"},
-	    			{"name": "TOP10NL_SPOORBAANDEEL_L_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "TOP10NL_TERREIN_V_bos_boomgaard_kwekerij", "style": ""},
-	    			{"name": "DORPSMANTEL_V", "style": "dorpsmantel_v_contrastkaart"},
-	    			{"name": "DEF_2023_BEHEERGEBIED_V_N14.01_N17.06_en_L01.01_L03.01", "style": ""},
-	    			{"name": "PANDEN_handvat_kernkwaliteiten_relief_contrastkaart", "style": "panden_relief_en_contrastkaart_handvat_kernkwaliteiten"},
-	    			{"name": "TOP10NL_REL_TALUD_HOGEZIJDE_L", "style": ""},
-	    			{"name": "LANDSCHAPSTYPEN_V_plateau", "style": "landschapstypen_v_plateau_contrastkaart"},
-	    			{"name": "LANDSCHAPSTYPEN_V_contrast_en_reliefkaart", "style": "landschapstypen_v_contrastkaart"},
-	    			{"name": "TOP10NL_INRICHTINGSELEMENT_L_heg_haag", "style": "top10nl_inrichtingselement_l_heg_haag_contrastkaart"},
-	    			{"name": "TOP10NL_INRICHTINGSELEMENT_L_bomenrij", "style": "top10nl_inrichtingselement_l_bomenrij_contrastkaart"},
-	    			{"name": "TOP10NL_INRICHTINGSELEMENT_P_boom", "style": "top10nl_inrichtingselement_p_boom_contrastkaart"},
-	    			{"name": "BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "MASKER_BESCHERMINGSGEBIED_V", "style": ""},
-	    			{"name": "MASKER_ZUID_LIMBURG_V", "style": ""}]
-	  },
-	  "reliefService": {
-	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
-	    "version": "1.3.0",
-	    "layers": [{"name": "ahn25helling", "style": ""},
-	    			{"name": "TOP10NL_HOOGTE_L", "style": ""},
-	    			{"name": "TOP10NL_REL_TALUD_HOGEZIJDE_L", "style": ""},
-	    			{"name": "LANDSCHAPSTYPEN_V", "style": ""},
-	    			{"name": "LANDSCHAPSTYPEN_V_plateau", "style": ""},
-	    			{"name": "LANDSCHAPSTYPEN_V_contrast_en_reliefkaart", "style": "landschapstypen_v_relief"},
-	    			{"name": "PANDEN_handvat_kernkwaliteiten_relief_contrastkaart", "style": "panden_relief_en_contrastkaart_handvat_kernkwaliteiten"},
-	    			{"name": "WATERSTAATSWERK_WATERGANG_V", "style": ""},
-	    			{"name": "TOP10NL_WATERDEEL_V_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "WATERSTAATSWERK_REGENWBUF_V", "style": ""},
-	    			{"name": "PRIMAIRE_BRONNEN_P", "style": ""},
-	    			{"name": "BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "MASKER_BESCHERMINGSGEBIED_V", "style": ""},
-	    			{"name": "MASKER_ZUID_LIMBURG_V", "style": ""}]
-	  },
-	  "groenKarakterService": {
-	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
-	    "version": "1.3.0",
-	    "layers": [{"name": "TOP10NL_TERREIN_V_grasland_heide_zand", "style": ""},
-	    			{"name": "TOP10NL_TERREIN_V_akkerland", "style": ""},
-	    			{"name": "TOP10NL_PLAATS_V_bebouwde_kom", "style": ""},
-	    			{"name": "DORPSMANTEL_V", "style": ""},
-	    			{"name": "BEBOUWD_GEBIED_V", "style": ""},
-	    			{"name": "TOP10NL_GEBOUW_V", "style": ""},
-	    			{"name": "CULTUURHISTORISCHE_ELEMENTEN_V_dorpskernen", "style": ""},
-	    			{"name": "TOP10NL_TERREIN_V_boomgaard", "style": ""},
-	    			{"name": "TOP10NL_WEGDEEL_HARTLIJN_L", "style": ""},
-	    			{"name": "BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "TOP10NL_TERREIN_V_bos", "style": ""},
-	    			{"name": "LANDSCHAPSTYPEN_V_dalbodem", "style": ""},
-	    			{"name": "WATERSTAATSWERK_WATERGANG_V", "style": ""},
-	    			{"name": "TOP10NL_WATERDEEL_V_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "TOP10NL_SPOORBAANDEEL_L_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "WATERSTAATSWERK_REGENWBUF_V", "style": ""},
-	    			{"name": "DEF_2023_BEHEERGEBIED_V_N14.01_N17.06", "style": ""},
-	    			{"name": "DEF_2023_BEHEERGEBIED_V_N01.03_N13.02", "style": ""},
-	    			{"name": "DEF_2023_BEHEERGEBIED_V_L01.01-L03.01", "style": ""},
-	    			{"name": "PRIMAIRE_BRONNEN_P", "style": ""},
-	    			{"name": "TOP10NL_INRICHTINGSELEMENT_L_heg_haag", "style": ""},
-	    			{"name": "TOP10NL_REL_TALUD_HOGEZIJDE_L", "style": ""},
-	    			{"name": "TOP10NL_INRICHTINGSELEMENT_L_bomenrij", "style": ""},
-	    			{"name": "TOP10NL_INRICHTINGSELEMENT_P_boom", "style": ""},
-	    			{"name": "MASKER_BESCHERMINGSGEBIED_V", "style": ""},
-	    			{"name": "MASKER_ZUID_LIMBURG_V", "style": ""}]
-	  },
-	  "luchtfotoService": {
-	    "url": "https://portal.prvlimburg.nl/geodata/LUCHTFOTO/wms?",
-	    "version": "1.3.0",
-	    "layers": [{"name": "LUFO_ACTUEEL_LAAG", "style": ""}]
-	  },
-	  "tranchotService": {
-	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
-	    "version": "1.3.0",
-	    "layers": [{"name": "tranchotkaarten", "style": ""}]
-	  },
-	  "top10Service": {
-	    "url": "https://portal.prvlimburg.nl/geodata/TOPOGRAFIE/wms?",
-	    "version": "1.3.0",
-	    "layers": [{"name": "TOP10NL_WEGDEEL_V_topoNLZL", "style": ""},
-	    			{"name": "TOP10NL_GEBOUW_V_topoNLZL", "style": ""},
-	    			{"name": "TOP10NL_TERREIN_V_topoNLZL", "style": ""},
-	    			{"name": "TOP10NL_WATERDEEL_V_topoNLZL", "style": ""},
-	    			{"name": "TOP10NL_REL_TALUD_HOGEZIJDE_L_topoNLZL", "style": ""},
-	    			{"name": "TOP10NL_REL_TALUD_LAGEZIJDE_L_topoNLZL", "style": ""},
-	    			{"name": "TOP10NL_SPOORBAANDEEL_L_topoNLZL", "style": ""},
-	    			{"name": "TOP10NL_WATERDEEL_L_topoNLZL", "style": ""},
-	    			{"name": "PLAATSNAMEN_P_topoNLZL", "style": ""},
-	    			{"name": "LIMBURG_MASKER", "style": ""}]
-	  },
-	  "infrastructuurService": {
-		"url": "https://portal.prvlimburg.nl/geodata/INFRASTRUCTUUR/wms?",
-		"version": "1.3.0",
-		"layers": [{"name": "NWB_WEGVAKKEN_LIMB_L_topoNLZL", "style": ""}]
-	  },
-	  "deelgebiedenService": {
-	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?request=GetCapabilities",
-	    "version": "1.3.0",
-	    "layers": [{"name": "DEELGEBIEDEN_V", "style": ""},
-	    			{"name": "Structuur_Beschermingsgebied_141116_151_NIEUW", "style": ""},
-	    			{"name": "TOP50NAMEN_P_grotere_steden", "style": ""},
-	    			{"name": "TOP50NAMEN_P_overig", "style": ""}]
-	  },
-	  "toponiemenService": {
-	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
-	    "version": "1.3.0",
-	    "layers": [{"name": "TOP50NAMEN_P_grotere_steden", "style": ""},
-	    			{"name": "TOP50NAMEN_P_overig", "style": ""}]
-	  },
-	  "landschapstypenService": {
-	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
-	    "version": "1.3.0",
-	    "layers": [{"name": "LANDSCHAPSTYPEN_V", "style": ""},
-	    			{"name": "BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten", "style": ""},
-	    			{"name": "MASKER_BESCHERMINGSGEBIED_V", "style": ""},
-	    			{"name": "MASKER_ZUID_LIMBURG_V", "style": ""}]
-	  },
-	  "maskerZuidLimburgService": {
-	  	"url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
-	  	"version": "1.3.0",
-	  	"layers": [{"name": "MASKER_ZUID_LIMBURG_V", "style": ""}]
-	  },
-	  "polService": {
-	    "url": "https://portal.prvlimburg.nl/geodata/POL/wms?",
-	    "version": "1.3.0",
-	    "layers": [{"name": "POL2014_GZB_V", "style": ""},
-	    			{"name": "POL2014_BUITENGEBIED_V", "style": ""},
-	    			{"name": "POL2014_NATUURBEEK_L", "style": ""},
-	    			{"name": "POL2014_BESCH_NAT_LANDSCH_V", "style": ""},
-	    			{"name": "POL2014_NAT_LANDSCHAP_ZL_V", "style": "pol2014_nat_landschap_zl_v_handvat_kerkkwaliteiten_rood"}]
-	  },
-	  "landschapStructuurService": {
-	    "url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
-	    "version": "1.3.0",
-	    "layers": ["Landschapskaart_deelgebied_Baneheide",
-	    			"Landschapskaart_deelgebied_Bekken_van_Heerlen", 
-	    			"Landschapskaart_deelgebied_Doenrade",
-	    			"Landschapskaart_deelgebied_Eperheide", 
-	    			"Landschapskaart_deelgebied_Geleenbeek",
-	    			"Landschapskaart_deelgebied_Geuldal", 
-	    			"Landschapskaart_deelgebied_Maasdal",
-	    			"Landschapskaart_deelgebied_Maasterras_Gronsveld", 
-	    			"Landschapskaart_deelgebied_Margraten",
-	    			"Landschapskaart_deelgebied_Roode_beek", 
-	    			"Landschapskaart_deelgebied_Schimmert",
-	    			"Landschapskaart_deelgebied_Ubachsberg", 
-	    			"Landschapskaart_deelgebied_Vijlenerbos"],
-	    "Baneheide": 0,
-	    "Bekken van Heerlen": 1,
-	    "Doenrade": 2,
-	    "Eperheide": 3,
-	    "Geleenbeek": 4,
-	    "Geuldal": 5,
-	    "Maasdal": 6,
-	    "Maasterras Gronsveld": 7,
-	    "Margraten": 8,
-	    "Roode Beek": 9,
-	    "Schimmert": 10,
-	    "Ubachsberg": 11,
-	    "Vijlenerbos": 12
-	  },
-	  "natura2000Service": {
-	    "url": "https://portal.prvlimburg.nl/geodata/POL/wms",
-	    "version": "1.3.0",
-	    "layers": [{"name": "POL2014_NATURA2000_V", "style": ""}]
-	  },
-	  "natuurbeheerplanService": {
-	    "url": "https://portal.prvlimburg.nl/geodata/NATUUR/wms?",
-	    "version": "1.3.0",
-	    "layers": [{"name": "DEF_2023_BEHEERGEBIED_V", "style": ""}]
-	  },
-	  "kadGemeentes": [
-	    {"label": "Amby", "value": "ABY00", "sections": ["A", "B", "C"]},
-	    {"label": "Amstenrade", "value": "ASR00", "sections": ["A", "B", "C"]},
-	    {"label": "Beek", "value": "BEE02", "sections": ["A", "B", "C", "D", "F", "G", "H", "I", 
-	    	"K", "L", "M", "N"]},
-	    {"label": "Bemelen", "value": "BML01", "sections": ["A", "B"]},
-	    {"label": "Berg en Terblijt", "value": "BER01", "sections": ["A", "B", "C", "D"]},
-	    {"label": "Bingelrade", "value": "BGR02", "sections": ["B", "C"]},
-	    {"label": "Bocholtz", "value": "BCZ00", "sections": ["A", "B", "D"]},
-	    {"label": "Brunssum", "value": "BSM02", "sections": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "K"]},
-	    {"label": "Bunde", "value": "BDE00", "sections": ["A", "B", "C", "D"]},
-	    {"label": "Cadier en Keer", "value": "CDR00", "sections": ["A", "B", "C"]},
-	    {"label": "Eijsden", "value": "EDN00", "sections": ["A", "B", "C", "D", "E", "F", "G", "H", 
-	    	"K", "L", "M"]},
-	    {"label": "Elsloo", "value": "ELO00", "sections": ["A", "B", "C", "D"]},
-	    {"label": "Geleen", "value": "GLN00", "sections": ["A", "B", "C", "D", "E", "F", "G", "H", 
-	    	"I", "K", "L"]},
-	    {"label": "Geulle", "value": "GLE02", "sections": ["A", "B", "C", "D"]},
-	    {"label": "Gronsveld", "value": "GVD01", "sections": ["A", "B"]},
-	    {"label": "Gulpen", "value": "GPN00", "sections": ["A", "B", "C", "D", "E", "F", "G", "H"]},
-	    {"label": "Heer", "value": "HEE03", "sections": ["A", "B"]},
-	    {"label": "Heerlen", "value": "HLN01", "sections": ["A", "B", "C", "D", "E", "F", "G", "H", 
-	    	"K", "L", "M", "N", "O", "Q", "R", "S", "T", "U", "V", "W"]},
-	    {"label": "Hoensbroek", "value": "HBK00", "sections": ["A", "B", "C", "D"]},
-	    {"label": "Houthem", "value": "HHM00", "sections": ["A", "B", "C"]},
-	    {"label": "Hulsberg", "value": "HBG02", "sections": ["A", "B", "D", "E"]},
-	    {"label": "Itteren", "value": "ITR00", "sections": ["A", "B"]},
-	    {"label": "Jabeek", "value": "JBK00", "sections": ["A", "C"]},
-	    {"label": "Kerkrade", "value": "KRD00", "sections": ["A", "B", "D", "E", "F", "G", "H", "K", 
-	    	"L", "M", "N", "P"]},
-	    {"label": "Klimmen", "value": "KMN02", "sections": ["A", "B", "C", "D", "E"]},
-	    {"label": "Maastricht", "value": "MTT00", "sections": ["A", "B", "C", "D", "E", "F", "G", "H",
-	    	"I", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "V", "W"]},
-	    {"label": "Margraten", "value": "MGT02", "sections": ["A", "B", "C", "D", "E", "F", "G", "H",
-	    	"K", "L", "M", "N", "P", "R", "S", "T", "V", "W", "X", "Y"]},
-	    {"label": "Meerssen", "value": "MSN01", "sections": ["A", "B", "D", "E", "F", "G", "H", "K", "L"]},
-	    {"label": "Merkelbeek", "value": "MKB00", "sections": ["C"]},
-	    {"label": "Mesch", "value": "MES00", "sections": ["B"]},
-	    {"label": "Mheer", "value": "MHE00", "sections": ["A", "B"]},
-	    {"label": "Munstergeleen", "value": "MSG00", "sections": ["C", "D"]},
-	    {"label": "Noorbeek", "value": "NBK03", "sections": ["A"]},
-	    {"label": "Nuth", "value": "NUT00", "sections": ["A", "B", "C", "D", "E", "H", "K", "L", 
-	    	"M", "N", "O", "P", "R"]},
-	    {"label": "Oirsbeek", "value": "OBK00", "sections": ["B", "C", "D"]},
-	    {"label": "Oud-Valkenburg", "value": "VKB03", "sections": ["A", "B", "C"]},
-	    {"label": "Oud-Vroenhoven", "value": "VHV03", "sections": ["A", "C", "D", "H", "I", "K"]},
-	    {"label": "Schimmert", "value": "SMT00", "sections": ["A", "B", "C", "D"]},
-	    {"label": "Schinnen", "value": "SNN00", "sections": ["A", "B", "C", "D", "E", "F", "G", "H", "K"]},
-	    {"label": "Schin op Geul", "value": "SCH02", "sections": ["B", "C", "D"]},
-	    {"label": "Schinveld", "value": "SVD00", "sections": ["A", "B", "C", "D"]},
-	    {"label": "Simpelveld", "value": "SPV00", "sections": ["A", "B", "C", "D", "E", "G", "H", "K",
-	    	"L", "M", "N"]},
-	    {"label": "Sint Geertruid", "value": "GTD02", "sections": ["A", "B"]},
-	    {"label": "Sint Pieter", "value": "PTR00", "sections": ["A", "B"]},
-	    {"label": "Sittard", "value": "STD00", "sections": ["A", "B", "C", "D", "F", "G", "H", "K",
-	    	"L", "M", "N", "Q", "R", "S", "T"]},
-	    {"label": "Slenaken", "value": "SAK00", "sections": ["B"]},
-	    {"label": "Spaubeek", "value": "SBK03", "sections": ["A", "B", "C"]},
-	    {"label": "Stein", "value": "STE00", "sections": ["A", "B", "C", "D", "E", "F", "G", "H", "K", "L"]},
-	    {"label": "Ulestraten", "value": "ULS00", "sections": ["B", "C", "D", "E"]},
-	    {"label": "Vaals", "value": "VAA00", "sections": ["A", "B", "C", "E", "F", "G", "H"]},
-	    {"label": "Valkenburg", "value": "VKB01", "sections": ["A", "B", "C", "D", "E", "G", "H", "K",
-	    	"L", "M", "N", "P", "R", "S", "T", "U"]},
-	    {"label": "Voerendaal", "value": "VRD00", "sections": ["A", "B", "C", "E", "F", "G", "H", "I",
-	    	"K", "L", "M", "N", "O", "P"]},
-	    {"label": "Wijlre", "value": "WRE01", "sections": ["B", "D", "E", "G", "J"]},
-	    {"label": "Wijnandsrade", "value": "WNR00", "sections": ["A", "C"]},
-	    {"label": "Wittem", "value": "WTM00", "sections": ["A", "B", "C", "D", "E", "F", "G", "H",
-	    	"K", "L", "M", "N", "P", "R"]}
-	  ]
-  }
+	"public": {
+		"domainSuffix": "handvat-viewer",
+		"hostname": "https://www.handvatnationaallandschap.nl",
+		"popupHandleiding": "popup-handleiding",
+		"popupHelp": "popup-help",
+		"popupContact": "popup-contact",
+		"popupLinks": "popup-links",
+		"popupDisclaimer": "popup-disclaimer",
+		"entree": "entree",
+		"startLinks": "start-links",
+		"startRechts": "start-rechts",
+		"infoLinks": "info-links",
+		"infoRechts": "info-rechts",
+		"uitlegLinks": "uitleg-links",
+		"uitlegRechts": "uitleg-rechts",
+		"stap1Links": "stap-1-links",
+		"stap1Rechts": "stap-1-rechts",
+		"stap2Links": "stap-2-links",
+		"stap3Deelgebied": "stap-3-deelgebied",
+		"stap3Beginselen": "stap-3-beginselen",
+		"stap4Links": "stap-4-links",
+		"stap5Links": "stap-5-links",
+		"stap6Links": "stap-6-links",
+		"relief": "kernkwaliteit-relief",
+		"cultuurhistorie": "kernkwaliteit-cultuurhistorie",
+		"groenkarakter": "kernkwaliteit-groenkarakter",
+		"openbesloten": "kernkwaliteit-openbesloten",
+		"pol": "kaart-pol",
+		"landschapstypen": "kaart-landschapstypen",
+		"natuurbeheerplan": "kaart-natuurbeheerplan",
+		"cultuurhistorieService": {
+			"url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+			"version": "1.3.0",
+			"layers": [
+				{
+					"name": "CULTUURLANDSCHAP_ZL_V_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "ARCHEOLOG_MONUMENT_COMPLEX_V_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "HISTORISCHE_BUITENPLAATSEN_V_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "PROV_ARCHEOL_AANDACHTSGEB_V_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "PANDEN_handvat_kernkwaliteiten_cultuurhistoriekaart",
+					"style": "panden_cultuurhistoriekaart_handvat_kernkwaliteiten"
+				},
+				{
+					"name": "CULTUURLANDSCHAP_ZL_L_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "CULTUURHISTORISCHE_ELEMENTEN_V_mijnbouwkolonie",
+					"style": ""
+				},
+				{
+					"name": "CULTUURHISTORISCHE_ELEMENTEN_L_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "CULTUURHISTORISCHE_ELEMENTEN_P_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "LVZL_KERKEN_POINT_P",
+					"style": ""
+				},
+				{
+					"name": "LVZL_SYMPOINT_P",
+					"style": ""
+				},
+				{
+					"name": "LVZL_KLOOSTERS_P",
+					"style": ""
+				},
+				{
+					"name": "GEOLOGISCH_MONUMENT_P",
+					"style": ""
+				},
+				{
+					"name": "RIJKSMONUMENTEN_P_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "MASKER_BESCHERMINGSGEBIED_V",
+					"style": ""
+				},
+				{
+					"name": "MASKER_ZUID_LIMBURG_V",
+					"style": ""
+				}
+			]
+		},
+		"cultuurhistorieHoverableService": {
+			"url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+			"version": "1.3.0",
+			"layers": [
+				{
+					"name": "CULTUURHISTORISCHE_ELEMENTEN_P_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "RIJKSMONUMENTEN_P_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "GEOLOGISCH_MONUMENT_P",
+					"style": ""
+				},
+				{
+					"name": "CULTUURHISTORISCHE_ELEMENTEN_L_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "CULTUURLANDSCHAP_ZL_V_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "PANDEN_handvat_kernkwaliteiten_cultuurhistoriekaart",
+					"style": "panden_cultuurhistoriekaart_handvat_kernkwaliteiten"
+				},
+				{
+					"name": "PROV_ARCHEOL_AANDACHTSGEB_V_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "HISTORISCHE_BUITENPLAATSEN_V_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "ARCHEOLOG_MONUMENT_COMPLEX_V_handvat_kernkwaliteiten",
+					"style": ""
+				}
+			]
+		},
+		"openBeslotenService": {
+			"url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+			"version": "1.3.0",
+			"layers": [
+				{
+					"name": "hillsha_ahn53",
+					"style": ""
+				},
+				{
+					"name": "LANDSCHAPSTYPEN_V_contrast_en_reliefkaart",
+					"style": "landschapstypen_v_contrastkaart"
+				},
+				{
+					"name": "TOP10NL_SPOORBAANDEEL_L_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_TERREIN_V_bos_boomgaard_kwekerij",
+					"style": ""
+				},
+				{
+					"name": "DORPSMANTEL_V",
+					"style": "dorpsmantel_v_contrastkaart"
+				},
+				{
+					"name": "DEF_2023_BEHEERGEBIED_V_N14.01_N17.06_en_L01.01_L03.01",
+					"style": ""
+				},
+				{
+					"name": "PANDEN_handvat_kernkwaliteiten_relief_contrastkaart",
+					"style": "panden_relief_en_contrastkaart_handvat_kernkwaliteiten"
+				},
+				{
+					"name": "TOP10NL_REL_TALUD_HOGEZIJDE_L",
+					"style": ""
+				},
+				{
+					"name": "LANDSCHAPSTYPEN_V_plateau",
+					"style": "landschapstypen_v_plateau_contrastkaart"
+				},
+				{
+					"name": "LANDSCHAPSTYPEN_V_contrast_en_reliefkaart",
+					"style": "landschapstypen_v_contrastkaart"
+				},
+				{
+					"name": "TOP10NL_INRICHTINGSELEMENT_L_heg_haag",
+					"style": "top10nl_inrichtingselement_l_heg_haag_contrastkaart"
+				},
+				{
+					"name": "TOP10NL_INRICHTINGSELEMENT_L_bomenrij",
+					"style": "top10nl_inrichtingselement_l_bomenrij_contrastkaart"
+				},
+				{
+					"name": "TOP10NL_INRICHTINGSELEMENT_P_boom",
+					"style": "top10nl_inrichtingselement_p_boom_contrastkaart"
+				},
+				{
+					"name": "BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "MASKER_BESCHERMINGSGEBIED_V",
+					"style": ""
+				},
+				{
+					"name": "MASKER_ZUID_LIMBURG_V",
+					"style": ""
+				}
+			]
+		},
+		"reliefService": {
+			"url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+			"version": "1.3.0",
+			"layers": [
+				{
+					"name": "ahn25helling",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_HOOGTE_L",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_REL_TALUD_HOGEZIJDE_L",
+					"style": ""
+				},
+				{
+					"name": "LANDSCHAPSTYPEN_V",
+					"style": ""
+				},
+				{
+					"name": "LANDSCHAPSTYPEN_V_plateau",
+					"style": ""
+				},
+				{
+					"name": "LANDSCHAPSTYPEN_V_contrast_en_reliefkaart",
+					"style": "landschapstypen_v_relief"
+				},
+				{
+					"name": "PANDEN_handvat_kernkwaliteiten_relief_contrastkaart",
+					"style": "panden_relief_en_contrastkaart_handvat_kernkwaliteiten"
+				},
+				{
+					"name": "WATERSTAATSWERK_WATERGANG_V",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_WATERDEEL_V_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "WATERSTAATSWERK_REGENWBUF_V",
+					"style": ""
+				},
+				{
+					"name": "PRIMAIRE_BRONNEN_P",
+					"style": ""
+				},
+				{
+					"name": "BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "MASKER_BESCHERMINGSGEBIED_V",
+					"style": ""
+				},
+				{
+					"name": "MASKER_ZUID_LIMBURG_V",
+					"style": ""
+				}
+			]
+		},
+		"groenKarakterService": {
+			"url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+			"version": "1.3.0",
+			"layers": [
+				{
+					"name": "TOP10NL_TERREIN_V_grasland_heide_zand",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_TERREIN_V_akkerland",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_PLAATS_V_bebouwde_kom",
+					"style": ""
+				},
+				{
+					"name": "DORPSMANTEL_V",
+					"style": ""
+				},
+				{
+					"name": "BEBOUWD_GEBIED_V",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_GEBOUW_V",
+					"style": ""
+				},
+				{
+					"name": "CULTUURHISTORISCHE_ELEMENTEN_V_dorpskernen",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_TERREIN_V_boomgaard",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_WEGDEEL_HARTLIJN_L",
+					"style": ""
+				},
+				{
+					"name": "BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_TERREIN_V_bos",
+					"style": ""
+				},
+				{
+					"name": "LANDSCHAPSTYPEN_V_dalbodem",
+					"style": ""
+				},
+				{
+					"name": "WATERSTAATSWERK_WATERGANG_V",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_WATERDEEL_V_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_SPOORBAANDEEL_L_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "WATERSTAATSWERK_REGENWBUF_V",
+					"style": ""
+				},
+				{
+					"name": "DEF_2023_BEHEERGEBIED_V_N14.01_N17.06",
+					"style": ""
+				},
+				{
+					"name": "DEF_2023_BEHEERGEBIED_V_N01.03_N13.02",
+					"style": ""
+				},
+				{
+					"name": "DEF_2023_BEHEERGEBIED_V_L01.01-L03.01",
+					"style": ""
+				},
+				{
+					"name": "PRIMAIRE_BRONNEN_P",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_INRICHTINGSELEMENT_L_heg_haag",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_REL_TALUD_HOGEZIJDE_L",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_INRICHTINGSELEMENT_L_bomenrij",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_INRICHTINGSELEMENT_P_boom",
+					"style": ""
+				},
+				{
+					"name": "MASKER_BESCHERMINGSGEBIED_V",
+					"style": ""
+				},
+				{
+					"name": "MASKER_ZUID_LIMBURG_V",
+					"style": ""
+				}
+			]
+		},
+		"luchtfotoService": {
+			"url": "https://portal.prvlimburg.nl/geodata/LUCHTFOTO/wms?",
+			"version": "1.3.0",
+			"layers": [
+				{
+					"name": "LUFO_ACTUEEL_LAAG",
+					"style": ""
+				}
+			]
+		},
+		"tranchotService": {
+			"url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+			"version": "1.3.0",
+			"layers": [
+				{
+					"name": "tranchotkaarten",
+					"style": ""
+				}
+			]
+		},
+		"top10Service": {
+			"url": "https://portal.prvlimburg.nl/geodata/TOPOGRAFIE/wms?",
+			"version": "1.3.0",
+			"layers": [
+				{
+					"name": "TOP10NL_WEGDEEL_V_topoNLZL",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_GEBOUW_V_topoNLZL",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_TERREIN_V_topoNLZL",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_WATERDEEL_V_topoNLZL",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_REL_TALUD_HOGEZIJDE_L_topoNLZL",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_REL_TALUD_LAGEZIJDE_L_topoNLZL",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_SPOORBAANDEEL_L_topoNLZL",
+					"style": ""
+				},
+				{
+					"name": "TOP10NL_WATERDEEL_L_topoNLZL",
+					"style": ""
+				},
+				{
+					"name": "PLAATSNAMEN_P_topoNLZL",
+					"style": ""
+				},
+				{
+					"name": "LIMBURG_MASKER",
+					"style": ""
+				}
+			]
+		},
+		"infrastructuurService": {
+			"url": "https://portal.prvlimburg.nl/geodata/INFRASTRUCTUUR/wms?",
+			"version": "1.3.0",
+			"layers": [
+				{
+					"name": "NWB_WEGVAKKEN_LIMB_L_topoNLZL",
+					"style": ""
+				}
+			]
+		},
+		"deelgebiedenService": {
+			"url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?request=GetCapabilities",
+			"version": "1.3.0",
+			"layers": [
+				{
+					"name": "DEELGEBIEDEN_V",
+					"style": ""
+				},
+				{
+					"name": "Structuur_Beschermingsgebied_141116_151_NIEUW",
+					"style": ""
+				},
+				{
+					"name": "TOP50NAMEN_P_grotere_steden",
+					"style": ""
+				},
+				{
+					"name": "TOP50NAMEN_P_overig",
+					"style": ""
+				}
+			]
+		},
+		"toponiemenService": {
+			"url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+			"version": "1.3.0",
+			"layers": [
+				{
+					"name": "TOP50NAMEN_P_grotere_steden",
+					"style": ""
+				},
+				{
+					"name": "TOP50NAMEN_P_overig",
+					"style": ""
+				}
+			]
+		},
+		"landschapstypenService": {
+			"url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+			"version": "1.3.0",
+			"layers": [
+				{
+					"name": "LANDSCHAPSTYPEN_V",
+					"style": ""
+				},
+				{
+					"name": "BESCHERMINGSGEB_NAT_LANDSC_V_handvat_kernkwaliteiten",
+					"style": ""
+				},
+				{
+					"name": "MASKER_BESCHERMINGSGEBIED_V",
+					"style": ""
+				},
+				{
+					"name": "MASKER_ZUID_LIMBURG_V",
+					"style": ""
+				}
+			]
+		},
+		"maskerZuidLimburgService": {
+			"url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+			"version": "1.3.0",
+			"layers": [
+				{
+					"name": "MASKER_ZUID_LIMBURG_V",
+					"style": ""
+				}
+			]
+		},
+		"polService": {
+			"url": "https://portal.prvlimburg.nl/geodata/POL/wms?",
+			"version": "1.3.0",
+			"layers": [
+				{
+					"name": "POL2014_GZB_V",
+					"style": ""
+				},
+				{
+					"name": "POL2014_BUITENGEBIED_V",
+					"style": ""
+				},
+				{
+					"name": "POL2014_NATUURBEEK_L",
+					"style": ""
+				},
+				{
+					"name": "POL2014_BESCH_NAT_LANDSCH_V",
+					"style": ""
+				},
+				{
+					"name": "POL2014_NAT_LANDSCHAP_ZL_V",
+					"style": "pol2014_nat_landschap_zl_v_handvat_kerkkwaliteiten_rood"
+				}
+			]
+		},
+		"landschapStructuurService": {
+			"url": "https://portal.prvlimburg.nl/geodata/LANDSCHAP/wms?",
+			"version": "1.3.0",
+			"layers": [
+				"Landschapskaart_deelgebied_Baneheide",
+				"Landschapskaart_deelgebied_Bekken_van_Heerlen",
+				"Landschapskaart_deelgebied_Doenrade",
+				"Landschapskaart_deelgebied_Eperheide",
+				"Landschapskaart_deelgebied_Geleenbeek",
+				"Landschapskaart_deelgebied_Geuldal",
+				"Landschapskaart_deelgebied_Maasdal",
+				"Landschapskaart_deelgebied_Maasterras_Gronsveld",
+				"Landschapskaart_deelgebied_Margraten",
+				"Landschapskaart_deelgebied_Roode_beek",
+				"Landschapskaart_deelgebied_Schimmert",
+				"Landschapskaart_deelgebied_Ubachsberg",
+				"Landschapskaart_deelgebied_Vijlenerbos"
+			],
+			"Baneheide": 0,
+			"Bekken van Heerlen": 1,
+			"Doenrade": 2,
+			"Eperheide": 3,
+			"Geleenbeek": 4,
+			"Geuldal": 5,
+			"Maasdal": 6,
+			"Maasterras Gronsveld": 7,
+			"Margraten": 8,
+			"Roode Beek": 9,
+			"Schimmert": 10,
+			"Ubachsberg": 11,
+			"Vijlenerbos": 12
+		},
+		"natura2000Service": {
+			"url": "https://portal.prvlimburg.nl/geodata/POL/wms",
+			"version": "1.3.0",
+			"layers": [
+				{
+					"name": "POL2014_NATURA2000_V",
+					"style": ""
+				}
+			]
+		},
+		"natuurbeheerplanService": {
+			"url": "https://portal.prvlimburg.nl/geodata/NATUUR/wms?",
+			"version": "1.3.0",
+			"layers": [
+				{
+					"name": "DEF_2023_BEHEERGEBIED_V",
+					"style": ""
+				}
+			]
+		},
+		"kadGemeentes": [
+			{
+				"label": "Amby",
+				"value": "ABY00",
+				"sections": [
+					"A",
+					"B",
+					"C"
+				]
+			},
+			{
+				"label": "Amstenrade",
+				"value": "ASR00",
+				"sections": [
+					"A",
+					"B",
+					"C"
+				]
+			},
+			{
+				"label": "Beek",
+				"value": "BEE02",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D",
+					"F",
+					"G",
+					"H",
+					"I",
+					"K",
+					"L",
+					"M",
+					"N"
+				]
+			},
+			{
+				"label": "Bemelen",
+				"value": "BML01",
+				"sections": [
+					"A",
+					"B"
+				]
+			},
+			{
+				"label": "Berg en Terblijt",
+				"value": "BER01",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D"
+				]
+			},
+			{
+				"label": "Bingelrade",
+				"value": "BGR02",
+				"sections": [
+					"B",
+					"C"
+				]
+			},
+			{
+				"label": "Bocholtz",
+				"value": "BCZ00",
+				"sections": [
+					"A",
+					"B",
+					"D"
+				]
+			},
+			{
+				"label": "Brunssum",
+				"value": "BSM02",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D",
+					"E",
+					"F",
+					"G",
+					"H",
+					"I",
+					"K"
+				]
+			},
+			{
+				"label": "Bunde",
+				"value": "BDE00",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D"
+				]
+			},
+			{
+				"label": "Cadier en Keer",
+				"value": "CDR00",
+				"sections": [
+					"A",
+					"B",
+					"C"
+				]
+			},
+			{
+				"label": "Eijsden",
+				"value": "EDN00",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D",
+					"E",
+					"F",
+					"G",
+					"H",
+					"K",
+					"L",
+					"M"
+				]
+			},
+			{
+				"label": "Elsloo",
+				"value": "ELO00",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D"
+				]
+			},
+			{
+				"label": "Geleen",
+				"value": "GLN00",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D",
+					"E",
+					"F",
+					"G",
+					"H",
+					"I",
+					"K",
+					"L"
+				]
+			},
+			{
+				"label": "Geulle",
+				"value": "GLE02",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D"
+				]
+			},
+			{
+				"label": "Gronsveld",
+				"value": "GVD01",
+				"sections": [
+					"A",
+					"B"
+				]
+			},
+			{
+				"label": "Gulpen",
+				"value": "GPN00",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D",
+					"E",
+					"F",
+					"G",
+					"H"
+				]
+			},
+			{
+				"label": "Heer",
+				"value": "HEE03",
+				"sections": [
+					"A",
+					"B"
+				]
+			},
+			{
+				"label": "Heerlen",
+				"value": "HLN01",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D",
+					"E",
+					"F",
+					"G",
+					"H",
+					"K",
+					"L",
+					"M",
+					"N",
+					"O",
+					"Q",
+					"R",
+					"S",
+					"T",
+					"U",
+					"V",
+					"W"
+				]
+			},
+			{
+				"label": "Hoensbroek",
+				"value": "HBK00",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D"
+				]
+			},
+			{
+				"label": "Houthem",
+				"value": "HHM00",
+				"sections": [
+					"A",
+					"B",
+					"C"
+				]
+			},
+			{
+				"label": "Hulsberg",
+				"value": "HBG02",
+				"sections": [
+					"A",
+					"B",
+					"D",
+					"E"
+				]
+			},
+			{
+				"label": "Itteren",
+				"value": "ITR00",
+				"sections": [
+					"A",
+					"B"
+				]
+			},
+			{
+				"label": "Jabeek",
+				"value": "JBK00",
+				"sections": [
+					"A",
+					"C"
+				]
+			},
+			{
+				"label": "Kerkrade",
+				"value": "KRD00",
+				"sections": [
+					"A",
+					"B",
+					"D",
+					"E",
+					"F",
+					"G",
+					"H",
+					"K",
+					"L",
+					"M",
+					"N",
+					"P"
+				]
+			},
+			{
+				"label": "Klimmen",
+				"value": "KMN02",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D",
+					"E"
+				]
+			},
+			{
+				"label": "Maastricht",
+				"value": "MTT00",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D",
+					"E",
+					"F",
+					"G",
+					"H",
+					"I",
+					"K",
+					"L",
+					"M",
+					"N",
+					"O",
+					"P",
+					"Q",
+					"R",
+					"S",
+					"T",
+					"V",
+					"W"
+				]
+			},
+			{
+				"label": "Margraten",
+				"value": "MGT02",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D",
+					"E",
+					"F",
+					"G",
+					"H",
+					"K",
+					"L",
+					"M",
+					"N",
+					"P",
+					"R",
+					"S",
+					"T",
+					"V",
+					"W",
+					"X",
+					"Y"
+				]
+			},
+			{
+				"label": "Meerssen",
+				"value": "MSN01",
+				"sections": [
+					"A",
+					"B",
+					"D",
+					"E",
+					"F",
+					"G",
+					"H",
+					"K",
+					"L"
+				]
+			},
+			{
+				"label": "Merkelbeek",
+				"value": "MKB00",
+				"sections": [
+					"C"
+				]
+			},
+			{
+				"label": "Mesch",
+				"value": "MES00",
+				"sections": [
+					"B"
+				]
+			},
+			{
+				"label": "Mheer",
+				"value": "MHE00",
+				"sections": [
+					"A",
+					"B"
+				]
+			},
+			{
+				"label": "Munstergeleen",
+				"value": "MSG00",
+				"sections": [
+					"C",
+					"D"
+				]
+			},
+			{
+				"label": "Noorbeek",
+				"value": "NBK03",
+				"sections": [
+					"A"
+				]
+			},
+			{
+				"label": "Nuth",
+				"value": "NUT00",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D",
+					"E",
+					"H",
+					"K",
+					"L",
+					"M",
+					"N",
+					"O",
+					"P",
+					"R"
+				]
+			},
+			{
+				"label": "Oirsbeek",
+				"value": "OBK00",
+				"sections": [
+					"B",
+					"C",
+					"D"
+				]
+			},
+			{
+				"label": "Oud-Valkenburg",
+				"value": "VKB03",
+				"sections": [
+					"A",
+					"B",
+					"C"
+				]
+			},
+			{
+				"label": "Oud-Vroenhoven",
+				"value": "VHV03",
+				"sections": [
+					"A",
+					"C",
+					"D",
+					"H",
+					"I",
+					"K"
+				]
+			},
+			{
+				"label": "Schimmert",
+				"value": "SMT00",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D"
+				]
+			},
+			{
+				"label": "Schinnen",
+				"value": "SNN00",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D",
+					"E",
+					"F",
+					"G",
+					"H",
+					"K"
+				]
+			},
+			{
+				"label": "Schin op Geul",
+				"value": "SCH02",
+				"sections": [
+					"B",
+					"C",
+					"D"
+				]
+			},
+			{
+				"label": "Schinveld",
+				"value": "SVD00",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D"
+				]
+			},
+			{
+				"label": "Simpelveld",
+				"value": "SPV00",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D",
+					"E",
+					"G",
+					"H",
+					"K",
+					"L",
+					"M",
+					"N"
+				]
+			},
+			{
+				"label": "Sint Geertruid",
+				"value": "GTD02",
+				"sections": [
+					"A",
+					"B"
+				]
+			},
+			{
+				"label": "Sint Pieter",
+				"value": "PTR00",
+				"sections": [
+					"A",
+					"B"
+				]
+			},
+			{
+				"label": "Sittard",
+				"value": "STD00",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D",
+					"F",
+					"G",
+					"H",
+					"K",
+					"L",
+					"M",
+					"N",
+					"Q",
+					"R",
+					"S",
+					"T"
+				]
+			},
+			{
+				"label": "Slenaken",
+				"value": "SAK00",
+				"sections": [
+					"B"
+				]
+			},
+			{
+				"label": "Spaubeek",
+				"value": "SBK03",
+				"sections": [
+					"A",
+					"B",
+					"C"
+				]
+			},
+			{
+				"label": "Stein",
+				"value": "STE00",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D",
+					"E",
+					"F",
+					"G",
+					"H",
+					"K",
+					"L"
+				]
+			},
+			{
+				"label": "Ulestraten",
+				"value": "ULS00",
+				"sections": [
+					"B",
+					"C",
+					"D",
+					"E"
+				]
+			},
+			{
+				"label": "Vaals",
+				"value": "VAA00",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"E",
+					"F",
+					"G",
+					"H"
+				]
+			},
+			{
+				"label": "Valkenburg",
+				"value": "VKB01",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D",
+					"E",
+					"G",
+					"H",
+					"K",
+					"L",
+					"M",
+					"N",
+					"P",
+					"R",
+					"S",
+					"T",
+					"U"
+				]
+			},
+			{
+				"label": "Voerendaal",
+				"value": "VRD00",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"E",
+					"F",
+					"G",
+					"H",
+					"I",
+					"K",
+					"L",
+					"M",
+					"N",
+					"O",
+					"P"
+				]
+			},
+			{
+				"label": "Wijlre",
+				"value": "WRE01",
+				"sections": [
+					"B",
+					"D",
+					"E",
+					"G",
+					"J"
+				]
+			},
+			{
+				"label": "Wijnandsrade",
+				"value": "WNR00",
+				"sections": [
+					"A",
+					"C"
+				]
+			},
+			{
+				"label": "Wittem",
+				"value": "WTM00",
+				"sections": [
+					"A",
+					"B",
+					"C",
+					"D",
+					"E",
+					"F",
+					"G",
+					"H",
+					"K",
+					"L",
+					"M",
+					"N",
+					"P",
+					"R"
+				]
+			}
+		]
+	}
 }
